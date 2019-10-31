@@ -153,9 +153,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\SDLGroup4\SDLGroup4.vcxproj">
       <Project>{205c8126-4512-4745-b9cd-e89ccbc87a17}</Project>
     </ProjectReference>
