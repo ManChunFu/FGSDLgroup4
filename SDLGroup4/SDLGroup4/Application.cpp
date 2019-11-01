@@ -72,8 +72,6 @@ void Engine::Application::Update()
 
 void Engine::Application::Render()
 {
-	//Engine::TextureManager::Texture("Assets/Sprites/enemy_drone_large_red.png");
-
 	SDL_Rect src = { 0, 0, 100, 100 };
 
 	SDL_Rect des = { 100, 100, 80, 80 };
