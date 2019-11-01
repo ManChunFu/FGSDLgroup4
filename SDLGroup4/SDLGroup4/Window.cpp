@@ -36,7 +36,7 @@ namespace Engine
 			return false;
 		}
 
-		Renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+		Renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 		if (Renderer == nullptr)
 		{
 			std::cout << "Failed to create SDL_Rendeer. SDL Error: " << SDL_GetError << std::endl;
