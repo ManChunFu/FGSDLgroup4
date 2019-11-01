@@ -13,11 +13,8 @@ namespace Engine
 		Window(const std::string& _title, int _width, int _height);
 		~Window();
 
-		bool closed = false;
-		static SDL_Renderer* Renderer;
-
 		bool Init();
-		bool IsClosed() const { return closed; }
+		static SDL_Renderer* Renderer;
 
 	private:
 		std::string title;

@@ -1,50 +1,34 @@
 #include "Window.h"
 
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
+#include <SDL_video.h>
+#include <SDL_render.h>
 #include <iostream>
+
 
 SDL_Renderer* Engine::Window::Renderer = nullptr;
 
 namespace Engine
 {
-	Window::Window(const std::string& _title, int _width, int _height) : title(_title), width(_width), height(_height)
-	{
-	}
+	Window::Window(const std::string& _title, int _width, int _height) : title(_title), width(_width), height(_height) {}
 
 	Window::~Window()
 	{
-		SDL_DestroyRenderer(Renderer);
-		Renderer = nullptr;
-		SDL_DestroyWindow(window);
-		window = nullptr;
-		TTF_Quit();
-		IMG_Quit();
-		SDL_Quit();
+		if (Renderer)
+		{
+			SDL_DestroyRenderer(Renderer);
+			Renderer = nullptr;
+		}
+
+		if (window)
+		{
+			SDL_DestroyWindow(window);
+			window = nullptr;
+		}
 	}
 
 
 	bool Window::Init()
 	{
-		if (SDL_Init(SDL_INIT_VIDEO) < 0)
-		{
-			std::cout << "Failed to inialize SDL. SDL Error: " << SDL_GetError << std::endl;
-			return false;
-		}
-
-		if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
-		{
-			std::cout << "Failed to inialize SDL_Image. SDL Error: " << SDL_GetError << std::endl;
-			return false;
-		}
-
-		if (TTF_Init() == -1)
-		{
-			std::cout << "Failed to inialize SDL_ttf. SDL Error: " << SDL_GetError << std::endl;
-			return false;
-		}
-
 		window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
 		if (window == nullptr)
 		{

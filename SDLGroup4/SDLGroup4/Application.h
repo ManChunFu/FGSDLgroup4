@@ -8,11 +8,14 @@ namespace Engine
 	public:
 		~Application() {};
 		
+		
 		bool Initialize();
 		void Run();
 		void Shutdown();
 
+
 	private:
+		bool isRunning;
 		Engine::Window* window = nullptr;
 	};
 }

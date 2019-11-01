@@ -1,23 +1,44 @@
 #include "Application.h"
 
-#include <SDL_events.h>
-#include <SDL_error.h>
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
 #include <iostream>
+
 
 bool Engine::Application::Initialize()
 {
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	{
+		std::cout << "Failed to inialize SDL. SDL Error: " << SDL_GetError << std::endl;
+		return false;
+	}
+
+	if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
+	{
+		std::cout << "Failed to inialize SDL_Image. SDL Error: " << SDL_GetError << std::endl;
+		return false;
+	}
+
+	if (TTF_Init() == -1)
+	{
+		std::cout << "Failed to inialize SDL_ttf. SDL Error: " << SDL_GetError << std::endl;
+		return false;
+	}
+
 	window = new Engine::Window("Main Window", 1440, 900);
 	if (!window->Init())
 	{
 		std::cout << "Failed to initialize. SDL Error: " << SDL_GetError << std::endl;
 		return false;
 	}
+
 	return true;
 }
 
 void Engine::Application::Run()
 {
-	while (!window->IsClosed())
+	while (isRunning)
 	{
 		SDL_Event event;
 		while (SDL_PollEvent(&event) > 0)
@@ -25,11 +46,11 @@ void Engine::Application::Run()
 			switch (event.type)
 			{
 			case SDL_QUIT:
-				window->closed = true;
+				isRunning = false;
 				break;
 			case SDL_KEYDOWN:
 				if (event.key.keysym.sym == SDLK_ESCAPE)
-					window->closed = true;
+					isRunning = false;
 				break;
 			default:
 				break;
@@ -40,10 +61,14 @@ void Engine::Application::Run()
 
 void Engine::Application::Shutdown()
 {
+	
 	if (window)
 	{
-		window->~Window();
+		
 		delete window;
 		window = nullptr;
 	}
+	TTF_Quit();
+	IMG_Quit();
+	SDL_Quit();
 }
