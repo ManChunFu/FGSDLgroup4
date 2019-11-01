@@ -1,10 +1,22 @@
-#include "Window.h"
+#include "Application.h"
 
 
 int main(int argc, char** argv)
 {
-	Engine::Window*  myWindow = new Engine::Window("Main Window", 1440, 900);
+	Engine::Application* application = new Engine::Application();
 	
+	if (!application->Initialize())
+	{
+		application->Shutdown();
+		delete application;
+		application = nullptr;
+		return -1;
+	}
+	
+	application->Run();
+	application->Shutdown();
+	delete application;
+	application = nullptr;
 
 	return 0;
 }

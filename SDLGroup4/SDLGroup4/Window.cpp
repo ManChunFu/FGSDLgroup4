@@ -11,7 +11,6 @@ namespace Engine
 {
 	Window::Window(const std::string& _title, int _width, int _height) : title(_title), width(_width), height(_height)
 	{
-		closed = !init();
 	}
 
 	Window::~Window()
@@ -25,22 +24,8 @@ namespace Engine
 		SDL_Quit();
 	}
 
-	void Window::PollEvents(SDL_Event& event)
-	{
-		switch (event.type)
-		{
-		case SDL_QUIT:
-			closed = true;
-			break;
-		case SDL_KEYDOWN:
-			if (event.key.keysym.sym == SDLK_ESCAPE)
-				closed = true;
-			break;
-		}
-	}
 
-
-	bool Window::init()
+	bool Window::Init()
 	{
 		if (SDL_Init(SDL_INIT_VIDEO) < 0)
 		{
