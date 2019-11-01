@@ -1,5 +1,7 @@
 #include "Application.h"
 #include "InputManager.h"
+#include "TextureManager.h"
+
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
@@ -40,22 +42,8 @@ void Engine::Application::Run()
 {
 	while (isRunning)
 	{
-		SDL_Event event;
-		while (SDL_PollEvent(&event) > 0)
-		{
-			switch (event.type)
-			{
-			case SDL_QUIT:
-				isRunning = false;
-				break;
-			case SDL_KEYDOWN:
-				if (event.key.keysym.sym == SDLK_ESCAPE)
-					isRunning = false;
-				break;
-			default:
-				break;
-			}
-		}
+		Render();
+		HandleEvents();
 	}
 }
 
@@ -84,5 +72,13 @@ void Engine::Application::Update()
 
 void Engine::Application::Render()
 {
-	
+	//Engine::TextureManager::Texture("Assets/Sprites/enemy_drone_large_red.png");
+
+	SDL_Rect src = { 0, 0, 100, 100 };
+
+	SDL_Rect des = { 100, 100, 80, 80 };
+
+	Engine::Window::RenderClear();
+	Engine::TextureManager::Draw(Engine::TextureManager::Texture("Assets/Sprites/enemy_drone_larger_red.png"), src, des);
+	Engine::Window::RenderPresent();
 }

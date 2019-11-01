@@ -1,43 +1,30 @@
 #include "TextureManager.h"
+#include "TextureManager.h"
+#include "Window.h"
 
-#include <SDL_render.h>
+#include <SDL.h>
 #include <SDL_image.h>
-#include <SDL_rect.h>
 #include <iostream>
 
-SDL_Texture* Engine::TextureManager::Texture = nullptr;
 
-Engine::TextureManager::TextureManager(SDL_Renderer* renderer, int _width, int _height, int _xCoordinate, int _yCoordinate, const std::string& texture_path):
-	width(_width), height(_height), xCoordinate(_xCoordinate), yCoordinate(_yCoordinate)
+
+void Engine::TextureManager::Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect)
+{
+	SDL_RenderCopy(Engine::Window::Renderer, sprite, &srcRect, &desRect);
+}
+
+SDL_Texture* Engine::TextureManager::Texture(const std::string& texture_path)
 {
 	SDL_Surface* surface = IMG_Load(texture_path.c_str());
 	if (!surface)
 		std::cout << "Failed to create SDL_surface. SDL Error: " << SDL_GetError << std::endl;
 	else
-		Texture = SDL_CreateTextureFromSurface(renderer, surface);
-
-	if (!Texture)
-		std::cout << "Failed to create SDL_texture." << std::endl;
-
-	SDL_FreeSurface(surface);
-
-}
-
-Engine::TextureManager::~TextureManager()
-{
-	if (Texture)
 	{
-		SDL_DestroyTexture(Texture);
-		Texture = nullptr;
+		SDL_FreeSurface(surface);
+		surface = nullptr;
+		return SDL_CreateTextureFromSurface(Engine::Window::Renderer, surface);
 	}
-}
 
-
-void Engine::TextureManager::Draw(SDL_Renderer* renderer)
-{
-	SDL_Rect rect = { xCoordinate, yCoordinate, width, height };
-
-	if (Texture)
-		SDL_RenderCopy(renderer, Texture, nullptr, &rect);
+	return nullptr;
 }
 

@@ -1,9 +1,8 @@
 #pragma once
 
 #include <string>
-
+#include <SDL.h>
 struct SDL_Window;
-struct SDL_Renderer;
 
 namespace Engine
 {
@@ -15,6 +14,8 @@ namespace Engine
 
 		bool Init();
 		static SDL_Renderer* Renderer;
+		static void RenderClear() { SDL_RenderClear(Renderer); }
+		static void RenderPresent() { SDL_RenderPresent(Renderer); }
 
 	private:
 		std::string title;
