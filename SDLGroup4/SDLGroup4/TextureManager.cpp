@@ -20,9 +20,10 @@ SDL_Texture* Engine::TextureManager::Texture(const std::string& texture_path)
 		std::cout << "Failed to create SDL_surface. SDL Error: " << SDL_GetError << std::endl;
 	else
 	{
+		SDL_Texture* newTexture = SDL_CreateTextureFromSurface(Engine::Window::Renderer, surface);
 		SDL_FreeSurface(surface);
 		surface = nullptr;
-		return SDL_CreateTextureFromSurface(Engine::Window::Renderer, surface);
+		return newTexture;
 	}
 
 	return nullptr;
