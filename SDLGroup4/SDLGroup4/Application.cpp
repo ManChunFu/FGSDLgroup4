@@ -1,5 +1,5 @@
 #include "Application.h"
-
+#include "InputManager.h"
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
@@ -71,4 +71,18 @@ void Engine::Application::Shutdown()
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
+}
+void Engine::Application::HandleEvents()
+{
+	Engine::InputManager::Update();
+	isRunning = Engine::InputManager::ProgramStatus();
+}
+
+void Engine::Application::Update()
+{
+}
+
+void Engine::Application::Render()
+{
+	
 }
