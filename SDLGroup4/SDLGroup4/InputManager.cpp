@@ -1,8 +1,6 @@
 #include "InputManager.h"
 SDL_Event Engine::InputManager::event;
-
-bool Engine::InputManager::ProgramStatus()
-{
+bool Engine::InputManager::ProgramStatus() {
 	switch (event.type)
 	{
 	case SDL_QUIT: return false; break;

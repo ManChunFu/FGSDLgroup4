@@ -15,7 +15,10 @@ namespace Engine
 
 
 	private:
-		bool isRunning;
+		void Update();
+		void HandleEvents();
+		void Render();
+		bool isRunning = true;
 		Engine::Window* window = nullptr;
 	};
 }
