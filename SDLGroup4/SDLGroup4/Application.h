@@ -20,5 +20,6 @@ namespace Engine
 		void Render();
 		bool isRunning = true;
 		Engine::Window* window = nullptr;
+		
 	};
 }

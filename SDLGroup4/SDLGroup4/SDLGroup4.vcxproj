@@ -139,6 +139,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Time.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -2,7 +2,7 @@
 #include "InputManager.h"
 #include "TextureManager.h"
 #include "Animation.h"
-
+#include "Time.h"
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
@@ -42,12 +42,23 @@ bool Engine::Application::Initialize()
 
 void Engine::Application::Run()
 {
+	const int FPS = 60;
+	const int frameDelay = 1000 / FPS;
+	Uint32 frameStartTick;
+	int frameTime;
 	//texting animation
 	Engine::Animation::AnimationSetup("Assets/Sprites/male_walk_anim.png", 3, 4, 200, 200);
 	while (isRunning)
 	{
+		frameStartTick = SDL_GetTicks();
 		Render();
 		HandleEvents();
+		Update();
+		frameTime = SDL_GetTicks() - frameStartTick;
+		Engine::Time::DeltaTime = frameDelay - frameTime;
+		if (frameDelay > frameTime) {
+			SDL_Delay(frameDelay - frameTime);
+		}
 	}
 }
 
