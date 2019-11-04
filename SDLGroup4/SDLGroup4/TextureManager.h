@@ -12,7 +12,7 @@ namespace Engine
 	{
 	public:
 		static void Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect);
-		static SDL_Texture* Texture(const std::string& texture_path);
+		static SDL_Texture* Texture(const std::string& texturePath);
 	};
 }
 

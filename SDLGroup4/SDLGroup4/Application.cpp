@@ -47,7 +47,7 @@ void Engine::Application::Run()
 	Uint32 frameStartTick;
 	int frameTime;
 	//testing animation
-	Engine::Animation::AnimationSetup("Assets/Sprites/male_walk_anim.png", 3, 4, 200, 200);
+	Engine::Animation::AnimationSetup("Assets/Sprites/Attack1.png", 4, 1, 0, 0);
 	while (isRunning)
 	{
 		frameStartTick = SDL_GetTicks();

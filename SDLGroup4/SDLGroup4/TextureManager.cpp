@@ -14,9 +14,9 @@ void Engine::TextureManager::Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rec
 	SDL_DestroyTexture(sprite);
 }
 
-SDL_Texture* Engine::TextureManager::Texture(const std::string& texture_path)
+SDL_Texture* Engine::TextureManager::Texture(const std::string& texturePath)
 {
-	SDL_Surface* surface = IMG_Load(texture_path.c_str());
+	SDL_Surface* surface = IMG_Load(texturePath.c_str());
 	if (!surface)
 		std::cout << "Failed to create SDL_surface. SDL Error: " << SDL_GetError << std::endl;
 	else
