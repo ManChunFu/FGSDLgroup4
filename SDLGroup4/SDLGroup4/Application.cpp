@@ -72,7 +72,7 @@ void Engine::Application::Shutdown()
 		delete window;
 		window = nullptr;
 	}
-	CollisionManager::Shutdown();
+	Engine::CollisionManager::Shutdown();
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
@@ -81,7 +81,7 @@ void Engine::Application::HandleEvents()
 {
 	Engine::InputManager::Update();
 	isRunning = Engine::InputManager::ProgramStatus();
-	CollisionManager::Update();
+	Engine::CollisionManager::Update();
 }
 
 void Engine::Application::Update()
