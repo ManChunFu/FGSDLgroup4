@@ -1,6 +1,7 @@
 #include "CollisionManager.h"
 #include "Collider.h"
 namespace Engine {
+	std::vector<Collider*> CollisionManager::colliders;
 	void CollisionManager::AddNewCollider(Engine::Collider* col)
 	{ colliders.push_back(col); }
 	void CollisionManager::Update()
@@ -9,8 +10,8 @@ namespace Engine {
 		{
 			for (int a = 0; a < colliders.size(); a++)
 			{
-				if (colliders[i] != colliders[a] && (colliders[i]->LeftBorder < colliders[a]->RightBorder && colliders[i]->TopBorder < colliders[a]->BottomBorder) &&
-					(colliders[i]->RightBorder > colliders[a]->LeftBorder && colliders[i]->BottomBorder > colliders[a]->TopBorder))
+				if (colliders[i] != colliders[a] && (colliders[i]->LeftBorder() < colliders[a]->RightBorder() && colliders[i]->TopBorder() < colliders[a]->BottomBorder()) &&
+					(colliders[i]->RightBorder() > colliders[a]->LeftBorder() && colliders[i]->BottomBorder() > colliders[a]->TopBorder()))
 				{
 					colliders[i]->collisionTarget = colliders[a];
 				}
