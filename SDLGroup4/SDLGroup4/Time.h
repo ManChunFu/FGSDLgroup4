@@ -2,6 +2,6 @@
 namespace Engine {
 	class Time {
 	public:
-		static int DeltaTime;
+		static float DeltaTime;
 	};
 }

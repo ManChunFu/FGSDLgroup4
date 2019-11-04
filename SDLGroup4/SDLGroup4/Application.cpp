@@ -7,7 +7,7 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <iostream>
-
+float Engine::Time::DeltaTime;
 
 bool Engine::Application::Initialize()
 {
