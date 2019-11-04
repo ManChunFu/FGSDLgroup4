@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "InputManager.h"
 #include "TextureManager.h"
+#include "Animation.h"
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -28,18 +29,21 @@ bool Engine::Application::Initialize()
 		return false;
 	}
 
-	window = new Engine::Window("Main Window", 1440, 900);
+	window = new Engine::Window("Main Window", 800, 600);
 	if (!window->Init())
 	{
 		std::cout << "Failed to initialize. SDL Error: " << SDL_GetError << std::endl;
 		return false;
 	}
 
+
 	return true;
 }
 
 void Engine::Application::Run()
 {
+	//texting animation
+	Engine::Animation::AnimationSetup("Assets/Sprites/male_walk_anim.png", 3, 4, 200, 200);
 	while (isRunning)
 	{
 		Render();
@@ -72,11 +76,8 @@ void Engine::Application::Update()
 
 void Engine::Application::Render()
 {
-	SDL_Rect src = { 0, 0, 100, 100 };
+	//testing animation
+	Engine::Animation::PlayAnimation(4);
 
-	SDL_Rect des = { 100, 100, 80, 80 };
 
-	Engine::Window::RenderClear();
-	Engine::TextureManager::Draw(Engine::TextureManager::Texture("Assets/Sprites/enemy_drone_larger_red.png"), src, des);
-	Engine::Window::RenderPresent();
 }
