@@ -10,11 +10,10 @@ namespace Engine {
 		{
 			for (int a = 0; a < colliders.size(); a++)
 			{
-				if (colliders[i] != colliders[a] && (colliders[i]->LeftBorder() < colliders[a]->RightBorder() && colliders[i]->TopBorder() < colliders[a]->BottomBorder()) &&
-					(colliders[i]->RightBorder() > colliders[a]->LeftBorder() && colliders[i]->BottomBorder() > colliders[a]->TopBorder()))
-				{
-					colliders[i]->collisionTarget = colliders[a];
-				}
+				if (colliders[i] != colliders[a] && (colliders[i]->LeftBorder() < colliders[a]->RightBorder() && 
+					colliders[i]->TopBorder() < colliders[a]->BottomBorder()) && (colliders[i]->RightBorder() > colliders[a]->LeftBorder() 
+				    && colliders[i]->BottomBorder() > colliders[a]->TopBorder()))
+				{colliders[i]->collisionTarget = colliders[a];}
 			}
 		}
 	}
