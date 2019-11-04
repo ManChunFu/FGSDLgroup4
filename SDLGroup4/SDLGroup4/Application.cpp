@@ -7,6 +7,7 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <iostream>
+#include "CollisionManager.h"
 float Engine::Time::DeltaTime;
 
 bool Engine::Application::Initialize()
@@ -52,8 +53,8 @@ void Engine::Application::Run()
 	{
 		frameStartTick = SDL_GetTicks();
 		Render();
-		HandleEvents();
 		Update();
+		HandleEvents();
 		frameTime = SDL_GetTicks() - frameStartTick;
 		Engine::Time::DeltaTime = frameDelay - frameTime;
 		if (frameDelay > frameTime) {
@@ -71,6 +72,7 @@ void Engine::Application::Shutdown()
 		delete window;
 		window = nullptr;
 	}
+	CollisionManager::Shutdown();
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
@@ -79,6 +81,7 @@ void Engine::Application::HandleEvents()
 {
 	Engine::InputManager::Update();
 	isRunning = Engine::InputManager::ProgramStatus();
+	CollisionManager::Update();
 }
 
 void Engine::Application::Update()
