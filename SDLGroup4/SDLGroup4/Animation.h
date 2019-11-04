@@ -13,7 +13,6 @@ namespace Engine
 	
 	private:
 		static std::string spritePath;
-		static SDL_Texture* newAnimation;
 		static int textureWidth, textureHeight;
 		static int frameWidth, frameHeight;
 		static SDL_Rect src, des;

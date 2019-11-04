@@ -46,7 +46,7 @@ void Engine::Application::Run()
 	const int frameDelay = 1000 / FPS;
 	Uint32 frameStartTick;
 	int frameTime;
-	//texting animation
+	//testing animation
 	Engine::Animation::AnimationSetup("Assets/Sprites/male_walk_anim.png", 3, 4, 200, 200);
 	while (isRunning)
 	{

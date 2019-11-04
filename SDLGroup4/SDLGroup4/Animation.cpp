@@ -3,7 +3,6 @@
 #include <iostream>
 
 std::string Engine::Animation::spritePath = "";
-SDL_Texture* Engine::Animation::newAnimation = nullptr;
 int Engine::Animation::textureWidth = 0;
 int Engine::Animation::textureHeight = 0;
 int Engine::Animation::frameWidth = 0;
@@ -15,6 +14,7 @@ int Engine::Animation::framtime = 0;
 
 void Engine::Animation::AnimationSetup(const std::string _spritePath, int totalSpritesInOneRow, int totalSpritesInOneColumn, int desPositionX, int desPositionY)
 {
+	SDL_Texture* newAnimation;
 	newAnimation = Engine::TextureManager::Texture(_spritePath);
 	if (newAnimation == nullptr)
 		std::cout << "Failed to load sprite. SDL Error: " << SDL_GetError << std::endl;
