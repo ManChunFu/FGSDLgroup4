@@ -3,6 +3,7 @@
 
 namespace Engine
 {
+	class InputManager;
 	class Application 
 	{
 	public:
@@ -20,6 +21,7 @@ namespace Engine
 		void Render();
 		bool isRunning = true;
 		Engine::Window* window = nullptr;
+		Engine::InputManager* inputManager = nullptr;
 		
 	};
 }
