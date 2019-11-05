@@ -3,6 +3,7 @@
 
 namespace Engine
 {
+	class Window;
 	class InputManager;
 	class Application 
 	{
