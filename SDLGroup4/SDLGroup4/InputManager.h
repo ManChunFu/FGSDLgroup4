@@ -9,8 +9,7 @@ namespace Engine
 	public:
 		InputManager();
 		void Update(bool& isRunning);
-		bool IsKeyPressed(SDL_Scancode key) const;
-		bool IsKeyReleased(SDL_Scancode key) const;
+		bool IsKeyDown(SDL_Scancode key) const { return keys[key]; };
 	private:
 		static SDL_Event event;
 		const Uint8* keys = nullptr;

@@ -8,7 +8,6 @@
 #include <SDL_ttf.h>
 #include <iostream>
 #include "CollisionManager.h"
-float Engine::Time::DeltaTime;
 
 bool Engine::Application::Initialize()
 {
@@ -51,21 +50,25 @@ void Engine::Application::Run()
 	Engine::Animation::AnimationSetup("Assets/Sprites/Attack1.png", 4, 1, 0, 0);
 	while (isRunning)
 	{
+		Engine::Time::StartFrame();
 		frameStartTick = SDL_GetTicks();
 		Render();
 		Update();
 		HandleEvents();
 		frameTime = SDL_GetTicks() - frameStartTick;
-		Engine::Time::DeltaTime = frameDelay - frameTime;
 		if (frameDelay > frameTime) {
 			SDL_Delay(frameDelay - frameTime);
 		}
+		Engine::Time::EndFrame();
 	}
 }
 
 void Engine::Application::Shutdown()
 {
-	
+	if (inputManager) {
+		delete inputManager;
+		inputManager = nullptr;
+	}
 	if (window)
 	{
 		

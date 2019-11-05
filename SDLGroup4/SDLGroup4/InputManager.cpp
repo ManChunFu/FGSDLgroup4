@@ -13,24 +13,11 @@ namespace Engine {
 	{
 		lastKeys = keys;
 		keys = SDL_GetKeyboardState(nullptr);
-		SDL_PollEvent(&event);
+		SDL_PollEvent(&event); 
 		switch (event.type)
 		{
 		case SDL_QUIT: isRunning = false; break;
 		}
-		if (IsKeyPressed(SDL_SCANCODE_ESCAPE)) {
-			isRunning = false;
-		}
-	}
-
-	bool InputManager::IsKeyPressed(SDL_Scancode key) const
-	{
-		if (!lastKeys[key] && keys[key]) { return true; }
-		return false;
-	}
-	bool InputManager::IsKeyReleased(SDL_Scancode key) const
-	{
-		if (lastKeys[key] && !keys[key]) { return true; }
-		return false;
+		if (IsKeyDown(SDL_SCANCODE_ESCAPE)) { isRunning = false; }
 	}
 }

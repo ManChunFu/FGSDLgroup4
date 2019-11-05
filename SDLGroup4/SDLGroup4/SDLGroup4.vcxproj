@@ -130,6 +130,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Time.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
