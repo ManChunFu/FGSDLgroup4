@@ -1,18 +1,18 @@
 #include "Animation.h"
 
 #include <iostream>
+#include "Vector2D.h"
 
-std::string Engine::Animation::spritePath = "";
-int Engine::Animation::textureWidth = 0;
-int Engine::Animation::textureHeight = 0;
-int Engine::Animation::frameWidth = 0;
-int Engine::Animation::frameHeight = 0;
-SDL_Rect Engine::Animation::src;
-SDL_Rect Engine::Animation::des;
 
-int Engine::Animation::framtime = 0;
+Engine::Animation::Animation(const std::string _spritePath, int totalSpritesInRow, int totalSpritesInColumn, int desPositionX, int desPositionY) 
+{
+}
 
-void Engine::Animation::AnimationSetup(const std::string _spritePath, int totalSpritesInOneRow, int totalSpritesInOneColumn, int desPositionX, int desPositionY)
+Engine::Animation::~Animation()
+{
+}
+
+void Engine::Animation::AnimationSetup(const std::string _spritePath, int totalSpritesInOneRow, int totalSpritesInOneColumn, Vector2D desPosition )
 {
 	SDL_Texture* newAnimation;
 	newAnimation = Engine::TextureManager::Texture(_spritePath);
@@ -21,7 +21,7 @@ void Engine::Animation::AnimationSetup(const std::string _spritePath, int totalS
 	else
 	{
 		spritePath = _spritePath;
-
+		 
 		SDL_QueryTexture(newAnimation, nullptr, nullptr, &textureWidth, &textureHeight);
 
 		frameWidth = textureWidth / totalSpritesInOneRow;
@@ -29,8 +29,8 @@ void Engine::Animation::AnimationSetup(const std::string _spritePath, int totalS
 		src.x = src.y = 0;
 		src.w = frameWidth;
 		src.h = frameHeight;
-		des.x = desPositionX;
-		des.y = desPositionY;
+		des.x = desPosition.X;
+		des.y = desPosition.Y;
 		des.w = frameWidth;
 		des.h = frameHeight;
 	}
