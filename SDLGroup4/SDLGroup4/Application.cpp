@@ -8,6 +8,7 @@
 #include <SDL_ttf.h>
 #include <iostream>
 #include "CollisionManager.h"
+#include "EntityManager.h"
 
 bool Engine::Application::Initialize()
 {
@@ -88,12 +89,14 @@ void Engine::Application::HandleEvents()
 
 void Engine::Application::Update()
 {
+	Engine::EntityManager::Update();
 }
 
 void Engine::Application::Render()
 {
 	//testing animation
 	Engine::Animation::PlayAnimation(4);
+	Engine::EntityManager::Render();
 
 
 }
