@@ -3,6 +3,8 @@
 
 namespace Engine
 {
+	class Window;
+
 	class Application 
 	{
 	public:
