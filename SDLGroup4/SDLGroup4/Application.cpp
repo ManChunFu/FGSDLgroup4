@@ -36,7 +36,7 @@ bool Engine::Application::Initialize()
 		std::cout << "Failed to initialize. SDL Error: " << SDL_GetError << std::endl;
 		return false;
 	}
-
+	inputManager = new Engine::InputManager();
 
 	return true;
 }
@@ -72,16 +72,15 @@ void Engine::Application::Shutdown()
 		delete window;
 		window = nullptr;
 	}
-	CollisionManager::Shutdown();
+	Engine::CollisionManager::Shutdown();
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }
 void Engine::Application::HandleEvents()
 {
-	Engine::InputManager::Update();
-	isRunning = Engine::InputManager::ProgramStatus();
-	CollisionManager::Update();
+	inputManager->Update(isRunning);
+	Engine::CollisionManager::Update();
 }
 
 void Engine::Application::Update()

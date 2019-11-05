@@ -1,11 +1,36 @@
 #include "InputManager.h"
-SDL_Event Engine::InputManager::event;
-bool Engine::InputManager::ProgramStatus() {
-	switch (event.type)
+#include <iostream>
+namespace Engine {
+	SDL_Event InputManager::event;
+		
+	InputManager::InputManager()
 	{
-	case SDL_QUIT: return false; break;
-	case SDL_KEYDOWN: if (event.key.keysym.sym == SDLK_ESCAPE) return false; break;
-	default: break;
+		keys = SDL_GetKeyboardState(nullptr);
+		lastKeys = keys;
 	}
-	return true;
+
+	void InputManager::Update(bool& isRunning)
+	{
+		lastKeys = keys;
+		keys = SDL_GetKeyboardState(nullptr);
+		SDL_PollEvent(&event);
+		switch (event.type)
+		{
+		case SDL_QUIT: isRunning = false; break;
+		}
+		if (IsKeyPressed(SDL_SCANCODE_ESCAPE)) {
+			isRunning = false;
+		}
+	}
+
+	bool InputManager::IsKeyPressed(SDL_Scancode key) const
+	{
+		if (!lastKeys[key] && keys[key]) { return true; }
+		return false;
+	}
+	bool InputManager::IsKeyReleased(SDL_Scancode key) const
+	{
+		if (lastKeys[key] && !keys[key]) { return true; }
+		return false;
+	}
 }
