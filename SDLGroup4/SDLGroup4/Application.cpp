@@ -9,7 +9,7 @@
 #include <iostream>
 #include "CollisionManager.h"
 #include "EntityManager.h"
-
+#include "Entity.h"
 bool Engine::Application::Initialize()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -37,7 +37,7 @@ bool Engine::Application::Initialize()
 		return false;
 	}
 	inputManager = new Engine::InputManager();
-
+	entity = new Entity("Assets/Sprites/enemy_drone_larger_red.png", 100, 100, 100,100);
 	return true;
 }
 
@@ -49,6 +49,7 @@ void Engine::Application::Run()
 	int frameTime;
 	//testing animation
 	Engine::Animation::AnimationSetup("Assets/Sprites/Attack1.png", 4, 1, 0, 0);
+	
 	while (isRunning)
 	{
 		Engine::Time::StartFrame();
@@ -76,6 +77,7 @@ void Engine::Application::Shutdown()
 		delete window;
 		window = nullptr;
 	}
+	EntityManager::Shutdown();
 	Engine::CollisionManager::Shutdown();
 	TTF_Quit();
 	IMG_Quit();
@@ -95,8 +97,11 @@ void Engine::Application::Update()
 void Engine::Application::Render()
 {
 	//testing animation
+	Engine::Window::RenderClear();
 	Engine::Animation::PlayAnimation(4);
+	
 	Engine::EntityManager::Render();
+	Engine::Window::RenderPresent();
 
 
 }

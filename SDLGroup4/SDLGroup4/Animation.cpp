@@ -51,9 +51,8 @@ void Engine::Animation::PlayAnimation(int speed)
 			src.x = 0;
 	}
 
-	Engine::Window::RenderClear();
+	
 	Engine::TextureManager::Draw(Engine::TextureManager::Texture(spritePath), src, des);
-	Engine::Window::RenderPresent();
 
 }
 

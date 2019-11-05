@@ -5,6 +5,7 @@ namespace Engine
 {
 	class Window;
 	class InputManager;
+	class Entity;
 	class Application 
 	{
 	public:
@@ -23,6 +24,7 @@ namespace Engine
 		bool isRunning = true;
 		Engine::Window* window = nullptr;
 		Engine::InputManager* inputManager = nullptr;
+		Engine::Entity* entity;
 		
 	};
 }
