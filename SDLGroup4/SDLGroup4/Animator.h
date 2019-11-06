@@ -14,10 +14,11 @@ namespace Engine
 
 		void Trigger(const std::string& name);
 		void Stop();
-		void Render(int x, int y);//(Vector2D position);
+		void DisplayAnimation(int x, int y);//(Vector2D position);
 
 		std::vector<Animation*> Animations;
 		Animation* currenAnimation = nullptr;
+		bool isTrigger = false;
 	};
 }
 

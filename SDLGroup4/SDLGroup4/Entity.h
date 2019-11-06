@@ -32,7 +32,7 @@ namespace Engine {
 			//testing animation
 			animator.Animations =
 			{
-				new Engine::Animation("Assets/Sprites/Attack1.png", "Attack", 4, 1, 5)
+				new Engine::Animation("Assets/Sprites/x64testing.png", "Run", 6, 1, 5)
 			};
 		}
 		virtual void Update() { destRect.x = posX; destRect.y = posY; collider->UpdateBorders(destRect); }
@@ -42,8 +42,9 @@ namespace Engine {
 			Engine::TextureManager::Draw(texture, sourceRect, destRect);
 
 			//testing animation
-			animator.Trigger("Attack");
-			animator.Render(0, 0);
+			animator.Trigger("Run");
+			if (animator.isTrigger)
+				animator.DisplayAnimation(0, 0);
 		}
 	protected:
 		float posX;
