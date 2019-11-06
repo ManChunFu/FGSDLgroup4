@@ -23,6 +23,7 @@ void Engine::Animator::Stop()
 
 void Engine::Animator::DisplayAnimation(int x, int y)//(Vector2D position)
 {
-	if (currenAnimation != nullptr)
-		currenAnimation->PlayAnimation(x, y);//(position);
+	if (isTrigger)
+		if (currenAnimation != nullptr)
+			currenAnimation->PlayAnimation(x, y);//(position);
 }

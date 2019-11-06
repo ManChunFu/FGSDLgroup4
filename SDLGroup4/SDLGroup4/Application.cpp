@@ -13,6 +13,7 @@
 #include "Entity.h"
 #include "SoundManager.h"
 #include <SDL_mixer.h>
+#include "Text.h"
 bool Engine::Application::Initialize()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -55,11 +56,19 @@ void Engine::Application::Run()
 	Uint32 frameStartTick;
 	int frameTime;
 	Mix_Chunk* sound = SoundManager::GetSound("Assets/Sounds/bell.wav");
-	//testing animation
-	//Engine::Animation::AnimationSetup("Assets/Sprites/Attack1.png", 4, 1, 0, 0);
+	int updatedScore = 0;
+
+	//testing text
+	std::string score = "Score: " + (char)updatedScore;
+	Engine::Text Score("Assets/Fonts/BAUHS93.ttf", 50, score, { 255, 255, 255, 255 }, 500, 200);
+
 	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
 	while (isRunning)
 	{
+		//testing text
+		Score.DisplayText();
+		Engine::Window::RenderPresent();
+
 		Engine::Time::StartFrame();
 		frameStartTick = SDL_GetTicks();
 		Render();

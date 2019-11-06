@@ -12,10 +12,9 @@ namespace Engine
 	class Text
 	{
 	public:
-		Text(const std::string& font_path, int fontsize, const std::string& message_text, SDL_Color color, Vector2D position);
+		Text(const std::string& font_path, int fontsize, const std::string& message_text, SDL_Color color, int x, int y);//Engine::Vector2D position);
 
 		void DisplayText();
-		void UpdateDisplayText(int updatedText);
 		SDL_Texture* LoadFont(const std::string& font_path, int fontsize, const std::string& message_text, SDL_Color color);
 	private:
 		SDL_Texture* textTexture;
