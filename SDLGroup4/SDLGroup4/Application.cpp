@@ -37,7 +37,7 @@ bool Engine::Application::Initialize()
 		return false;
 	}
 
-	window = new Engine::Window("Main Window", 800, 600);
+	window = new Engine::Window("Main Window", 1440, 900);
 	if (!window->Init())
 	{
 		std::cout << "Failed to initialize. SDL Error: " << SDL_GetError << std::endl;
