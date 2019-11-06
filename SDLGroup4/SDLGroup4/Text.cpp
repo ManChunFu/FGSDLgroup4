@@ -12,7 +12,7 @@ SDL_Texture* Engine::Text::ChooseFont(const std::string& font_path, int fontsize
 		std::cout << "Failed to load font. SDL_Error: " << SDL_GetError << std::endl;
 	else
 	{
-		//auto fontTexture = SDL_CreateTexture(Engine::Window::Renderer, NULL, NULL)
+		
 	}
 	return nullptr;
 }
