@@ -15,7 +15,7 @@ namespace Engine
 		SDL_Texture* ChooseFont(const std::string& font_path, int fontsize);
 
 		SDL_Texture* fontTexture;
-		SDL_Rect textRect;
+		//SDL_Rect textRect;
 	};
 }
 

@@ -11,7 +11,6 @@
 void Engine::TextureManager::Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect)
 {
 	SDL_RenderCopy(Engine::Window::Renderer, sprite, &srcRect, &desRect);
-	SDL_DestroyTexture(sprite);
 }
 
 SDL_Texture* Engine::TextureManager::Texture(const std::string& texturePath)

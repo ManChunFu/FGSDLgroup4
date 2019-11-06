@@ -6,10 +6,13 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include <iostream>
 #include "CollisionManager.h"
 #include "EntityManager.h"
 #include "Entity.h"
+#include "SoundManager.h"
+#include <SDL_mixer.h>
 bool Engine::Application::Initialize()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -27,6 +30,10 @@ bool Engine::Application::Initialize()
 	if (TTF_Init() == -1)
 	{
 		std::cout << "Failed to inialize SDL_ttf. SDL Error: " << SDL_GetError << std::endl;
+		return false;
+	}
+	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+	{
 		return false;
 	}
 
@@ -47,13 +54,15 @@ void Engine::Application::Run()
 	const int frameDelay = 1000 / FPS;
 	Uint32 frameStartTick;
 	int frameTime;
+	Mix_Chunk* sound = SoundManager::GetSound("Assets/Sounds/bell.wav");
 	//testing animation
 	//Engine::Animation::AnimationSetup("Assets/Sprites/Attack1.png", 4, 1, 0, 0);
-	
+	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav");
 	while (isRunning)
 	{
 		Engine::Time::StartFrame();
 		frameStartTick = SDL_GetTicks();
+		
 		Render();
 		Update();
 		HandleEvents();
@@ -82,6 +91,7 @@ void Engine::Application::Shutdown()
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
+	Mix_CloseAudio();
 }
 void Engine::Application::HandleEvents()
 {
