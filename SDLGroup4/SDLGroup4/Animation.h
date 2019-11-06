@@ -22,6 +22,7 @@ namespace Engine
 		static SDL_Rect src, des;
 		static const int framePerSecond = 60;
 		static int framtime;
+		static SDL_Texture* animationTexture;
 	};
 }
 
