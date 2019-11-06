@@ -1,25 +1,28 @@
 #pragma once
 
+#include "Vector2D.h"
 #include "TextureManager.h"
 #include <string>
 #include <vector>
+
 
 namespace Engine
 {
 	class Animation
 	{
 	public:
-		Animation(const std::string _spritePath, std::string name, int _totalSpritesInRow, int _totalSpritesInColumn, int desPositionX, int desPositionY);
+		Animation(const std::string spritePath, std::string name, int spriteSheetLenghtX, int spriteSheetLengthY, int speed);
 		~Animation();
-		void AnimationSetup(const std::string _spritePath, int totalSpritesInOneRow, int totalSpritesInOneColumn, Vector2D desPosition);
-		void PlayAnimation(int speed);
+		void PlayAnimation(Vector2D position);
 	
 	private:
 		std::string spritePath = "";
-		int totalSpritesInRow = 0, totalSpritesInColumn;
-		int textureWidth = 0, textureHeight = 0;
+		std::string name = "";
+		int spriteSheetLengthX = 0, spriteSheetLengthY = 0;
+		int speed = 0;
+		int spriteWidth = 0, spriteHeight = 0;
 		int frameWidth = 0, frameHeight = 0;
-		SDL_Rect src, des;
+		SDL_Rect sourceRect, destinationRect;
 		const int framePerSecond = 60;
 		int framtime = 0;
 	};

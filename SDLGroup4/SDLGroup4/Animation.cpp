@@ -4,55 +4,43 @@
 #include "Vector2D.h"
 
 
-Engine::Animation::Animation(const std::string _spritePath, int totalSpritesInRow, int totalSpritesInColumn, int desPositionX, int desPositionY) 
+Engine::Animation::Animation(const std::string spritePath, std::string name, int spriteSheetLenghtX, int spriteSheetLengthY, int speed) :
+	spritePath(spritePath), name(name), speed(speed)
 {
+	SDL_Texture* newAnimation;
+	newAnimation = Engine::TextureManager::Texture(spritePath);
+	
+	SDL_QueryTexture(newAnimation, nullptr, nullptr, &spriteWidth, &spriteHeight);
+
+	frameWidth = spriteWidth / spriteSheetLenghtX;
+	frameHeight = spriteHeight / spriteSheetLengthY;
+	sourceRect.x = sourceRect.y = 0;
+	sourceRect.w = destinationRect.w = frameWidth;
+	sourceRect.h = destinationRect.h = frameHeight;
+
+	if (&sourceRect == nullptr || &destinationRect == nullptr)
+		std::cout << "Failed to setup animated sprite's source / destination value. SDL Error: " << SDL_GetError << std::endl;
 }
 
 Engine::Animation::~Animation()
 {
 }
 
-void Engine::Animation::AnimationSetup(const std::string _spritePath, int totalSpritesInOneRow, int totalSpritesInOneColumn, Vector2D desPosition )
-{
-	SDL_Texture* newAnimation;
-	newAnimation = Engine::TextureManager::Texture(_spritePath);
-	if (newAnimation == nullptr)
-		std::cout << "Failed to load sprite. SDL Error: " << SDL_GetError << std::endl;
-	else
-	{
-		spritePath = _spritePath;
-		 
-		SDL_QueryTexture(newAnimation, nullptr, nullptr, &textureWidth, &textureHeight);
 
-		frameWidth = textureWidth / totalSpritesInOneRow;
-		frameHeight = textureHeight / totalSpritesInOneColumn;
-		src.x = src.y = 0;
-		src.w = frameWidth;
-		src.h = frameHeight;
-		des.x = desPosition.X;
-		des.y = desPosition.Y;
-		des.w = frameWidth;
-		des.h = frameHeight;
-	}
-
-	if (&src == nullptr || &des == nullptr)
-		std::cout << "Failed to setup animated sprite's source / destination value. SDL Error: " << SDL_GetError << std::endl;
-}
-
-void Engine::Animation::PlayAnimation(int speed)
+void Engine::Animation::PlayAnimation(Vector2D position)
 {
 	framtime++;
+	destinationRect.x = position.X;
+	destinationRect.y = position.Y;
 
 	if (framePerSecond/framtime == speed)
 	{
 		framtime = 0;
-		src.x += frameWidth;
-		if (src.x >= textureWidth)
-			src.x = 0;
+		sourceRect.x += frameWidth;
+		if (sourceRect.x >= spriteWidth)
+			sourceRect.x = 0;
 	}
 
-	
-	Engine::TextureManager::Draw(Engine::TextureManager::Texture(spritePath), src, des);
-
+	Engine::TextureManager::Draw(Engine::TextureManager::Texture(spritePath), sourceRect, destinationRect);
 }
 
