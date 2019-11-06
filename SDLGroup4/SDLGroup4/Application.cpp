@@ -57,12 +57,12 @@ void Engine::Application::Run()
 	Mix_Chunk* sound = SoundManager::GetSound("Assets/Sounds/bell.wav");
 	//testing animation
 	//Engine::Animation::AnimationSetup("Assets/Sprites/Attack1.png", 4, 1, 0, 0);
-	
+	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav");
 	while (isRunning)
 	{
 		Engine::Time::StartFrame();
 		frameStartTick = SDL_GetTicks();
-		SoundManager::PlaySoundEffect(sound);
+		
 		Render();
 		Update();
 		HandleEvents();
