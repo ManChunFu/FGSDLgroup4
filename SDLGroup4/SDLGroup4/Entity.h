@@ -43,7 +43,8 @@ namespace Engine {
 
 			//testing animation
 			animator.Trigger("Attack");
-			animator.Render(0, 0);
+			if (animator.isTrigger)
+				animator.DisplayAnimation(0, 0);
 		}
 	protected:
 		float posX;
