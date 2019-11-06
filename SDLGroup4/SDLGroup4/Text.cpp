@@ -1,17 +1,25 @@
 #include "Text.h"
 #include "Window.h"
+#include "TextureManager.h"
 
 #include <SDL_ttf.h>
 #include <iostream>
 
-Engine::Text::Text(SDL_Renderer* renderer, const std::string& font_path, int fontsize, const std::string& message_text, SDL_Color color)
+Engine::Text::Text(const std::string& font_path, int fontsize, const std::string& message_text, SDL_Color color, Vector2D position)
 {
-	textTexture = LoadFont(Engine::Window::Renderer, font_path, fontsize, message_text, color);
+	textTexture = LoadFont(font_path, fontsize, message_text, color);
 	SDL_QueryTexture(textTexture, nullptr, nullptr, &textRect.w, &textRect.h);
+
+	textRect.x = position.X;
+	textRect.y = position.Y;
 }
 
+void Engine::Text::DisplayText()
+{
+	Engine::TextureManager::Draw(textTexture, textRect, textRect);
+}
 
-SDL_Texture* Engine::Text::LoadFont(SDL_Renderer* renderer, const std::string& font_path, int fontsize, const std::string& message_text, SDL_Color color)
+SDL_Texture* Engine::Text::LoadFont(const std::string& font_path, int fontsize, const std::string& message_text, SDL_Color color)
 {
 	TTF_Font* font = TTF_OpenFont(font_path.c_str(), fontsize);
 	if (!font)
