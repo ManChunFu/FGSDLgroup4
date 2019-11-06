@@ -1,9 +1,9 @@
 #pragma once
 
 #include <string>
+#include <SDL_rect.h>
 struct SDL_Texture;
 struct SDL_Color;
-struct SDL_Rect;
 
 namespace Engine
 {

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Animation.h"
 #include <vector>
 
@@ -11,10 +12,12 @@ namespace Engine
 		Animator() {}
 		~Animator() { Animations.clear(); }
 
-		static std::vector<Animation*> Animations;
+		void Trigger(const std::string& name);
+		void Stop();
+		void Render(int x, int y);//(Vector2D position);
 
+		std::vector<Animation*> Animations;
 		Animation* currenAnimation = nullptr;
-
 	};
 }
 

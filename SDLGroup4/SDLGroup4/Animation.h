@@ -13,11 +13,12 @@ namespace Engine
 	public:
 		Animation(const std::string spritePath, std::string name, int spriteSheetLenghtX, int spriteSheetLengthY, int speed);
 		~Animation();
-		void PlayAnimation(Vector2D position);
+		void PlayAnimation(int x, int y);//(Vector2D& position);
+
+		std::string name = "";
 	
 	private:
 		std::string spritePath = "";
-		std::string name = "";
 		int spriteSheetLengthX = 0, spriteSheetLengthY = 0;
 		int speed = 0;
 		int spriteWidth = 0, spriteHeight = 0;

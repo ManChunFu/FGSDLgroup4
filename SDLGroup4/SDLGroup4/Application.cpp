@@ -96,10 +96,7 @@ void Engine::Application::Update()
 
 void Engine::Application::Render()
 {
-	//testing animation
 	Engine::Window::RenderClear();
-	//Engine::Animation::PlayAnimation(4);
-	
 	Engine::EntityManager::Render();
 	Engine::Window::RenderPresent();
 

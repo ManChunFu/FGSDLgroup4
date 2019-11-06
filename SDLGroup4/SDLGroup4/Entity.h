@@ -29,15 +29,22 @@ namespace Engine {
 			collider = new Engine::Collider(destRect, "Player");
 			Engine::EntityManager::AddEntity(this);
 
-			/*animator.Animations =
+			//testing animation
+			animator.Animations =
 			{
-				new Engine::Animation("dsfds","Left",123,12,12,12),
-				new Engine::Animation("dsfds","Right",123,12,12,12),
-				new Engine::Animation("dsfds","Jump",12332,12,12,12)
-			};*/
+				new Engine::Animation("Assets/Sprites/Attack1.png", "Attack", 4, 1, 5)
+			};
 		}
 		virtual void Update() { destRect.x = posX; destRect.y = posY; collider->UpdateBorders(destRect); }
-		void Render() { /*std::cout << sourceRect.y << sourceRect.x << std::endl;*/ Engine::TextureManager::Draw(texture, sourceRect, destRect); }
+		void Render() 
+		{ 
+			/*std::cout << sourceRect.y << sourceRect.x << std::endl;*/ 
+			Engine::TextureManager::Draw(texture, sourceRect, destRect);
+
+			//testing animation
+			animator.Trigger("Attack");
+			animator.Render(0, 0);
+		}
 	protected:
 		float posX;
 		float posY;
@@ -45,7 +52,7 @@ namespace Engine {
 		SDL_Rect sourceRect;
 		SDL_Rect destRect;
 		SDL_Texture* texture;
-		/*Engine::Animator animator;*/
-		
+		Engine::Animator animator;
+
 	};
 }

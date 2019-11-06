@@ -125,6 +125,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="CollisionManager.cpp" />

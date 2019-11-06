@@ -1,11 +1,10 @@
 #include "Animation.h"
 
 #include <iostream>
-#include "Vector2D.h"
 
 
 Engine::Animation::Animation(const std::string spritePath, std::string name, int spriteSheetLenghtX, int spriteSheetLengthY, int speed) :
-	spritePath(spritePath), name(name), speed(speed)
+	spritePath(spritePath), name(name.c_str()), speed(speed)
 {
 	SDL_Texture* newAnimation;
 	newAnimation = Engine::TextureManager::Texture(spritePath);
@@ -27,11 +26,11 @@ Engine::Animation::~Animation()
 }
 
 
-void Engine::Animation::PlayAnimation(Vector2D position)
+void Engine::Animation::PlayAnimation(int x, int y)//(Vector2D& position)
 {
 	framtime++;
-	destinationRect.x = position.X;
-	destinationRect.y = position.Y;
+	destinationRect.x = x;//position.X;
+	destinationRect.y = y;//position.Y;
 
 	if (framePerSecond/framtime == speed)
 	{
