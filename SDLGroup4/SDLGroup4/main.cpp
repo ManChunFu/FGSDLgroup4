@@ -2,7 +2,6 @@
 #include "TextureManager.h"
 #include "Window.h"
 
-
 int main(int argc, char** argv)
 {
 	Engine::Application* application = new Engine::Application();
@@ -14,7 +13,6 @@ int main(int argc, char** argv)
 		application = nullptr;
 	}
 	
-
 	application->Run();
 	application->Shutdown();
 	delete application;

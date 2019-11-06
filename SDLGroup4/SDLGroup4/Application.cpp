@@ -48,7 +48,7 @@ void Engine::Application::Run()
 	Uint32 frameStartTick;
 	int frameTime;
 	//testing animation
-	Engine::Animation::AnimationSetup("Assets/Sprites/Attack1.png", 4, 1, 0, 0);
+	//Engine::Animation::AnimationSetup("Assets/Sprites/Attack1.png", 4, 1, 0, 0);
 	
 	while (isRunning)
 	{
@@ -98,7 +98,7 @@ void Engine::Application::Render()
 {
 	//testing animation
 	Engine::Window::RenderClear();
-	Engine::Animation::PlayAnimation(4);
+	//Engine::Animation::PlayAnimation(4);
 	
 	Engine::EntityManager::Render();
 	Engine::Window::RenderPresent();
