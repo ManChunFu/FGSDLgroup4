@@ -5,16 +5,16 @@
 #include <SDL_ttf.h>
 #include <iostream>
 
-Engine::Text::Text(const std::string& font_path, int fontsize, const std::string& message_text, SDL_Color color, int x, int y)//Engine::Vector2D position)
+Engine::Text::Text(const std::string& font_path, int fontsize, const std::string& message_text, SDL_Color color, GameElement base)//Engine::Vector2D position)
 {
 	textTexture = LoadFont(font_path, fontsize, message_text, color);
 	SDL_QueryTexture(textTexture, nullptr, nullptr, &textRect.w, &textRect.h);
 
-	textRect.x = x;//position.X;
-	textRect.y = y;//position.Y;
+	textRect.x = base.xCoordinate ;//position.X;
+	textRect.y = base.yCoordinate;//position.Y;
 }
 
-void Engine::Text::DisplayText()
+void Engine::Text::Render()
 {
 	SDL_RenderCopy(Engine::Window::Renderer, textTexture, nullptr, &textRect);
 }

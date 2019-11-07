@@ -1,6 +1,7 @@
 #pragma once
 #include "Window.h"
 #include "Text.h"
+#include "Canvas.h"
 
 namespace Engine
 {
@@ -29,6 +30,7 @@ namespace Engine
 
 		std::string score = "Score: ";
 		Engine::Text* Score;
+		Engine::Canvas* myCanvy;
 		
 	};
 }

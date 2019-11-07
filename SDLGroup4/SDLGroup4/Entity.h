@@ -12,7 +12,7 @@
 namespace Engine {
 	class Entity {
 	public:
-		virtual ~Entity() {}
+		~Entity() {}
 		Entity(std::string path, int height, int width, int xpos, int ypos)
 		{
 			posX = xpos;

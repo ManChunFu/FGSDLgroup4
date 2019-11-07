@@ -1,5 +1,4 @@
 #include "TextureManager.h"
-#include "TextureManager.h"
 #include "Window.h"
 
 #include <SDL_render.h>

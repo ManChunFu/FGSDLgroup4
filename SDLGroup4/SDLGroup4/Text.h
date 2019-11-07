@@ -3,18 +3,19 @@
 
 #include <string>
 #include <SDL_rect.h>
+#include "GameElement.h"
 
 struct SDL_Texture;
 struct SDL_Color;
 
 namespace Engine
 {
-	class Text
+	class Text: public GameElement
 	{
 	public:
-		Text(const std::string& font_path, int fontsize, const std::string& message_text, SDL_Color color, int x, int y);//Engine::Vector2D position);
-
-		void DisplayText();
+		Text(const std::string& font_path, int fontsize, const std::string& message_text, SDL_Color color, GameElement base);//Engine::Vector2D position);
+		
+		void Render() override;
 		SDL_Texture* LoadFont(const std::string& font_path, int fontsize, const std::string& message_text, SDL_Color color);
 	private:
 		SDL_Texture* textTexture;

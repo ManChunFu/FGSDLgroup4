@@ -13,17 +13,19 @@
 #include "Entity.h"
 #include "SoundManager.h"
 #include <SDL_mixer.h>
+#include "Canvas.h"
 #include "Text.h"
 
 
 bool Engine::Application::Initialize()
 {
+
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		std::cout << "Failed to inialize SDL. SDL Error: " << SDL_GetError << std::endl;
 		return false;
 	}
-
+	
 	if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
 	{
 		std::cout << "Failed to inialize SDL_Image. SDL Error: " << SDL_GetError << std::endl;
@@ -49,7 +51,10 @@ bool Engine::Application::Initialize()
 	inputManager = new Engine::InputManager();
 	entity = new Entity("Assets/Sprites/enemy_drone_larger_red.png", 100, 100, 100,100);
 
-	Score = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, score, { 255, 255, 255, 255 }, 500, 200);
+	//testing canvas
+	myCanvy = new Engine::Canvas({ 0, 200, 200, 225 }, { 150,130,340,300 });
+	myCanvy->AddChild(new Text("Assets/Fonts/BAUHS93.ttf", 50, score, { 255, 255, 255, 255 }, { 500,200, 50, 50}));
+	//Score = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, score, { 255, 255, 255, 255 }, 500, 200);
 	return true;
 }
 
@@ -98,7 +103,7 @@ void Engine::Application::Shutdown()
 	Mix_CloseAudio();
 }
 void Engine::Application::HandleEvents()
-{
+{	
 	inputManager->Update(isRunning);
 	Engine::CollisionManager::Update();
 }
@@ -110,8 +115,11 @@ void Engine::Application::Update()
 
 void Engine::Application::Render()
 {
+	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 10, 33, 132);
+
 	Engine::Window::RenderClear();
-	Score->DisplayText();
+	myCanvy->Render();
+	//Score->Render();
 	Engine::EntityManager::Render();
 	Engine::Window::RenderPresent();
 
