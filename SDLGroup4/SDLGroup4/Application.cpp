@@ -14,6 +14,8 @@
 #include "SoundManager.h"
 #include <SDL_mixer.h>
 #include "Text.h"
+
+
 bool Engine::Application::Initialize()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -46,6 +48,8 @@ bool Engine::Application::Initialize()
 	}
 	inputManager = new Engine::InputManager();
 	entity = new Entity("Assets/Sprites/enemy_drone_larger_red.png", 100, 100, 100,100);
+
+	Score = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, score, { 255, 255, 255, 255 }, 500, 200);
 	return true;
 }
 
@@ -56,19 +60,11 @@ void Engine::Application::Run()
 	Uint32 frameStartTick;
 	int frameTime;
 	Mix_Chunk* sound = SoundManager::GetSound("Assets/Sounds/bell.wav");
-	int updatedScore = 0;
-
-	//testing text
-	std::string score = "Score: " + (char)updatedScore;
-	Engine::Text Score("Assets/Fonts/BAUHS93.ttf", 50, score, { 255, 255, 255, 255 }, 500, 200);
+		
 
 	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
 	while (isRunning)
 	{
-		//testing text
-		Score.DisplayText();
-		Engine::Window::RenderPresent();
-
 		Engine::Time::StartFrame();
 		frameStartTick = SDL_GetTicks();
 		Render();
@@ -115,6 +111,7 @@ void Engine::Application::Update()
 void Engine::Application::Render()
 {
 	Engine::Window::RenderClear();
+	Score->DisplayText();
 	Engine::EntityManager::Render();
 	Engine::Window::RenderPresent();
 

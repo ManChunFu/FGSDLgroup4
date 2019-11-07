@@ -26,7 +26,7 @@ Engine::Animation::~Animation()
 }
 
 
-void Engine::Animation::PlayAnimation(int x, int y)//(Vector2D& position)
+void Engine::Animation::PlayAnimation(float x, float y)//(Vector2D& position)
 {
 	framtime++;
 	destinationRect.x = x;//position.X;

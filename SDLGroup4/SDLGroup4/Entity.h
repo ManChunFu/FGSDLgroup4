@@ -32,7 +32,7 @@ namespace Engine {
 		}
 
 		virtual void Update() { destRect.x = posX; destRect.y = posY; collider->UpdateBorders(destRect); }
-		void Render() 
+		virtual void Render() 
 		{ 
 			/*std::cout << sourceRect.y << sourceRect.x << std::endl;*/ 
 			Engine::TextureManager::Draw(texture, sourceRect, destRect);
