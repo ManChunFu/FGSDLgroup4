@@ -6,7 +6,6 @@
 Engine::Animation::Animation(const std::string spritePath, std::string name, int spriteSheetLenghtX, int spriteSheetLengthY, int speed) :
 	spritePath(spritePath), name(name.c_str()), speed(speed)
 {
-	SDL_Texture* newAnimation;
 	newAnimation = Engine::TextureManager::Texture(spritePath);
 	
 	SDL_QueryTexture(newAnimation, nullptr, nullptr, &spriteWidth, &spriteHeight);
@@ -40,6 +39,8 @@ void Engine::Animation::PlayAnimation(float x, float y)//(Vector2D& position)
 			sourceRect.x = 0;
 	}
 
-	Engine::TextureManager::Draw(Engine::TextureManager::Texture(spritePath), sourceRect, destinationRect);
+	
+	Engine::TextureManager::Draw(newAnimation, sourceRect, destinationRect);
+	
 }
 
