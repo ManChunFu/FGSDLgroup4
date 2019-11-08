@@ -13,7 +13,7 @@ namespace Engine {
 	class Entity {
 	public:
 		virtual ~Entity() {};
-		Entity(std::string path, int height, int width, int xpos, int ypos)
+		Entity(std::string path, int height, int width, int xpos, int ypos, std::string name)
 		{
 			posX = xpos;
 			posY = ypos;
@@ -23,12 +23,12 @@ namespace Engine {
 			sourceRect.y = 0;
 			destRect.w = width;
 			destRect.h = height;
-			destRect.w = posX;
-			destRect.w = posY;
+			destRect.x = posX;
+			destRect.y = posY;
 			texture = TextureManager::Texture(path);
-			collider = new Engine::Collider(destRect, "Player");
+			collider = new Engine::Collider(destRect, name, TextureManager::Surface(path));
 			Engine::EntityManager::AddEntity(this);
-
+			
 			//testing animation
 			animator.Animations =
 			{

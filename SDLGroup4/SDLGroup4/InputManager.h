@@ -8,6 +8,7 @@ namespace Engine
 	{
 	public:
 		InputManager();
+		void Shutdown();
 		void Update(bool& isRunning);
 		bool IsKeyDown(SDL_Scancode key) const { return keys[key]; };
 	private:

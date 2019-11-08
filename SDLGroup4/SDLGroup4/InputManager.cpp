@@ -9,6 +9,14 @@ namespace Engine {
 		lastKeys = keys;
 	}
 
+	void InputManager::Shutdown()
+	{
+		delete lastKeys;
+		lastKeys = nullptr;
+		delete keys;
+		keys = nullptr;
+	}
+
 	void InputManager::Update(bool& isRunning)
 	{
 		lastKeys = keys;

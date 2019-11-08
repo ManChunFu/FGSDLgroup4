@@ -25,6 +25,7 @@ namespace Engine
 		Engine::Window* window = nullptr;
 		Engine::InputManager* inputManager = nullptr;
 		Engine::Entity* entity;
+		Engine::Entity* entity2;
 		
 	};
 }
