@@ -2,7 +2,7 @@
 
 void Engine::Animator::Trigger(const std::string& name)
 {
-	for (auto animationClipID = 0; animationClipID < Animations.size(); animationClipID++)
+	for (unsigned int animationClipID = 0; animationClipID < Animations.size(); animationClipID++)
 	{
 		if (Animations[animationClipID]->name == name.c_str())
 		{
@@ -21,8 +21,9 @@ void Engine::Animator::Stop()
 	currenAnimation = nullptr;
 }
 
-void Engine::Animator::DisplayAnimation(int x, int y)//(Vector2D position)
+void Engine::Animator::DisplayAnimation(float x, float y)//(Vector2D position)
 {
-	if (currenAnimation != nullptr)
-		currenAnimation->PlayAnimation(x, y);//(position);
+	if (isTrigger)
+		if (currenAnimation != nullptr)
+			currenAnimation->PlayAnimation(x, y);//(position);
 }

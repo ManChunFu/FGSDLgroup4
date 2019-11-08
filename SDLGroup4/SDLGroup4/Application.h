@@ -1,5 +1,7 @@
 #pragma once
 #include "Window.h"
+#include "Text.h"
+#include "Canvas.h"
 
 namespace Engine
 {
@@ -25,7 +27,10 @@ namespace Engine
 		Engine::Window* window = nullptr;
 		Engine::InputManager* inputManager = nullptr;
 		Engine::Entity* entity;
-		Engine::Entity* entity2;
+
+		std::string score = "Score: ";
+		Engine::Text* Score;
+		Engine::Canvas* myCanvy;
 		
 	};
 }

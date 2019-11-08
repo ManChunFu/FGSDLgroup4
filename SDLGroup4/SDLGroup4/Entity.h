@@ -12,8 +12,8 @@
 namespace Engine {
 	class Entity {
 	public:
-		virtual ~Entity() {};
-		Entity(std::string path, int height, int width, int xpos, int ypos, std::string name)
+		~Entity() {}
+		Entity(std::string path, int height, int width, int xpos, int ypos)
 		{
 			posX = xpos;
 			posY = ypos;
@@ -23,29 +23,29 @@ namespace Engine {
 			sourceRect.y = 0;
 			destRect.w = width;
 			destRect.h = height;
-			destRect.x = posX;
-			destRect.y = posY;
+			destRect.w = posX;
+			destRect.w = posY;
 			texture = TextureManager::Texture(path);
-			collider = new Engine::Collider(destRect, name, TextureManager::Surface(path));
+			collider = new Engine::Collider(destRect, "Player");
 			Engine::EntityManager::AddEntity(this);
-			
+
 			//testing animation
-			animator.Animations =
-			{
-				new Engine::Animation("Assets/Sprites/x64testing.png", "Run", 6, 1, 5)
-			};
+			animator.Animations.push_back(new Animation("Assets/Sprites/x64testing.png", "Run", 6, 1, 5));
+			animator.Trigger("Run");
+
 		}
+
 		virtual void Update() { destRect.x = posX; destRect.y = posY; collider->UpdateBorders(destRect); }
-		void Render() 
+		virtual void Render() 
 		{ 
 			/*std::cout << sourceRect.y << sourceRect.x << std::endl;*/ 
 			Engine::TextureManager::Draw(texture, sourceRect, destRect);
 
-			//testing animation
-			animator.Trigger("Run");
-			if (animator.isTrigger)
-				animator.DisplayAnimation(0, 0);
+			animator.DisplayAnimation(posX, posY);
 		}
+
+		Engine::Animator animator;
+
 	protected:
 		float posX;
 		float posY;
@@ -53,7 +53,6 @@ namespace Engine {
 		SDL_Rect sourceRect;
 		SDL_Rect destRect;
 		SDL_Texture* texture;
-		Engine::Animator animator;
 
 	};
 }
