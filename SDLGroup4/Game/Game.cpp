@@ -67,7 +67,6 @@ int main(int argc, char** argv)
 			return false;
 		}
 		inputManager = new Engine::InputManager();
-		entity = new Entity("Assets/Sprites/enemy_drone_larger_red.png", 100, 100, 100, 100);
 
 		return true;
 	}
@@ -79,8 +78,6 @@ int main(int argc, char** argv)
 		Uint32 frameStartTick;
 		int frameTime;
 		Mix_Chunk* sound = SoundManager::GetSound("Assets/Sounds/bell.wav");
-
-
 		Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
 		while (isRunning)
 		{

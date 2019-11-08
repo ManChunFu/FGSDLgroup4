@@ -29,10 +29,6 @@ namespace Engine {
 			collider = new Engine::Collider(destRect, "Player");
 			Engine::EntityManager::AddEntity(this);
 
-			//testing animation
-			animator.Animations.push_back(new Animation("Assets/Sprites/x64testing.png", "Run", 6, 1, 5));
-			animator.Trigger("Run");
-
 		}
 
 		virtual void Update() { destRect.x = posX; destRect.y = posY; collider->UpdateBorders(destRect); }
