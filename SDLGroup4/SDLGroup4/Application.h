@@ -28,9 +28,7 @@ namespace Engine
 		Engine::InputManager* inputManager = nullptr;
 		Engine::Entity* entity;
 
-		std::string score = "Score: ";
-		Engine::Text* Score;
-		Engine::Canvas* myCanvy;
-		
 	};
+
+	Application* CreateApplication();
 }
