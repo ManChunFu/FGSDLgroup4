@@ -22,7 +22,7 @@ namespace Engine
 			Color = color;
 		}
 		void Render() override;
-
+		void UpdatePosition(float xCoordinate, float yCoordinate) override;
 		void AddChild(GameElement* elemet);
 
 		std::vector<GameElement*> Children;

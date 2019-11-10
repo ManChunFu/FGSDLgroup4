@@ -1,6 +1,5 @@
 #pragma once
 #include "Window.h"
-#include "Text.h"
 #include "Canvas.h"
 
 namespace Engine
