@@ -6,7 +6,6 @@
 #include <SDL_render.h>
 
 
-
 Engine::Button::Button(GameElement base, SDL_Color color)
 {
 	boxRect.w = width = base.width;
@@ -17,9 +16,15 @@ Engine::Button::Button(GameElement base, SDL_Color color)
 	this->color = color;
 }
 
-void Engine::Button::AddChild(GameElement* element, void(*function))
+void Engine::Button::SetText(GameElement* element)
 {
-	Children.push_back(element);
+	element->UpdatePosition(element->xCoordinate + this->xCoordinate, element->yCoordinate + this->yCoordinate);
+	TextElement = element;
+}
+
+void Engine::Button::SetOnClickEvent(std::function<void()> function)
+{
+	this->OnClick = function;
 }
 
 void Engine::Button::UpdatePosition(float xCoordinate, float yCoordinate)
@@ -28,28 +33,13 @@ void Engine::Button::UpdatePosition(float xCoordinate, float yCoordinate)
 	boxRect.y = this->yCoordinate = yCoordinate;
 }
 
-void *Engine::Button::OnClickEventPlay()
-{
-	SDL_Event event;
-	if(SDL_PollEvent(&event) != 0)
-	{
-		if (event.type == SDL_MOUSEBUTTONDOWN || event.key.keysym.sym == SDLK_EXECUTE)
-		{
-			Children.clear();
-			Engine::Canvas* tempCanvas = new Engine::Canvas();
-			tempCanvas->Close();
-		}
-	}
-	return NULL;
-}
 
 void Engine::Button::Render()
 {
 	SDL_SetRenderDrawColor(Engine::Window::Renderer, color.r, color.g, color.g, color.a);
 	SDL_RenderDrawRect(Engine::Window::Renderer, &boxRect);
 
-	for (int8_t index = 0; index < Children.size(); index++)
-		Children[index]->Render();
+	TextElement->Render();
 }
 
 

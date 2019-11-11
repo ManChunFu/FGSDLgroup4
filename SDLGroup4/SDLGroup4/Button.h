@@ -3,7 +3,10 @@
 #include "GameElement.h"
 #include <string>
 #include <vector>
+
 #include <SDL_events.h>
+#include <functional>
+
 
 struct SDL_Rect;
 struct SDL_Color;
@@ -15,14 +18,13 @@ namespace Engine
 	public:
 		Button(GameElement base, SDL_Color color);
 		
-		void AddChild(GameElement* element, void (*function));
+		void SetText(GameElement* element);
+		void SetOnClickEvent(std::function<void()> function);
 		void UpdatePosition(float xCoordinate, float yCoordinate) override;
-		void *OnClickEventPlay();
-		void Render() override;
-
+		std::function<void()> OnClick;
+		void Render() override;		
 		 
-		std::string text;
-		std::vector<GameElement*> Children;
+		GameElement* TextElement;
 
 
 	private:
