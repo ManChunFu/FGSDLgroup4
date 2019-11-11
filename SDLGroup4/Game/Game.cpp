@@ -80,9 +80,22 @@ void Engine::Application::Run()
 	Mix_Chunk* sound = SoundManager::GetSound("Assets/Sounds/bell.wav");
 	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
 
-	Engine::Canvas* StartMenuCanvas = new Engine::Canvas({ 0, 200, 200, 255 }, { 900, 600, 250, 150 });
-	Engine::Text* StartMenuTitle = new Engine::Text("Assets/Fonts/Roboto-Medium.ttf", 50, "WIZARDLAND", { 255, 255, 255, 255 }, { 50, 50, 275, 50 });
+#pragma region MyRegion
+
+	Engine::Canvas* StartMenuCanvas = new Engine::Canvas({ 0, 0, 0, 255 }, { 900, 600, 250, 150 });
+	Engine::Text* StartMenuTitle = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, "WIZARDLAND", { 255, 255, 255, 255 }, { 50, 50, 300, 100 });
+	Engine::Button* PlayButton = new Engine::Button({ 200, 80, 350, 200 }, { 0, 255, 0, 255});
+	Engine::Text* PlayTextOnButton = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "PLAY", { 255, 255, 255, 255 }, { 45, 45, 650, 365 });
+	PlayButton->AddChild(PlayTextOnButton, (PlayButton->OnClickEventPlay)());
+	Engine::Text* QuitTextOnButton = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "QUIT", { 255, 255, 255, 255 }, { 45, 45, 395, 350 });
+	Engine::Text* RecordTextOnButton = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "SCORE RECORDS", { 255, 255, 255, 255 }, { 45, 45, 280, 450 });
 	StartMenuCanvas->AddChild(StartMenuTitle);
+	StartMenuCanvas->AddChild(PlayButton);
+	StartMenuCanvas->AddChild(QuitTextOnButton);
+	StartMenuCanvas->AddChild(RecordTextOnButton);
+
+#pragma endregion
+
 	while (isRunning)
 	{
 		StartMenuCanvas->Render();

@@ -13,6 +13,7 @@ namespace Engine
 	class Canvas: public GameElement
 	{
 	public:
+		Canvas() {}
 		Canvas(SDL_Color color, GameElement base)
 		{
 			width = base.width;
@@ -21,9 +22,11 @@ namespace Engine
 			yCoordinate = base.yCoordinate;
 			Color = color;
 		}
+
 		void Render() override;
 		void UpdatePosition(float xCoordinate, float yCoordinate) override;
 		void AddChild(GameElement* elemet);
+		void Close();
 
 		std::vector<GameElement*> Children;
 		

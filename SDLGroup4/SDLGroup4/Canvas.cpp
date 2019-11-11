@@ -3,11 +3,17 @@
 #include <SDL_pixels.h>
 #include <SDL_render.h>
 
-void Engine::Canvas::AddChild(GameElement * element)
+void Engine::Canvas::AddChild(GameElement* element)
 {	
 	element->UpdatePosition(element->xCoordinate + this->xCoordinate, element->yCoordinate + this->yCoordinate);
 	Children.push_back(element);
 }
+
+void Engine::Canvas::Close()
+{
+	Children.clear();
+}
+
 
 void Engine::Canvas::Render()
 {
