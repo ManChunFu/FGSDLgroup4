@@ -3,7 +3,8 @@
 #include <iostream>
 #include <SDL_mouse.h>
 
-namespace Engine {
+namespace Engine 
+{
 	SDL_Event InputManager::event;
 		
 	InputManager::InputManager()
@@ -14,9 +15,9 @@ namespace Engine {
 
 	void InputManager::Shutdown()
 	{
-		for (auto gameElement : GameObjectsListener)
+		for (auto gameElement : clickableObjects)
 		{ if(gameElement) delete gameElement; }
-		GameObjectsListener.clear();
+		clickableObjects.clear();
 		delete lastKeys;
 		lastKeys = nullptr;
 		delete keys;
@@ -27,17 +28,17 @@ namespace Engine {
 	{
 		lastKeys = keys;
 		keys = SDL_GetKeyboardState(nullptr);
-		SDL_PollEvent(&event); 
-		switch (event.type)
+		while (SDL_PollEvent(&event)) 
 		{
-		case SDL_QUIT: isRunning = false; return; break;
+			switch (event.type)
+			{
+			case SDL_QUIT: isRunning = false; return; break;
+			}
+			if (IsKeyDown(SDL_SCANCODE_ESCAPE)) { isRunning = false; return; }
+			CheckMouseOnClickable();
 		}
-		if (IsKeyDown(SDL_SCANCODE_ESCAPE)) { isRunning = false; return; }
-		CheckMouseOnClickable();
-		
 
 	}
-
 	void InputManager::SetMouseCursor(SDL_SystemCursor newCursor)
 	{
 		SDL_Cursor* cursor;
@@ -50,24 +51,19 @@ namespace Engine {
 		int mouseX, mouseY;
 		SDL_GetMouseState(&mouseX, &mouseY);
 
-		for (auto gameElement : GameObjectsListener)
+		for (auto gameElement : clickableObjects)
 		{
 			if (mouseX > gameElement->xCoordinate && mouseX < (gameElement->xCoordinate + gameElement->width) &&
 				mouseY > gameElement->yCoordinate && mouseY < (gameElement->yCoordinate + gameElement->height))
 			{
-
 				if (mouseCursor != SDL_SYSTEM_CURSOR_HAND)
-					SetMouseCursor(SDL_SYSTEM_CURSOR_HAND);
-
+				{ SetMouseCursor(SDL_SYSTEM_CURSOR_HAND); }
 				if (event.type == SDL_MOUSEBUTTONDOWN)
-				{
-					Engine::Button* buttonElement = dynamic_cast<Engine::Button*>(gameElement);
-					buttonElement->OnClick();
-				}
+				{ gameElement->OnClick(); }
 				return;
 			}
 		}
 		if (mouseCursor != SDL_SYSTEM_CURSOR_ARROW)
-			SetMouseCursor(SDL_SYSTEM_CURSOR_ARROW);
+		{ SetMouseCursor(SDL_SYSTEM_CURSOR_ARROW); }
 	}
 }

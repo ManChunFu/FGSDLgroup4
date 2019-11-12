@@ -93,9 +93,7 @@ void Engine::Application::Run()
 	StartMenuCanvas->AddChild(PlayButton);
 	StartMenuCanvas->AddChild(QuitText);
 	StartMenuCanvas->AddChild(RecordTextOnButton);
-	inputManager->GameObjectsListener.push_back(PlayButton);
-	inputManager->GameObjectsListener.push_back(StartMenuTitle);
-
+	inputManager->AddClickableElement(PlayButton);
 
 #pragma endregion MainMenu Implementation
 
@@ -160,4 +158,5 @@ void OnClickMyButton()
 {
 	Engine::Text* PlayText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "PLAYING", { 255, 0, 0, 255 }, { 45, 45, 650, 365 });
 	PlayButton->SetText(PlayText);
+	PlayText = nullptr;
 }

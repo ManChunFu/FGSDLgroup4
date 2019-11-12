@@ -20,7 +20,6 @@ namespace Engine {
 				{ 
 					colliders[a]->collisions.push_back(colliders[i]);
 					colliders[i]->collisions.push_back(colliders[a]);
-				
 				}
 			}
 		}
