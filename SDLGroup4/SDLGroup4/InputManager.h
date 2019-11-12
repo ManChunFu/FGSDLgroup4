@@ -16,12 +16,15 @@ namespace Engine
 		bool IsKeyDown(SDL_Scancode key) const { return keys[key]; };
 		std::vector<GameElement*> GameObjectsListener;
 
+		bool MouseCursorHand = false;
 		void SetMouseCursor(SDL_SystemCursor newCursor);
+
 	private:
 		static SDL_Event event;
 		const Uint8* keys = nullptr;
 		const Uint8* lastKeys = nullptr;
 		void CheckMouseOnClickable();
 		SDL_SystemCursor mouseCursor = SDL_SYSTEM_CURSOR_ARROW;
+
 	};
 }

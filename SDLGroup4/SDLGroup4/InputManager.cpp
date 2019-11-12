@@ -5,7 +5,7 @@
 
 namespace Engine {
 	SDL_Event InputManager::event;
-		
+
 	InputManager::InputManager()
 	{
 		keys = SDL_GetKeyboardState(nullptr);
@@ -15,7 +15,9 @@ namespace Engine {
 	void InputManager::Shutdown()
 	{
 		for (auto gameElement : GameObjectsListener)
-		{ if(gameElement) delete gameElement; }
+		{
+			if (gameElement) delete gameElement;
+		}
 		GameObjectsListener.clear();
 		delete lastKeys;
 		lastKeys = nullptr;
@@ -27,15 +29,13 @@ namespace Engine {
 	{
 		lastKeys = keys;
 		keys = SDL_GetKeyboardState(nullptr);
-		SDL_PollEvent(&event); 
+		SDL_PollEvent(&event);
 		switch (event.type)
 		{
 		case SDL_QUIT: isRunning = false; return; break;
 		}
 		if (IsKeyDown(SDL_SCANCODE_ESCAPE)) { isRunning = false; return; }
 		CheckMouseOnClickable();
-		
-
 	}
 
 	void InputManager::SetMouseCursor(SDL_SystemCursor newCursor)
@@ -45,6 +45,7 @@ namespace Engine {
 		SDL_SetCursor(cursor);
 		mouseCursor = newCursor;
 	}
+
 	void InputManager::CheckMouseOnClickable()
 	{
 		int mouseX, mouseY;
@@ -52,12 +53,15 @@ namespace Engine {
 
 		for (auto gameElement : GameObjectsListener)
 		{
-			if (mouseX > gameElement->xCoordinate && mouseX < (gameElement->xCoordinate + gameElement->width) &&
-				mouseY > gameElement->yCoordinate && mouseY < (gameElement->yCoordinate + gameElement->height))
+			if (mouseX > gameElement->xCoordinate&& mouseX < (gameElement->xCoordinate + gameElement->width) &&
+				mouseY > gameElement->yCoordinate&& mouseY < (gameElement->yCoordinate + gameElement->height))
 			{
-
 				if (mouseCursor != SDL_SYSTEM_CURSOR_HAND)
+				{
 					SetMouseCursor(SDL_SYSTEM_CURSOR_HAND);
+					MouseCursorHand = true;
+				}
+
 
 				if (event.type == SDL_MOUSEBUTTONDOWN)
 				{
@@ -68,6 +72,9 @@ namespace Engine {
 			}
 		}
 		if (mouseCursor != SDL_SYSTEM_CURSOR_ARROW)
+		{
 			SetMouseCursor(SDL_SYSTEM_CURSOR_ARROW);
+			MouseCursorHand = false;
+		}
 	}
 }

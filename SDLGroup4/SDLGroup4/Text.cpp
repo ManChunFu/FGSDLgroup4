@@ -14,6 +14,10 @@ Engine::Text::Text(const std::string& font_path, int fontsize, const std::string
 	this->yCoordinate = textRect.y = base.yCoordinate;//position.Y;
 }
 
+void Engine::Text::ChangeTextColor(SDL_Color color)
+{
+}
+
 void Engine::Text::Render()
 {
 	SDL_RenderCopy(Engine::Window::Renderer, textTexture, nullptr, &textRect);
