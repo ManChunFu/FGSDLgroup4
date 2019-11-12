@@ -94,7 +94,8 @@ void Engine::Application::Run()
 	StartMenuCanvas->AddChild(PlayButton);
 	StartMenuCanvas->AddChild(QuitText);
 	StartMenuCanvas->AddChild(RecordTextOnButton);
-	inputManager->GameObjectsLisener.push_back(PlayButton);
+	inputManager->GameObjectsListener.push_back(PlayButton);
+	inputManager->GameObjectsListener.push_back(StartMenuTitle);
 
 
 #pragma endregion MainMenu Implementation
