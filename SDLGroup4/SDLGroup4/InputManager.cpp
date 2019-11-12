@@ -14,6 +14,9 @@ namespace Engine {
 
 	void InputManager::Shutdown()
 	{
+		for (auto gameElement : GameObjectsListener)
+		{ if(gameElement) delete gameElement; }
+		GameObjectsListener.clear();
 		delete lastKeys;
 		lastKeys = nullptr;
 		delete keys;
@@ -27,14 +30,14 @@ namespace Engine {
 		SDL_PollEvent(&event); 
 		switch (event.type)
 		{
-		case SDL_QUIT: isRunning = false; break;
+		case SDL_QUIT: isRunning = false; return; break;
 		}
-		if (IsKeyDown(SDL_SCANCODE_ESCAPE)) { isRunning = false; }
+		if (IsKeyDown(SDL_SCANCODE_ESCAPE)) { isRunning = false; return; }
 
 		int mouseX, mouseY;
 		SDL_GetMouseState(&mouseX, &mouseY);
 
-		for (auto gameElement : GameObjectsLisener)
+		for (auto gameElement : GameObjectsListener)
 		{
 			if (mouseX > gameElement->xCoordinate&& mouseX < (gameElement->xCoordinate + gameElement->width) &&
 				mouseY > gameElement->yCoordinate&& mouseY < (gameElement->yCoordinate + gameElement->height))
@@ -65,16 +68,7 @@ namespace Engine {
 		SDL_SetCursor(cursor);
 		mouseCursor = newCursor;
 	}
-
-	void GetMousePosition() 
+	void InputManager::CheckMouseOnClickable()
 	{
-		SDL_Event event;
-		if (SDL_PollEvent(&event) != 0)
-		{
-			if (event.type == SDL_MOUSEBUTTONDOWN || event.key.keysym.sym == SDLK_EXECUTE)
-			{
-				
-			}
-		}
 	}
 }

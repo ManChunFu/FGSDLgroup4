@@ -14,13 +14,14 @@ namespace Engine
 		void Shutdown();
 		void Update(bool& isRunning);
 		bool IsKeyDown(SDL_Scancode key) const { return keys[key]; };
-		std::vector<GameElement*> GameObjectsLisener;
+		std::vector<GameElement*> GameObjectsListener;
 
 		void SetMouseCursor(SDL_SystemCursor newCursor);
 	private:
 		static SDL_Event event;
 		const Uint8* keys = nullptr;
 		const Uint8* lastKeys = nullptr;
+		void CheckMouseOnClickable();
 		SDL_SystemCursor mouseCursor = SDL_SYSTEM_CURSOR_ARROW;
 	};
 }
