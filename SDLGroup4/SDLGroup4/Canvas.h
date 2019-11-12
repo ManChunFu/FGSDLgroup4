@@ -27,7 +27,7 @@ namespace Engine
 		void UpdatePosition(float xCoordinate, float yCoordinate) override;
 		void AddChild(GameElement* elemet);
 		void Close();
-
+	private:
 		std::vector<GameElement*> Children;
 		
 		SDL_Color Color;

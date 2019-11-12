@@ -12,7 +12,7 @@
 #include <Entity.h>
 #include <SoundManager.h>
 #include <SDL_mixer.h>
-#include <Canvas.h>
+#include <UIManager.h>
 #include <Text.h>
 #include "Game.h"
 int main(int argc, char** argv)
@@ -66,7 +66,7 @@ bool Engine::Application::Initialize()
 		return false;
 	}
 	inputManager = new Engine::InputManager();
-
+	Engine::UIManager::Initialize();
 	return true;
 }
 
@@ -80,8 +80,6 @@ void Engine::Application::Run()
 	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
 
 #pragma region MainMenu Implementation
-
-	Engine::Canvas* StartMenuCanvas = new Engine::Canvas({ 0, 0, 0, 255 }, { 900, 600, 250, 150 });
 	Engine::Text* StartMenuTitle = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, "WIZARDLAND", { 255, 255, 255, 255 }, { 50, 50, 300, 100 });
 	PlayButton = new Engine::Button({ 200, 80, 350, 200 }, { 0, 255, 0, 255});
 	Engine::Text* PlayText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "PLAY", { 255, 255, 255, 255 }, { 45, 45, 0, 0 });
@@ -89,22 +87,16 @@ void Engine::Application::Run()
 	PlayButton->SetOnClickEvent(OnClickMyButton);
 	Engine::Text* QuitText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "QUIT", { 255, 255, 255, 255 }, { 45, 45, 395, 350 });
 	Engine::Text* RecordTextOnButton = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "SCORE RECORDS", { 255, 255, 255, 255 }, { 45, 45, 280, 450 });
-	StartMenuCanvas->AddChild(StartMenuTitle);
-	StartMenuCanvas->AddChild(PlayButton);
-	StartMenuCanvas->AddChild(QuitText);
-	StartMenuCanvas->AddChild(RecordTextOnButton);
+	Engine::UIManager::AddObjectsToScene(0, { StartMenuTitle, PlayButton, QuitText, RecordTextOnButton });
 	inputManager->AddClickableElement(PlayButton);
 
 #pragma endregion MainMenu Implementation
 
 	while (isRunning)
 	{
-		StartMenuCanvas->Render();
-
 		Engine::Time::StartFrame();
 		frameStartTick = SDL_GetTicks();
 		Render();
-		StartMenuCanvas->Render();
 		Update();
 		HandleEvents();
 		frameTime = SDL_GetTicks() - frameStartTick;
@@ -127,6 +119,7 @@ void Engine::Application::Shutdown()
 		delete window;
 		window = nullptr;
 	}
+	Engine::UIManager::Shutdown();
 	EntityManager::Shutdown();
 	Engine::CollisionManager::Shutdown();
 	TTF_Quit();
@@ -142,11 +135,13 @@ void Engine::Application::HandleEvents()
 
 void Engine::Application::Update()
 {
+	Engine::UIManager::Update();
 	Engine::EntityManager::Update();
 }
 
 void Engine::Application::Render()
 {
+	Engine::UIManager::Render();
 	Engine::Window::RenderPresent();
 	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);//background color
 	Engine::Window::RenderClear();
