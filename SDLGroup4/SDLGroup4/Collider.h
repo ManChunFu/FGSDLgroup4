@@ -8,7 +8,7 @@
 namespace Engine {
 	class Collider {
 	public:
-		Collider(SDL_Rect destRect, std::string colliderTag, SDL_Surface* pointer) : topBorder(destRect.y - (int)(destRect.h * 0.5f)), bottomBorder(destRect.y + (int)(destRect.h * 0.5f)),
+		Collider(SDL_Rect destRect, std::string colliderTag, SDL_Surface* pointer, float _scale) : topBorder(destRect.y - (int)(destRect.h * 0.5f)), bottomBorder(destRect.y + (int)(destRect.h * 0.5f)),
 			leftBorder(destRect.x - (int)(destRect.w * 0.5f)), rightBorder(destRect.x + (int)(destRect.w * 0.5f))
 		{
 			Engine::CollisionManager::AddNewCollider(this);
@@ -16,6 +16,7 @@ namespace Engine {
 			surface = pointer;
 			width = destRect.w;
 			height = destRect.h;
+			scale = _scale;
 		};
 		void UpdateBorders(SDL_Rect destRect)
 		{
@@ -42,12 +43,12 @@ namespace Engine {
 			int bpp;
 			Uint8* p;
 			Uint32 pixelColor;
-			for (int i = 0; i < width; i++)
+			for (int x = startX; x < width + startX; x++)
 			{
-				for (int a = 0; a < height; a++)
+				for (int y = startY; y < height + startX; y++)
 				{
 					bpp = surface->format->BytesPerPixel;
-					p = (Uint8*)surface->pixels + startY * surface->pitch + startX * bpp;
+					p = (Uint8*)surface->pixels + (int)(y / scale) * surface->pitch + (int)(x / scale) * bpp;
 					switch (bpp)
 					{
 					case(1):
@@ -70,16 +71,14 @@ namespace Engine {
 					SDL_GetRGBA(pixelColor, surface->format, &red, &green, &blue, &alpha);
 					//std::cout << (int)alpha;
 					if (alpha > 100) return true;
-					startY++;
 				}
-				startX++;
 			}
 			return false;
-			
 		}
 	private:
 		int topBorder = 0, bottomBorder = 0, leftBorder = 0, rightBorder = 0, width = 0, height = 0;
 		SDL_Surface* surface;
+		float scale = 0;
 
 	};
 }

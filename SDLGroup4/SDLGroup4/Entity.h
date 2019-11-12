@@ -13,25 +13,28 @@ namespace Engine {
 	class Entity {
 	public:
 		virtual ~Entity() {}
-		Entity(std::string path, int height, int width, int xpos, int ypos)
+		Entity(std::string path, float scale, int xpos, int ypos)
 		{
+			int width;
+			int height;
+			texture = TextureManager::Texture(path);
+			SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
 			posX = xpos;
 			posY = ypos;
-			sourceRect.w = width;
-			sourceRect.h = height;
 			sourceRect.x = 0;
 			sourceRect.y = 0;
-			destRect.w = width;
-			destRect.h = height;
-			destRect.w = posX;
-			destRect.w = posY;
-			texture = TextureManager::Texture(path);
-			collider = new Engine::Collider(destRect, "Player", TextureManager::Surface(path));
+			destRect.w = width * scale;
+			destRect.h = height * scale;
+			destRect.x = posX;
+			destRect.y = posY;
+			sourceRect.w = width;
+			sourceRect.h = height;
+			collider = new Engine::Collider(destRect, "Player", TextureManager::Surface(path), scale);
 			Engine::EntityManager::AddEntity(this);
 
 			//testing animation
-			animator.Animations.push_back(new Animation("Assets/Sprites/x64testing.png", "Run", 6, 1, 5));
-			animator.Trigger("Run");
+			//animator.Animations.push_back(new Animation("Assets/Sprites/x64testing.png", "Run", 6, 1, 5));
+			//animator.Trigger("Run");
 
 		}
 
@@ -41,7 +44,7 @@ namespace Engine {
 			/*std::cout << sourceRect.y << sourceRect.x << std::endl;*/ 
 			Engine::TextureManager::Draw(texture, sourceRect, destRect);
 
-			animator.DisplayAnimation(posX, posY);
+			//animator.DisplayAnimation(posX, posY);
 		}
 
 		Engine::Animator animator;

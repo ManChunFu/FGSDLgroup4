@@ -26,7 +26,6 @@ namespace Engine
 		bool isRunning = true;
 		Engine::Window* window = nullptr;
 		Engine::InputManager* inputManager = nullptr;
-		Engine::Entity* entity;
 
 	};
 

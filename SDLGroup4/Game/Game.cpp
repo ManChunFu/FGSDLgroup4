@@ -67,7 +67,8 @@ int main(int argc, char** argv)
 			return false;
 		}
 		inputManager = new Engine::InputManager();
-		entity = new Entity("Assets/Sprites/enemy_drone_larger_red.png", 100, 100, 100, 100);
+		Engine::Entity* entity = new Entity("Assets/Sprites/enemy_drone_larger_red.png", 1.5f, 100, 100);
+		Engine::Entity* entity2 = new Entity("Assets/Sprites/enemy_drone_larger_red.png", 1.5f, 150, 110);
 
 		return true;
 	}

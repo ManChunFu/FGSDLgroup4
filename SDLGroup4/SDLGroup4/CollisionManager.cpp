@@ -20,23 +20,25 @@ namespace Engine {
 				{ 
 					if (colliders[i]->HasSurface() && colliders[a]->HasSurface())
 					{
-						int checkAreaWidth = (colliders[a]->RightBorder() - colliders[i]->LeftBorder());
-						if (checkAreaWidth < colliders[i]->Width()) checkAreaWidth = colliders[i]->Width() - (colliders[i]->RightBorder() - colliders[a]->LeftBorder());
+						int startXI = std::max(colliders[a]->LeftBorder() - colliders[i]->LeftBorder(), 0);
+						int startYI = std::max(colliders[a]->TopBorder() - colliders[i]->TopBorder(), 0);
+						int width = std::min(colliders[i]->RightBorder() - colliders[a]->LeftBorder(), colliders[a]->RightBorder() - colliders[i]->LeftBorder());
+						int height = std::min(colliders[i]->BottomBorder() - colliders[a]->TopBorder(), colliders[a]->BottomBorder() - colliders[i]->TopBorder());
 						
-						int checkAreaHeight = (colliders[a]->BottomBorder() - colliders[i]->TopBorder());
-						if (checkAreaHeight > colliders[i]->Height()) checkAreaHeight = colliders[i]->Height() - (colliders[i]->BottomBorder() - colliders[a]->TopBorder());
+						
+						int startXA = std::max(colliders[i]->LeftBorder() - colliders[a]->LeftBorder(), 0);
+						int startYA = std::max(colliders[i]->TopBorder() - colliders[a]->TopBorder(), 0);
 
-						int colliderIStartX = std::max(colliders[a]->LeftBorder() - colliders[i]->LeftBorder(), 0);
-						int colliderIStartY = std::max(colliders[a]->TopBorder() - colliders[i]->TopBorder(), 0);
-						int colliderAStartX = std::max(colliders[a]->RightBorder() - colliders[i]->RightBorder(), 0);
-						int colliderAStartY = std::max(colliders[a]->BottomBorder() - colliders[i]->BottomBorder(), 0);
-						if(colliders[i]->CheckAreaForAlpha(colliderIStartX, colliderIStartY, checkAreaWidth, checkAreaHeight) && 
-							colliders[a]->CheckAreaForAlpha(colliderAStartX, colliderAStartY, checkAreaWidth, checkAreaHeight))
-						{
-							std::cout << colliders[i]->tag;
+
+						if (colliders[i]->CheckAreaForAlpha(startXI, startYI, width, height) && colliders[a]->CheckAreaForAlpha(startXA, startYA, width, height)) {
+
 						}
 					}
-					else colliders[i]->collisions.push_back(colliders[a]);
+					else
+					{
+						colliders[a]->collisions.push_back(colliders[i]);
+						colliders[i]->collisions.push_back(colliders[a]);
+					}
 				
 				}
 			}
