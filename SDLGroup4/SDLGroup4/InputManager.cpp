@@ -42,7 +42,6 @@ namespace Engine {
 			if (mouseX > gameElement->xCoordinate&& mouseX < (gameElement->xCoordinate + gameElement->width) &&
 				mouseY > gameElement->yCoordinate&& mouseY < (gameElement->yCoordinate + gameElement->height))
 			{
-
 				if (mouseCursor != SDL_SYSTEM_CURSOR_HAND)
 					SetMouseCursor(SDL_SYSTEM_CURSOR_HAND);
 
@@ -58,7 +57,6 @@ namespace Engine {
 					SetMouseCursor(SDL_SYSTEM_CURSOR_ARROW);
 			}
 		}
-
 	}
 
 	void InputManager::SetMouseCursor(SDL_SystemCursor newCursor)
