@@ -19,6 +19,7 @@ Engine::Button::Button(GameElement base, SDL_Color color)
 void Engine::Button::SetText(GameElement* element)
 {
 	element->UpdatePosition(element->xCoordinate + this->xCoordinate, element->yCoordinate + this->yCoordinate);
+	delete TextElement;
 	TextElement = element;
 }
 

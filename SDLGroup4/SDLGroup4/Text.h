@@ -14,8 +14,7 @@ namespace Engine
 	{
 	public:
 		Text(const std::string& font_path, int fontsize, const std::string& message_text, SDL_Color color, GameElement base);//Engine::Vector2D position);
-		
-		void ChangeTextColor(SDL_Color color);
+		~Text();
 		void Render() override;
 		void UpdatePosition(float xCoordinate, float yCoordinate) override;
 		SDL_Texture* LoadFont(const std::string& font_path, int fontsize, const std::string& message_text, SDL_Color color);

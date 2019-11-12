@@ -14,8 +14,10 @@ Engine::Text::Text(const std::string& font_path, int fontsize, const std::string
 	this->yCoordinate = textRect.y = base.yCoordinate;//position.Y;
 }
 
-void Engine::Text::ChangeTextColor(SDL_Color color)
+Engine::Text::~Text()
 {
+	if (textTexture) { SDL_DestroyTexture(textTexture); }
+	textTexture = nullptr;
 }
 
 void Engine::Text::Render()
@@ -45,7 +47,6 @@ SDL_Texture* Engine::Text::LoadFont(const std::string& font_path, int fontsize, 
 	SDL_Texture* textTexture = SDL_CreateTextureFromSurface(Engine::Window::Renderer, textSurface);
 	if (!textTexture)
 		std::cout << "Failed to create text_texture." << SDL_GetError << std::endl;
-
 	SDL_FreeSurface(textSurface);
 	TTF_CloseFont(font);
 

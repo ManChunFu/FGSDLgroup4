@@ -1,19 +1,17 @@
 #pragma once
 
-#include "GameElement.h"
+#include "IClickable.h"
 #include <string>
 #include <vector>
 
 #include <SDL_events.h>
-#include <functional>
-#include "IClickable.h"
 
 struct SDL_Rect;
 struct SDL_Color;
 
 namespace Engine
 {
-	class Button: public GameElement
+	class Button: public IClickable
 	{
 	public:
 		Button(GameElement base, SDL_Color color);
@@ -21,7 +19,6 @@ namespace Engine
 		void SetText(GameElement* element);
 		void SetOnClickEvent(std::function<void()> function);
 		void UpdatePosition(float xCoordinate, float yCoordinate) override;
-		std::function<void()> OnClick;
 		void Render() override;		
 		
 		GameElement* TextElement;
@@ -30,6 +27,9 @@ namespace Engine
 		SDL_Rect boxRect;
 		SDL_Color color;
 		
+
+		// Inherited via IClickable
+
 
 		// Inherited via IClickable
 

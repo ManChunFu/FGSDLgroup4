@@ -1,7 +1,10 @@
 #pragma once
+#include "GameElement.h"
+#include <functional>
 namespace Engine {
-	class IClickable {
+	class IClickable : public GameElement
+	{
 	public:
-		virtual void OnClick() = 0;
+		std::function<void()> OnClick;
 	};
 }
