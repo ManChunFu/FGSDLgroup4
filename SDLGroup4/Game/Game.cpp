@@ -33,108 +33,131 @@ int main(int argc, char** argv)
 	application = nullptr;
 
 	return 0;
-
 }
-	bool Engine::Application::Initialize()
+
+bool Engine::Application::Initialize()
+{
+
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-
-		if (SDL_Init(SDL_INIT_VIDEO) < 0)
-		{
-			std::cout << "Failed to inialize SDL. SDL Error: " << SDL_GetError << std::endl;
-			return false;
-		}
-
-		if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
-		{
-			std::cout << "Failed to inialize SDL_Image. SDL Error: " << SDL_GetError << std::endl;
-			return false;
-		}
-
-		if (TTF_Init() == -1)
-		{
-			std::cout << "Failed to inialize SDL_ttf. SDL Error: " << SDL_GetError << std::endl;
-			return false;
-		}
-		if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
-		{
-			return false;
-		}
-
-		window = new Engine::Window("Main Window", 1440, 900);
-		if (!window->Init())
-		{
-			std::cout << "Failed to initialize. SDL Error: " << SDL_GetError << std::endl;
-			return false;
-		}
-		inputManager = new Engine::InputManager();
-		Engine::Entity* entity = new Entity("Assets/Sprites/enemy_drone_larger_red.png", 1.5f, 100, 100);
-		Engine::Entity* entity2 = new Entity("Assets/Sprites/enemy_drone_larger_red.png", 1.5f, 150, 110);
-
-		return true;
+		std::cout << "Failed to inialize SDL. SDL Error: " << SDL_GetError << std::endl;
+		return false;
 	}
 
-	void Engine::Application::Run()
+	if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
 	{
-		const int FPS = 60;
-		const int frameDelay = 1000 / FPS;
-		Uint32 frameStartTick;
-		int frameTime;
-		Mix_Chunk* sound = SoundManager::GetSound("Assets/Sounds/bell.wav");
+		std::cout << "Failed to inialize SDL_Image. SDL Error: " << SDL_GetError << std::endl;
+		return false;
+	}
+
+	if (TTF_Init() == -1)
+	{
+		std::cout << "Failed to inialize SDL_ttf. SDL Error: " << SDL_GetError << std::endl;
+		return false;
+	}
+	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+	{
+		return false;
+	}
+
+	window = new Engine::Window("Main Window", 1440, 900);
+	if (!window->Init())
+	{
+		std::cout << "Failed to initialize. SDL Error: " << SDL_GetError << std::endl;
+		return false;
+	}
+	inputManager = new Engine::InputManager();
+
+	return true;
+}
+
+void Engine::Application::Run()
+{
+	const int FPS = 60;
+	const int frameDelay = 1000 / FPS;
+	Uint32 frameStartTick;
+	int frameTime;
+	Mix_Chunk* sound = SoundManager::GetSound("Assets/Sounds/bell.wav");
+	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
+
+#pragma region MainMenu Implementation
+
+	Engine::Canvas* StartMenuCanvas = new Engine::Canvas({ 0, 0, 0, 255 }, { 900, 600, 250, 150 });
+	Engine::Text* StartMenuTitle = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, "WIZARDLAND", { 255, 255, 255, 255 }, { 50, 50, 300, 100 });
+	PlayButton = new Engine::Button({ 200, 80, 350, 200 }, { 0, 255, 0, 255});
+	Engine::Text* PlayText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "PLAY", { 255, 255, 255, 255 }, { 45, 45, 0, 0 });
+	PlayButton->SetText(PlayText);
+	PlayButton->SetOnClickEvent(OnClickMyButton);
+	Engine::Text* QuitText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "QUIT", { 255, 255, 255, 255 }, { 45, 45, 395, 350 });
+	Engine::Text* RecordTextOnButton = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "SCORE RECORDS", { 255, 255, 255, 255 }, { 45, 45, 280, 450 });
+	StartMenuCanvas->AddChild(StartMenuTitle);
+	StartMenuCanvas->AddChild(PlayButton);
+	StartMenuCanvas->AddChild(QuitText);
+	StartMenuCanvas->AddChild(RecordTextOnButton);
+	inputManager->GameObjectsLisener.push_back(PlayButton);
 
 
-		Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
-		while (isRunning)
-		{
-			Engine::Time::StartFrame();
-			frameStartTick = SDL_GetTicks();
-			Render();
-			Update();
-			HandleEvents();
-			frameTime = SDL_GetTicks() - frameStartTick;
-			if (frameDelay > frameTime) {
-				SDL_Delay(frameDelay - frameTime);
-			}
-			Engine::Time::EndFrame();
+#pragma endregion MainMenu Implementation
+
+	while (isRunning)
+	{
+		StartMenuCanvas->Render();
+
+		Engine::Time::StartFrame();
+		frameStartTick = SDL_GetTicks();
+		Render();
+		StartMenuCanvas->Render();
+		Update();
+		HandleEvents();
+		frameTime = SDL_GetTicks() - frameStartTick;
+		if (frameDelay > frameTime) {
+			SDL_Delay(frameDelay - frameTime);
 		}
+		Engine::Time::EndFrame();
 	}
+}
 
-	void Engine::Application::Shutdown()
+
+void Engine::Application::Shutdown()
+{
+	if (inputManager) {
+		delete inputManager;
+		inputManager = nullptr;
+	}
+	if (window)
 	{
-		if (inputManager) {
-			delete inputManager;
-			inputManager = nullptr;
-		}
-		if (window)
-		{
-
-			delete window;
-			window = nullptr;
-		}
-		EntityManager::Shutdown();
-		Engine::CollisionManager::Shutdown();
-		TTF_Quit();
-		IMG_Quit();
-		SDL_Quit();
-		Mix_CloseAudio();
+		delete window;
+		window = nullptr;
 	}
-	void Engine::Application::HandleEvents()
-	{
-		inputManager->Update(isRunning);
-		Engine::CollisionManager::Update();
-	}
+	EntityManager::Shutdown();
+	Engine::CollisionManager::Shutdown();
+	TTF_Quit();
+	IMG_Quit();
+	SDL_Quit();
+	Mix_CloseAudio();
+}
+void Engine::Application::HandleEvents()
+{
+	inputManager->Update(isRunning);
+	Engine::CollisionManager::Update();
+}
 
-	void Engine::Application::Update()
-	{
-		Engine::EntityManager::Update();
-	}
+void Engine::Application::Update()
+{
+	Engine::EntityManager::Update();
+}
 
-	void Engine::Application::Render()
-	{
-		SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 10, 33, 132);
+void Engine::Application::Render()
+{
+	Engine::Window::RenderPresent();
+	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);//background color
+	Engine::Window::RenderClear();
+	Engine::EntityManager::Render();
+	
+}
 
-		Engine::Window::RenderClear();
-		Engine::EntityManager::Render();
-		Engine::Window::RenderPresent();
-
-
-	}
+void OnClickMyButton()
+{
+	Engine::Text* PlayText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "PLAYING", { 255, 0, 0, 255 }, { 45, 45, 650, 365 });
+	PlayButton->SetText(PlayText);
+}

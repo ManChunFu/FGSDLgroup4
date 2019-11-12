@@ -12,6 +12,8 @@ namespace Engine
 		int width, height;
 		float xCoordinate, yCoordinate;
 
+		virtual void UpdatePosition(float xCoordinate, float yCoordinate) {};
+
 		virtual void Render() {};
 	};
 }

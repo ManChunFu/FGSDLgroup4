@@ -2,22 +2,34 @@
 
 #include "GameElement.h"
 #include <string>
+#include <vector>
+
+#include <SDL_events.h>
+#include <functional>
+
+
+struct SDL_Rect;
+struct SDL_Color;
 
 namespace Engine
 {
 	class Button: public GameElement
 	{
 	public:
-		Button(const std::string& text, GameElement base)
-		{
-			width = base.width; 
-			height = base.height; 
-			xCoordinate = base.xCoordinate; 
-			yCoordinate = base.yCoordinate;
-		};
+		Button(GameElement base, SDL_Color color);
+		
+		void SetText(GameElement* element);
+		void SetOnClickEvent(std::function<void()> function);
+		void UpdatePosition(float xCoordinate, float yCoordinate) override;
+		std::function<void()> OnClick;
+		void Render() override;		
 		 
+		GameElement* TextElement;
+
+
 	private:
-		std::string text;
+		SDL_Rect boxRect;
+		SDL_Color color;
 		
 	};
 }
