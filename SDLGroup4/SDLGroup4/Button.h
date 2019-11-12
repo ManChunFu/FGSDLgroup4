@@ -6,7 +6,7 @@
 
 #include <SDL_events.h>
 #include <functional>
-
+#include "IClickable.h"
 
 struct SDL_Rect;
 struct SDL_Color;
@@ -23,14 +23,16 @@ namespace Engine
 		void UpdatePosition(float xCoordinate, float yCoordinate) override;
 		std::function<void()> OnClick;
 		void Render() override;		
-		 
+		
 		GameElement* TextElement;
-
 
 	private:
 		SDL_Rect boxRect;
 		SDL_Color color;
 		
+
+		// Inherited via IClickable
+
 	};
 }
 
