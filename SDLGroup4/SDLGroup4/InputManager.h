@@ -23,8 +23,8 @@ namespace Engine
 			clickableObjects.clear();
 		}
 
-		void SetMouseCursor(SDL_SystemCursor newCursor);
 	private:
+		void SetMouseCursor(SDL_SystemCursor newCursor);
 		std::vector<IClickable*> clickableObjects;
 		static SDL_Event event;
 		const Uint8* keys = nullptr;

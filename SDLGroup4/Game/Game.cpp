@@ -98,9 +98,9 @@ void Engine::Application::Run()
 	{
 		Engine::Time::StartFrame();
 		frameStartTick = SDL_GetTicks();
-		Render();
 		Update();
 		HandleEvents();
+		Render();
 		frameTime = SDL_GetTicks() - frameStartTick;
 		if (frameDelay > frameTime) {
 			SDL_Delay(frameDelay - frameTime);
@@ -121,9 +121,10 @@ void Engine::Application::Shutdown()
 		delete window;
 		window = nullptr;
 	}
+	Engine::SoundManager::Shutdown();
 	Engine::UIManager::Shutdown();
-	EntityManager::Shutdown();
 	Engine::CollisionManager::Shutdown();
+	EntityManager::Shutdown();
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
@@ -131,12 +132,12 @@ void Engine::Application::Shutdown()
 }
 void Engine::Application::HandleEvents()
 {
-	inputManager->Update(isRunning);
 	Engine::CollisionManager::Update();
 }
 
 void Engine::Application::Update()
 {
+	inputManager->Update(isRunning);
 	Engine::UIManager::Update();
 	Engine::EntityManager::Update();
 }
@@ -147,8 +148,7 @@ void Engine::Application::Render()
 	Engine::UIManager::Render();
 	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);//background color
 	Engine::EntityManager::Render();
-	Engine::Window::RenderPresent();
-	
+	Engine::Window::RenderPresent(); 
 }
 
 void OnClickMyButton()
@@ -157,3 +157,4 @@ void OnClickMyButton()
 	PlayButton->SetText(PlayText);
 	PlayText = nullptr;
 }
+

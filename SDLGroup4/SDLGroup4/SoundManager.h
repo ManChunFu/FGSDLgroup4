@@ -12,6 +12,7 @@ namespace Engine {
 		static void SetMusic(const char* _path, int volume);
 		static bool AddSoundEffect(const std::string& name, const char* _path);
 		static bool HasSoundEffect(const std::string& name);
+		static void Shutdown();
 	private:
 		static Mix_Music* music;
 		static SoundEffects soundeffects;
