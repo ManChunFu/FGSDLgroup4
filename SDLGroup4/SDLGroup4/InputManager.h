@@ -22,6 +22,7 @@ namespace Engine
 			{ if (gameElement) delete gameElement; }
 			clickableObjects.clear();
 		}
+
 		void SetMouseCursor(SDL_SystemCursor newCursor);
 	private:
 		std::vector<IClickable*> clickableObjects;
