@@ -81,8 +81,9 @@ void Engine::Application::Run()
 
 #pragma region MainMenu Implementation
 	Engine::Text* StartMenuTitle = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, "WIZARDLAND", { 255, 255, 255, 255 }, { 50, 50, 300, 100 });
-	PlayButton = new Engine::Button({ 200, 80, 350, 200 }, { 0, 255, 0, 255});
+	PlayButton = new Engine::Button({ 200, 80, 350, 200 }, { 0, 255, 0, 255 });
 	Engine::Text* PlayText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "PLAY", { 255, 255, 255, 255 }, { 45, 45, 55, 15 });
+	PlayText->ChangeTextColor({ 255, 0, 0, 255 });
 	PlayButton->SetOnClickEvent(OnClickMyButton);
 	Engine::Text* QuitText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "QUIT", { 255, 255, 255, 255 }, { 45, 45, 395, 350 });
 	Engine::Text* RecordTextOnButton = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "SCORE RECORDS", { 255, 255, 255, 255 }, { 45, 45, 280, 450 });
@@ -90,6 +91,7 @@ void Engine::Application::Run()
 	PlayButton->SetText(PlayText);
 	inputManager->AddClickableElement(PlayButton);
 
+	
 #pragma endregion MainMenu Implementation
 
 	while (isRunning)
@@ -146,7 +148,7 @@ void Engine::Application::Render()
 	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);//background color
 	Engine::Window::RenderClear();
 	Engine::EntityManager::Render();
-	
+
 }
 
 void OnClickMyButton()

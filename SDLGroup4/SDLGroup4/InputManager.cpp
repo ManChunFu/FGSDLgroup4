@@ -59,6 +59,7 @@ namespace Engine
 				if (mouseCursor != SDL_SYSTEM_CURSOR_HAND)
 				{ 
 					SetMouseCursor(SDL_SYSTEM_CURSOR_HAND); 
+					
 				}
 				if (event.type == SDL_MOUSEBUTTONDOWN)
 				{ gameElement->OnClick(); }
