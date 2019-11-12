@@ -82,12 +82,12 @@ void Engine::Application::Run()
 #pragma region MainMenu Implementation
 	Engine::Text* StartMenuTitle = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, "WIZARDLAND", { 255, 255, 255, 255 }, { 50, 50, 300, 100 });
 	PlayButton = new Engine::Button({ 200, 80, 350, 200 }, { 0, 255, 0, 255});
-	Engine::Text* PlayText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "PLAY", { 255, 255, 255, 255 }, { 45, 45, 0, 0 });
-	PlayButton->SetText(PlayText);
+	Engine::Text* PlayText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "PLAY", { 255, 255, 255, 255 }, { 45, 45, 55, 15 });
 	PlayButton->SetOnClickEvent(OnClickMyButton);
 	Engine::Text* QuitText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "QUIT", { 255, 255, 255, 255 }, { 45, 45, 395, 350 });
 	Engine::Text* RecordTextOnButton = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "SCORE RECORDS", { 255, 255, 255, 255 }, { 45, 45, 280, 450 });
 	Engine::UIManager::AddObjectsToScene(0, { StartMenuTitle, PlayButton, QuitText, RecordTextOnButton });
+	PlayButton->SetText(PlayText);
 	inputManager->AddClickableElement(PlayButton);
 
 #pragma endregion MainMenu Implementation
@@ -151,7 +151,7 @@ void Engine::Application::Render()
 
 void OnClickMyButton()
 {
-	Engine::Text* PlayText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "PLAYING", { 255, 0, 0, 255 }, { 45, 45, 650, 365 });
+	Engine::Text* PlayText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "PLAYING", { 255, 0, 0, 255 }, { 45, 45, 55, 15 });
 	PlayButton->SetText(PlayText);
 	PlayText = nullptr;
 }
