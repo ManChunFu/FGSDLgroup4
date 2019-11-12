@@ -16,8 +16,6 @@ namespace Engine
 	void UIManager::AddObjectsToScene(int scene, std::vector<GameElement*> childObject)
 	{
 		for (int i = 0; i < childObject.size(); i++)
-		{
-			Scenes[scene]->AddChild(childObject[i]);
-		}
+		{ Scenes[scene]->AddChild(childObject[i]); }
 	}
 }

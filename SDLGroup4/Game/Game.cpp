@@ -67,6 +67,24 @@ bool Engine::Application::Initialize()
 	}
 	inputManager = new Engine::InputManager();
 	Engine::UIManager::Initialize();
+
+#pragma region MainMenu Implementation
+	Engine::Text* StartMenuTitle = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, "WIZARDLAND", { 255, 255, 255, 255 }, { 50, 50, 300, 100 });
+	PlayButton = new Engine::Button({ 200, 80, 350, 200 }, { 0, 255, 0, 255 });
+	Engine::Text* PlayText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "PLAY", { 255, 255, 255, 255 }, { 45, 45, 0, 0 });
+	PlayButton->SetText(PlayText);
+	PlayButton->SetOnClickEvent(OnClickMyButton);
+	Engine::Text* QuitText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "QUIT", { 255, 255, 255, 255 }, { 45, 45, 395, 350 });
+	Engine::Text* RecordTextOnButton = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "SCORE RECORDS", { 255, 255, 255, 255 }, { 45, 45, 280, 450 });
+
+
+	Engine::UIManager::AddObjectsToScene(0, { StartMenuTitle, PlayButton, QuitText, RecordTextOnButton });
+	inputManager->AddClickableElement(PlayButton);
+
+#pragma endregion MainMenu Implementation
+
+	SoundManager::AddSoundEffect("Bell", "Assets/Sounds/bell.wav");
+	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
 	return true;
 }
 
@@ -76,22 +94,6 @@ void Engine::Application::Run()
 	const int frameDelay = 1000 / FPS;
 	Uint32 frameStartTick;
 	int frameTime;
-	Mix_Chunk* sound = SoundManager::GetSound("Assets/Sounds/bell.wav");
-	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
-
-#pragma region MainMenu Implementation
-	Engine::Text* StartMenuTitle = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, "WIZARDLAND", { 255, 255, 255, 255 }, { 50, 50, 300, 100 });
-	PlayButton = new Engine::Button({ 200, 80, 350, 200 }, { 0, 255, 0, 255});
-	Engine::Text* PlayText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "PLAY", { 255, 255, 255, 255 }, { 45, 45, 0, 0 });
-	PlayButton->SetText(PlayText);
-	PlayButton->SetOnClickEvent(OnClickMyButton);
-	Engine::Text* QuitText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "QUIT", { 255, 255, 255, 255 }, { 45, 45, 395, 350 });
-	Engine::Text* RecordTextOnButton = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "SCORE RECORDS", { 255, 255, 255, 255 }, { 45, 45, 280, 450 });
-	Engine::UIManager::AddObjectsToScene(0, { StartMenuTitle, PlayButton, QuitText, RecordTextOnButton });
-	inputManager->AddClickableElement(PlayButton);
-
-#pragma endregion MainMenu Implementation
-
 	while (isRunning)
 	{
 		Engine::Time::StartFrame();
@@ -141,11 +143,11 @@ void Engine::Application::Update()
 
 void Engine::Application::Render()
 {
-	Engine::UIManager::Render();
-	Engine::Window::RenderPresent();
-	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);//background color
 	Engine::Window::RenderClear();
+	Engine::UIManager::Render();
+	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);//background color
 	Engine::EntityManager::Render();
+	Engine::Window::RenderPresent();
 	
 }
 
