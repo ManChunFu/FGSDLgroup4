@@ -57,13 +57,19 @@ namespace Engine
 				mouseY > gameElement->yCoordinate && mouseY < (gameElement->yCoordinate + gameElement->height))
 			{
 				if (mouseCursor != SDL_SYSTEM_CURSOR_HAND)
-				{ SetMouseCursor(SDL_SYSTEM_CURSOR_HAND); }
+				{ 
+					SetMouseCursor(SDL_SYSTEM_CURSOR_HAND); 
+					MouseCursorHand = true;
+				}
 				if (event.type == SDL_MOUSEBUTTONDOWN)
 				{ gameElement->OnClick(); }
 				return;
 			}
 		}
 		if (mouseCursor != SDL_SYSTEM_CURSOR_ARROW)
-		{ SetMouseCursor(SDL_SYSTEM_CURSOR_ARROW); }
+		{ 
+			SetMouseCursor(SDL_SYSTEM_CURSOR_ARROW); 
+			MouseCursorHand = false;
+		}
 	}
 }

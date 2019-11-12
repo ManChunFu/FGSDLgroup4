@@ -4,12 +4,7 @@
 #include <Canvas.h>
 #include <Text.h>
 #include <Image.h>
-#include <Button.h>
 
-namespace Engine
-{
-	class Button;
-}
 
 class Game : public Engine::Application
 {
