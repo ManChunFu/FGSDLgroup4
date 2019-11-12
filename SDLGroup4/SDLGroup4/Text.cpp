@@ -22,10 +22,9 @@ Engine::Text::~Text()
 	textTexture = nullptr;
 }
 
-
 void Engine::Text::ChangeTextColor(SDL_Color color)
 {
-	textTexture = LoadFont(fontPath.c_str(), fontsize, messageText, color);
+	textTexture = LoadFont(fontPath.c_str(), fontsize, messageText, {255, 0, 0, 255});
 }
 
 void Engine::Text::Render()

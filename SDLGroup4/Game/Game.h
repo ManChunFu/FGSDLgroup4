@@ -19,4 +19,10 @@ Engine::Application* Engine::CreateApplication()
 }
 
 void OnClickMyButton();
-Engine::Button* PlayButton;
+Engine::Text* startMenuTitle;
+Engine::Button* playButton;
+Engine::Text* playText;
+Engine::Button* quitButton;
+Engine::Text* quitText;
+Engine::Button* scoreButton;
+Engine::Text* scoreRecordText;

@@ -23,6 +23,7 @@ namespace Engine
 			clickableObjects.clear();
 		}
 
+		bool mouseCursorHand = false;
 		void SetMouseCursor(SDL_SystemCursor newCursor);
 	private:
 		std::vector<IClickable*> clickableObjects;

@@ -46,6 +46,7 @@ namespace Engine
 		SDL_SetCursor(cursor);
 		mouseCursor = newCursor;
 	}
+
 	void InputManager::CheckMouseOnClickable()
 	{
 		int mouseX, mouseY;
@@ -59,16 +60,17 @@ namespace Engine
 				if (mouseCursor != SDL_SYSTEM_CURSOR_HAND)
 				{ 
 					SetMouseCursor(SDL_SYSTEM_CURSOR_HAND); 
-					
+					mouseCursorHand = true;
 				}
 				if (event.type == SDL_MOUSEBUTTONDOWN)
-				{ gameElement->OnClick(); }
+					gameElement->OnClick(); 
 				return;
 			}
 		}
 		if (mouseCursor != SDL_SYSTEM_CURSOR_ARROW)
 		{ 
 			SetMouseCursor(SDL_SYSTEM_CURSOR_ARROW); 
+			mouseCursorHand = false;
 		}
 	}
 }

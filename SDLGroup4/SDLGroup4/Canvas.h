@@ -13,7 +13,6 @@ namespace Engine
 	class Canvas: public GameElement
 	{
 	public:
-		Canvas() {}
 		Canvas(SDL_Color color, GameElement base)
 		{
 			width = base.width;
