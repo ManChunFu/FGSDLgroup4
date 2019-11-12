@@ -30,9 +30,9 @@ namespace Engine {
 		SDL_PollEvent(&event); 
 		switch (event.type)
 		{
-		case SDL_QUIT: isRunning = false; break;
+		case SDL_QUIT: isRunning = false; return; break;
 		}
-		if (IsKeyDown(SDL_SCANCODE_ESCAPE)) { isRunning = false; }
+		if (IsKeyDown(SDL_SCANCODE_ESCAPE)) { isRunning = false; return; }
 
 		int mouseX, mouseY;
 		SDL_GetMouseState(&mouseX, &mouseY);
@@ -67,5 +67,8 @@ namespace Engine {
 		cursor = SDL_CreateSystemCursor(newCursor);
 		SDL_SetCursor(cursor);
 		mouseCursor = newCursor;
+	}
+	void InputManager::CheckMouseOnClickable()
+	{
 	}
 }
