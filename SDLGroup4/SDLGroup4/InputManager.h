@@ -22,7 +22,8 @@ namespace Engine
 			{ if (gameElement) delete gameElement; }
 			clickableObjects.clear();
 		}
-
+		bool IsKeyPressed(SDL_Scancode key) const;
+		bool IsKeyReleased(SDL_Scancode key) const;
 	private:
 		void SetMouseCursor(SDL_SystemCursor newCursor);
 		std::vector<IClickable*> clickableObjects;

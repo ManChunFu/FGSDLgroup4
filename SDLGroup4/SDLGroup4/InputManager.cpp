@@ -37,6 +37,16 @@ namespace Engine
 		}
 
 	}
+	bool InputManager::IsKeyPressed(SDL_Scancode key) const
+	{
+		if (!lastKeys[key] && keys[key]) { return true; }
+		return false;
+	}
+	bool InputManager::IsKeyReleased(SDL_Scancode key) const
+	{
+		if (lastKeys[key] && !keys[key]) { return true; }
+		return false;
+	}
 	void InputManager::SetMouseCursor(SDL_SystemCursor newCursor)
 	{
 		SDL_Cursor* cursor;

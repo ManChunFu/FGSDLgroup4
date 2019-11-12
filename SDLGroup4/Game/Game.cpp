@@ -82,6 +82,8 @@ bool Engine::Application::Initialize()
 	scoreButton = new Engine::Button({ 400, 80, 250, 450 }, { 0, 255, 0, 255 });
 	scoreRecordText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "SCORE RECORDS", { 255, 255, 255, 255 }, { 45, 45, 30, 15 });
 
+	quitButton->SetOnClickEvent(OnClickMyButton);
+	scoreButton->SetOnClickEvent(OnClickMyButton);
 	Engine::UIManager::AddObjectsToScene(0, { startMenuTitle, playButton, quitButton, scoreButton });
 	playButton->SetText(playText);
 	quitButton->SetText(quitText);
