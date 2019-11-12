@@ -30,10 +30,8 @@ namespace Engine
 		keys = SDL_GetKeyboardState(nullptr);
 		while (SDL_PollEvent(&event)) 
 		{
-			switch (event.type)
-			{
-			case SDL_QUIT: isRunning = false; return; break;
-			}
+			if(event.type == SDL_QUIT)
+			{ isRunning = false; return; }
 			if (IsKeyDown(SDL_SCANCODE_ESCAPE)) { isRunning = false; return; }
 			CheckMouseOnClickable();
 		}
@@ -46,7 +44,6 @@ namespace Engine
 		SDL_SetCursor(cursor);
 		mouseCursor = newCursor;
 	}
-
 	void InputManager::CheckMouseOnClickable()
 	{
 		int mouseX, mouseY;
@@ -58,19 +55,14 @@ namespace Engine
 				mouseY > gameElement->yCoordinate && mouseY < (gameElement->yCoordinate + gameElement->height))
 			{
 				if (mouseCursor != SDL_SYSTEM_CURSOR_HAND)
-				{ 
-					SetMouseCursor(SDL_SYSTEM_CURSOR_HAND); 
-					mouseCursorHand = true;
-				}
+				{ SetMouseCursor(SDL_SYSTEM_CURSOR_HAND); }
 				if (event.type == SDL_MOUSEBUTTONDOWN)
-					gameElement->OnClick(); 
+				{ gameElement->OnClick(); }
 				return;
 			}
 		}
 		if (mouseCursor != SDL_SYSTEM_CURSOR_ARROW)
-		{ 
-			SetMouseCursor(SDL_SYSTEM_CURSOR_ARROW); 
-			mouseCursorHand = false;
-		}
+		{ SetMouseCursor(SDL_SYSTEM_CURSOR_ARROW); }
+		return;
 	}
 }

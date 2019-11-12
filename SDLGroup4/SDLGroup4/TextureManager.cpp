@@ -7,12 +7,12 @@
 
 
 namespace Engine {
-	void Engine::TextureManager::Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect)
+	void TextureManager::Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect)
 	{
 		SDL_RenderCopy(Engine::Window::Renderer, sprite, &srcRect, &desRect);
 	}
 
-	SDL_Texture* Engine::TextureManager::Texture(const std::string& texturePath)
+	SDL_Texture* TextureManager::Texture(const std::string& texturePath)
 	{
 		SDL_Surface* surface = IMG_Load(texturePath.c_str());
 		if (!surface)
@@ -26,11 +26,5 @@ namespace Engine {
 		}
 
 		return nullptr;
-	}
-
-	SDL_Surface* Engine::TextureManager::Surface(const std::string& texturePath)
-	{
-		SDL_Surface* surface = IMG_Load(texturePath.c_str());
-		return surface;
 	}
 }

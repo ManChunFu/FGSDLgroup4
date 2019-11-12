@@ -9,7 +9,7 @@
 class Game : public Engine::Application
 {
 public:
-	
+private:
 		
 };
 
