@@ -1,12 +1,31 @@
 #pragma once
 #include "GameElement.h"
 #include <functional>
-#include "Text.h"
+
+struct SDL_Color;
+
 namespace Engine {
 	class IClickable : public GameElement
 	{
 	public:
 		std::function<void()> OnClick;
+
+		SDL_Color* HoverForegroundColor = nullptr;
+		SDL_Color* ForegroundColor = nullptr;
+
+		int MouseCurrentStatus;
 		
+		
+	};		
+	enum MouseStatus
+	{
+		None = 1,
+		Hover = 2
 	};
+	
 }
+
+
+
+
+

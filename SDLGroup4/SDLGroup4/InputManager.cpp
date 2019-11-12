@@ -2,6 +2,7 @@
 #include "Button.h"
 #include <iostream>
 #include <SDL_mouse.h>
+#include "Text.h"
 
 namespace Engine 
 {
@@ -52,7 +53,6 @@ namespace Engine
 		SDL_Cursor* cursor;
 		cursor = SDL_CreateSystemCursor(newCursor);
 		SDL_SetCursor(cursor);
-		mouseCursor = newCursor;
 	}
 	void InputManager::CheckMouseOnClickable()
 	{
@@ -64,15 +64,35 @@ namespace Engine
 			if (mouseX > gameElement->xCoordinate && mouseX < (gameElement->xCoordinate + gameElement->width) &&
 				mouseY > gameElement->yCoordinate && mouseY < (gameElement->yCoordinate + gameElement->height))
 			{
-				if (mouseCursor != SDL_SYSTEM_CURSOR_HAND)
-				{ SetMouseCursor(SDL_SYSTEM_CURSOR_HAND); }
+				if (gameElement->MouseCurrentStatus != MouseStatus::Hover)
+				{
+					gameElement->MouseCurrentStatus = MouseStatus::Hover;
+					SetMouseCursor(SDL_SYSTEM_CURSOR_HAND); 
+					if (gameElement->HoverForegroundColor != nullptr)
+					{
+						dynamic_cast<Engine::Text*>(dynamic_cast<Engine::Button*>(gameElement)->TextElement)
+							->ChangeTextColor(gameElement->HoverForegroundColor);
+					}
+				}
 				if (event.type == SDL_MOUSEBUTTONDOWN)
-				{ gameElement->OnClick(); }
+				{ 
+					gameElement->OnClick(); 
+				}
 				return;
 			}
+			else if (gameElement->MouseCurrentStatus != MouseStatus::None)
+			{
+				gameElement->MouseCurrentStatus = MouseStatus::None;
+				SetMouseCursor(SDL_SYSTEM_CURSOR_ARROW);
+
+				if (gameElement->ForegroundColor != nullptr)
+				{
+					dynamic_cast<Engine::Text*>(dynamic_cast<Engine::Button*>(gameElement)->TextElement)
+						->ChangeTextColor(gameElement->ForegroundColor);
+				}				
+			}
 		}
-		if (mouseCursor != SDL_SYSTEM_CURSOR_ARROW)
-		{ SetMouseCursor(SDL_SYSTEM_CURSOR_ARROW); }
+	
 		return;
 	}
 }

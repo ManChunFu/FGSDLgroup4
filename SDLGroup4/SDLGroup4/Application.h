@@ -16,15 +16,15 @@ namespace Engine
 		bool Initialize();
 		void Run();
 		void Shutdown();
-
+		Engine::Window* window = nullptr;
+		Engine::InputManager* inputManager = nullptr;
 
 	private:
 		void Update();
 		void HandleEvents();
 		void Render();
 		bool isRunning = true;
-		Engine::Window* window = nullptr;
-		Engine::InputManager* inputManager = nullptr;
+
 
 	};
 

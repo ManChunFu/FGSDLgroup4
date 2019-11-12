@@ -18,7 +18,11 @@ Engine::Application* Engine::CreateApplication()
 	return new Game();
 }
 
-void OnClickMyButton();
+Engine::Application* application;
+void OnClickQuitButton();
+void OnClickPlayButton();
+void OnClickScoreButton();
+
 Engine::Text* startMenuTitle;
 Engine::Button* playButton;
 Engine::Text* playText;

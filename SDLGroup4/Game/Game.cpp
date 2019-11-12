@@ -17,7 +17,7 @@
 #include "Game.h"
 int main(int argc, char** argv)
 {
-	Engine::Application* application = new Engine::Application();
+	application = new Engine::Application();
 
 	if (!application->Initialize())
 	{
@@ -74,16 +74,23 @@ bool Engine::Application::Initialize()
 
 	playButton = new Engine::Button({ 200, 80, 345, 150 }, { 0, 255, 0, 255 });
 	playText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "PLAY", { 255, 255, 255, 255 }, { 45, 45, 55, 15 });
-	playButton->SetOnClickEvent(OnClickMyButton);
+	playButton->SetOnClickEvent(OnClickPlayButton);
+	playButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
+	playButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
 
 	quitButton = new Engine::Button({ 200, 80, 345, 300 }, { 0, 255, 0, 255 });
 	quitText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "QUIT", { 255, 255, 255, 255 }, { 45, 45, 50, 15 });
+	quitButton->SetOnClickEvent(OnClickQuitButton);
+	quitButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
+	quitButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
 
 	scoreButton = new Engine::Button({ 400, 80, 250, 450 }, { 0, 255, 0, 255 });
 	scoreRecordText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "SCORE RECORDS", { 255, 255, 255, 255 }, { 45, 45, 30, 15 });
-
-	quitButton->SetOnClickEvent(OnClickMyButton);
-	scoreButton->SetOnClickEvent(OnClickMyButton);
+	scoreButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
+	scoreButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
+	scoreButton->SetOnClickEvent(OnClickScoreButton);
+	
+	
 	Engine::UIManager::AddObjectsToScene(0, { startMenuTitle, playButton, quitButton, scoreButton });
 	playButton->SetText(playText);
 	quitButton->SetText(quitText);
@@ -110,6 +117,8 @@ void Engine::Application::Run()
 		Engine::Time::StartFrame();
 		frameStartTick = SDL_GetTicks();
 		Update();
+		if (!isRunning)
+			break;
 		HandleEvents();
 		Render();
 		frameTime = SDL_GetTicks() - frameStartTick;
@@ -120,9 +129,9 @@ void Engine::Application::Run()
 	}
 }
 
-
 void Engine::Application::Shutdown()
 {
+	
 	if (inputManager) {
 		delete inputManager;
 		inputManager = nullptr;
@@ -140,7 +149,10 @@ void Engine::Application::Shutdown()
 	IMG_Quit();
 	SDL_Quit();
 	Mix_CloseAudio();
+	isRunning = false;
 }
+
+
 void Engine::Application::HandleEvents()
 {
 	Engine::CollisionManager::Update();
@@ -162,8 +174,17 @@ void Engine::Application::Render()
 	Engine::Window::RenderPresent(); 
 }
 
-void OnClickMyButton()
+void OnClickQuitButton()
 {
-	
+	application->Shutdown();
+}
+
+void OnClickPlayButton()
+{
+
+}
+void OnClickScoreButton()
+{
+
 }
 
