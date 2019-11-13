@@ -6,11 +6,11 @@ namespace Engine {
 	class CollisionManager
 	{
 	public:
-		static void AddNewCollider(Engine::Collider* col);
-		static void Update();
-		static void Shutdown();
+		void AddNewCollider(Engine::Collider* col);
+		void Update();
+		void Shutdown();
 	private:
-		static std::vector<Collider*> colliders;
+	  std::vector<Collider*> colliders;
 	};
 }
 

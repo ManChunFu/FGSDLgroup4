@@ -11,7 +11,7 @@ namespace Engine
 	{
 	public:
 		~Application() {};
-		
+		void Quit() { isRunning = false; }
 		
 		bool Initialize();
 		void Run();

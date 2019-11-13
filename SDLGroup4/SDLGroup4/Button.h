@@ -3,7 +3,7 @@
 #include "IClickable.h"
 #include <string>
 #include <vector>
-
+#include "Text.h"
 #include <SDL_events.h>
 
 struct SDL_Rect;
@@ -16,13 +16,14 @@ namespace Engine
 	public:
 		Button(GameElement base, SDL_Color color);
 		
-		void SetText(GameElement* element);
+		void SetText(Text* element);
 		void SetOnClickEvent(std::function<void()> function);
 		void UpdatePosition(float xCoordinate, float yCoordinate) override;
 		void Render() override;		
 		
-		GameElement* TextElement;
+		Text* TextElement;
 
+		virtual void OnHover() override;
 	private:
 		SDL_Rect boxRect;
 		SDL_Color color;
@@ -32,6 +33,13 @@ namespace Engine
 
 
 		// Inherited via IClickable
+
+
+		// Inherited via IClickable
+
+
+		// Inherited via IClickable
+		virtual void LeavingHover() override;
 
 	};
 }

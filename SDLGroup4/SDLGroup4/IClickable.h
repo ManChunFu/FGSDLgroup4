@@ -9,7 +9,8 @@ namespace Engine {
 	{
 	public:
 		std::function<void()> OnClick;
-
+		virtual void OnHover() = 0;
+		virtual void LeavingHover() = 0;
 		SDL_Color* HoverForegroundColor = nullptr;
 		SDL_Color* ForegroundColor = nullptr;
 

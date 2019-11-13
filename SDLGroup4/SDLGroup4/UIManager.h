@@ -7,19 +7,19 @@ namespace Engine
 	class UIManager
 	{
 	public:
-		static std::vector<Canvas*> Scenes;
+		static std::vector<Canvas*> ExistingCanvas;
 		static void Initialize();
 		static void Initialize(SDL_Color color, GameElement base);
 		static void AddObjectsToScene(int scene, std::vector<GameElement*> childObjects);
 		static void Render() { 
-			if (Scenes.size() > 0)
-				Scenes[ActiveScene]->Render(); 
+			if (ExistingCanvas.size() > 0)
+				ExistingCanvas[ActiveCanvas]->Render(); 
 		}
-		static int CreateScene(SDL_Color color, GameElement base) { Scenes.push_back(new Canvas(color, base)); return Scenes.size(); }
+		static int CreateScene(SDL_Color color, GameElement base) { ExistingCanvas.push_back(new Canvas(color, base)); return ExistingCanvas.size(); }
 		static void Update() {}
 		static void Shutdown() 
 		{
-			for (auto canvas : Scenes) 
+			for (auto canvas : ExistingCanvas) 
 			{
 				if (canvas)
 				{
@@ -28,9 +28,9 @@ namespace Engine
 					canvas = nullptr;
 				}
 			}
-			Scenes.clear();
+			ExistingCanvas.clear();
 		}
-		static int ActiveScene;
+		static int ActiveCanvas;
 	};
 }
 
