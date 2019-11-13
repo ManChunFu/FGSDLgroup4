@@ -11,7 +11,7 @@ namespace Engine {
 		Collider(SDL_Rect destRect, std::string colliderTag) : topBorder(destRect.y - (int)(destRect.h * 0.5f)), bottomBorder(destRect.y + (int)(destRect.h * 0.5f)),
 			leftBorder(destRect.x - (int)(destRect.w * 0.5f)), rightBorder(destRect.x + (int)(destRect.w * 0.5f))
 		{
-			Engine::CollisionManager::AddNewCollider(this);
+			
 			tag = colliderTag;
 		};
 		void UpdateBorders(SDL_Rect destRect)
