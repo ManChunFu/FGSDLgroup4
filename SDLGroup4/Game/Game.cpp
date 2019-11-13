@@ -1,20 +1,15 @@
 #include <InputManager.h>
-#include <TextureManager.h>
-#include <Animation.h>
 #include <Time.h>
-#include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include <iostream>
-#include <CollisionManager.h>
-#include <EntityManager.h>
-#include <Entity.h>
 #include <SoundManager.h>
 #include <SDL_mixer.h>
 #include <UIManager.h>
-#include <Text.h>
+#include "MainMenu.h"
 #include "Game.h"
+#include <Scene.h>
 int main(int argc, char** argv)
 {
 	application = new Engine::Application();
@@ -67,40 +62,7 @@ bool Engine::Application::Initialize()
 	}
 	inputManager = new Engine::InputManager();
 	Engine::UIManager::Initialize();
-
-#pragma region MainMenu Implementation
-
-	startMenuTitle = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, "WIZARDLAND", { 0, 150, 150, 255 }, { 50, 50, 300, 20 });
-
-	playButton = new Engine::Button({ 200, 80, 345, 150 }, { 0, 255, 0, 255 });
-	playText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "PLAY", { 255, 255, 255, 255 }, { 45, 45, 55, 15 });
-	playButton->SetOnClickEvent(OnClickPlayButton);
-	playButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
-	playButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
-
-	quitButton = new Engine::Button({ 200, 80, 345, 300 }, { 0, 255, 0, 255 });
-	quitText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "QUIT", { 255, 255, 255, 255 }, { 45, 45, 50, 15 });
-	quitButton->SetOnClickEvent(OnClickQuitButton);
-	quitButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
-	quitButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
-
-	scoreButton = new Engine::Button({ 400, 80, 250, 450 }, { 0, 255, 0, 255 });
-	scoreRecordText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "SCORE RECORDS", { 255, 255, 255, 255 }, { 45, 45, 30, 15 });
-	scoreButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
-	scoreButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
-	scoreButton->SetOnClickEvent(OnClickScoreButton);
-	
-	
-	Engine::UIManager::AddObjectsToScene(0, { startMenuTitle, playButton, quitButton, scoreButton });
-	playButton->SetText(playText);
-	quitButton->SetText(quitText);
-	scoreButton->SetText(scoreRecordText);
-	inputManager->AddClickableElement(playButton);
-	inputManager->AddClickableElement(quitButton);
-	inputManager->AddClickableElement(scoreButton);
-
-#pragma endregion MainMenu Implementation
-
+	scenes.push_back(new MainMenu(this, inputManager));
 	SoundManager::AddSoundEffect("Bell", "Assets/Sounds/bell.wav");
 	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
 	return true;
@@ -117,8 +79,6 @@ void Engine::Application::Run()
 		Engine::Time::StartFrame();
 		frameStartTick = SDL_GetTicks();
 		Update();
-		if (!isRunning)
-			break;
 		HandleEvents();
 		Render();
 		frameTime = SDL_GetTicks() - frameStartTick;
@@ -143,26 +103,32 @@ void Engine::Application::Shutdown()
 	}
 	Engine::SoundManager::Shutdown();
 	Engine::UIManager::Shutdown();
-	Engine::CollisionManager::Shutdown();
-	EntityManager::Shutdown();
+	for (auto scene : scenes)
+	{
+		scene->Shutdown();
+		delete scene;
+	}
+	scenes.clear();
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 	Mix_CloseAudio();
-	isRunning = false;
+	
 }
 
 
 void Engine::Application::HandleEvents()
 {
-	Engine::CollisionManager::Update();
+	if (activeScene > scenes.size()) activeScene = scenes.size();
+	scenes[activeScene]->HandleEvents();
 }
 
 void Engine::Application::Update()
 {
 	inputManager->Update(isRunning);
 	Engine::UIManager::Update();
-	Engine::EntityManager::Update();
+	if (activeScene > scenes.size() - 1) activeScene = scenes.size() - 1;
+	scenes[activeScene]->Update();
 }
 
 void Engine::Application::Render()
@@ -170,21 +136,13 @@ void Engine::Application::Render()
 	Engine::Window::RenderClear();
 	Engine::UIManager::Render();
 	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);//background color
-	Engine::EntityManager::Render();
+	if (activeScene > scenes.size()) activeScene = scenes.size();
+	scenes[activeScene]->Render();
 	Engine::Window::RenderPresent(); 
 }
-
-void OnClickQuitButton()
+void Engine::Application::LoadScene(int scene) 
 {
-	application->Shutdown();
+	application->activeScene = scene;
 }
 
-void OnClickPlayButton()
-{
-
-}
-void OnClickScoreButton()
-{
-
-}
 

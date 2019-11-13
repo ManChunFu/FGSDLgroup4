@@ -1,7 +1,6 @@
 #include "EntityManager.h"
 #include "Entity.h"
 namespace Engine {
-	std::vector<Entity*> EntityManager::entities;
 	void EntityManager::Update()
 	{
 		for (auto item : entities)

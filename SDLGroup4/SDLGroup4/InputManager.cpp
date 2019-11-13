@@ -70,8 +70,7 @@ namespace Engine
 					SetMouseCursor(SDL_SYSTEM_CURSOR_HAND); 
 					if (gameElement->HoverForegroundColor != nullptr)
 					{
-						dynamic_cast<Engine::Text*>(dynamic_cast<Engine::Button*>(gameElement)->TextElement)
-							->ChangeTextColor(gameElement->HoverForegroundColor);
+						gameElement->OnHover();
 					}
 				}
 				if (event.type == SDL_MOUSEBUTTONDOWN)
@@ -87,12 +86,10 @@ namespace Engine
 
 				if (gameElement->ForegroundColor != nullptr)
 				{
-					dynamic_cast<Engine::Text*>(dynamic_cast<Engine::Button*>(gameElement)->TextElement)
-						->ChangeTextColor(gameElement->ForegroundColor);
+					gameElement->LeavingHover();
 				}				
 			}
 		}
-	
-		return;
+		SetMouseCursor(SDL_SYSTEM_CURSOR_ARROW);
 	}
 }

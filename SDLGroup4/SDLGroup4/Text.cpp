@@ -24,6 +24,7 @@ Engine::Text::~Text()
 
 void Engine::Text::ChangeTextColor(SDL_Color* color)
 {
+	SDL_DestroyTexture(textTexture);
 	textTexture = LoadFont(fontPath.c_str(), fontsize, messageText, *color);
 }
 

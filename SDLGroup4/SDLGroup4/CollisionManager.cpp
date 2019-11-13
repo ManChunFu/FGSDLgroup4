@@ -3,7 +3,6 @@
 #include<algorithm> 
 #include <iostream>
 namespace Engine {
-	std::vector<Collider*> CollisionManager::colliders;
 	void CollisionManager::AddNewCollider(Engine::Collider* col)
 	{ colliders.push_back(col); }
 	void CollisionManager::Update()

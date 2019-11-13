@@ -16,7 +16,7 @@ Engine::Button::Button(GameElement base, SDL_Color color)
 	this->color = color;
 }
 
-void Engine::Button::SetText(GameElement* element)
+void Engine::Button::SetText(Text* element)
 {
 	element->UpdatePosition(element->xCoordinate + this->xCoordinate, element->yCoordinate + this->yCoordinate);
 	delete TextElement;
@@ -41,6 +41,16 @@ void Engine::Button::Render()
 	SDL_RenderDrawRect(Engine::Window::Renderer, &boxRect);
 
 	TextElement->Render();
+}
+
+void Engine::Button::OnHover()
+{
+	TextElement->ChangeTextColor(HoverForegroundColor);
+}
+
+void Engine::Button::LeavingHover()
+{
+	TextElement->ChangeTextColor(ForegroundColor);
 }
 
 

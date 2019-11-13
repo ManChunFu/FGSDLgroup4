@@ -22,11 +22,3 @@ Engine::Application* application;
 void OnClickQuitButton();
 void OnClickPlayButton();
 void OnClickScoreButton();
-
-Engine::Text* startMenuTitle;
-Engine::Button* playButton;
-Engine::Text* playText;
-Engine::Button* quitButton;
-Engine::Text* quitText;
-Engine::Button* scoreButton;
-Engine::Text* scoreRecordText;
