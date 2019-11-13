@@ -1,7 +1,6 @@
 #pragma once
 #include "Vector2D.h"
 #include "GameElement.h"
-#include "IClickable.h"
 #include <string>
 #include <SDL_rect.h>
 

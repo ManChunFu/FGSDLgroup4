@@ -7,7 +7,6 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include <iostream>
-#include <CollisionManager.h>
 #include <EntityManager.h>
 #include <Entity.h>
 #include <SoundManager.h>
@@ -117,8 +116,6 @@ void Engine::Application::Run()
 		Engine::Time::StartFrame();
 		frameStartTick = SDL_GetTicks();
 		Update();
-		if (!isRunning)
-			break;
 		HandleEvents();
 		Render();
 		frameTime = SDL_GetTicks() - frameStartTick;
@@ -143,26 +140,25 @@ void Engine::Application::Shutdown()
 	}
 	Engine::SoundManager::Shutdown();
 	Engine::UIManager::Shutdown();
-	Engine::CollisionManager::Shutdown();
 	EntityManager::Shutdown();
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 	Mix_CloseAudio();
-	isRunning = false;
+	
 }
 
 
 void Engine::Application::HandleEvents()
 {
-	Engine::CollisionManager::Update();
+	
 }
 
 void Engine::Application::Update()
 {
 	inputManager->Update(isRunning);
 	Engine::UIManager::Update();
-	Engine::EntityManager::Update();
+	if (Engine::UIManager::ActiveCanvas != 0) Engine::EntityManager::Update();
 }
 
 void Engine::Application::Render()
@@ -170,18 +166,18 @@ void Engine::Application::Render()
 	Engine::Window::RenderClear();
 	Engine::UIManager::Render();
 	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);//background color
-	Engine::EntityManager::Render();
+	if (Engine::UIManager::ActiveCanvas != 0) Engine::EntityManager::Render();
 	Engine::Window::RenderPresent(); 
 }
 
 void OnClickQuitButton()
 {
-	application->Shutdown();
+	application->Quit();
 }
 
 void OnClickPlayButton()
 {
-
+	Engine::UIManager::ActiveCanvas = 1;
 }
 void OnClickScoreButton()
 {
