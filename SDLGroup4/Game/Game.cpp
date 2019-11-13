@@ -2,18 +2,17 @@
 #include <TextureManager.h>
 #include <Animation.h>
 #include <Time.h>
-#include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include <iostream>
-#include <EntityManager.h>
 #include <Entity.h>
 #include <SoundManager.h>
 #include <SDL_mixer.h>
 #include <UIManager.h>
 #include <Text.h>
 #include "Game.h"
+#include <Scene.h>
 int main(int argc, char** argv)
 {
 	application = new Engine::Application();
@@ -140,7 +139,12 @@ void Engine::Application::Shutdown()
 	}
 	Engine::SoundManager::Shutdown();
 	Engine::UIManager::Shutdown();
-	EntityManager::Shutdown();
+	for (auto scene : scenes)
+	{
+		scene->Shutdown();
+		delete scene;
+	}
+	scenes.clear();
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
@@ -151,14 +155,14 @@ void Engine::Application::Shutdown()
 
 void Engine::Application::HandleEvents()
 {
-	
+	scenes[activeScene]->HandleEvents();
 }
 
 void Engine::Application::Update()
 {
 	inputManager->Update(isRunning);
 	Engine::UIManager::Update();
-	if (Engine::UIManager::ActiveCanvas != 0) Engine::EntityManager::Update();
+	scenes[activeScene]->Update();
 }
 
 void Engine::Application::Render()
@@ -166,8 +170,12 @@ void Engine::Application::Render()
 	Engine::Window::RenderClear();
 	Engine::UIManager::Render();
 	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);//background color
-	if (Engine::UIManager::ActiveCanvas != 0) Engine::EntityManager::Render();
+	scenes[activeScene]->Render();
 	Engine::Window::RenderPresent(); 
+}
+void Engine::Application::LoadScene(int scene) 
+{
+	application->activeScene = scene;
 }
 
 void OnClickQuitButton()

@@ -5,13 +5,14 @@
 #include <vector>
 #include "CollisionManager.h"
 #include <iostream>
+#include "Scene.h"
 namespace Engine {
 	class Collider {
 	public:
-		Collider(SDL_Rect destRect, std::string colliderTag) : topBorder(destRect.y - (int)(destRect.h * 0.5f)), bottomBorder(destRect.y + (int)(destRect.h * 0.5f)),
+		Collider(SDL_Rect destRect, std::string colliderTag, Scene* scene) : topBorder(destRect.y - (int)(destRect.h * 0.5f)), bottomBorder(destRect.y + (int)(destRect.h * 0.5f)),
 			leftBorder(destRect.x - (int)(destRect.w * 0.5f)), rightBorder(destRect.x + (int)(destRect.w * 0.5f))
 		{
-			
+			scene->CollisionManager()->AddNewCollider(this);
 			tag = colliderTag;
 		};
 		void UpdateBorders(SDL_Rect destRect)
