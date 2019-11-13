@@ -86,12 +86,10 @@ namespace Engine
 
 				if (gameElement->ForegroundColor != nullptr)
 				{
-					dynamic_cast<Engine::Text*>(dynamic_cast<Engine::Button*>(gameElement)->TextElement)
-						->ChangeTextColor(gameElement->ForegroundColor);
+					gameElement->LeavingHover();
 				}				
 			}
 		}
-	
-		return;
+		SetMouseCursor(SDL_SYSTEM_CURSOR_ARROW);
 	}
 }

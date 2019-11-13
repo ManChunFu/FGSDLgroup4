@@ -8,13 +8,12 @@
 #include <iostream>
 #include "Animator.h"
 #include "Animation.h"
-
+#include "Scene.h"
 namespace Engine {
 	class Entity {
 	public:
 		virtual ~Entity() {}
-		Entity(){}
-		Entity(std::string path, int height, int width, int xpos, int ypos)
+		Entity(std::string path, int height, int width, int xpos, int ypos, Scene* scene)
 		{
 			posX = xpos;
 			posY = ypos;
@@ -27,8 +26,8 @@ namespace Engine {
 			destRect.w = posX;
 			destRect.w = posY;
 			texture = TextureManager::Texture(path);
-			collider = new Engine::Collider(destRect, "Player");
-			Engine::EntityManager::AddEntity(this);
+			collider = new Engine::Collider(destRect, "something", scene);
+			scene->EntityManager()->AddEntity(this);
 
 		}
 

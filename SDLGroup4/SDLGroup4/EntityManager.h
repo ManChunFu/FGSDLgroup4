@@ -5,12 +5,12 @@ namespace Engine {
 	class EntityManager
 	{
 	public:
-		static void Update();
-		static void Render();
-		static void AddEntity(Entity* add);
-		static void Shutdown();
+		void Update();
+		void Render();
+		void AddEntity(Entity* add);
+		void Shutdown();
 	private:
-		static std::vector<Entity*> entities;
+		std::vector<Entity*> entities;
 	};
 }
 
