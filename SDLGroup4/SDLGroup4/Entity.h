@@ -23,8 +23,8 @@ namespace Engine {
 			sourceRect.y = 0;
 			destRect.w = width;
 			destRect.h = height;
-			destRect.w = posX;
-			destRect.w = posY;
+			destRect.x = posX;
+			destRect.y = posY;
 			texture = TextureManager::Texture(path);
 			collider = new Engine::Collider(destRect, "something", scene);
 			scene->EntityManager()->AddEntity(this);

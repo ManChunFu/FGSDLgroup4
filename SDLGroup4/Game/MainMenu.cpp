@@ -5,13 +5,6 @@ MainMenu* MainMenu::mainmenu;
 void MainMenu::Shutdown()
 {
 	Scene::Shutdown();
-	delete startMenuTitle;
-	delete playButton;
-	delete playText;
-	delete quitButton;
-	delete quitText;
-	delete scoreButton;
-	delete scoreRecordText;
 	Engine::Text* startMenuTitle = nullptr;
 	Engine::Button* playButton = nullptr;
 	Engine::Text* playText = nullptr;

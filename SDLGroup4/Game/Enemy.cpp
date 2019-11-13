@@ -1,33 +1,33 @@
 #include "Enemy.h"
 #include <InputManager.h>
 #include <Vector2D.h>
+#include <Time.h>
+#include <iostream>
 
 
 
-Enemy::Enemy(std::string& spritePath, int width, int height, float xPos, float yPos)
+void Enemy::OnCollisionEnter(Engine::Collider* other)
 {
-
+	std::cout << other->tag << std::endl;
 }
 
 void Enemy::Update()
 {
-	
+	Engine::Entity::Update();
+
+	if (collider->collisions.size() > 0)
+	{
+		for (auto col : collider->collisions)
+			OnCollisionEnter(col);
+	}
 }
 
-void Enemy::MovePlayer(float deltaTime)
+
+void Enemy::MovePlayer()
 {
+	Engine::Time::DeltaTime();
 	Engine::Vector2D movement;
-	if (inputManager->IsKeyDown(SDL_SCANCODE_A))
-		movement.X = -1.0f;
+	
 
-	if (inputManager->IsKeyDown(SDL_SCANCODE_D))
-		movement.X = 1.0f;
-
-	if (inputManager->IsKeyDown(SDL_SCANCODE_W))
-		movement.Y = -1.0f;
-
-	if (inputManager->IsKeyDown(SDL_SCANCODE_S))
-		movement.Y = 1.0f;
-
-	//position += movement * speed * deltaTime;
+	
 }
