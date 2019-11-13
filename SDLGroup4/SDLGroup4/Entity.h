@@ -31,6 +31,8 @@ namespace Engine {
 
 		}
 
+		Entity() {}
+
 		virtual void Update() { destRect.x = posX; destRect.y = posY; collider->UpdateBorders(destRect); }
 		virtual void Render() 
 		{ 
@@ -51,4 +53,5 @@ namespace Engine {
 		SDL_Texture* texture;
 
 	};
+
 }
