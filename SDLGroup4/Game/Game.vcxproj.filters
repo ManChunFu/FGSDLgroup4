@@ -6,6 +6,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="AI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
@@ -13,6 +14,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="AI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

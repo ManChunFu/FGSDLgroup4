@@ -11,6 +11,7 @@
 #include "Game.h"
 #include <Scene.h>
 #include "MainScene.h"
+
 int main(int argc, char** argv)
 {
 	application = new Engine::Application();
@@ -137,13 +138,16 @@ void Engine::Application::Update()
 		if (activeScene > scenes.size() - 1) activeScene = scenes.size() - 1;
 		scenes[activeScene]->Update();
 	}
+	else
+		application->LoadScene(2);
+
 }
 
 void Engine::Application::Render()
 {
 	Engine::Window::RenderClear();
 	Engine::UIManager::Render();
-	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);//background color
+	SDL_SetRenderDrawColor(Engine::Window::Renderer, 100, 100, 100, 255);//background color
 	if (activeScene > scenes.size()) activeScene = scenes.size();
 	scenes[activeScene]->Render();
 	Engine::Window::RenderPresent(); 

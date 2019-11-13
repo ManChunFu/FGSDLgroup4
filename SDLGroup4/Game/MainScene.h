@@ -10,7 +10,13 @@ class Enemy;
 class MainScene : public Engine::Scene
 {
 public:
-	MainScene(Engine::Application* app, Engine::InputManager* input) : Scene(app, input) { mainScene = this; createPlayer(); }
+	MainScene(Engine::Application* app, Engine::InputManager* input) : Scene(app, input) 
+	{ 
+		mainScene = this; 
+		createPlayer(); 
+		CreateEnemy(); 
+	}
+
 	static MainScene* mainScene;
 	void Update() override;
 private:
