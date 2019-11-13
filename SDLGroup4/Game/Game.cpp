@@ -101,6 +101,7 @@ bool Engine::Application::Initialize()
 
 	SoundManager::AddSoundEffect("Bell", "Assets/Sounds/bell.wav");
 	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
+	scenes.push_back(new Scene());
 	return true;
 }
 

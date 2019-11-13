@@ -18,7 +18,7 @@ namespace Engine
 		const int id = idCtr;
 		CollisionManager* CollisionManager() { return colManager; };
 		EntityManager* EntityManager() { return entityManager; };
-		virtual void SetUpUI() = 0;
+		virtual void SetUpUI() {}
 	private:
 		static int idCtr;
 		Engine::CollisionManager* colManager;
