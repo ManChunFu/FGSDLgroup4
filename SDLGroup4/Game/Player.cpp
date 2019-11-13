@@ -1,37 +1,44 @@
 #include "Player.h"
 #include<InputManager.h>
+#include<TextureManager.h>
+#include <Time.h>
+#include<Vector2D.h>
 
-Player::Player(std::string path, int height, int width, int xpos, int ypos)
-{
-	player = new Entity(path, height, width, xpos, ypos);
-}
+
+
 
 void Player::Update()
 {
 	MovePlayer();
+	Engine::Entity::Update();
 }
 
 void Player::Render()
 {
+	Engine::Entity::Render();
 }
 
 
 void Player::MovePlayer()
 {
-	if (inputManager->IsKeyPressed(SDL_SCANCODE_UP))
+	Engine::Vector2D movement;
+	if (inputManager->IsKeyDown(SDL_SCANCODE_UP))
 	{
-
+		movement.Y = -10.0f;
 	}
-	if (inputManager->IsKeyPressed(SDL_SCANCODE_DOWN))
+	if (inputManager->IsKeyDown(SDL_SCANCODE_DOWN))
 	{
-
+		movement.Y = 10.0f;
 	}
-	if (inputManager->IsKeyPressed(SDL_SCANCODE_RIGHT))
+	if (inputManager->IsKeyDown(SDL_SCANCODE_RIGHT))
 	{
-
+		movement.X = 10.0f;
 	}
-	if (inputManager->IsKeyPressed(SDL_SCANCODE_LEFT))
+	if (inputManager->IsKeyDown(SDL_SCANCODE_LEFT))
 	{
-
+		movement.X = -10.0f;
 	}
+
+	posX += movement.X * moveSpeed *Engine::Time::DeltaTime();
+	posY += movement.Y * moveSpeed * Engine::Time::DeltaTime();
 }

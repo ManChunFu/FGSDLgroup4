@@ -5,7 +5,7 @@ MainScene* MainScene::mainScene = nullptr;
 void MainScene::Update()
 {
 	Scene::Update();
-	CreateEnemy();
+	/*CreateEnemy();*/
 }
 
 void MainScene::CreateEnemy()
@@ -14,6 +14,12 @@ void MainScene::CreateEnemy()
 	enemy.push_back(new Enemy(1, path, 64, 64, 100.0f, 100.0f, mainScene));
 }
 
+
+void MainScene::createPlayer()
+{
+	std::string path = "Assets/Sprites/enemy_drone_larger_red.png";
+	player = new Player(inputManager, 1, path, 64, 64, 200.0f, 200.0f, mainScene);
+}
 
 void MainScene::SetUpUI()
 {
