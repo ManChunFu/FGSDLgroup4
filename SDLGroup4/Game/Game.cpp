@@ -156,6 +156,7 @@ void Engine::Application::Shutdown()
 
 void Engine::Application::HandleEvents()
 {
+	if (activeScene > scenes.size()) activeScene = scenes.size();
 	scenes[activeScene]->HandleEvents();
 }
 
@@ -163,6 +164,7 @@ void Engine::Application::Update()
 {
 	inputManager->Update(isRunning);
 	Engine::UIManager::Update();
+	if (activeScene > scenes.size() - 1) activeScene = scenes.size() - 1;
 	scenes[activeScene]->Update();
 }
 
@@ -171,6 +173,7 @@ void Engine::Application::Render()
 	Engine::Window::RenderClear();
 	Engine::UIManager::Render();
 	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);//background color
+	if (activeScene > scenes.size()) activeScene = scenes.size();
 	scenes[activeScene]->Render();
 	Engine::Window::RenderPresent(); 
 }
@@ -186,6 +189,8 @@ void OnClickQuitButton()
 
 void OnClickPlayButton()
 {
+	application->inputManager->ClearClickables();
+	application->LoadScene(1);
 	Engine::UIManager::ActiveCanvas = 1;
 }
 void OnClickScoreButton()

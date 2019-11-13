@@ -90,7 +90,6 @@ namespace Engine
 				}				
 			}
 		}
-	
-		return;
+		SetMouseCursor(SDL_SYSTEM_CURSOR_ARROW);
 	}
 }

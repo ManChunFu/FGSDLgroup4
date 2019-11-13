@@ -12,8 +12,7 @@ namespace Engine
 		static void Initialize(SDL_Color color, GameElement base);
 		static void AddObjectsToScene(int scene, std::vector<GameElement*> childObjects);
 		static void Render() { 
-			if (ExistingCanvas.size() > 0)
-				ExistingCanvas[ActiveCanvas]->Render(); 
+			if (ExistingCanvas.size() > 0 && ActiveCanvas < ExistingCanvas.size()) ExistingCanvas[ActiveCanvas]->Render(); 
 		}
 		static int CreateScene(SDL_Color color, GameElement base) { ExistingCanvas.push_back(new Canvas(color, base)); return ExistingCanvas.size(); }
 		static void Update() {}
