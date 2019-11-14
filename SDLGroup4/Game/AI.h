@@ -5,8 +5,8 @@
 class AI
 {
 public:
-	std::vector<Engine::Vector2D> pathFinding(float xPos, float yPost);
-	
+	bool EnterDangerZone(float radiusLimit, float xPos, float yPos, float targetXPos, float targetYPos);
+	std::vector<Engine::Vector2D> pathFinding(float targetXPos, float targetYPos, float startXPos, float startYpos);
 
 private:
 	

@@ -1,11 +1,9 @@
 #pragma once
 #include <Scene.h>
 #include <vector>
-#include "Player.h"
 
 
 class Player;
-
 class Enemy;
 class MainScene : public Engine::Scene
 {

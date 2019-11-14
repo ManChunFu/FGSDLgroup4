@@ -138,8 +138,6 @@ void Engine::Application::Update()
 		if (activeScene > scenes.size() - 1) activeScene = scenes.size() - 1;
 		scenes[activeScene]->Update();
 	}
-	else
-		application->LoadScene(2);
 
 }
 
