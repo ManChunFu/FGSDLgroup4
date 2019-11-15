@@ -37,7 +37,7 @@ void MainMenu::SetUpUI()
 	scoreButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
 	scoreButton->SetOnClickEvent(OnClickScoreButton);
 		
-	Engine::UIManager::AddObjectsToScene(0, { startMenuTitle, playButton, exitButton, scoreButton });
+	Engine::UIManager::AddObjectsToCanvas(0, { startMenuTitle, playButton, exitButton, scoreButton });
 	playButton->SetText(playText);
 	exitButton->SetText(exitText);
 	scoreButton->SetText(scoreRecordText);

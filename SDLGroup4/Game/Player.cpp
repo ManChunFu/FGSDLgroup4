@@ -13,10 +13,6 @@ void Player::Update()
 	Engine::Entity::Update();
 }
 
-void Player::Render()
-{
-	Engine::Entity::Render();
-}
 
 
 void Player::MovePlayer()
@@ -39,8 +35,8 @@ void Player::MovePlayer()
 		movement.X = -10.0f;
 	}*/
 
-	posX += inputManager->GetAxis("Horizontal") * moveSpeed *Engine::Time::DeltaTime();
-	posY += inputManager->GetAxis("Vertical") * moveSpeed * Engine::Time::DeltaTime();
+	position->X += inputManager->GetAxis("Horizontal") * moveSpeed *Engine::Time::DeltaTime();
+	position->Y += inputManager->GetAxis("Vertical") * moveSpeed * Engine::Time::DeltaTime();
 }
 
 void Player::OnCollisionEnter(Engine::Collider* other)
