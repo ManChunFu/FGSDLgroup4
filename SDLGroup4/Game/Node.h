@@ -15,7 +15,7 @@ public:
 	bool IsStartPoint;
 	bool NodeCompleted;
 
-	void GetHCost(Engine::Vector2D newNodePos);
+	float GetHCost(Engine::Vector2D targetPos, Engine::Vector2D newNodePos);
 
 };
 	

@@ -1,6 +1,7 @@
 #include "Node.h"
 
-Node::Node(Engine::Vector2D position, float hCost, Node* parent) : Position(position), HCost(hCost)
+
+Node::Node(Engine::Vector2D position, float hCost, Node* parent) :Position(position), HCost(hCost)
 {
 	if (parent != nullptr)
 	{
@@ -19,6 +20,12 @@ Node::~Node()
 {
 }
 
-void Node::GetHCost(Engine::Vector2D newNodePos)
+float Node::GetHCost(Engine::Vector2D targetPos, Engine::Vector2D newNodePos)
 {
+	float x = fabsf(targetPos.X - newNodePos.X);
+	float y = fabsf(targetPos.Y - newNodePos.Y);
+	if (x < y)
+		return (y - x) + (hypotf(x, x));
+	else
+		return (x - y) + (hypotf(y, y));
 }

@@ -18,13 +18,7 @@ void Enemy::Update()
 
 void Enemy::OnCollisionEnter(Engine::Collider* other)
 {
+	std::cout << other->tag << std::endl;
 }
 
-void Enemy::MovePlayer()
-{
-	Engine::Time::DeltaTime();
-	Engine::Vector2D movement;
-	
 
-	
-}
