@@ -23,7 +23,7 @@ public:
 
 	void Update() override;
 
-	float moveSpeed = 100.0f;
+	float moveSpeed = 500.0f;
 
 private:
 	Engine::InputManager* inputManager = nullptr;

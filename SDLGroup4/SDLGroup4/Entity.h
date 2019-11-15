@@ -23,53 +23,20 @@ namespace Engine {
 			position->Y = 0;
 			scene->EntityManager()->AddEntity(this);
 		}
-		void AddCollider(std::string tag){ collider = new Engine::Collider(destRect, tag, scene); }
-		void AddSprite(std::string _path, int scaleX, int scaleY) 
-		{ 
-			texture = Engine::TextureManager::Texture(_path);  
-			SDL_QueryTexture(texture, NULL, NULL, &sourceRect.w, &sourceRect.h);
-			destRect.w = sourceRect.w * scaleX;
-			destRect.h = sourceRect.h * scaleY;
-		};
-		void AddSprite(std::string _path)
-		{
-			texture = Engine::TextureManager::Texture(_path);
-			SDL_QueryTexture(texture, NULL, NULL, &sourceRect.w, &sourceRect.h);
-			destRect.w = sourceRect.w;
-			destRect.h = sourceRect.h;
-		};
-		virtual void Update() 
-		{
-			if (collider) 
-			{
-				if (collider->collisions.size() > 0)
-				{
-					for (auto col : collider->collisions)
-						OnCollisionEnter(col);
-				}
-				collider->UpdateBorders(destRect);
-			}
-			destRect.x = position->X; destRect.y = position->Y;
-		}
-		void Render() 
-		{ 
-			/*std::cout << sourceRect.y << sourceRect.x << std::endl;*/ 
-			if (texture)
-			{
-				Engine::TextureManager::Draw(texture, sourceRect, destRect);
-				animator.DisplayAnimation(position->X, position->Y);
-			}
-		}
-
+		void AddCollider(std::string tag){ collider = new Engine::Collider(destRect, tag, this); }
+		void AddSprite(std::string _path, int scaleX, int scaleY);
+		void AddSprite(std::string _path);
+		virtual void Update();
+		void Render();
 		Engine::Animator animator;
+		Vector2D* position = nullptr;
 
 	protected:
 		virtual void OnCollisionEnter(Engine::Collider* other) {}
-		Vector2D* position = nullptr;
 		Engine::Collider* collider = nullptr;
+		SDL_Rect destRect;
 	private:
 		SDL_Rect sourceRect;
-		SDL_Rect destRect;
 		SDL_Texture* texture = nullptr;
 		Scene* scene = nullptr;
 	};

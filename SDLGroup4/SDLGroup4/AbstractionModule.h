@@ -2,11 +2,10 @@
 namespace Engine 
 {
 	class Scene;
-	class Entity;
-	class AbstractionModule 
+	class AbstractionModule
 	{
 	public:
 		static Engine::Scene* ActiveScene;
-		
 	};
+	
 }

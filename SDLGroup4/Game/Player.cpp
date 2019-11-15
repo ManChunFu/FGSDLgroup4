@@ -10,6 +10,10 @@
 void Player::Update()
 {
 	MovePlayer();
+	if (position->X < 0) position->X = 0;
+	if (position->X > 1440 - destRect.w) position->X = 1440 - destRect.w;
+	if (position->Y < 0) position->Y = 0;
+	if (position->Y > 900 - destRect.h) position->Y = 900 - destRect.h;
 	Engine::Entity::Update();
 }
 

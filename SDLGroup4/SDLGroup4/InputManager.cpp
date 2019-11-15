@@ -59,6 +59,9 @@ namespace Engine
 			if (IsKeyDown(SDL_SCANCODE_S) || IsKeyDown(SDL_SCANCODE_DOWN)) { return 1; }
 			if (IsKeyDown(SDL_SCANCODE_W) || IsKeyDown(SDL_SCANCODE_UP)) { return -1; }
 		}
+		if (Axis == "Space") if (IsKeyDown(SDL_SCANCODE_SPACE)) return 1;
+		if (Axis == "Fire") if (IsKeyDown(SDL_SCANCODE_RETURN)) return 1;
+
 		return 0;
 	}
 	void InputManager::SetMouseCursor(SDL_SystemCursor newCursor)

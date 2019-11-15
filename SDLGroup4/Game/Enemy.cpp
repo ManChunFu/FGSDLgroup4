@@ -19,12 +19,3 @@ void Enemy::Update()
 void Enemy::OnCollisionEnter(Engine::Collider* other)
 {
 }
-
-void Enemy::MovePlayer()
-{
-	Engine::Time::DeltaTime();
-	Engine::Vector2D movement;
-	
-
-	
-}

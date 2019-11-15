@@ -1,7 +1,6 @@
 #pragma once
 #include <Entity.h>
 #include <string>
-#include <Vector2D.h>
 
 namespace Engine
 {
@@ -27,8 +26,6 @@ public:
 private:
 	void OnCollisionEnter(Engine::Collider* other) override;
 	Engine::InputManager* inputManager = nullptr;
-	Engine::Vector2D* position;
-	void MovePlayer();
 
 };
 
