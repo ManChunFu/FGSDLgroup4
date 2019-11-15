@@ -18,4 +18,7 @@ void Enemy::Update()
 
 void Enemy::OnCollisionEnter(Engine::Collider* other)
 {
+	std::cout << other->tag << std::endl;
 }
+
+
