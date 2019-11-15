@@ -17,12 +17,11 @@ class Player : public Engine :: Entity
 public:
 	Entity* player;
 
-	Player(Engine::InputManager* input, int playerHP, std::string path, int height, int width, int xpos, int ypos, Engine::Scene* scene) :
-		Engine::Entity(path, height, width, xpos, ypos, scene) { hitPoint = playerHP; inputManager = input; };
+	Player(Engine::InputManager* input, int playerHP) : Engine::Entity() 
+	{ hitPoint = playerHP; inputManager = input; };
 
 
 	void Update() override;
-	void Render() override;
 
 	float moveSpeed = 100.0f;
 
@@ -32,7 +31,6 @@ private:
 	Engine::Animator* anim = nullptr;
 
 	int hitPoint;
-	float position;
 
 
 	

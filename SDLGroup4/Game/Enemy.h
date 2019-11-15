@@ -12,8 +12,7 @@ namespace Engine
 class Enemy : public Engine::Entity
 {
 public:
-	Enemy(int hp, std::string& spritePath, int width, int height, float xPos, float yPos, Engine::Scene* scene) : 
-		Engine::Entity(spritePath, width, height, xPos, yPos, scene)
+	Enemy(int hp) : Engine::Entity()
 	{
 		hitpoint = hp;
 	};
