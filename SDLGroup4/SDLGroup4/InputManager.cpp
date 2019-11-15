@@ -36,7 +36,6 @@ namespace Engine
 			if (IsKeyDown(SDL_SCANCODE_ESCAPE)) { isRunning = false; return; }
 			CheckMouseOnClickable();
 		}
-
 	}
 	bool InputManager::IsKeyPressed(SDL_Scancode key) const
 	{
