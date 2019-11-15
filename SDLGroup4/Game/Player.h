@@ -24,7 +24,7 @@ public:
 	void Update() override;
 	void Render() override;
 
-	float moveSpeed = 10.0f;
+	float moveSpeed = 100.0f;
 
 private:
 	Engine::InputManager* inputManager = nullptr;
@@ -38,6 +38,10 @@ private:
 	
 	void MovePlayer();
 	
+
+
+	// Inherited via Entity
+	virtual void OnCollisionEnter(Engine::Collider* other) override;
 
 };
 

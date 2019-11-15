@@ -33,7 +33,15 @@ namespace Engine {
 
 		Entity() {}
 
-		virtual void Update() { destRect.x = posX; destRect.y = posY; collider->UpdateBorders(destRect); }
+		virtual void Update() 
+		{
+			if (collider->collisions.size() > 0)
+			{
+				for (auto col : collider->collisions)
+					OnCollisionEnter(col);
+			}
+			destRect.x = posX; destRect.y = posY; collider->UpdateBorders(destRect); 
+		}
 		virtual void Render() 
 		{ 
 			/*std::cout << sourceRect.y << sourceRect.x << std::endl;*/ 
@@ -45,6 +53,8 @@ namespace Engine {
 		Engine::Animator animator;
 
 	protected:
+		virtual void OnCollisionEnter(Engine::Collider* other) = 0;
+	
 		float posX;
 		float posY;
 		Engine::Collider* collider;
