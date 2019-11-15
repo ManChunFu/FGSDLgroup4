@@ -29,7 +29,6 @@ public:
 private:
 	Engine::InputManager* inputManager = nullptr;
 	Engine::Vector2D* position;
-	void MovePlayer();
 
 };
 

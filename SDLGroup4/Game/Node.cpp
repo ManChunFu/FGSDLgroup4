@@ -14,3 +14,11 @@ Node::Node(Engine::Vector2D position, float hCost, Node* parent) : Position(posi
 		GCost = 0;
 	}
 }
+
+Node::~Node()
+{
+}
+
+void Node::GetHCost(Engine::Vector2D newNodePos)
+{
+}

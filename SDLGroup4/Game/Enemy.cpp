@@ -23,11 +23,5 @@ void Enemy::Update()
 }
 
 
-void Enemy::MovePlayer()
-{
-	Engine::Time::DeltaTime();
-	Engine::Vector2D movement;
-	
 
-	
-}
+

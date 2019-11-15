@@ -5,6 +5,7 @@ class Node
 {
 public:
 	Node(Engine::Vector2D position, float hCost, Node* parent); 
+	~Node();
 		
 	std::vector<Node*>Parent;
 	Engine::Vector2D Position;
@@ -13,6 +14,9 @@ public:
 	float FCost = (GCost + HCost);
 	bool IsStartPoint;
 	bool NodeCompleted;
+
+	void GetHCost(Engine::Vector2D newNodePos);
+
 };
 	
 	
