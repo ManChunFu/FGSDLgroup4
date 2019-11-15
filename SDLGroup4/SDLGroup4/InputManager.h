@@ -4,7 +4,7 @@
 #include <SDL_events.h>
 #include <vector>
 #include "IClickable.h"
-
+#include <string>
 namespace Engine
 {
 	class InputManager
@@ -24,6 +24,7 @@ namespace Engine
 		}
 		bool IsKeyPressed(SDL_Scancode key) const;
 		bool IsKeyReleased(SDL_Scancode key) const;
+		int GetAxis(std::string Axis);
 	private:
 		void SetMouseCursor(SDL_SystemCursor newCursor);
 		std::vector<IClickable*> clickableObjects;

@@ -22,7 +22,7 @@ void Player::Render()
 void Player::MovePlayer()
 {
 	Engine::Vector2D movement;
-	if (inputManager->IsKeyDown(SDL_SCANCODE_UP))
+	/*if (inputManager->IsKeyDown(SDL_SCANCODE_UP))
 	{
 		movement.Y = -10.0f;
 	}
@@ -37,8 +37,12 @@ void Player::MovePlayer()
 	if (inputManager->IsKeyDown(SDL_SCANCODE_LEFT))
 	{
 		movement.X = -10.0f;
-	}
+	}*/
 
-	posX += movement.X * moveSpeed *Engine::Time::DeltaTime();
-	posY += movement.Y * moveSpeed * Engine::Time::DeltaTime();
+	posX += inputManager->GetAxis("Horizontal") * moveSpeed *Engine::Time::DeltaTime();
+	posY += inputManager->GetAxis("Vertical") * moveSpeed * Engine::Time::DeltaTime();
+}
+
+void Player::OnCollisionEnter(Engine::Collider* other)
+{
 }

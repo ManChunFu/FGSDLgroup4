@@ -47,6 +47,20 @@ namespace Engine
 		if (lastKeys[key] && !keys[key]) { return true; }
 		return false;
 	}
+	int InputManager::GetAxis(std::string Axis)
+	{
+		if (Axis == "Horizontal") 
+		{
+			if (IsKeyDown(SDL_SCANCODE_D) || IsKeyDown(SDL_SCANCODE_RIGHT))  { return 1; }
+			if (IsKeyDown(SDL_SCANCODE_A) || IsKeyDown(SDL_SCANCODE_LEFT)) { return -1; }
+		}
+		if(Axis == "Vertical")
+		{
+			if (IsKeyDown(SDL_SCANCODE_S) || IsKeyDown(SDL_SCANCODE_DOWN)) { return 1; }
+			if (IsKeyDown(SDL_SCANCODE_W) || IsKeyDown(SDL_SCANCODE_UP)) { return -1; }
+		}
+		return 0;
+	}
 	void InputManager::SetMouseCursor(SDL_SystemCursor newCursor)
 	{
 		SDL_Cursor* cursor;
