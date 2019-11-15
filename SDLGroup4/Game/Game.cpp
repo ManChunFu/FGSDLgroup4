@@ -10,6 +10,8 @@
 #include "MainMenu.h"
 #include "Game.h"
 #include <Scene.h>
+#include "MainScene.h"
+
 int main(int argc, char** argv)
 {
 	application = new Engine::Application();
@@ -63,6 +65,7 @@ bool Engine::Application::Initialize()
 	inputManager = new Engine::InputManager();
 	Engine::UIManager::Initialize();
 	scenes.push_back(new MainMenu(this, inputManager));
+	scenes.push_back(new MainScene(this, inputManager));
 	SoundManager::AddSoundEffect("Bell", "Assets/Sounds/bell.wav");
 	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
 	return true;
@@ -119,23 +122,30 @@ void Engine::Application::Shutdown()
 
 void Engine::Application::HandleEvents()
 {
-	if (activeScene > scenes.size()) activeScene = scenes.size();
-	scenes[activeScene]->HandleEvents();
+	if (!application->Pause)
+	{
+		if (activeScene > scenes.size()) activeScene = scenes.size();
+		scenes[activeScene]->HandleEvents();
+	}
 }
 
 void Engine::Application::Update()
 {
-	inputManager->Update(isRunning);
+	inputManager->Update(isRunning, application->Pause);
 	Engine::UIManager::Update();
-	if (activeScene > scenes.size() - 1) activeScene = scenes.size() - 1;
-	scenes[activeScene]->Update();
+	if (!application->Pause)
+	{
+		if (activeScene > scenes.size() - 1) activeScene = scenes.size() - 1;
+		scenes[activeScene]->Update();
+	}
+
 }
 
 void Engine::Application::Render()
 {
 	Engine::Window::RenderClear();
 	Engine::UIManager::Render();
-	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);//background color
+	SDL_SetRenderDrawColor(Engine::Window::Renderer, 100, 100, 100, 255);//background color
 	if (activeScene > scenes.size()) activeScene = scenes.size();
 	scenes[activeScene]->Render();
 	Engine::Window::RenderPresent(); 

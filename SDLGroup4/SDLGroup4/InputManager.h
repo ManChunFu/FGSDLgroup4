@@ -12,7 +12,7 @@ namespace Engine
 	public:
 		InputManager();
 		void Shutdown();
-		void Update(bool& isRunning);
+		void Update(bool& isRunning, bool& pause);
 		bool IsKeyDown(SDL_Scancode key) const { return keys[key]; };
 		void AddClickableElement(IClickable* element) { clickableObjects.push_back(element); }
 		void ClearClickables() { clickableObjects.clear(); }

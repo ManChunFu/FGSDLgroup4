@@ -25,7 +25,7 @@ namespace Engine
 		keys = nullptr;
 	}
 
-	void InputManager::Update(bool& isRunning)
+	void InputManager::Update(bool& isRunning, bool& pause)
 	{
 		lastKeys = keys;
 		keys = SDL_GetKeyboardState(nullptr);
@@ -33,7 +33,7 @@ namespace Engine
 		{
 			if(event.type == SDL_QUIT)
 			{ isRunning = false; return; }
-			if (IsKeyDown(SDL_SCANCODE_ESCAPE)) { isRunning = false; return; }
+			if (IsKeyDown(SDL_SCANCODE_ESCAPE)) { pause = !pause; return; }
 			CheckMouseOnClickable();
 		}
 	}

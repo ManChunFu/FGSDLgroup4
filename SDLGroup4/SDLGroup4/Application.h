@@ -20,6 +20,7 @@ namespace Engine
 		Engine::Window* window = nullptr;
 		Engine::InputManager* inputManager = nullptr;
 		void LoadScene(int scene);
+		bool Pause = false;
 	private:
 		std::vector<Scene*> scenes;
 		int activeScene;

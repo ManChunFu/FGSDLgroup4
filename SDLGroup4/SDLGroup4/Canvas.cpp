@@ -11,6 +11,10 @@ void Engine::Canvas::AddChild(GameElement* element)
 
 void Engine::Canvas::Close()
 {
+	for (auto child : Children)
+	{
+		delete child;
+	}
 	Children.clear();
 }
 
