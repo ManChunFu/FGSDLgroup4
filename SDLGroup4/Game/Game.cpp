@@ -1,5 +1,5 @@
 #include <InputManager.h>
-#include <Time.h>
+#include <GameTime.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
@@ -33,7 +33,6 @@ int main(int argc, char** argv)
 
 bool Engine::Application::Initialize()
 {
-
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		std::cout << "Failed to inialize SDL. SDL Error: " << SDL_GetError << std::endl;
@@ -79,7 +78,7 @@ void Engine::Application::Run()
 	int frameTime;
 	while (isRunning)
 	{
-		Engine::Time::StartFrame();
+		Engine::GameTime::StartFrame();
 		frameStartTick = SDL_GetTicks();
 		Update();
 		HandleEvents();
@@ -88,7 +87,7 @@ void Engine::Application::Run()
 		if (frameDelay > frameTime) {
 			SDL_Delay(frameDelay - frameTime);
 		}
-		Engine::Time::EndFrame();
+		Engine::GameTime::EndFrame();
 	}
 }
 

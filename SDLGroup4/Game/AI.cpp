@@ -1,5 +1,7 @@
 #include "AI.h"
-#include <math.h>
+#include <random>
+#include <ctime>
+#include <time.h>
 
 bool AI::EnterDangerZone(float radiusLimit, Engine::Vector2D position, Engine::Vector2D targetPosition)
 {
@@ -8,32 +10,20 @@ bool AI::EnterDangerZone(float radiusLimit, Engine::Vector2D position, Engine::V
 
 std::vector<Engine::Vector2D> AI::pathFinding(Engine::Vector2D targetPosition, Engine::Vector2D startPosition)
 {
-	std::vector<Node*> examinatedNodArea;
-	examinatedNodArea.push_back(new Node(startPosition, GetHCost(targetPosition, startPosition), nullptr));
-	
-	std::vector<Node*> workingNodes;
-	bool reachTarget = false;
-
-	float currentSmallestFCost = 1000;
-	do
-	{
-		//int miniFCost = (int)
-
-	} while (!reachTarget && !NodeCompleted(examinatedNodArea));
-
 	return std::vector<Engine::Vector2D>();
 }
 
-bool AI::NodeCompleted(std::vector<Node*> nodeList)
+void AI::RandomMovement()
 {
-	for (auto node : nodeList)
-	{
-		if (!node->NodeCompleted)
-			return false;
-	}
-	return true;
-}
+	std::mt19937 generator;
+	generator.seed(std::time_t(0));
+	
+	//positionX = (std::uniform_int_distribution<uint32_t>(1, 1439))(generator);
+	
 
+	/*position->X += inputManager->GetAxis("Horizontal") * moveSpeed * Engine::Time::DeltaTime();
+	position->Y += inputManager->GetAxis("Vertical") * moveSpeed * Engine::Time::DeltaTime();*/
+}
 
 
 

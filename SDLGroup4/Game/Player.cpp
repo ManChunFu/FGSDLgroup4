@@ -1,7 +1,7 @@
 #include "Player.h"
 #include<InputManager.h>
 #include<TextureManager.h>
-#include <Time.h>
+#include <GameTime.h>
 #include<Vector2D.h>
 
 
@@ -39,8 +39,8 @@ void Player::MovePlayer()
 		movement.X = -10.0f;
 	}*/
 
-	position->X += inputManager->GetAxis("Horizontal") * moveSpeed *Engine::Time::DeltaTime();
-	position->Y += inputManager->GetAxis("Vertical") * moveSpeed * Engine::Time::DeltaTime();
+	position->X += inputManager->GetAxis("Horizontal") * moveSpeed *Engine::GameTime::DeltaTime();
+	position->Y += inputManager->GetAxis("Vertical") * moveSpeed * Engine::GameTime::DeltaTime();
 }
 
 void Player::OnCollisionEnter(Engine::Collider* other)
