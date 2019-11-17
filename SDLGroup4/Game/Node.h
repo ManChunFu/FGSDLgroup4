@@ -11,7 +11,7 @@ public:
 	Engine::Vector2D Position;
 	float GCost;
 	float HCost;
-	float FCost = (GCost + HCost);
+	float FCost = (GCost + HCost); 
 	bool IsStartPoint;
 
 };

@@ -2,14 +2,16 @@
 #include <Vector2D.h>
 #include <Vector>
 
+class NodeList;
 class AI 
 {
 public:
 	bool EnterDangerZone(float radiusLimit, Engine::Vector2D position, Engine::Vector2D targetPosition);
 	std::vector<Engine::Vector2D> pathFinding(Engine::Vector2D targetPosition, Engine::Vector2D startPosition);
-	void RandomMovement();
+	Engine::Vector2D RandomMovement();
 
 private:
-	float positionX, positionY;
+	Engine::Vector2D position;
+	NodeList* nodelist;
 };
 

@@ -2,6 +2,7 @@
 #include <random>
 #include <ctime>
 #include <time.h>
+#include "NodeList.h"
 
 bool AI::EnterDangerZone(float radiusLimit, Engine::Vector2D position, Engine::Vector2D targetPosition)
 {
@@ -10,19 +11,23 @@ bool AI::EnterDangerZone(float radiusLimit, Engine::Vector2D position, Engine::V
 
 std::vector<Engine::Vector2D> AI::pathFinding(Engine::Vector2D targetPosition, Engine::Vector2D startPosition)
 {
-	return std::vector<Engine::Vector2D>();
+	nodelist = new NodeList(targetPosition, startPosition);
+	nodelist->GetPath();
+	return nodelist->Path;
+		
 }
 
-void AI::RandomMovement()
+Engine::Vector2D AI::RandomMovement()
 {
 	std::mt19937 generator;
-	generator.seed(std::time_t(0));
+	generator.seed(std::time(0));
 	
-	//positionX = (std::uniform_int_distribution<uint32_t>(1, 1439))(generator);
-	
+	float X = (std::uniform_int_distribution<uint32_t>(1, 1439))(generator);
+	float Y = (std::uniform_int_distribution<uint32_t>(1, 899))(generator);
 
-	/*position->X += inputManager->GetAxis("Horizontal") * moveSpeed * Engine::Time::DeltaTime();
-	position->Y += inputManager->GetAxis("Vertical") * moveSpeed * Engine::Time::DeltaTime();*/
+	position.X = X;
+	position.Y = Y;
+	return position;
 }
 
 

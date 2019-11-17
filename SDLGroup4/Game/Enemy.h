@@ -9,6 +9,10 @@ namespace Engine
 	class Collider;
 	class Scene;
 }
+
+class Player;
+class AI;
+
 class Enemy : public Engine::Entity
 {
 public:
@@ -21,13 +25,14 @@ public:
 	float speed = 100.0f;
 	int hitpoint;
 	void Update() override;
-	
+	void Movement();
 	
 
 private:
 	void OnCollisionEnter(Engine::Collider* other) override;
 	Engine::InputManager* inputManager = nullptr;
-	Engine::Vector2D* position;
-
+	Engine::Vector2D position;
+	AI* ai = nullptr;
+	Player* player = nullptr;
 };
 

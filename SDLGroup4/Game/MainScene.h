@@ -18,7 +18,7 @@ public:
 
 	static MainScene* mainScene;
 	void Update() override;
-	std::vector<Engine::Vector2D> ObstacleList;
+	std::vector<Engine::Vector2D*> ObstacleList;
 private:
 	void CreateEnemy();
 	std::vector<Enemy*> enemy;

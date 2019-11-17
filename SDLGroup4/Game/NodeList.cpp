@@ -2,11 +2,21 @@
 #include "Node.h"
 
 
+
+NodeList::NodeList(Engine::Vector2D targetPos, Engine::Vector2D startPos) ://, std::vector<Engine::Vector2D*> obstacleList) :
+	targetPos(targetPos), startPos(startPos) {}//, obstacleList(obstacleList){}
+
+NodeList::~NodeList()
+{
+	examinatedNodeArea.clear();
+	workingNodes.clear();
+	closeNodes.clear();
+}
+
 std::vector<Engine::Vector2D> NodeList::GetPath()
 {
 	std::vector<Engine::Vector2D> result;
 	examinatedNodeArea.push_back(new Node(startPos, GetHCost(startPos, targetPos), nullptr));
-
 
 	bool reachTarget = false;
 	currentSamllestFCost = 1000;
@@ -20,12 +30,18 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 			if (current->Position == targetPos)
 			{
 				reachTarget = true;
-				result.push_back(current->Position);
+				Node* nodesToTarget = current;
+				Path.push_back(current->Position);
+
 			}
 
 			for (auto move : moveByStraightLine)
 			{
+				/*float x = current->Position->X + move.X;
+				float y = current->Position->Y + move.Y;*/
 				Engine::Vector2D newMovePosStraight = current->Position + move;
+				/*newMovePosStraight.X = x;
+				newMovePosStraight.Y = y;*/
 				if ((newMovePosStraight.X >= sceneSizeMinX && newMovePosStraight.X <= sceneSizeMaxX) && 
 					(newMovePosStraight.Y >= sceneSizeMinY && newMovePosStraight.Y <= sceneSizeMaxY))
 				{
@@ -42,7 +58,11 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 
 			for (auto move : moveByDiagnoalLine)
 			{
+				/*float x = current->Position->X + move.X;
+				float y = current->Position->Y + move.Y;*/
 				Engine::Vector2D newMovePosDiagnoal = current->Position + move;
+				/*newMovePosDiagnoal.X = x;
+				newMovePosDiagnoal.Y = y;*/
 				Engine::Vector2D diagnoalNeighborX= current->Position;
 				diagnoalNeighborX.X += move.X;
 				Engine::Vector2D diagnoalNeighborY = current->Position;
@@ -67,7 +87,8 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 			MoveNodeToClose(current);
 		}
 	} while (!reachTarget);
-	
+
+
 
 	return result;
 }
@@ -88,7 +109,7 @@ void NodeList::SetWorkingNodes()
 	for (auto node : examinatedNodeArea)
 	{
 		if (miniFCost == NULL || node->FCost < miniFCost)
-			miniFCost = node->FCost;
+			miniFCost = (int)node->FCost;
 	}	
 
 	if (miniFCost > currentSamllestFCost)
@@ -101,14 +122,14 @@ void NodeList::SetWorkingNodes()
 	}	
 	else
 	{	
-		currentSamllestFCost = miniFCost;
+		currentSamllestFCost = (int)miniFCost;
 		int miniHCostOfAllMiniFCosts = NULL;
 
 		for (auto node : examinatedNodeArea)
 		{
 			if (node->FCost == miniFCost)
 				if (miniHCostOfAllMiniFCosts == NULL || node->HCost < miniHCostOfAllMiniFCosts)
-					miniHCostOfAllMiniFCosts = node->HCost;
+					miniHCostOfAllMiniFCosts = (int)node->HCost;
 		}
 
 		for (auto node : examinatedNodeArea)
