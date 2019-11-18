@@ -2,18 +2,17 @@
 #include "Node.h"
 
 
-
 NodeList::NodeList(Engine::Vector2D targetPos, Engine::Vector2D startPos) ://, std::vector<Engine::Vector2D*> obstacleList) :
 	targetPos(targetPos), startPos(startPos) {}//, obstacleList(obstacleList){}
 
 NodeList::~NodeList()
 {
 	for (auto examinatedNode : examinatedNodeArea)
-	{
 		delete examinatedNode;
-	}
 	examinatedNodeArea.clear();
 	// todo delete all lists ( one list with all the nodes)
+
+	
 	workingNodes.clear();
 	closeNodes.clear();
 }
@@ -84,8 +83,6 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 			MoveNodeToClose(current);
 		}
 	} while (!reachTarget);
-
-
 
 	return result;
 }

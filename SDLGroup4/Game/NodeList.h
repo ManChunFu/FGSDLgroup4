@@ -1,9 +1,8 @@
 #pragma once
 #include <Vector2D.h>
 #include <vector>
+#include "Node.h"
 
-class Obstacle;
-class Node;
 class NodeList 
 {
 public:
@@ -13,9 +12,10 @@ public:
 	std::vector<Engine::Vector2D> GetPath();
 	void SetNewTargetPos(Engine::Vector2D targetPos) { this->targetPos = targetPos; }
 	void SetNewStartPos(Engine::Vector2D startPos) { this->targetPos = startPos; }
-	void SetNewObstacleList(std::vector<Engine::Vector2D> obstacleList) { this->obstacleList = obstacleList; }
+	//void SetNewObstacleList(std::vector<Engine::Vector2D> obstacleList) { this->obstacleList = obstacleList; }
 
 	std::vector<Engine::Vector2D> Path;	
+	
 private:
 	float GetHCost(Engine::Vector2D newNodePos, Engine::Vector2D targetPos);
 	void SetWorkingNodes();
