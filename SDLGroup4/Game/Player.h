@@ -25,7 +25,6 @@ public:
 
 private:
 	Engine::InputManager* inputManager = nullptr;
-	Engine::Collider* collider = nullptr;
 	Engine::Animator* anim = nullptr;
 
 	int hitPoint = 0;

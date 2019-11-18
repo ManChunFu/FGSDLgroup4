@@ -25,6 +25,7 @@ namespace Engine
 		void AddEntity(Entity* ent);
 		void Destroy(Entity* target);
 		Engine::Application* application;
+		static Scene* ActiveScene;
 	protected:
 		Engine::InputManager* inputManager;
 	private:

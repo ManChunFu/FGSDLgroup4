@@ -7,7 +7,7 @@ void Bullet::Update()
 	position.X += movement.X;
 	lifeSpan -= Engine::GameTime::DeltaTime();
 	if (lifeSpan < 0) {
-		Engine::AbstractionModule::ActiveScene->Destroy(this);
+		Engine::Scene::ActiveScene->Destroy(this);
 	}
 	Entity::Update();
 }

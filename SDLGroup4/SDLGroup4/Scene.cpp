@@ -3,12 +3,12 @@
 #include "EntityManager.h"
 #include "Text.h"
 #include "UIManager.h"
-#include "SceneManager.h"
 namespace Engine {
 	int Scene::idCtr = 0;
+	Scene* Scene::ActiveScene = nullptr;
 	Scene::Scene(Application* app, InputManager* input)
 	{
-		AbstractionModule::ActiveScene = this;
+		ActiveScene = this;
 		colManager = new Engine::CollisionManager();
 		entityManager = new Engine::EntityManager();
 		inputManager = input;
