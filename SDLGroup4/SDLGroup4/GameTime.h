@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL_stdinc.h>
 namespace Engine {
-	class Time {
+	class GameTime {
 	public:
 		static float DeltaTime() { return deltaTime; }
 		static void StartFrame();

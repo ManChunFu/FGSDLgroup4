@@ -1,12 +1,17 @@
 #include "Node.h"
 
-
-Node::Node(Engine::Vector2D position, float hCost, Node* parent) :Position(position), HCost(hCost)
+Node::Node(Engine::Vector2D position, float hCost, Node* parent) : Position(position), HCost(hCost)
 {
 	if (parent != nullptr)
 	{
+		/*float x = parent->Position->X - position->X;
+		float y = parent->Position->Y - position->Y;
+		*/
 		Parent.push_back(parent);
-		Engine::Vector2D difference = (parent->Position - position);
+		/*Engine::Vector2D difference;
+		difference.X = x;
+		difference.Y = y;*/
+		Engine::Vector2D difference = parent->Position - position;
 		GCost = parent->GCost * (fabsf(difference.X) == 1 && fabsf(difference.Y) == 1 ? 14.f : 10.f);
 	}
 	else
@@ -16,16 +21,15 @@ Node::Node(Engine::Vector2D position, float hCost, Node* parent) :Position(posit
 	}
 }
 
-Node::~Node()
+bool Node::HasThisParent(Node* node)
 {
+	for (auto parent : Parent)
+	{
+		if (parent == node)
+			return true;
+	}
+	return false;
 }
 
-float Node::GetHCost(Engine::Vector2D targetPos, Engine::Vector2D newNodePos)
-{
-	float x = fabsf(targetPos.X - newNodePos.X);
-	float y = fabsf(targetPos.Y - newNodePos.Y);
-	if (x < y)
-		return (y - x) + (hypotf(x, x));
-	else
-		return (x - y) + (hypotf(y, y));
-}
+
+

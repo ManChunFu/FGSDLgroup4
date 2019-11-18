@@ -8,7 +8,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="Node.cpp" />
-    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="NodeList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
@@ -18,7 +18,8 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="AI.h" />
     <ClInclude Include="Node.h" />
-    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="NodeList.h" />
+    <ClInclude Include="Obstacle.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

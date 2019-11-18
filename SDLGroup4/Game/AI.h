@@ -1,15 +1,17 @@
 #pragma once
 #include <Vector2D.h>
 #include <Vector>
-#include "Node.h"
 
-class AI : public Node
+class NodeList;
+class AI 
 {
 public:
 	bool EnterDangerZone(float radiusLimit, Engine::Vector2D position, Engine::Vector2D targetPosition);
 	std::vector<Engine::Vector2D> pathFinding(Engine::Vector2D targetPosition, Engine::Vector2D startPosition);
+	Engine::Vector2D RandomMovement();
 
 private:
-	bool NodeCompleted(std::vector<Node*> nodeList);
+	Engine::Vector2D position;
+	NodeList* nodelist;
 };
 

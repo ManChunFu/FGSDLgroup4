@@ -93,6 +93,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="NodeList.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +112,8 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="NodeList.h" />
+    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
