@@ -1,5 +1,5 @@
 #include <InputManager.h>
-#include <Time.h>
+#include <GameTime.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
@@ -11,6 +11,7 @@
 #include "Game.h"
 #include <Scene.h>
 #include "MainScene.h"
+
 int main(int argc, char** argv)
 {
 	application = new Engine::Application();
@@ -32,7 +33,6 @@ int main(int argc, char** argv)
 
 bool Engine::Application::Initialize()
 {
-
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		std::cout << "Failed to inialize SDL. SDL Error: " << SDL_GetError << std::endl;
@@ -78,7 +78,7 @@ void Engine::Application::Run()
 	int frameTime;
 	while (isRunning)
 	{
-		Engine::Time::StartFrame();
+		Engine::GameTime::StartFrame();
 		frameStartTick = SDL_GetTicks();
 		Update();
 		HandleEvents();
@@ -87,7 +87,7 @@ void Engine::Application::Run()
 		if (frameDelay > frameTime) {
 			SDL_Delay(frameDelay - frameTime);
 		}
-		Engine::Time::EndFrame();
+		Engine::GameTime::EndFrame();
 	}
 }
 
@@ -137,13 +137,14 @@ void Engine::Application::Update()
 		if (activeScene > scenes.size() - 1) activeScene = scenes.size() - 1;
 		scenes[activeScene]->Update();
 	}
+
 }
 
 void Engine::Application::Render()
 {
 	Engine::Window::RenderClear();
 	Engine::UIManager::Render();
-	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);//background color
+	SDL_SetRenderDrawColor(Engine::Window::Renderer, 100, 100, 100, 255);//background color
 	if (activeScene > scenes.size()) activeScene = scenes.size();
 	scenes[activeScene]->Render();
 	Engine::Window::RenderPresent(); 

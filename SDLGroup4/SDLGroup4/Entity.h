@@ -9,49 +9,36 @@
 #include "Animator.h"
 #include "Animation.h"
 #include "Scene.h"
+#include "Vector2D.h"
+#include "AbstractionModule.h"
 namespace Engine {
 	class Entity {
 	public:
 		virtual ~Entity() {}
-		Entity(std::string path, int height, int width, int xpos, int ypos, Scene* scene)
+		Entity()
 		{
-			posX = xpos;
-			posY = ypos;
-			sourceRect.w = width;
-			sourceRect.h = height;
-			sourceRect.x = 0;
-			sourceRect.y = 0;
-			destRect.w = width;
-			destRect.h = height;
-			destRect.x = posX;
-			destRect.y = posY;
-			texture = TextureManager::Texture(path);
-			collider = new Engine::Collider(destRect, "something", scene);
+			scene = AbstractionModule::ActiveScene;
+			position = new Vector2D();
+			position->X = 0;
+			position->Y = 0;
 			scene->EntityManager()->AddEntity(this);
-
 		}
-
-		Entity() {}
-
-		virtual void Update() { destRect.x = posX; destRect.y = posY; collider->UpdateBorders(destRect); }
-		virtual void Render() 
-		{ 
-			/*std::cout << sourceRect.y << sourceRect.x << std::endl;*/ 
-			Engine::TextureManager::Draw(texture, sourceRect, destRect);
-
-			animator.DisplayAnimation(posX, posY);
-		}
-
+		void AddCollider(std::string tag){ collider = new Engine::Collider(destRect, tag, this); }
+		void AddSprite(std::string _path, int scaleX, int scaleY);
+		void AddSprite(std::string _path);
+		virtual void Update();
+		void Render();
 		Engine::Animator animator;
+		Vector2D* position = nullptr;
 
 	protected:
-		float posX;
-		float posY;
-		Engine::Collider* collider;
-		SDL_Rect sourceRect;
+		virtual void OnCollisionEnter(Engine::Collider* other) {}
+		Engine::Collider* collider = nullptr;
 		SDL_Rect destRect;
-		SDL_Texture* texture;
-
+	private:
+		SDL_Rect sourceRect;
+		SDL_Texture* texture = nullptr;
+		Scene* scene = nullptr;
 	};
 
 }

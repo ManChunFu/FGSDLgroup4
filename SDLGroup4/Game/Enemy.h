@@ -9,11 +9,14 @@ namespace Engine
 	class Collider;
 	class Scene;
 }
+
+class Player;
+class AI;
+
 class Enemy : public Engine::Entity
 {
 public:
-	Enemy(int hp, std::string& spritePath, int width, int height, float xPos, float yPos, Engine::Scene* scene) : 
-		Engine::Entity(spritePath, width, height, xPos, yPos, scene)
+	Enemy(int hp) : Engine::Entity()
 	{
 		hitpoint = hp;
 	};
@@ -21,15 +24,15 @@ public:
 
 	float speed = 100.0f;
 	int hitpoint;
-	void OnCollisionEnter(Engine::Collider* other);
 	void Update() override;
-	
+	void Movement();
 	
 
 private:
+	void OnCollisionEnter(Engine::Collider* other) override;
 	Engine::InputManager* inputManager = nullptr;
-	Engine::Vector2D* position;
-	void MovePlayer();
-
+	Engine::Vector2D position;
+	AI* ai = nullptr;
+	Player* player = nullptr;
 };
 
