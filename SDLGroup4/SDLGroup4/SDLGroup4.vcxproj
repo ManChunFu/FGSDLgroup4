@@ -108,6 +108,7 @@
     <ClInclude Include="IClickable.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SoundManager.h" />
