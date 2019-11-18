@@ -18,7 +18,7 @@ void Player::Update()
 	Engine::Vector2D bulletpos;
 	bulletpos.X = position.X;
 	bulletpos.Y = position.Y;
-	if (inputManager->GetAxis("Fire") == 1) 
+	if (inputManager->IsKeyPressed(SDL_SCANCODE_RETURN)) 
 	{
 		bullet = new Bullet(3, bulletpos); 
 		bullet->AddSprite("Bullet");

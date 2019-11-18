@@ -26,12 +26,9 @@ public:
 	int hitpoint;
 	void Update() override;
 	void Movement();
-	
-
 private:
 	void OnCollisionEnter(Engine::Collider* other) override;
 	Engine::InputManager* inputManager = nullptr;
-	Engine::Vector2D position;
 	AI* ai = nullptr;
 	Player* player = nullptr;
 };

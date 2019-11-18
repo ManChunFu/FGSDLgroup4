@@ -7,6 +7,8 @@ namespace Engine
 		SDL_QueryTexture(texture, nullptr, nullptr, &sourceRect.w, &sourceRect.h);
 		destRect.w = sourceRect.w * scaleX;
 		destRect.h = sourceRect.h * scaleY;
+		ScaleX = ScaleX;
+		ScaleY = scaleY;
 	}
 	void Entity::AddSprite(std::string _name)
 	{
@@ -27,6 +29,8 @@ namespace Engine
 			collider->UpdateBorders(destRect);
 		}
 		destRect.x = position.X; destRect.y = position.Y;
+		destRect.w = ScaleX * sourceRect.w;
+		destRect.h = ScaleY * sourceRect.h;
 	}
 	void Entity::Render()
 	{
@@ -35,5 +39,13 @@ namespace Engine
 			Engine::TextureManager::Draw(texture, sourceRect, destRect);
 			animator.DisplayAnimation(position.X, position.Y);
 		}
+	}
+	void Entity::UpdateCollisionBox()
+	{
+		if (collider)
+		{
+			collider->UpdateBorders(destRect);
+		}
+		destRect.x = position.X; destRect.y = position.Y;
 	}
 }

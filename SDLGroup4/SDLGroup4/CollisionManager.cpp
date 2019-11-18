@@ -2,6 +2,7 @@
 #include "Collider.h"
 #include<algorithm> 
 #include <iostream>
+#include "Entity.h"
 namespace Engine {
 	void CollisionManager::AddNewCollider(Engine::Collider* col)
 	{ colliders.push_back(col); }
@@ -19,6 +20,20 @@ namespace Engine {
 				{ 
 					colliders[a]->collisions.push_back(colliders[i]);
 					colliders[i]->collisions.push_back(colliders[a]);
+					if (colliders[i]->solid && colliders[a]->solid) 
+					{
+						int directionX = 0;
+						int directionY = 0;
+						if (colliders[i]->TopBorder() < colliders[a]->BottomBorder() && colliders[a]->TopBorder() < colliders[i]->TopBorder()) directionY = -(colliders[i]->TopBorder() - colliders[a]->BottomBorder());
+						if (colliders[a]->TopBorder() < colliders[i]->BottomBorder() && colliders[a]->TopBorder() > colliders[i]->TopBorder()) directionY = (colliders[a]->TopBorder() - colliders[i]->BottomBorder());
+						if (colliders[i]->LeftBorder() < colliders[a]->RightBorder() && colliders[a]->LeftBorder() < colliders[i]->LeftBorder()) directionX = -(colliders[i]->LeftBorder() - colliders[a]->RightBorder());
+						if (colliders[a]->LeftBorder() < colliders[i]->RightBorder() && colliders[a]->LeftBorder() > colliders[i]->LeftBorder()) directionX = (colliders[a]->LeftBorder() - colliders[i]->RightBorder());
+						if (abs(directionX) > abs(directionY)) directionX = 0;
+						else directionY = 0;
+						colliders[i]->GameObject->position.X += directionX;
+						colliders[i]->GameObject->position.Y += directionY;
+						colliders[i]->GameObject->UpdateCollisionBox();
+					}
 				}
 			}
 		}

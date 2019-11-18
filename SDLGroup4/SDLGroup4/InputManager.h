@@ -30,7 +30,7 @@ namespace Engine
 		std::vector<IClickable*> clickableObjects;
 		static SDL_Event event;
 		const Uint8* keys = nullptr;
-		const Uint8* lastKeys = nullptr;
+		Uint8 lastKeys[256];
 		void CheckMouseOnClickable();
 		SDL_SystemCursor mouseCursor = SDL_SYSTEM_CURSOR_ARROW;
 	};

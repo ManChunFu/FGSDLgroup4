@@ -6,7 +6,6 @@
 #include "CollisionManager.h"
 #include <iostream>
 #include "Scene.h"
-#include "SceneManager.h"
 namespace Engine {
 	class Entity;
 	class Collider {
@@ -15,7 +14,7 @@ namespace Engine {
 			leftBorder(destRect.x - (int)(destRect.w * 0.5f)), rightBorder(destRect.x + (int)(destRect.w * 0.5f))
 		{
 			GameObject = entity;
-			AbstractionModule::ActiveScene->CollisionManager()->AddNewCollider(this);
+			Scene::ActiveScene->CollisionManager()->AddNewCollider(this);
 			tag = colliderTag;
 		};
 		~Collider()
@@ -38,6 +37,7 @@ namespace Engine {
 		int RightBorder() { return rightBorder; }
 		int Width() { return width; }
 		int Height() { return height; }
+		bool solid = false;
 		Entity* GameObject;
 		std::vector<Collider*> collisions;
 		std::string tag = "";
