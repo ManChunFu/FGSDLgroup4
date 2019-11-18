@@ -1,11 +1,11 @@
-#include "Bullet.h"
-#include <Time.h>
+#include "TestBullet.h"
+#include <GameTime.h>
 void Bullet::Update()
 {
 	Engine::Vector2D movement;
-	movement.Y = -1 * speed * Engine::Time::DeltaTime();
+	movement.Y = -1 * speed * Engine::GameTime::DeltaTime();
 	position.X += movement.X;
-	lifeSpan -= Engine::Time::DeltaTime();
+	lifeSpan -= Engine::GameTime::DeltaTime();
 	if (lifeSpan < 0) {
 		Engine::AbstractionModule::ActiveScene->Destroy(this);
 	}
