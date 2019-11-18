@@ -1,9 +1,8 @@
 #pragma once
 #include <Scene.h>
 #include <vector>
-#include <Vector2D.h>
+#include <TextureManager.h>
 
-class Obsticale;
 class Player;
 class Enemy;
 class MainScene : public Engine::Scene
@@ -12,13 +11,15 @@ public:
 	MainScene(Engine::Application* app, Engine::InputManager* input) : Scene(app, input) 
 	{ 
 		mainScene = this; 
+		Engine::TextureManager::AddTexture("Enemy", "Assets/Sprites/enemy_drone_larger_red.png");
+		Engine::TextureManager::AddTexture("Bullet", "Assets/Sprites/enemy_drone_larger_red.png");
+		Engine::TextureManager::AddTexture("Player", "Assets/Sprites/Hopping_rabbit_dude.png");
 		createPlayer(); 
 		CreateEnemy(); 
 	}
 
 	static MainScene* mainScene;
 	void Update() override;
-	std::vector<Engine::Vector2D*> ObstacleList;
 private:
 	void CreateEnemy();
 	std::vector<Enemy*> enemy;

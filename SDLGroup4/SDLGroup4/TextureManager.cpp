@@ -7,12 +7,13 @@
 
 
 namespace Engine {
+	Textures TextureManager::textures;
 	void TextureManager::Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect)
 	{
 		SDL_RenderCopy(Engine::Window::Renderer, sprite, &srcRect, &desRect);
 	}
 
-	SDL_Texture* TextureManager::Texture(const std::string& texturePath)
+	SDL_Texture* TextureManager::LoadTexture(const std::string& texturePath)
 	{
 		SDL_Surface* surface = IMG_Load(texturePath.c_str());
 		if (!surface)
@@ -26,5 +27,35 @@ namespace Engine {
 		}
 
 		return nullptr;
+	}
+	void TextureManager::AddTexture(std::string name, const char* _path)
+	{
+		if (!HasTexture(name))
+		{
+			SDL_Texture* texture = Engine::TextureManager::LoadTexture(_path);
+			textures.insert({ name, texture });
+		}
+	}
+	bool TextureManager::HasTexture(std::string name)
+	{
+		auto it = textures.find(name);
+		if (it != textures.end()) {
+			return true;
+		}
+		return false;
+	}
+	SDL_Texture* TextureManager::GetTexture(std::string name)
+	{
+		if (HasTexture(name)) 
+		{ return textures.find(name)->second; }
+		return nullptr;
+	}
+	void TextureManager::Shutdown()
+	{
+		for (auto it = textures.begin(); it != textures.end(); it++)
+		{
+			SDL_DestroyTexture(it->second);
+		}
+		textures.clear();
 	}
 }

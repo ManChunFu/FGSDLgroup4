@@ -9,7 +9,7 @@ Engine::Image::Image(const std::string& imagePath, GameElement base)
 	xCoordinate = base.xCoordinate;
 	yCoordinate = base.yCoordinate;
 
-	newImage = Engine::TextureManager::Texture(imagePath);
+	newImage = Engine::TextureManager::GetTexture(imagePath);
 }
 
 Engine::Image::~Image()

@@ -11,7 +11,8 @@
 #include "Game.h"
 #include <Scene.h>
 #include "MainScene.h"
-
+#include <SceneManager.h>
+#include <TextureManager.h>
 int main(int argc, char** argv)
 {
 	application = new Engine::Application();
@@ -67,6 +68,7 @@ bool Engine::Application::Initialize()
 	scenes.push_back(new MainScene(this, inputManager));
 	SoundManager::AddSoundEffect("Bell", "Assets/Sounds/bell.wav");
 	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
+	Engine::AbstractionModule::ActiveScene = scenes[activeScene];
 	return true;
 }
 
@@ -104,6 +106,7 @@ void Engine::Application::Shutdown()
 		window = nullptr;
 	}
 	Engine::SoundManager::Shutdown();
+	Engine::TextureManager::Shutdown();
 	Engine::UIManager::Shutdown();
 	for (auto scene : scenes)
 	{
@@ -151,6 +154,7 @@ void Engine::Application::Render()
 }
 void Engine::Application::LoadScene(int scene) 
 {
+	Engine::AbstractionModule::ActiveScene = scenes[scene];
 	application->activeScene = scene;
 }
 

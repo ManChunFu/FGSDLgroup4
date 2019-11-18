@@ -40,6 +40,7 @@ namespace Engine {
 	{
 		Mix_FreeMusic(music);
 		music = nullptr;
+		
 		for (auto it = soundeffects.begin(); it != soundeffects.end(); it++)
 		{ Mix_FreeChunk(it->second); }
 		soundeffects.clear();

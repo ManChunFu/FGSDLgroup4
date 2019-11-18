@@ -6,7 +6,7 @@
 Engine::Animation::Animation(const std::string spritePath, std::string name, int spriteSheetLenghtX, int spriteSheetLengthY, int speed) :
 	spritePath(spritePath), name(name.c_str()), speed(speed)
 {
-	newAnimation = Engine::TextureManager::Texture(spritePath);
+	newAnimation = Engine::TextureManager::GetTexture(spritePath);
 	
 	SDL_QueryTexture(newAnimation, nullptr, nullptr, &spriteWidth, &spriteHeight);
 
