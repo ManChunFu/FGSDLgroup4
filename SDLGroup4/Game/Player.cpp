@@ -4,7 +4,7 @@
 #include <GameTime.h>
 #include<Vector2D.h>
 #include "TestBullet.h"
-
+#include <iostream>
 
 void Player::Update()
 {

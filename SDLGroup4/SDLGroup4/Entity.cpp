@@ -19,6 +19,9 @@ namespace Engine
 	}
 	void Entity::Update()
 	{
+		destRect.x = position.X; destRect.y = position.Y;
+		destRect.w = ScaleX * sourceRect.w;
+		destRect.h = ScaleY * sourceRect.h;
 		if (collider)
 		{
 			if (collider->collisions.size() > 0)
@@ -28,9 +31,6 @@ namespace Engine
 			}
 			collider->UpdateBorders(destRect);
 		}
-		destRect.x = position.X; destRect.y = position.Y;
-		destRect.w = ScaleX * sourceRect.w;
-		destRect.h = ScaleY * sourceRect.h;
 	}
 	void Entity::Render()
 	{
