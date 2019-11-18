@@ -27,7 +27,7 @@ public:
 private:
 	void OnCollisionEnter(Engine::Collider* other) override;
 	Engine::InputManager* inputManager = nullptr;
-	Engine::Vector2D* position;
+	Engine::Vector2D position;
 
 };
 

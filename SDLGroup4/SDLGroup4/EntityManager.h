@@ -7,6 +7,7 @@ namespace Engine {
 	public:
 		void Update();
 		void Render();
+		void RemoveEntity(Entity* ent);
 		void AddEntity(Entity* add);
 		void Shutdown();
 	private:

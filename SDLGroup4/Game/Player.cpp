@@ -3,18 +3,26 @@
 #include<TextureManager.h>
 #include <Time.h>
 #include<Vector2D.h>
-
-
+#include "Bullet.h"
 
 
 void Player::Update()
 {
 	MovePlayer();
-	if (position->X < 0) position->X = 0;
-	if (position->X > 1440 - destRect.w) position->X = 1440 - destRect.w;
-	if (position->Y < 0) position->Y = 0;
-	if (position->Y > 900 - destRect.h) position->Y = 900 - destRect.h;
+	if (position.X < 0) position.X = 0;
+	if (position.X > 1440 - destRect.w) position.X = 1440 - destRect.w;
+	if (position.Y < 0) position.Y = 0;
+	if (position.Y > 900 - destRect.h) position.Y = 900 - destRect.h;
 	Engine::Entity::Update();
+	
+	Engine::Vector2D bulletpos;
+	bulletpos.X = position.X;
+	bulletpos.Y = position.Y;
+	if (inputManager->GetAxis("Fire") == 1) 
+	{
+		bullet = new Bullet(3, bulletpos); 
+		bullet->AddSprite("Bullet");
+	}
 }
 
 
@@ -39,8 +47,8 @@ void Player::MovePlayer()
 		movement.X = -10.0f;
 	}*/
 
-	position->X += inputManager->GetAxis("Horizontal") * moveSpeed *Engine::Time::DeltaTime();
-	position->Y += inputManager->GetAxis("Vertical") * moveSpeed * Engine::Time::DeltaTime();
+	position.X += inputManager->GetAxis("Horizontal") * moveSpeed *Engine::Time::DeltaTime();
+	position.Y += inputManager->GetAxis("Vertical") * moveSpeed * Engine::Time::DeltaTime();
 }
 
 void Player::OnCollisionEnter(Engine::Collider* other)
