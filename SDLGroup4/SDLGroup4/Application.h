@@ -23,7 +23,7 @@ namespace Engine
 		bool Pause = false;
 	private:
 		std::vector<Scene*> scenes;
-		int activeScene;
+		int activeScene = 0;
 		void Update();
 		void HandleEvents();
 		void Render();

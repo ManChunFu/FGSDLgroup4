@@ -10,7 +10,7 @@ namespace Engine {
 	Textures TextureManager::textures;
 	void TextureManager::Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect)
 	{
-		SDL_RenderCopy(Engine::Window::Renderer, sprite, &srcRect, &desRect);
+		if(sprite && Engine::Window::Renderer) SDL_RenderCopy(Engine::Window::Renderer, sprite, &srcRect, &desRect);
 	}
 
 	SDL_Texture* TextureManager::LoadTexture(const std::string& texturePath)
@@ -28,7 +28,7 @@ namespace Engine {
 
 		return nullptr;
 	}
-	void TextureManager::AddTexture(std::string name, const char* _path)
+	void TextureManager::AddTexture(std::string name, const std::string& _path)
 	{
 		if (!HasTexture(name))
 		{

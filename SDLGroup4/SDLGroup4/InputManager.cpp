@@ -3,7 +3,7 @@
 #include <iostream>
 #include <SDL_mouse.h>
 #include "Text.h"
-
+#include <algorithm>
 namespace Engine 
 {
 	SDL_Event InputManager::event;
@@ -11,7 +11,7 @@ namespace Engine
 	InputManager::InputManager()
 	{
 		keys = SDL_GetKeyboardState(nullptr);
-		lastKeys = keys;
+		std::copy(keys, keys + 256, lastKeys);
 	}
 
 	void InputManager::Shutdown()
@@ -19,15 +19,13 @@ namespace Engine
 		for (auto gameElement : clickableObjects)
 		{ if(gameElement) delete gameElement; }
 		clickableObjects.clear();
-		delete lastKeys;
-		lastKeys = nullptr;
 		delete keys;
 		keys = nullptr;
 	}
 
 	void InputManager::Update(bool& isRunning, bool& pause)
 	{
-		lastKeys = keys;
+		std::copy(keys, keys + 256, lastKeys);
 		keys = SDL_GetKeyboardState(nullptr);
 		while (SDL_PollEvent(&event)) 
 		{

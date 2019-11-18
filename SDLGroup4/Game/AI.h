@@ -13,5 +13,9 @@ public:
 private:
 	Engine::Vector2D position;
 	NodeList* nodelist;
+
+	const int minScreen = 0;
+	const int maxScreenWidth = 1440;
+	const int maxScreenHight = 900;
 };
 

@@ -12,20 +12,20 @@ public:
 	{ 
 		mainScene = this; 
 		Engine::TextureManager::AddTexture("Enemy", "Assets/Sprites/enemy_drone_larger_red.png");
-		Engine::TextureManager::AddTexture("Bullet", "Assets/Sprites/enemy_drone_larger_red.png");
+		Engine::TextureManager::AddTexture("FireSpell", "Assets/Sprites/FireSpell.png");
 		Engine::TextureManager::AddTexture("Player", "Assets/Sprites/Hopping_rabbit_dude.png");
 		Engine::TextureManager::AddTexture("Projectile1", "Assets/Sprites/lightning.png");
 		createPlayer(); 
 		CreateEnemy(); 
 	}
 
+	Player* player;
 	static MainScene* mainScene;
 	void Update() override;
 private:
 	void CreateEnemy();
 	std::vector<Enemy*> enemy;
 
-	Player* player;
 	void createPlayer();
 	
 	// Inherited via Scene

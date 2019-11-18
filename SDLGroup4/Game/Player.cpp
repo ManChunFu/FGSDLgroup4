@@ -24,10 +24,10 @@ void Player::Update()
 	Engine::Vector2D bulletpos;
 	bulletpos.X = position.X;
 	bulletpos.Y = position.Y;
-	if (inputManager->GetAxis("Fire") == 1) 
+	if (inputManager->GetAxis("Space") == 1) 
 	{
 		bullet = new Bullet(3, bulletpos); 
-		bullet->AddSprite("Bullet");
+		bullet->AddSprite("FireSpell");
 	}
 
 	Engine::Vector2D projectilePos;

@@ -1,20 +1,21 @@
 #pragma once
 #include <Vector2D.h>
 #include <vector>
+#include "Node.h"
 
-class Node;
 class NodeList 
 {
 public:
-	NodeList(Engine::Vector2D targetPos, Engine::Vector2D startPos);//, std::vector<Engine::Vector2D*> obstacleList);
+	NodeList(Engine::Vector2D targetPos, Engine::Vector2D startPos);//, std::vector<Engine::Vector2D> obstacleList);
 	~NodeList();
 
 	std::vector<Engine::Vector2D> GetPath();
 	void SetNewTargetPos(Engine::Vector2D targetPos) { this->targetPos = targetPos; }
 	void SetNewStartPos(Engine::Vector2D startPos) { this->targetPos = startPos; }
-	void SetNewObstacleList(std::vector<Engine::Vector2D> obstacleList) { this->obstacleList = obstacleList; }
+	//void SetNewObstacleList(std::vector<Engine::Vector2D> obstacleList) { this->obstacleList = obstacleList; }
 
 	std::vector<Engine::Vector2D> Path;	
+	
 private:
 	float GetHCost(Engine::Vector2D newNodePos, Engine::Vector2D targetPos);
 	void SetWorkingNodes();
