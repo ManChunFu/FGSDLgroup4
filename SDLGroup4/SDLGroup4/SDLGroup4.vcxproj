@@ -84,6 +84,7 @@
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Text.cpp" />

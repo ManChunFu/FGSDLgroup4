@@ -3,28 +3,29 @@
 #include <string>
 #include "Vector2D.h"
 
+namespace Engine {
 
-
-	
 	class Scene;
 	class InputManager;
 
+	class Projectile : public Engine::Entity
+	{
+	public:
+		Projectile(InputManager* input, std::string path, int height, int width, int xpos, int ypos, Scene* scene) :
+			Engine::Entity() { shootX = xpos; shootY = ypos; };
+
+		void Update() override;
+		
 
 
-	class Projectile : public Engine :: Entity
-{
-public:
-	Projectile(InputManager* input, std::string path, int height, int width, int xpos, int ypos, Scene* scene) : 
-		Engine::Entity() { shootX = xpos; shootY = ypos; };
+	private:
+		int shootX;
+		int shootY;
 
-	void Update() override;
-	void Render() override;
+		float projectileLife = 5.f;
 
-private:
-	int shootX;
-	int shootY;
+		void fireProjectile();
+	};
 
-	float projectileLife = 5.f;
-
-
-};
+	
+}
