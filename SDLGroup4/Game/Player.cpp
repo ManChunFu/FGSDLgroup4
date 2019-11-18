@@ -3,8 +3,7 @@
 #include<TextureManager.h>
 #include <GameTime.h>
 #include<Vector2D.h>
-
-
+#include "TestBullet.h"
 
 
 void Player::Update()
@@ -15,6 +14,15 @@ void Player::Update()
 	if (position.Y < 0) position.Y = 0;
 	if (position.Y > 900 - destRect.h) position.Y = 900 - destRect.h;
 	Engine::Entity::Update();
+	
+	Engine::Vector2D bulletpos;
+	bulletpos.X = position.X;
+	bulletpos.Y = position.Y;
+	if (inputManager->GetAxis("Fire") == 1) 
+	{
+		bullet = new Bullet(3, bulletpos); 
+		bullet->AddSprite("Bullet");
+	}
 }
 
 

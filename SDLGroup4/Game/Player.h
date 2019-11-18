@@ -2,7 +2,7 @@
 #include <Entity.h>
 #include <Scene.h>
 //#include <InputManager.h>
-
+class Bullet;
 namespace Engine 
 {
 	class InputManager;
@@ -15,8 +15,6 @@ namespace Engine
 class Player : public Engine :: Entity
 {
 public:
-	Entity* player;
-
 	Player(Engine::InputManager* input, int playerHP) : Engine::Entity() 
 	{ hitPoint = playerHP; inputManager = input; };
 
@@ -30,8 +28,8 @@ private:
 	Engine::Collider* collider = nullptr;
 	Engine::Animator* anim = nullptr;
 
-	int hitPoint;
-
+	int hitPoint = 0;
+	Bullet* bullet = nullptr;
 
 	
 	void MovePlayer();

@@ -10,21 +10,15 @@
 #include "Animation.h"
 #include "Scene.h"
 #include "Vector2D.h"
-#include "AbstractionModule.h"
+#include "SceneManager.h"
 namespace Engine {
 	class Entity {
 	public:
 		virtual ~Entity() {}
-		Entity()
-		{
-			scene = AbstractionModule::ActiveScene;
-			position.X = 0;
-			position.Y = 0;
-			scene->EntityManager()->AddEntity(this);
-		}
+		Entity() { Engine::AbstractionModule::ActiveScene->AddEntity(this); };
 		void AddCollider(std::string tag){ collider = new Engine::Collider(destRect, tag, this); }
-		void AddSprite(std::string _path, int scaleX, int scaleY);
-		void AddSprite(std::string _path);
+		void AddSprite(std::string _name, int scaleX, int scaleY);
+		void AddSprite(std::string _name);
 		virtual void Update();
 		void Render();
 		Engine::Animator animator;
@@ -37,7 +31,6 @@ namespace Engine {
 	private:
 		SDL_Rect sourceRect;
 		SDL_Texture* texture = nullptr;
-		Scene* scene = nullptr;
 	};
 
 }

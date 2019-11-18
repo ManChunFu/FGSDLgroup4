@@ -3,7 +3,7 @@
 #include "EntityManager.h"
 #include "Text.h"
 #include "UIManager.h"
-#include "AbstractionModule.h"
+#include "SceneManager.h"
 namespace Engine {
 	int Scene::idCtr = 0;
 	Scene::Scene(Application* app, InputManager* input)
@@ -33,6 +33,15 @@ namespace Engine {
 	void Scene::Update()
 	{
 		entityManager->Update();
+		for (auto i : destroyQueue)
+		{
+			entityManager->RemoveEntity(i);
+			delete i;
+		}
+		destroyQueue.clear();
+		for (Entity* add : addQueue)
+		{ entityManager->AddEntity(add); }
+		addQueue.clear();
 	}
 	void Scene::HandleEvents()
 	{
@@ -42,4 +51,15 @@ namespace Engine {
 	{
 		entityManager->Render();
 	}
+
+	void Scene::AddEntity(Entity* ent)
+	{
+		addQueue.push_back(ent);
+	}
+
+	void Scene::Destroy(Entity* target)
+	{
+		destroyQueue.push_back(target);
+	}
+
 }
