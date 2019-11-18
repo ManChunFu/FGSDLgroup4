@@ -16,16 +16,12 @@ void Enemy::Update()
 
 void Enemy::Movement()
 {
-	/*if (&player->position != nullptr)
-	{
-		if (ai->EnterDangerZone(30.0f, position, *player->position))
-		{
-			ai->pathFinding(*player->position, position);
-		}
-		else
-			ai->RandomMovement();
-	}*/
-		
+	//if (ai->EnterDangerZone(30.0f, position, player->position))
+	//{
+	//	//ai->pathFinding(player->position, position);
+	//}
+	//else
+	//	ai->RandomMovement();
 }
 
 

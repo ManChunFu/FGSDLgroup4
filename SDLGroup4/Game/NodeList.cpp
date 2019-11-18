@@ -8,7 +8,12 @@ NodeList::NodeList(Engine::Vector2D targetPos, Engine::Vector2D startPos) ://, s
 
 NodeList::~NodeList()
 {
+	for (auto examinatedNode : examinatedNodeArea)
+	{
+		delete examinatedNode;
+	}
 	examinatedNodeArea.clear();
+	// todo delete all lists ( one list with all the nodes)
 	workingNodes.clear();
 	closeNodes.clear();
 }
@@ -37,11 +42,7 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 
 			for (auto move : moveByStraightLine)
 			{
-				/*float x = current->Position->X + move.X;
-				float y = current->Position->Y + move.Y;*/
 				Engine::Vector2D newMovePosStraight = current->Position + move;
-				/*newMovePosStraight.X = x;
-				newMovePosStraight.Y = y;*/
 				if ((newMovePosStraight.X >= sceneSizeMinX && newMovePosStraight.X <= sceneSizeMaxX) && 
 					(newMovePosStraight.Y >= sceneSizeMinY && newMovePosStraight.Y <= sceneSizeMaxY))
 				{
@@ -58,11 +59,7 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 
 			for (auto move : moveByDiagnoalLine)
 			{
-				/*float x = current->Position->X + move.X;
-				float y = current->Position->Y + move.Y;*/
 				Engine::Vector2D newMovePosDiagnoal = current->Position + move;
-				/*newMovePosDiagnoal.X = x;
-				newMovePosDiagnoal.Y = y;*/
 				Engine::Vector2D diagnoalNeighborX= current->Position;
 				diagnoalNeighborX.X += move.X;
 				Engine::Vector2D diagnoalNeighborY = current->Position;

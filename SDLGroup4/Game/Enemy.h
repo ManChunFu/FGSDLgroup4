@@ -21,7 +21,6 @@ public:
 		hitpoint = hp;
 	};
 
-
 	float speed = 100.0f;
 	int hitpoint;
 	void Update() override;
@@ -32,7 +31,7 @@ private:
 	void OnCollisionEnter(Engine::Collider* other) override;
 	Engine::InputManager* inputManager = nullptr;
 	Engine::Vector2D position;
-	AI* ai = nullptr;
+	AI ai;
 	Player* player = nullptr;
 };
 

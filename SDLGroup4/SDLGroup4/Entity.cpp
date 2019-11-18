@@ -26,14 +26,14 @@ namespace Engine
 			}
 			collider->UpdateBorders(destRect);
 		}
-		destRect.x = position->X; destRect.y = position->Y;
+		destRect.x = position.X; destRect.y = position.Y;
 	}
 	void Entity::Render()
 	{
 		if (texture)
 		{
 			Engine::TextureManager::Draw(texture, sourceRect, destRect);
-			animator.DisplayAnimation(position->X, position->Y);
+			animator.DisplayAnimation(position.X, position.Y);
 		}
 	}
 }

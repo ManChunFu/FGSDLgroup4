@@ -2,11 +2,12 @@
 #include <Vector2D.h>
 #include <vector>
 
+class Obstacle;
 class Node;
 class NodeList 
 {
 public:
-	NodeList(Engine::Vector2D targetPos, Engine::Vector2D startPos);//, std::vector<Engine::Vector2D*> obstacleList);
+	NodeList(Engine::Vector2D targetPos, Engine::Vector2D startPos);//, std::vector<Engine::Vector2D> obstacleList);
 	~NodeList();
 
 	std::vector<Engine::Vector2D> GetPath();

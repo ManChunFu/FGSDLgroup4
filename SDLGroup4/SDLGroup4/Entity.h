@@ -18,9 +18,8 @@ namespace Engine {
 		Entity()
 		{
 			scene = AbstractionModule::ActiveScene;
-			position = new Vector2D();
-			position->X = 0;
-			position->Y = 0;
+			position.X = 0;
+			position.Y = 0;
 			scene->EntityManager()->AddEntity(this);
 		}
 		void AddCollider(std::string tag){ collider = new Engine::Collider(destRect, tag, this); }
@@ -29,7 +28,7 @@ namespace Engine {
 		virtual void Update();
 		void Render();
 		Engine::Animator animator;
-		Vector2D* position = nullptr;
+		Vector2D position;
 
 	protected:
 		virtual void OnCollisionEnter(Engine::Collider* other) {}
