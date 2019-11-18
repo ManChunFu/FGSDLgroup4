@@ -3,11 +3,17 @@
 #include<TextureManager.h>
 #include <GameTime.h>
 #include<Vector2D.h>
+#include<Projectile.h>
 #include "TestBullet.h"
 
 
 void Player::Update()
 {
+
+	currPos = position;
+	dirX = inputManager->GetAxis("Horizontal");
+	dirY = inputManager->GetAxis("Vertical");
+
 	MovePlayer();
 	if (position.X < 0) position.X = 0;
 	if (position.X > 1440 - destRect.w) position.X = 1440 - destRect.w;
@@ -23,13 +29,26 @@ void Player::Update()
 		bullet = new Bullet(3, bulletpos); 
 		bullet->AddSprite("Bullet");
 	}
+
+	Engine::Vector2D projectilePos;
+	if (dirX == 0 && dirY == 0)
+	{
+		dirX = 1;
+	}
+	if (inputManager->GetAxis("Space")==1)
+	{
+		projectile = new Engine::Projectile(3, projectilePos, dirX, dirY);
+		projectile->AddSprite("Projectile1");
+	}
+
+
 }
 
 
 
 void Player::MovePlayer()
 {
-	Engine::Vector2D movement;
+	
 	/*if (inputManager->IsKeyDown(SDL_SCANCODE_UP))
 	{
 		movement.Y = -10.0f;
@@ -47,8 +66,8 @@ void Player::MovePlayer()
 		movement.X = -10.0f;
 	}*/
 
-	position.X += inputManager->GetAxis("Horizontal") * moveSpeed *Engine::GameTime::DeltaTime();
-	position.Y += inputManager->GetAxis("Vertical") * moveSpeed * Engine::GameTime::DeltaTime();
+	position.X +=dirX * moveSpeed *Engine::GameTime::DeltaTime();
+	position.Y +=dirY * moveSpeed * Engine::GameTime::DeltaTime();
 }
 
 void Player::OnCollisionEnter(Engine::Collider* other)

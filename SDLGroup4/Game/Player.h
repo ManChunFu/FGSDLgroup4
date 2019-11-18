@@ -10,6 +10,7 @@ namespace Engine
 	class CollisionManager;
 	class Vector2D;
 	class TextureManager;
+	class Projectile;
 }
 
 class Player : public Engine :: Entity
@@ -29,7 +30,13 @@ private:
 	Engine::Animator* anim = nullptr;
 
 	int hitPoint = 0;
+	int dirX;
+	int dirY;
 	Bullet* bullet = nullptr;
+	Engine::Vector2D currPos;
+	
+	Engine::Projectile* projectile = nullptr; //alternative for shooting (um)
+
 
 	
 	void MovePlayer();

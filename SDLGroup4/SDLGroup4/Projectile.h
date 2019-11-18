@@ -11,20 +11,25 @@ namespace Engine {
 	class Projectile : public Engine::Entity
 	{
 	public:
-		Projectile(InputManager* input, std::string path, int height, int width, int xpos, int ypos, Scene* scene) :
-			Engine::Entity() { shootX = xpos; shootY = ypos; };
+		Projectile(float lifeSpan, const Engine::Vector2D& startPos, int _dirX, int _dirY) :
+			Engine::Entity()
+		{
+			dirX = _dirX;
+			dirY = _dirY;
+			position = startPos;
+		}
 
 		void Update() override;
-		
-
 
 	private:
-		int shootX;
-		int shootY;
+		int shootX = 200;
+		int shootY = 200;
 
-		float projectileLife = 5.f;
+		int dirX;
+		int dirY;
 
-		void fireProjectile();
+		float lifeSpan = 0;
+
 	};
 
 	
