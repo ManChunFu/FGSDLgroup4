@@ -22,7 +22,6 @@ public:
 		hitpoint = hp;
 	}
 
-	float speed = 50.0f;
 	int hitpoint;
 	void Update() override;
 	void Movement();
