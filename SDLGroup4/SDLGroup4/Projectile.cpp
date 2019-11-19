@@ -13,7 +13,7 @@ namespace Engine
 
 		if (lifeSpan < 0)
 		{
-			Engine::AbstractionModule::ActiveScene->Destroy(this);
+			Engine::Scene::ActiveScene->Destroy(this);
 		}
 		Entity::Update();
 	}
