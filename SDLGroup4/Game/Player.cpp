@@ -35,7 +35,7 @@ void Player::Update()
 	{
 		dirX = 1;
 	}
-	if (inputManager->GetAxis("Space")==1)
+	if (inputManager->GetAxis("Fire2")==1)
 	{
 		projectile = new Engine::Projectile(3, projectilePos, dirX, dirY);
 		projectile->AddSprite("Projectile1");

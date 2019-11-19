@@ -59,6 +59,8 @@ namespace Engine
 		}
 		if (Axis == "Space") if (IsKeyDown(SDL_SCANCODE_SPACE)) return 1;
 		if (Axis == "Fire") if (IsKeyDown(SDL_SCANCODE_RETURN)) return 1;
+		if (Axis == "Fire2") if (IsKeyDown(SDL_SCANCODE_LSHIFT)) return 1;
+		
 
 		return 0;
 	}
