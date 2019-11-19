@@ -27,6 +27,19 @@ namespace Engine {
 		{
 			return (leftSide.X == rightSide.X) && (leftSide.Y == rightSide.Y);
 		}
+
+		friend Vector2D operator*(Vector2D leftSide, const Vector2D& rightSide)
+		{
+			leftSide.X *= rightSide.X;
+			leftSide.Y *= rightSide.Y;
+			return leftSide;
+		}
+		friend Vector2D operator*(Vector2D leftSide, const float& rightSide)
+		{
+			leftSide.X *= rightSide;
+			leftSide.Y *= rightSide;
+			return leftSide;
+		}
 			
 		
 	};
