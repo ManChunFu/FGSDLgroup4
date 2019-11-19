@@ -9,7 +9,7 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="NodeList.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="TestBullet.cpp" />
+    <ClCompile Include="TimedExplosive.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AI.h" />
@@ -21,7 +21,7 @@
     <ClInclude Include="NodeList.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="TestBullet.h" />
+    <ClInclude Include="TimedExplosive.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

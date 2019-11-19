@@ -16,7 +16,7 @@ namespace Engine {
 		virtual ~Entity() {}
 		Entity() { Engine::Scene::ActiveScene->AddEntity(this); };
 		void AddCollider(std::string tag){ collider = new Engine::Collider(destRect, tag, this); }
-		void AddSprite(std::string _name, int scaleX, int scaleY);
+		void AddSprite(std::string _name, float scaleX, float scaleY);
 		void AddSprite(std::string _name);
 		virtual void Update();
 		void Render();
@@ -24,7 +24,9 @@ namespace Engine {
 		Vector2D position;
 		void UpdateCollisionBox();
 		Engine::Collider* collider = nullptr;
-		int ScaleX = 1, ScaleY = 1;
+		float ScaleX = 1, ScaleY = 1;
+		int GetSpriteWidth() { return destRect.w; };
+		int GetSpriteHeight() { return destRect.h; };
 	protected:
 		virtual void OnCollisionEnter(Engine::Collider* other) {}
 		SDL_Rect destRect = {0,0,0,0};
