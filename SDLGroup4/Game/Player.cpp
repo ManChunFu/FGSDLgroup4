@@ -30,14 +30,17 @@ void Player::Update()
 		mineTimer = mineCooldown;
 	}
 
-	Engine::Vector2D projectilePos(200.f, 200.f);
+	Engine::Vector2D projectilePos;
+	projectilePos.X +=  position.X  + 100.f;
+	projectilePos.Y +=  position.Y + 100.f;
+
 	if (dirX == 0 && dirY == 0)
 	{
 		dirX = 1;
 	}
 	if (inputManager->GetAxis("Fire2")==1)
 	{
-		projectile = new Engine::Projectile(3, projectilePos, dirX, dirY);
+		projectile = new Engine::Projectile(3,position, dirX, dirY);
 		projectile->AddSprite("Projectile1");
 	}
 
