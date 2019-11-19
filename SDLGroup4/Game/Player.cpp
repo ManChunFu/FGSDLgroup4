@@ -38,10 +38,18 @@ void Player::Update()
 	{
 		dirX = 1;
 	}
-	if (inputManager->GetAxis("Fire2")==1)
-	{
-		projectile = new Engine::Projectile(3,position, dirX, dirY);
-		projectile->AddSprite("Projectile1");
+
+	projectile = new Engine::Projectile(3, position, dirX, dirY);
+	if (inputManager->GetAxis("Fire2")== 1)
+	{	
+		if (inputManager->GetAxis("Vertical"))
+		{
+			projectile->AddSprite("Projectile2");
+		}
+		else
+		{
+			projectile->AddSprite("Projectile1");
+		}	
 	}
 
 
