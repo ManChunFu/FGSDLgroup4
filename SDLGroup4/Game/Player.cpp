@@ -30,7 +30,7 @@ void Player::Update()
 		bullet->AddSprite("FireSpell");
 	}
 
-	Engine::Vector2D projectilePos;
+	Engine::Vector2D projectilePos(200.f, 200.f);
 	if (dirX == 0 && dirY == 0)
 	{
 		dirX = 1;
