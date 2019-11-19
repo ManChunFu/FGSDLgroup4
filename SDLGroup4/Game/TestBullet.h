@@ -8,9 +8,11 @@ public:
 		position = startPos;
 		lifeSpan = lifespan;
 	}
+	~Bullet() override { Engine::Entity::~Entity(); }
 	void Update() override;
 private:
 	int speed = 200;
 	float lifeSpan = 0;
+	float explosionTimer = 2;
 };
 

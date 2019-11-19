@@ -3,6 +3,7 @@
 #include "EntityManager.h"
 #include "Text.h"
 #include "UIManager.h"
+#include "Entity.h"
 namespace Engine {
 	int Scene::idCtr = 0;
 	Scene* Scene::ActiveScene = nullptr;
@@ -33,8 +34,9 @@ namespace Engine {
 	void Scene::Update()
 	{
 		entityManager->Update();
-		for (auto i : destroyQueue)
+		for (Entity* i : destroyQueue)
 		{
+			if (i->collider) colManager->RemoveCollider(i->collider);
 			entityManager->RemoveEntity(i);
 			delete i;
 		}

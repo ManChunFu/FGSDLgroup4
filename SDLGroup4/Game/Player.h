@@ -29,11 +29,12 @@ private:
 	Engine::Animator* anim = nullptr;
 
 	int hitPoint = 0;
-	int dirX;
-	int dirY;
+	int dirX = 0;
+	int dirY = 0;
 	Bullet* bullet = nullptr;
 	Engine::Vector2D currPos;
-	
+	float mineCooldown = 5;
+	float mineTimer = mineCooldown;
 	Engine::Projectile* projectile = nullptr; //alternative for shooting (um)
 
 

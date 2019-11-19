@@ -9,7 +9,7 @@
 
 void Player::Update()
 {
-
+	if (mineTimer > 0) mineTimer -= Engine::GameTime::DeltaTime();
 	currPos = position;
 	dirX = inputManager->GetAxis("Horizontal");
 	dirY = inputManager->GetAxis("Vertical");
@@ -24,10 +24,11 @@ void Player::Update()
 	Engine::Vector2D bulletpos;
 	bulletpos.X = position.X;
 	bulletpos.Y = position.Y;
-	if (inputManager->GetAxis("Space") == 1) 
+	if (inputManager->IsKeyPressed(Key::RETURN) && mineTimer < 0) 
 	{
 		bullet = new Bullet(3, bulletpos); 
 		bullet->AddSprite("FireSpell");
+		mineTimer = mineCooldown;
 	}
 
 	Engine::Vector2D projectilePos(200.f, 200.f);
