@@ -14,7 +14,6 @@ public:
 	void SetNewStartPos(Engine::Vector2D startPos) { this->targetPos = startPos; }
 	//void SetNewObstacleList(std::vector<Engine::Vector2D> obstacleList) { this->obstacleList = obstacleList; }
 
-	std::vector<Engine::Vector2D> Path;	
 	
 private:
 	float GetHCost(Engine::Vector2D newNodePos, Engine::Vector2D targetPos);
@@ -26,6 +25,7 @@ private:
 	std::vector<Node*> examinatedNodeArea;
 	std::vector<Node*> workingNodes;
 	std::vector<Node*> closeNodes;
+	std::vector<Engine::Vector2D> Path;
 	std::vector<Engine::Vector2D> obstacleList;
 
 	float currentSamllestFCost;

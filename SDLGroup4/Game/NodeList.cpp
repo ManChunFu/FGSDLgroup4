@@ -19,7 +19,7 @@ NodeList::~NodeList()
 
 std::vector<Engine::Vector2D> NodeList::GetPath()
 {
-	std::vector<Engine::Vector2D> result;
+	//std::vector<Engine::Vector2D> result;
 	examinatedNodeArea.push_back(new Node(startPos, GetHCost(startPos, targetPos), nullptr));
 
 	bool reachTarget = false;
@@ -35,8 +35,20 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 			{
 				reachTarget = true;
 				Node* nodesToTarget = current;
-				Path.push_back(current->Position);
+				Path.push_back(nodesToTarget->Position);
 
+				while (nodesToTarget->Parent.size() > 0)
+				{
+					Node* closestParent = nodesToTarget->Parent[0];
+					if (nodesToTarget->Parent.size() > 1)
+						for (uint8_t index = 1; index < nodesToTarget->Parent.size(); index++)
+						{
+							if (nodesToTarget->Parent[index]->GCost < closestParent->GCost)
+								closestParent = nodesToTarget->Parent[index];
+						}
+					Path.push_back(closestParent->Position);
+					nodesToTarget = closestParent;
+				}
 			}
 
 			for (auto move : moveByStraightLine)
@@ -84,16 +96,18 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 		}
 	} while (!reachTarget);
 
-	return result;
+	return Path;
 }
 
 
 void NodeList::SetWorkingNodes()
 {
-	workingNodes.empty();
+	for (auto node : workingNodes)
+		delete node;
+	workingNodes.clear();
 
 	int arrayCount = examinatedNodeArea.size();
-	int miniFCost = 0;
+	float miniFCost = 0.f;
 	if (arrayCount < 1)
 	{
 		miniFCost = NULL;
@@ -103,7 +117,7 @@ void NodeList::SetWorkingNodes()
 	for (auto node : examinatedNodeArea)
 	{
 		if (miniFCost == NULL || node->FCost < miniFCost)
-			miniFCost = (int)node->FCost;
+			miniFCost = node->FCost;
 	}	
 
 	if (miniFCost > currentSamllestFCost)
@@ -116,14 +130,14 @@ void NodeList::SetWorkingNodes()
 	}	
 	else
 	{	
-		currentSamllestFCost = (int)miniFCost;
-		int miniHCostOfAllMiniFCosts = NULL;
+		currentSamllestFCost = miniFCost;
+		float miniHCostOfAllMiniFCosts = 0.f;
 
 		for (auto node : examinatedNodeArea)
 		{
 			if (node->FCost == miniFCost)
-				if (miniHCostOfAllMiniFCosts == NULL || node->HCost < miniHCostOfAllMiniFCosts)
-					miniHCostOfAllMiniFCosts = (int)node->HCost;
+				if (miniHCostOfAllMiniFCosts == 0.f || node->HCost < miniHCostOfAllMiniFCosts)
+					miniHCostOfAllMiniFCosts = node->HCost;
 		}
 
 		for (auto node : examinatedNodeArea)
