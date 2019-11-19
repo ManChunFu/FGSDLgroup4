@@ -1,6 +1,6 @@
-#include "TestBullet.h"
+#include "TimedExplosive.h"
 #include <GameTime.h>
-void Bullet::Update()
+void TimedExplosive::Update()
 {
 	if (lifeSpan < 0) 
 	{

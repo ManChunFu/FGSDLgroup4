@@ -4,7 +4,7 @@
 #include <GameTime.h>
 #include<Vector2D.h>
 #include<Projectile.h>
-#include "TestBullet.h"
+#include "TimedExplosive.h"
 
 
 void Player::Update()
@@ -26,8 +26,7 @@ void Player::Update()
 	bulletpos.Y = position.Y;
 	if (inputManager->IsKeyPressed(Key::RETURN) && mineTimer < 0) 
 	{
-		bullet = new Bullet(3, bulletpos); 
-		bullet->AddSprite("FireSpell");
+		bullet = new TimedExplosive(3, bulletpos); 
 		mineTimer = mineCooldown;
 	}
 
