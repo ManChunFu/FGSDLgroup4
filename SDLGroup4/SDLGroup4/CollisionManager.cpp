@@ -47,4 +47,16 @@ namespace Engine {
 		{ delete col; }
 		colliders.clear();
 	}
+	void CollisionManager::RemoveCollider(Engine::Collider* col)
+	{
+		for (int i = 0; i < colliders.size(); i++)
+		{
+			if (colliders[i] == col) 
+			{
+				delete colliders[i];
+				colliders.erase(colliders.begin() + i);
+				return;
+			}
+		}
+	}
 }

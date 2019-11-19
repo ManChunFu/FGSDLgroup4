@@ -1,13 +1,13 @@
 #include "Entity.h"
 namespace Engine 
 {
-	void Entity::AddSprite(std::string _name, int scaleX, int scaleY)
+	void Entity::AddSprite(std::string _name, float scaleX, float scaleY)
 	{
 		texture = Engine::TextureManager::GetTexture(_name);
 		SDL_QueryTexture(texture, nullptr, nullptr, &sourceRect.w, &sourceRect.h);
 		destRect.w = sourceRect.w * scaleX;
 		destRect.h = sourceRect.h * scaleY;
-		ScaleX = ScaleX;
+		ScaleX = scaleX;
 		ScaleY = scaleY;
 	}
 	void Entity::AddSprite(std::string _name)

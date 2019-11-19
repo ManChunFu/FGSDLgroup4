@@ -4,12 +4,12 @@
 #include <GameTime.h>
 #include<Vector2D.h>
 #include<Projectile.h>
-#include "TestBullet.h"
+#include "TimedExplosive.h"
 
 
 void Player::Update()
 {
-
+	if (mineTimer > 0) mineTimer -= Engine::GameTime::DeltaTime();
 	currPos = position;
 	dirX = inputManager->GetAxis("Horizontal");
 	dirY = inputManager->GetAxis("Vertical");
@@ -24,21 +24,32 @@ void Player::Update()
 	Engine::Vector2D bulletpos;
 	bulletpos.X = position.X;
 	bulletpos.Y = position.Y;
-	if (inputManager->GetAxis("Space") == 1) 
+	if (inputManager->IsKeyPressed(Key::RETURN) && mineTimer < 0) 
 	{
-		bullet = new Bullet(3, bulletpos); 
-		bullet->AddSprite("FireSpell");
+		bullet = new TimedExplosive(3, bulletpos); 
+		mineTimer = mineCooldown;
 	}
 
 	Engine::Vector2D projectilePos;
+	projectilePos.X +=  position.X  + 100.f;
+	projectilePos.Y +=  position.Y + 100.f;
+
 	if (dirX == 0 && dirY == 0)
 	{
 		dirX = 1;
 	}
-	if (inputManager->GetAxis("Space")==1)
-	{
-		projectile = new Engine::Projectile(3, projectilePos, dirX, dirY);
-		projectile->AddSprite("Projectile1");
+
+	projectile = new Engine::Projectile(3, position, dirX, dirY);
+	if (inputManager->GetAxis("Fire2")== 1)
+	{	
+		if (inputManager->GetAxis("Vertical"))
+		{
+			projectile->AddSprite("Projectile2");
+		}
+		else
+		{
+			projectile->AddSprite("Projectile1");
+		}	
 	}
 
 
