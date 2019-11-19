@@ -12,7 +12,17 @@ bool AI::EnterDangerZone(float radiusLimit, Engine::Vector2D position, Engine::V
 
 std::vector<Engine::Vector2D> AI::pathFinding(Engine::Vector2D targetPosition, Engine::Vector2D startPosition)
 {
-	nodelist = new NodeList(targetPosition, startPosition);
+	int targetPosIntX = (int)targetPosition.X;
+	int targetPosIntY = (int)targetPosition.Y;
+	int startPosIntX = (int)startPosition.X;
+	int startPosIntY = (int)startPosition.Y;
+	Engine::Vector2D targetPosInt;
+	targetPosInt.X = targetPosIntX;
+	targetPosInt.Y = targetPosIntY;
+	Engine::Vector2D startPosInt;
+	startPosInt.X = startPosIntX;
+	startPosInt.Y = startPosIntY;
+	nodelist = new NodeList(targetPosInt, startPosInt);
 	std::vector<Engine::Vector2D> list = nodelist->GetPath(); //need to give return a list
 	return list;
 }

@@ -11,19 +11,20 @@ NodeList::~NodeList()
 		delete examinatedNode;
 	examinatedNodeArea.clear();
 	// todo delete all lists ( one list with all the nodes)
-
-	
+	for (auto workingNode : workingNodes)
+		delete workingNode;
 	workingNodes.clear();
-	closeNodes.clear();
+	//closeNodes.clear();
 }
 
 std::vector<Engine::Vector2D> NodeList::GetPath()
 {
 	//std::vector<Engine::Vector2D> result;
+	
 	examinatedNodeArea.push_back(new Node(startPos, GetHCost(startPos, targetPos), nullptr));
 
 	bool reachTarget = false;
-	currentSamllestFCost = 1000;
+	currentSmallestFCost = 1000;
 	
 	do 
 	{
@@ -92,9 +93,9 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 					}
 				}
 			}
-			MoveNodeToClose(current);
+			current->NodeCompleted = true;
 		}
-	} while (!reachTarget);
+	} while (!reachTarget && !CheckAllNodesCompleted());
 
 	return Path;
 }
@@ -102,25 +103,27 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 
 void NodeList::SetWorkingNodes()
 {
-	for (auto node : workingNodes)
-		delete node;
+	/*for (auto node : workingNodes)
+		delete node;*/
 	workingNodes.clear();
 
 	int arrayCount = examinatedNodeArea.size();
-	float miniFCost = 0.f;
 	if (arrayCount < 1)
 	{
-		miniFCost = NULL;
+		miniFCost = 0;
 		return;
 	}
-		
+/*Get miniFCost*/
 	for (auto node : examinatedNodeArea)
 	{
-		if (miniFCost == NULL || node->FCost < miniFCost)
-			miniFCost = node->FCost;
+		if (!node->NodeCompleted)
+		{
+			if (miniFCost == 0 || node->FCost < miniFCost)
+				miniFCost = node->FCost;
+		}
 	}	
-
-	if (miniFCost > currentSamllestFCost)
+/*Compare to the current smallestFCost*/
+	if (miniFCost > currentSmallestFCost)
 	{
 		for (auto node : examinatedNodeArea)
 		{
@@ -130,20 +133,25 @@ void NodeList::SetWorkingNodes()
 	}	
 	else
 	{	
-		currentSamllestFCost = miniFCost;
-		float miniHCostOfAllMiniFCosts = 0.f;
+		currentSmallestFCost = miniFCost;
 
 		for (auto node : examinatedNodeArea)
 		{
-			if (node->FCost == miniFCost)
-				if (miniHCostOfAllMiniFCosts == 0.f || node->HCost < miniHCostOfAllMiniFCosts)
-					miniHCostOfAllMiniFCosts = node->HCost;
+			if (!node->NodeCompleted)
+			{
+				if (node->FCost == miniFCost)
+					if (miniHCostOfAllMiniFCosts == 0 || node->HCost < miniHCostOfAllMiniFCosts)
+						miniHCostOfAllMiniFCosts = node->HCost;
+			}
 		}
 
 		for (auto node : examinatedNodeArea)
 		{
-			if (node->FCost == miniFCost && node->HCost == miniHCostOfAllMiniFCosts)
-				workingNodes.push_back(node);
+			if (!node->NodeCompleted)
+			{
+				if (node->FCost == miniFCost && node->HCost == miniHCostOfAllMiniFCosts)
+					workingNodes.push_back(node);
+			}
 		}
 	}
 }
@@ -166,21 +174,31 @@ Node* NodeList::CheckExistingNode(Engine::Vector2D newNodePos)
 	return nullptr;
 }
 
-
-void NodeList::MoveNodeToClose(Node* node)
+bool NodeList::CheckAllNodesCompleted()
 {
-	closeNodes.push_back(node);
-	for (int index = 0; index < examinatedNodeArea.size(); index++)
+	for (auto node : examinatedNodeArea)
 	{
-		if (node->Position == examinatedNodeArea[index]->Position)
-			examinatedNodeArea.erase(examinatedNodeArea.begin() + index);
+		if (!node->NodeCompleted)
+			return false;
 	}
+	return true;
 }
 
-float NodeList::GetHCost(Engine::Vector2D newNodePos, Engine::Vector2D targetPos)
+
+//void NodeList::MoveNodeToClose(Node* node)
+//{
+//	closeNodes.push_back(node);
+//	for (int index = 0; index < examinatedNodeArea.size(); index++)
+//	{
+//		if (node->Position == examinatedNodeArea[index]->Position)
+//			examinatedNodeArea.erase(examinatedNodeArea.begin() + index);
+//	}
+//}
+
+int NodeList::GetHCost(Engine::Vector2D newNodePos, Engine::Vector2D targetPos)
 {
-	float x = fabsf(targetPos.X - newNodePos.X);
-	float y = fabsf(targetPos.Y - newNodePos.Y);
+	int x = fabsf(targetPos.X - newNodePos.X);
+	int y = fabsf(targetPos.Y - newNodePos.Y);
 	if (x < y)
 		return (y - x) + (hypotf(x, x));
 	else
