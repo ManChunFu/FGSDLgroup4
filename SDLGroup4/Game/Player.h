@@ -34,7 +34,7 @@ private:
 	TimedExplosive* bullet = nullptr;
 	Engine::Vector2D currPos;
 	float mineCooldown = 5;
-	float mineTimer = mineCooldown;
+	float mineTimer = 0;
 	Engine::Projectile* projectile = nullptr; //alternative for shooting (um)
 
 

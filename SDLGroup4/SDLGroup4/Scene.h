@@ -20,6 +20,7 @@ namespace Engine
 		virtual void HandleEvents();
 		virtual void Render();
 		const int id = idCtr;
+		virtual void AddClickables() {};
 		CollisionManager* CollisionManager() { return colManager; };
 		virtual void SetUpUI() = 0;
 		void AddEntity(Entity* ent);

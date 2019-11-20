@@ -11,10 +11,11 @@
 #include "Game.h"
 #include <Scene.h>
 #include "MainScene.h"
+#include "GameOverScene.h"
 #include <TextureManager.h>
-
 #pragma warning( push )
 #pragma warning( disable : 4267)
+//todo: add game over screen and on hover sounds to buttons
 int main(int argc, char** argv)
 {
 	application = new Engine::Application();
@@ -68,7 +69,9 @@ bool Engine::Application::Initialize()
 	Engine::UIManager::Initialize();
 	scenes.push_back(new MainMenu(this, inputManager));
 	scenes.push_back(new MainScene(this, inputManager));
+	scenes.push_back(new GameOverScene(this, inputManager));
 	SoundManager::AddSoundEffect("Bell", "Assets/Sounds/bell.wav");
+	SoundManager::AddSoundEffect("Button", "Assets/Sounds/button.wav");
 	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
 	Engine::Scene::ActiveScene = scenes[activeScene];
 	return true;
@@ -158,6 +161,8 @@ void Engine::Application::LoadScene(int scene)
 {
 	Engine::Scene::ActiveScene = scenes[scene];
 	application->activeScene = scene;
+	inputManager->ClearClickables();
+	scenes[scene]->AddClickables();
 }
 
 

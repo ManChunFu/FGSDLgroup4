@@ -25,10 +25,14 @@ namespace Engine {
 						int directionX = 0;
 						int directionY = 0;
 						int offset = 1;
-						if (colliders[i]->TopBorder() < colliders[a]->BottomBorder() && colliders[a]->TopBorder() < colliders[i]->TopBorder()) directionY = -(colliders[i]->TopBorder() - colliders[a]->BottomBorder());
-						if (colliders[a]->TopBorder() < colliders[i]->BottomBorder() && colliders[a]->TopBorder() > colliders[i]->TopBorder()) directionY = (colliders[a]->TopBorder() - colliders[i]->BottomBorder());
-						if (colliders[i]->LeftBorder() < colliders[a]->RightBorder() && colliders[a]->LeftBorder() < colliders[i]->LeftBorder()) directionX = -(colliders[i]->LeftBorder() - colliders[a]->RightBorder());
-						if (colliders[a]->LeftBorder() < colliders[i]->RightBorder() && colliders[a]->LeftBorder() > colliders[i]->LeftBorder()) directionX = (colliders[a]->LeftBorder() - colliders[i]->RightBorder());
+						if (colliders[i]->TopBorder() < colliders[a]->BottomBorder() && colliders[a]->TopBorder() < colliders[i]->TopBorder()) 
+							directionY = -(colliders[i]->TopBorder() - colliders[a]->BottomBorder());
+						if (colliders[a]->TopBorder() < colliders[i]->BottomBorder() && colliders[a]->TopBorder() > colliders[i]->TopBorder()) 
+							directionY = (colliders[a]->TopBorder() - colliders[i]->BottomBorder());
+						if (colliders[i]->LeftBorder() < colliders[a]->RightBorder() && colliders[a]->LeftBorder() < colliders[i]->LeftBorder()) 
+							directionX = -(colliders[i]->LeftBorder() - colliders[a]->RightBorder());
+						if (colliders[a]->LeftBorder() < colliders[i]->RightBorder() && colliders[a]->LeftBorder() > colliders[i]->LeftBorder()) 
+							directionX = (colliders[a]->LeftBorder() - colliders[i]->RightBorder());
 						if (abs(directionX) > abs(directionY)) directionX = 0; 
 						else directionY = 0;
 						if(directionX > 0) colliders[i]->GameObject->position.X = colliders[a]->RightBorder() - offset;
