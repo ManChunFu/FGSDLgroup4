@@ -4,7 +4,7 @@
 #include <SDL_events.h>
 #include <SDL_pixels.h>
 #include <SDL_render.h>
-
+#include "SoundManager.h"
 
 Engine::Button::Button(GameElement base, SDL_Color color)
 {
@@ -46,6 +46,7 @@ void Engine::Button::Render()
 void Engine::Button::OnHover()
 {
 	TextElement->ChangeTextColor(HoverForegroundColor);
+	SoundManager::PlaySoundEffect("Button", 0, 100);
 }
 
 void Engine::Button::LeavingHover()

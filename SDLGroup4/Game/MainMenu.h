@@ -6,6 +6,7 @@ public:
 	MainMenu(Engine::Application* app, Engine::InputManager* input) : Scene(app, input) { SetUpUI(); }
 	static MainMenu* mainMenu;
 	void Shutdown() override;
+	void AddClickables() override;
 private:
 	virtual void SetUpUI() override;
 	Engine::Text* startMenuTitle;
@@ -16,8 +17,10 @@ private:
 	Engine::Button* scoreButton;
 	Engine::Text* scoreRecordText;
 };
+namespace mainmenu {
 	void OnClickExitButton();
 	void OnClickPlayButton();
 	void OnClickScoreButton();
+}
 
 
