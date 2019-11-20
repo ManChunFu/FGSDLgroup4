@@ -30,6 +30,10 @@ namespace Engine {
 		{
 			return (leftSide.X == rightSide.X) && (leftSide.Y == rightSide.Y);
 		}
+		friend bool operator!=(Vector2D leftSide, const Vector2D& rightSide)
+		{
+			return (leftSide.X != rightSide.X) || (leftSide.Y != rightSide.Y);
+		}
 
 		friend Vector2D operator*(Vector2D leftSide, const Vector2D& rightSide)
 		{

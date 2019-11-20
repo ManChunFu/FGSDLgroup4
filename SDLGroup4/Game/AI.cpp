@@ -31,9 +31,9 @@ std::vector<Engine::Vector2D> AI::pathFinding(Engine::Vector2D targetPosition, E
 
 Engine::Vector2D AI::RandomMovement()
 {
-	float x = rand() % 4 - 2;
-	float y = rand() % 4 - 2;
-		
+	float x = (rand() % 7) - 3;
+	float y = (rand() % 7) - 3;
+	
 	Engine::Vector2D position;
 	position.X = x;
 	position.Y = y;

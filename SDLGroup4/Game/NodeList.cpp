@@ -25,6 +25,9 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 	{
 		SetWorkingNodes();
 
+		if (workingNodes.size() == 0)
+			break;
+
 		for (Node* current : workingNodes)
 		{
 			//if (current->Position == targetPos)
