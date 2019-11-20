@@ -4,14 +4,15 @@
 class Node
 {
 public:
-	Node(Engine::Vector2D position, float hCost, Node* parent); 
+	Node(Engine::Vector2D position, int hCost, Node* parent); 
 	bool HasThisParent(Node* node);
 		
 	std::vector<Node*>Parent;
 	Engine::Vector2D Position;
-	float GCost;
-	float HCost;
-	float FCost = (GCost + HCost); 
+	int GCost;
+	int HCost;
+	int FCost; 
 	bool IsStartPoint;
+	bool NodeCompleted;
 
 };

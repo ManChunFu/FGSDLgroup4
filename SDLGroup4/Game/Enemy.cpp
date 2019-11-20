@@ -23,31 +23,35 @@ void Enemy::Update()
 
 void Enemy::Movement()
 {
-	Engine::Vector2D newPosition;
-
-	Engine::Vector2D positionTemp = ai.RandomMovement();
-	newPosition = position + positionTemp;
-
-	if (newPosition.X <= 0)
-		newPosition.X++;
-	else if (newPosition.Y <= 0)
-		newPosition.Y++;
-	else if (position.X >= 1440)
-		newPosition.X--;
-	else if (position.Y >= 900)
-		newPosition.Y--;
-	else
-		position = newPosition;
-
+	
 
 	if (OnTriggerEnter())
 	{
 		std::cout << "Alert!";
-		/*pathToTarget = ai.pathFinding(player->position, position);
+		pathToTarget = ai.pathFinding(player->position, position);
 		for (auto path : pathToTarget)
 		{
 			
-		}*/
+		}
+	}
+	else
+	{
+		Engine::Vector2D newPosition;
+
+		Engine::Vector2D positionTemp = ai.RandomMovement();
+		newPosition = position + positionTemp;
+
+		if (newPosition.X <= 0)
+			newPosition.X++;
+		else if (newPosition.Y <= 0)
+			newPosition.Y++;
+		else if (position.X >= 1440)
+			newPosition.X--;
+		else if (position.Y >= 900)
+			newPosition.Y--;
+		else
+			position = newPosition;
+
 	}
 }
 

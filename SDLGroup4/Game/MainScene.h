@@ -14,7 +14,8 @@ public:
 		Engine::TextureManager::AddTexture("Enemy", "Assets/Sprites/enemy_drone_larger_red.png");
 		Engine::TextureManager::AddTexture("FireSpell", "Assets/Sprites/FireSpell.png");
 		Engine::TextureManager::AddTexture("Player", "Assets/Sprites/Hopping_rabbit_dude.png");
-		Engine::TextureManager::AddTexture("Projectile1", "Assets/Sprites/lightning.png");
+		Engine::TextureManager::AddTexture("Projectile1", "Assets/Sprites/laserX.png");
+		Engine::TextureManager::AddTexture("Projectile2", "Assets/Sprites/laserY.png");
 		Engine::TextureManager::AddTexture("Explosion", "Assets/2D Galaxy Assets/Game/Sprites/Explosion/Explosion_00019.png");
 		createPlayer(); 
 		CreateEnemy(); 
