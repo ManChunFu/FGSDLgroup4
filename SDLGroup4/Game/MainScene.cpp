@@ -1,11 +1,24 @@
 #include "MainScene.h"
 #include "Enemy.h"
 #include "Player.h"
+#include "Map.h"
 
 MainScene* MainScene::mainScene = nullptr;
 void MainScene::Update()
 {
 	Scene::Update();
+}
+
+void MainScene::Render()
+{
+	map->DrawMap();
+	Scene::Render();
+}
+
+void MainScene::CreateMap()
+{
+	map = new Map();
+	
 }
 
 void MainScene::CreateEnemy()
@@ -18,7 +31,7 @@ void MainScene::CreateEnemy()
 	enemy[0]->collider->solid = true;
 }
 
-void MainScene::createPlayer()
+void MainScene::CreatePlayer()
 {
 	player = new Player(inputManager, 1);
 	player->AddCollider("Player");
