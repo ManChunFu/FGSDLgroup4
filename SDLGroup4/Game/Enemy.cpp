@@ -12,10 +12,10 @@ void Enemy::Update()
 {
 	Movement();
 
-	/*if (position.X < 0) position.X = 0;
+	if (position.X < 0) position.X = 0;
 	if (position.X > 1440 - destRect.w) position.X = 1440 - destRect.w;
 	if (position.Y < 0) position.Y = 0;
-	if (position.Y > 900 - destRect.h) position.Y = 900 - destRect.h;*/
+	if (position.Y > 900 - destRect.h) position.Y = 900 - destRect.h;
 
 	Engine::Entity::Update();
 
@@ -23,22 +23,39 @@ void Enemy::Update()
 
 void Enemy::Movement()
 {
-	
+	Engine::Vector2D newPosition;
+	frameCounter += Engine::GameTime::DeltaTime();
 
 	if (OnTriggerEnter())
 	{
 		std::cout << "Alert!";
-		pathToTarget = ai.pathFinding(player->position, position);
+		if (frameCounter > 1.f)
+		{
+			frameCounter = 0.f;
+			pathToTarget = ai.pathFinding(player->position, position);
+			pathCounter = 2;
+		}
+		if (pathToTarget.size() > pathCounter)
+		{
+			position = pathToTarget[pathToTarget.size() - pathCounter];
+			pathCounter++;
+		}
+
+		/*std::reverse(pathToTarget.begin(), pathToTarget.end());
+
 		for (auto path : pathToTarget)
 		{
-			
-		}
+			position = path;
+		}*/
 	}
 	else
 	{
-		Engine::Vector2D newPosition;
-
-		Engine::Vector2D positionTemp = ai.RandomMovement();
+		randomCounter += Engine::GameTime::DeltaTime();
+		if (randomCounter > 1.f)
+		{
+			randomCounter = 0.f;
+			positionTemp = ai.RandomMovement();
+		}
 		newPosition = position + positionTemp;
 
 		if (newPosition.X <= 0)

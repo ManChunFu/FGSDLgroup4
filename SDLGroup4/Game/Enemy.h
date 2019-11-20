@@ -34,5 +34,10 @@ private:
 	AI ai;
 	Player* player = nullptr;
 	std::vector<Engine::Vector2D> pathToTarget;
+	Engine::Vector2D positionTemp;
+	float randomCounter = 0.f;
+	int pathCounter = 2;
+	float frameCounter = 0.f;
+
 };
 

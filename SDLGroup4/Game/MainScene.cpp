@@ -10,12 +10,15 @@ void MainScene::Update()
 
 void MainScene::CreateEnemy()
 {
-	enemy.push_back(new Enemy(1));
-	enemy[enemy.size() - 1]->AddCollider("Enemy");
-	enemy[enemy.size() - 1]->AddSprite("Enemy");
-	enemy[0]->position.X = 200;
-	enemy[0]->position.Y = 200;
-	enemy[0]->collider->solid = true;
+	for (int i = 0; i < 10; i++)
+	{
+		enemy.push_back(new Enemy(1));
+		enemy[enemy.size() - 1]->AddCollider("Enemy");
+		enemy[enemy.size() - 1]->AddSprite("Enemy");
+		enemy[i]->position.X = i * 50;
+		enemy[i]->position.Y = i * 50;
+		enemy[i]->collider->solid = true;
+	}
 }
 
 void MainScene::createPlayer()
