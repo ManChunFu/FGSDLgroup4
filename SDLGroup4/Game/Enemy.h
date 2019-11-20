@@ -4,6 +4,7 @@
 #include <Vector2D.h>
 #include "AI.h"
 #include "MainScene.h"
+#include <string>
 namespace Engine
 {
 	class InputManager;
@@ -20,6 +21,8 @@ public:
 	Enemy(int hp) : Engine::Entity() {
 		player = MainScene::mainScene->player;
 		hitpoint = hp;
+		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 8, 1, 5));
+		
 	}
 
 	int hitpoint;
@@ -38,6 +41,7 @@ private:
 	float randomCounter = 0.f;
 	int pathCounter = 2;
 	float frameCounter = 0.f;
+
 
 };
 

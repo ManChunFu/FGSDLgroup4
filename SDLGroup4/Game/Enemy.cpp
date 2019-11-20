@@ -8,21 +8,22 @@
 #include <GameTime.h>
 
 
+
 void Enemy::Update()
 {
 	Movement();
 
-	if (position.X < 0) position.X = 0;
+	/*if (position.X < 0) position.X = 0;
 	if (position.X > 1440 - destRect.w) position.X = 1440 - destRect.w;
 	if (position.Y < 0) position.Y = 0;
-	if (position.Y > 900 - destRect.h) position.Y = 900 - destRect.h;
+	if (position.Y > 900 - destRect.h) position.Y = 900 - destRect.h;*/
 
 	Engine::Entity::Update();
-
 }
 
 void Enemy::Movement()
 {
+	
 	Engine::Vector2D newPosition;
 	frameCounter += Engine::GameTime::DeltaTime();
 
@@ -41,12 +42,6 @@ void Enemy::Movement()
 			pathCounter++;
 		}
 
-		/*std::reverse(pathToTarget.begin(), pathToTarget.end());
-
-		for (auto path : pathToTarget)
-		{
-			position = path;
-		}*/
 	}
 	else
 	{
@@ -57,6 +52,7 @@ void Enemy::Movement()
 			positionTemp = ai.RandomMovement();
 		}
 		newPosition = position + positionTemp;
+		animator.Trigger("Run");
 
 		if (newPosition.X <= 0)
 			newPosition.X++;
@@ -74,7 +70,7 @@ void Enemy::Movement()
 
 bool Enemy::OnTriggerEnter()
 {
-	return (ai.EnterDangerZone(200.0f, position, player->position));
+	return (ai.EnterDangerZone(500.0f, position, player->position));
 }
 
 
