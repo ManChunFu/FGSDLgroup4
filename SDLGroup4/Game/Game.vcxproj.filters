@@ -10,8 +10,9 @@
     <ClCompile Include="NodeList.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="TimedExplosive.cpp" />
-    <ClCompile Include="GameOverScene.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AI.h" />
@@ -24,8 +25,9 @@
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="TimedExplosive.h" />
-    <ClInclude Include="GameOverScene.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="GameOverScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

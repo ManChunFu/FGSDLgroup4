@@ -24,20 +24,19 @@ std::vector<Engine::Vector2D> AI::pathFinding(Engine::Vector2D targetPosition, E
 	startPosInt.Y = startPosIntY;
 	nodelist = new NodeList(targetPosInt, startPosInt);
 	std::vector<Engine::Vector2D> list = nodelist->GetPath(); //need to give return a list
+
+	delete nodelist;
 	return list;
 }
 
 Engine::Vector2D AI::RandomMovement()
 {
-	std::mt19937 generator;
-	generator.seed(std::time(0));
-
-	float X = (std::uniform_int_distribution<uint32_t>(0, 4))(generator); 
-	float Y = (std::uniform_int_distribution<uint32_t>(0, 4))(generator);
-
+	float x = rand() % 4 - 2;
+	float y = rand() % 4 - 2;
+		
 	Engine::Vector2D position;
-	position.X = (X - 2); // to get minus value
-	position.Y = (Y - 2);
+	position.X = x;
+	position.Y = y;
 	return position;
 }
 

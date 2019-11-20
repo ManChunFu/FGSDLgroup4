@@ -18,7 +18,7 @@ namespace Engine
 
 		std::vector<Animation*> Animations;
 		Animation* currenAnimation = nullptr;
-		bool isTrigger = false;
+		bool isTrigger;
 	};
 }
 
