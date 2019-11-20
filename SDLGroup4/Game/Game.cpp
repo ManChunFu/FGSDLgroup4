@@ -12,9 +12,9 @@
 #include <Scene.h>
 #include "MainScene.h"
 #include <TextureManager.h>
-
 #pragma warning( push )
 #pragma warning( disable : 4267)
+//todo: add game over screen and on hover sounds to buttons
 int main(int argc, char** argv)
 {
 	application = new Engine::Application();

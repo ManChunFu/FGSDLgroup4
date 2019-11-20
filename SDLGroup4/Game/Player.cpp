@@ -16,20 +16,19 @@ void Player::Update()
 
 	MovePlayer();
 	if (position.X < 0) position.X = 0;
-	if (position.X > 1440 - destRect.w) position.X = 1440 - destRect.w;
+	if (position.X > 1440 - destRect.w) position.X = 1440.0f - destRect.w;
 	if (position.Y < 0) position.Y = 0;
-	if (position.Y > 900 - destRect.h) position.Y = 900 - destRect.h;
+	if (position.Y > 900 - destRect.h) position.Y = 900.0f - destRect.h;
 	Engine::Entity::Update();
 	
 	Engine::Vector2D bulletpos;
 	bulletpos.X = position.X;
 	bulletpos.Y = position.Y;
-	if (inputManager->IsKeyPressed(Key::RETURN) && mineTimer < 0) 
+	if (inputManager->IsKeyPressed(Key::RETURN) && mineTimer <= 0)
 	{
 		bullet = new TimedExplosive(3, bulletpos); 
 		mineTimer = mineCooldown;
 	}
-
 	Engine::Vector2D projectilePos(200.f, 200.f);
 	if (dirX == 0 && dirY == 0)
 	{
