@@ -1,7 +1,7 @@
 #include "MainScene.h"
 #include "Enemy.h"
 #include "Player.h"
-
+#include <InputManager.h>
 MainScene* MainScene::mainScene = nullptr;
 void MainScene::Update()
 {

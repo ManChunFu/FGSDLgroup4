@@ -13,6 +13,7 @@
 #include "MainScene.h"
 #include "GameOverScene.h"
 #include <TextureManager.h>
+#include <Camera.h>
 #pragma warning( push )
 #pragma warning( disable : 4267)
 //todo: add game over screen and on hover sounds to buttons
@@ -160,6 +161,7 @@ void Engine::Application::Render()
 void Engine::Application::LoadScene(int scene) 
 {
 	Engine::Scene::ActiveScene = scenes[scene];
+	Engine::Camera::ActiveCamera = scenes[scene]->Camera();
 	application->activeScene = scene;
 	inputManager->ClearClickables();
 	scenes[scene]->AddClickables();
