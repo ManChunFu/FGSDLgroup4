@@ -27,6 +27,7 @@ namespace Engine {
 		float ScaleX = 1, ScaleY = 1;
 		int GetSpriteWidth() { return destRect.w; };
 		int GetSpriteHeight() { return destRect.h; };
+		bool PlayAnimation = false;
 	protected:
 		virtual void OnCollisionEnter(Engine::Collider* other) {}
 		SDL_Rect destRect = {0,0,0,0};

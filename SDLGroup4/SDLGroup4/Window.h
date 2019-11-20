@@ -16,7 +16,8 @@ namespace Engine
 		static SDL_Renderer* Renderer;
 		static void RenderClear() { SDL_RenderClear(Renderer); }
 		static void RenderPresent() { SDL_RenderPresent(Renderer); }
-
+		int ScreenWidth() { return width; }
+		int ScreenHeight() { return height; }
 	private:
 		std::string title;
 		int width;

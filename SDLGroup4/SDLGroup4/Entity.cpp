@@ -39,8 +39,12 @@ namespace Engine
 		{
 			destRect.x -= Engine::Camera::ActiveCamera->Position.X;
 			destRect.y -= Engine::Camera::ActiveCamera->Position.Y;
-			Engine::TextureManager::Draw(texture, sourceRect, destRect);
-			animator.DisplayAnimation(position.X, position.Y);
+			if (PlayAnimation) 
+			{ animator.DisplayAnimation(destRect.x, destRect.y); }
+			else
+			{ Engine::TextureManager::Draw(texture, sourceRect, destRect); }
+			
+			
 		}
 	}
 	void Entity::UpdateCollisionBox()
