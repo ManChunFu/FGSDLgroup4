@@ -5,6 +5,7 @@
 #include <vector>
 #include "IClickable.h"
 #include <string>
+enum Key { Q, W, E, R, T, Y, U, I, O, P, A, S, D, F, G, H, J, K, L, Z, X, C, V, B, N, M, RETURN, ESCAPE, BACKSPACE, LCTRL, RCTRL, LALT, RALT, SPACE };
 namespace Engine
 {
 	class InputManager
@@ -22,10 +23,12 @@ namespace Engine
 			{ if (gameElement) delete gameElement; }
 			clickableObjects.clear();
 		}
-		bool IsKeyPressed(SDL_Scancode key) const;
-		bool IsKeyReleased(SDL_Scancode key) const;
+		bool IsKeyPressed(Key key);
+		bool IsKeyReleased(Key key);
 		int GetAxis(std::string Axis);
 	private:
+		bool IsKeyReleased(SDL_Scancode key) const;
+		bool IsKeyPressed(SDL_Scancode key) const;
 		void SetMouseCursor(SDL_SystemCursor newCursor);
 		std::vector<IClickable*> clickableObjects;
 		static SDL_Event event;

@@ -12,25 +12,35 @@ bool AI::EnterDangerZone(float radiusLimit, Engine::Vector2D position, Engine::V
 
 std::vector<Engine::Vector2D> AI::pathFinding(Engine::Vector2D targetPosition, Engine::Vector2D startPosition)
 {
-	nodelist = new NodeList(targetPosition, startPosition);
-	//std::vector<Engine::Vector2D> list = nodelist->GetPath(); //need to give return a list
-	return nodelist->Path;
-		
+	int targetPosIntX = (int)targetPosition.X;
+	int targetPosIntY = (int)targetPosition.Y;
+	int startPosIntX = (int)startPosition.X;
+	int startPosIntY = (int)startPosition.Y;
+	Engine::Vector2D targetPosInt;
+	targetPosInt.X = targetPosIntX;
+	targetPosInt.Y = targetPosIntY;
+	Engine::Vector2D startPosInt;
+	startPosInt.X = startPosIntX;
+	startPosInt.Y = startPosIntY;
+	nodelist = new NodeList(targetPosInt, startPosInt);
+	std::vector<Engine::Vector2D> list = nodelist->GetPath(); //need to give return a list
+	return list;
 }
 
 Engine::Vector2D AI::RandomMovement()
 {
 	std::mt19937 generator;
 	generator.seed(std::time(0));
-	
-	//Todo: fix value between 0 - 900 and 0 - 1440
-	float X = (std::uniform_int_distribution<uint32_t>(1, 5))(generator);
-	float Y = (std::uniform_int_distribution<uint32_t>(1, 5))(generator);
 
-	position.X = X;
-	position.Y = Y;
+	float X = (std::uniform_int_distribution<uint32_t>(0, 4))(generator); 
+	float Y = (std::uniform_int_distribution<uint32_t>(0, 4))(generator);
+
+	Engine::Vector2D position;
+	position.X = (X - 2); // to get minus value
+	position.Y = (Y - 2);
 	return position;
 }
+
 
 
 

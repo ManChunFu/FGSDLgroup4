@@ -23,6 +23,8 @@ void MainScene::createPlayer()
 	player = new Player(inputManager, 1);
 	player->AddCollider("Player");
 	player->AddSprite("Player");
+	player->position.X = 500;
+	player->position.Y = 500;
 	player->collider->solid = true;
 }
 

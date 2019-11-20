@@ -14,22 +14,25 @@ public:
 	void SetNewStartPos(Engine::Vector2D startPos) { this->targetPos = startPos; }
 	//void SetNewObstacleList(std::vector<Engine::Vector2D> obstacleList) { this->obstacleList = obstacleList; }
 
-	std::vector<Engine::Vector2D> Path;	
 	
 private:
-	float GetHCost(Engine::Vector2D newNodePos, Engine::Vector2D targetPos);
+	int GetHCost(Engine::Vector2D newNodePos, Engine::Vector2D targetPos);
 	void SetWorkingNodes();
 	bool CheckObstacle(Engine::Vector2D newNodePos);
 	Node* CheckExistingNode(Engine::Vector2D newNodePos);
-	void MoveNodeToClose(Node* node);
+	//void MoveNodeToClose(Node* node);
+	bool CheckAllNodesCompleted();
 
 	std::vector<Node*> examinatedNodeArea;
 	std::vector<Node*> workingNodes;
 	std::vector<Node*> closeNodes;
+	std::vector<Engine::Vector2D> Path;
 	std::vector<Engine::Vector2D> obstacleList;
 
-	float currentSamllestFCost;
-	const float sceneSizeMinX = 0, sceneSizeMinY = 0, sceneSizeMaxX = 1440, sceneSizeMaxY = 900;
+	int miniFCost;
+	int miniHCostOfAllMiniFCosts;
+	int currentSmallestFCost;
+	const int sceneSizeMinX = 0, sceneSizeMinY = 0, sceneSizeMaxX = 1440, sceneSizeMaxY = 900;
 	
 	Engine::Vector2D targetPos;
 	Engine::Vector2D startPos; 

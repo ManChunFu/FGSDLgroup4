@@ -2,7 +2,7 @@
 #include <Entity.h>
 #include <Scene.h>
 //#include <InputManager.h>
-class Bullet;
+class TimedExplosive;
 namespace Engine 
 {
 	class InputManager;
@@ -29,11 +29,12 @@ private:
 	Engine::Animator* anim = nullptr;
 
 	int hitPoint = 0;
-	int dirX;
-	int dirY;
-	Bullet* bullet = nullptr;
+	int dirX = 0;
+	int dirY = 0;
+	TimedExplosive* bullet = nullptr;
 	Engine::Vector2D currPos;
-	
+	float mineCooldown = 5;
+	float mineTimer = mineCooldown;
 	Engine::Projectile* projectile = nullptr; //alternative for shooting (um)
 
 
