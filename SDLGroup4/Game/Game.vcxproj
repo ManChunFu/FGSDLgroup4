@@ -87,6 +87,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AI.cpp" />
+    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="TimedExplosive.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -107,6 +109,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AI.h" />
+    <ClInclude Include="Background.h" />
+    <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="TimedExplosive.h" />
     <ClInclude Include="Enemy.h" />
