@@ -14,6 +14,8 @@ public:
 	MainScene(Engine::Application* app, Engine::InputManager* input) : Scene(app, input) 
 	{ 
 		mainScene = this; 
+		sceneCam.Position.X = 100;
+		sceneCam.Position.Y = 100;
 		Engine::TextureManager::AddTexture("Enemy", "Assets/Sprites/enemy_drone_larger_red.png");
 		Engine::TextureManager::AddTexture("FireSpell", "Assets/Sprites/FireSpell.png");
 		Engine::TextureManager::AddTexture("Player", "Assets/Sprites/Hopping_rabbit_dude.png");

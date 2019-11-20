@@ -3,6 +3,7 @@
 #include "Text.h"
 #include "Button.h"
 #include <vector>
+#include "Camera.h"
 namespace Engine 
 {
 	class Application;
@@ -20,13 +21,16 @@ namespace Engine
 		virtual void HandleEvents();
 		virtual void Render();
 		const int id = idCtr;
+		virtual void AddClickables() {};
 		CollisionManager* CollisionManager() { return colManager; };
 		virtual void SetUpUI() = 0;
 		void AddEntity(Entity* ent);
 		void Destroy(Entity* target);
 		Engine::Application* application;
 		static Scene* ActiveScene;
+		Camera* Camera() { return &sceneCam; }
 	protected:
+		Engine::Camera sceneCam;
 		Engine::InputManager* inputManager;
 	private:
 		std::vector<Entity*> addQueue;
