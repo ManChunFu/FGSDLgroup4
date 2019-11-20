@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "Camera.h"
 namespace Engine 
 {
 	void Entity::AddSprite(std::string _name, float scaleX, float scaleY)
@@ -36,6 +37,8 @@ namespace Engine
 	{
 		if (texture)
 		{
+			destRect.x -= Engine::Camera::ActiveCamera->Position.X;
+			destRect.y -= Engine::Camera::ActiveCamera->Position.Y;
 			Engine::TextureManager::Draw(texture, sourceRect, destRect);
 			animator.DisplayAnimation(position.X, position.Y);
 		}
