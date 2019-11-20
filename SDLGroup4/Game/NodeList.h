@@ -22,6 +22,7 @@ private:
 	Node* CheckExistingNode(Engine::Vector2D newNodePos);
 	//void MoveNodeToClose(Node* node);
 	bool CheckAllNodesCompleted();
+	//Engine::Vector2D HalfWayPoint(Engine::Vector2D targetPos, Engine::Vector2D startPos);
 
 	std::vector<Node*> examinatedNodeArea;
 	std::vector<Node*> workingNodes;

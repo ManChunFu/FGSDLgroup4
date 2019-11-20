@@ -9,17 +9,12 @@ NodeList::~NodeList()
 {
 	for (auto examinatedNode : examinatedNodeArea)
 		delete examinatedNode;
+
 	examinatedNodeArea.clear();
-	// todo delete all lists ( one list with all the nodes)
-	for (auto workingNode : workingNodes)
-		delete workingNode;
-	workingNodes.clear();
-	//closeNodes.clear();
 }
 
 std::vector<Engine::Vector2D> NodeList::GetPath()
 {
-	//std::vector<Engine::Vector2D> result;
 	
 	examinatedNodeArea.push_back(new Node(startPos, GetHCost(startPos, targetPos), nullptr));
 
@@ -32,6 +27,7 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 
 		for (Node* current : workingNodes)
 		{
+			//if (current->Position == targetPos)
 			if (current->Position == targetPos)
 			{
 				reachTarget = true;
@@ -184,21 +180,23 @@ bool NodeList::CheckAllNodesCompleted()
 	return true;
 }
 
-
-//void NodeList::MoveNodeToClose(Node* node)
+//in the future purpose
+//Engine::Vector2D NodeList::HalfWayPoint(Engine::Vector2D targetPos, Engine::Vector2D startPos)
 //{
-//	closeNodes.push_back(node);
-//	for (int index = 0; index < examinatedNodeArea.size(); index++)
-//	{
-//		if (node->Position == examinatedNodeArea[index]->Position)
-//			examinatedNodeArea.erase(examinatedNodeArea.begin() + index);
-//	}
+//	Engine::Vector2D temPos;
+//
+//	temPos.X = targetPos.X - fabsf((targetPos.X - startPos.X) * 0.5);
+//	temPos.Y = targetPos.Y - fabsf((targetPos.Y - startPos.Y) * 0.5);
+//
+//	return temPos;
 //}
+
 
 int NodeList::GetHCost(Engine::Vector2D newNodePos, Engine::Vector2D targetPos)
 {
 	int x = fabsf(targetPos.X - newNodePos.X);
 	int y = fabsf(targetPos.Y - newNodePos.Y);
+	
 	if (x < y)
 		return (y - x) + (hypotf(x, x));
 	else

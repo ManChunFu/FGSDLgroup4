@@ -8,6 +8,7 @@
 #include <GameTime.h>
 
 
+
 void Enemy::Update()
 {
 	Movement();
@@ -18,28 +19,40 @@ void Enemy::Update()
 	if (position.Y > 900 - destRect.h) position.Y = 900 - destRect.h;*/
 
 	Engine::Entity::Update();
-
 }
 
 void Enemy::Movement()
 {
 	
+	Engine::Vector2D newPosition;
+	frameCounter += Engine::GameTime::DeltaTime();
 
 	if (OnTriggerEnter())
 	{
 		std::cout << "Alert!";
-		pathToTarget = ai.pathFinding(player->position, position);
-		for (auto path : pathToTarget)
+		if (frameCounter > 1.f)
 		{
-			
+			frameCounter = 0.f;
+			pathToTarget = ai.pathFinding(player->position, position);
+			pathCounter = 2;
 		}
+		if (pathToTarget.size() > pathCounter)
+		{
+			position = pathToTarget[pathToTarget.size() - pathCounter];
+			pathCounter++;
+		}
+
 	}
 	else
 	{
-		Engine::Vector2D newPosition;
-
-		Engine::Vector2D positionTemp = ai.RandomMovement();
+		randomCounter += Engine::GameTime::DeltaTime();
+		if (randomCounter > 1.f)
+		{
+			randomCounter = 0.f;
+			positionTemp = ai.RandomMovement();
+		}
 		newPosition = position + positionTemp;
+		animator.Trigger("Run");
 
 		if (newPosition.X <= 0)
 			newPosition.X++;
@@ -57,7 +70,7 @@ void Enemy::Movement()
 
 bool Enemy::OnTriggerEnter()
 {
-	return (ai.EnterDangerZone(200.0f, position, player->position));
+	return (ai.EnterDangerZone(500.0f, position, player->position));
 }
 
 
