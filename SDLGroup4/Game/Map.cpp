@@ -84,16 +84,16 @@ void Map::DrawMap()
 			switch (type)
 			{
 			case 0:
-				Engine::TextureManager::Draw(sandFloor0, sourceRect, destRect);
+				Engine::TextureManager::Draw(sandFloor0, sourceRect, destRect,0);
 				break;
 			case 1:
-				Engine::TextureManager::Draw(sandFloor1, sourceRect, destRect);
+				Engine::TextureManager::Draw(sandFloor1, sourceRect, destRect, 0);
 				break;
 			case 2:
-				Engine::TextureManager::Draw(sandFloor2, sourceRect, destRect);
+				Engine::TextureManager::Draw(sandFloor2, sourceRect, destRect, 0);
 				break;
 			case 3:
-				Engine::TextureManager::Draw(sandFloor3, sourceRect, destRect);
+				Engine::TextureManager::Draw(sandFloor3, sourceRect, destRect,0);
 				break;
 			default:
 				break;
