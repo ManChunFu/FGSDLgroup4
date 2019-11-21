@@ -44,3 +44,15 @@ void Engine::Animation::PlayAnimation(float x, float y)//(Vector2D& position)
 	
 }
 
+void Engine::Animation::ChangeScale(float amount)
+{
+	destinationRect.w = sourceRect.w * amount;
+	destinationRect.h = sourceRect.h * amount;
+}
+
+void Engine::Animation::ChangeScale(float x, float y)
+{
+	destinationRect.w = sourceRect.w * x;
+	destinationRect.h = sourceRect.h * y;
+}
+

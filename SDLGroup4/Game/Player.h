@@ -1,7 +1,6 @@
 #pragma once
 #include <Entity.h>
 #include <Scene.h>
-//#include <InputManager.h>
 class TimedExplosive;
 namespace Engine 
 {
@@ -22,19 +21,24 @@ public:
 
 	void Update() override;
 
-	float moveSpeed = 500.0f;
+	float moveSpeed = normalSpeed;
 
 private:
 	Engine::InputManager* inputManager = nullptr;
 	Engine::Animator* anim = nullptr;
-
+	float normalSpeed = 500.0f;
+	float teleportDistance = 15000.0f;
 	int hitPoint = 0;
 	int dirX = 0;
 	int dirY = 0;
+	Engine::Vector2D lastDirection;
 	TimedExplosive* bullet = nullptr;
 	Engine::Vector2D currPos;
 	float mineCooldown = 5;
 	float mineTimer = 0;
+	float teleportCooldown = 3.0f;
+	float teleportTimer;
+	bool hasTeleported;
 	Engine::Projectile* projectile = nullptr; //alternative for shooting (um)
 
 

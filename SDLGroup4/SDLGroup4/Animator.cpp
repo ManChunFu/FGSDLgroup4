@@ -27,3 +27,13 @@ void Engine::Animator::DisplayAnimation(float x, float y)//(Vector2D position)
 		if (currenAnimation != nullptr)
 			currenAnimation->PlayAnimation(x, y);//(position);
 }
+
+void Engine::Animator::ChangeScale(float amount)
+{
+	if(currenAnimation) currenAnimation->ChangeScale(amount);
+}
+
+void Engine::Animator::ChangeScale(float x, float y)
+{
+	if(currenAnimation) currenAnimation->ChangeScale(x, y);
+}

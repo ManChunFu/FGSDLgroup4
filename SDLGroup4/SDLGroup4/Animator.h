@@ -15,7 +15,8 @@ namespace Engine
 		void Trigger(const std::string& name);
 		void Stop();
 		void DisplayAnimation(float x, float y);//(Vector2D position);
-
+		void ChangeScale(float amount);
+		void ChangeScale(float x, float y);
 		std::vector<Animation*> Animations;
 		Animation* currenAnimation = nullptr;
 		bool isTrigger;

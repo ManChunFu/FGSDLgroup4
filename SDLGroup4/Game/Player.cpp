@@ -34,15 +34,10 @@ void Player::Update()
 	projectilePos.X +=  position.X  + 100.f;
 	projectilePos.Y +=  position.Y + 100.f;
 
-	if (dirX == 0 && dirY == 0)
-	{
-		dirX = 1;
-	}
-
-	projectile = new Engine::Projectile(3, position, dirX, dirY);
+	projectile = new Engine::Projectile(3, position, lastDirection.X, lastDirection.Y);
 	if (inputManager->GetAxis("Fire2")== 1)
 	{	
-		if (inputManager->GetAxis("Vertical"))
+		if (lastDirection.Y != 0)
 		{
 			projectile->AddSprite("Projectile2");
 		}
@@ -51,8 +46,11 @@ void Player::Update()
 			projectile->AddSprite("Projectile1");
 		}	
 	}
-
-
+	if (dirX != 0 || dirY != 0) 
+	{
+		lastDirection.X = dirX;
+		lastDirection.Y = dirY;
+	}
 }
 
 
@@ -76,7 +74,18 @@ void Player::MovePlayer()
 	{
 		movement.X = -10.0f;
 	}*/
-
+	if (teleportTimer > 0) 
+	{
+		teleportTimer -= Engine::GameTime::DeltaTime();
+		if (inputManager->IsKeyReleased(Key::SPACE)) hasTeleported = false;
+	}
+		moveSpeed = normalSpeed;
+	if (teleportTimer <= 0 && !hasTeleported && inputManager->GetAxis("Space") != 0) 
+	{
+		teleportTimer = teleportCooldown;
+		hasTeleported = true;
+		moveSpeed = teleportDistance;
+	}
 	position.X +=dirX * moveSpeed *Engine::GameTime::DeltaTime();
 	position.Y +=dirY * moveSpeed * Engine::GameTime::DeltaTime();
 }

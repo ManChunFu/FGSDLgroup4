@@ -23,6 +23,7 @@ namespace Engine
 		destRect.x = position.X; destRect.y = position.Y;
 		destRect.w = ScaleX * sourceRect.w;
 		destRect.h = ScaleY * sourceRect.h;
+		
 		if (collider)
 		{
 			if (collider->collisions.size() > 0)
@@ -39,8 +40,11 @@ namespace Engine
 		{
 			destRect.x -= Engine::Camera::ActiveCamera->Position.X;
 			destRect.y -= Engine::Camera::ActiveCamera->Position.Y;
-			if (PlayAnimation) 
-			{ animator.DisplayAnimation(destRect.x, destRect.y); }
+			if (PlayAnimation)
+			{
+				animator.DisplayAnimation(destRect.x, destRect.y);
+				animator.ChangeScale(ScaleX, ScaleY);
+			}
 			else
 			{ Engine::TextureManager::Draw(texture, sourceRect, destRect); }
 			

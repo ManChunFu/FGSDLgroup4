@@ -16,7 +16,8 @@ namespace Engine
 		void PlayAnimation(float x, float y);//(Vector2D& position);
 
 		std::string name = "";
-	
+		void ChangeScale(float amount);
+		void ChangeScale(float x, float y);
 	private:
 		std::string spritePath = "";
 		int spriteSheetLengthX = 0, spriteSheetLengthY = 0;
