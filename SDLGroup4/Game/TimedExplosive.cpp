@@ -6,8 +6,8 @@ void TimedExplosive::Update()
 	{
 		if (explosionTimer == 2) 
 		{
-			this->AddCollider("Explosion");
 			this->AddSprite("Explosion", 0.5f, 0.5f);
+			this->AddCollider("Explosion", false);
 			position.X -= GetSpriteWidth() * 0.5f;
 			position.Y -= GetSpriteHeight() * 0.5f;
 		}

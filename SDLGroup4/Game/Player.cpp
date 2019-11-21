@@ -8,6 +8,7 @@
 
 void Player::Update()
 {
+	rotation = 100;
 	if (mineTimer > 0) mineTimer -= Engine::GameTime::DeltaTime();
 	currPos = position;
 	dirX = inputManager->GetAxis("Horizontal");

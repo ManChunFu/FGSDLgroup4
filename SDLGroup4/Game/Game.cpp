@@ -74,7 +74,10 @@ bool Engine::Application::Initialize()
 	SoundManager::AddSoundEffect("Bell", "Assets/Sounds/bell.wav");
 	SoundManager::AddSoundEffect("Button", "Assets/Sounds/button.wav");
 	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
+	for (auto i : scenes)
+	{ i->Shutdown(); }
 	Engine::Scene::ActiveScene = scenes[0];
+	Engine::Scene::ActiveScene->Start();
 	return true;
 }
 

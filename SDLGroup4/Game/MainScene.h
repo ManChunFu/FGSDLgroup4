@@ -16,7 +16,7 @@ public:
 		mainScene = this; 
 		
 		Engine::TextureManager::AddTexture("Enemy", "Assets/Sprites/enemy.png");
-		Engine::TextureManager::AddTexture("EnemyRun", "Assets/Sprites/Run.png");
+		Engine::TextureManager::AddTexture("EnemyRun", "Assets/Sprites/char.png");
 		Engine::TextureManager::AddTexture("FireSpell", "Assets/Sprites/FireSpell.png");
 		Engine::TextureManager::AddTexture("PlayerIdle", "Assets/Sprites/Player/IDLE.png");
 		Engine::TextureManager::AddTexture("Player", "Assets/Sprites/Player/sprite.png");

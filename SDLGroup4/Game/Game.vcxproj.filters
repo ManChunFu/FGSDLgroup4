@@ -1,40 +1,105 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="AI.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="MainMenu.cpp" />
-    <ClCompile Include="MainScene.cpp" />
-    <ClCompile Include="Node.cpp" />
-    <ClCompile Include="NodeList.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="TimedExplosive.cpp" />
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="Background.cpp" />
-    <ClCompile Include="GameOverScene.cpp" />
+    <ClCompile Include="Background.cpp">
+      <Filter>Cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeList.cpp">
+      <Filter>Cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverScene.cpp">
+      <Filter>Cpp files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Cpp files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="MainScene.cpp">
+      <Filter>Cpp files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>Cpp files\Character Related</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Cpp files\Character Related</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Cpp files\Character Related</Filter>
+    </ClCompile>
+    <ClCompile Include="TimedExplosive.cpp">
+      <Filter>Cpp files\Character Related</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AI.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="MainMenu.h" />
-    <ClInclude Include="MainScene.h" />
-    <ClInclude Include="Node.h" />
-    <ClInclude Include="NodeList.h" />
-    <ClInclude Include="Obstacle.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="TimedExplosive.h" />
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="Background.h" />
-    <ClInclude Include="GameOverScene.h" />
+    <ClInclude Include="Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScene.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="MainScene.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Header Files\Character related stuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Character related stuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Character related stuff</Filter>
+    </ClInclude>
+    <ClInclude Include="TimedExplosive.h">
+      <Filter>Header Files\Character related stuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle.h">
+      <Filter>Header Files\Character related stuff</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="HeaderFiles">
+    <Filter Include="Header Files">
       <UniqueIdentifier>{a4afbe70-36c2-4697-af2a-e9359f4365f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scenes">
+      <UniqueIdentifier>{b61f4823-478d-4561-921b-52e7ebb1b545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Character related stuff">
+      <UniqueIdentifier>{1d862033-04a2-4dd8-8920-94fe5c2b6375}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cpp files">
+      <UniqueIdentifier>{403937c2-86b2-402d-92ea-d3adeeb1c80c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cpp files\Scenes">
+      <UniqueIdentifier>{4c52a6e1-cd75-423e-a66c-6d1a28519cbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cpp files\Character Related">
+      <UniqueIdentifier>{a23b05a0-4a2e-4267-b958-651a8591d85b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
