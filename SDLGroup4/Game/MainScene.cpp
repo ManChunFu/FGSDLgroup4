@@ -32,7 +32,7 @@ void MainScene::Start()
 
 void MainScene::CreateEnemy()
 {
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		enemy.push_back(new Enemy(1));
 		enemy[enemy.size() - 1]->AddCollider("Enemy", true);

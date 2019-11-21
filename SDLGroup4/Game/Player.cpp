@@ -90,13 +90,46 @@ void Player::MovePlayer()
 	
 	position.X +=dirX * moveSpeed *Engine::GameTime::DeltaTime();
 	position.Y +=dirY * moveSpeed * Engine::GameTime::DeltaTime();
-	animator.Stop();
-	animator.Trigger("Run");
+	
 
 	if (dirX == 0 && dirY == 0)
+	{		
+		if (!stopMoving)
+		{
+			stopMoving = true;
+
+			animator.Stop();
+			animator.Trigger(animationIdleID);
+		}
+	}
+	else
 	{
-		animator.Stop();
-		animator.Trigger("Idle");
+		if (dirX > 0)
+		{
+			if (animationMovingID != "RunRight" || stopMoving)
+			{
+				animationIdleID = "IdleRight";
+				animationMovingID = "RunRight";
+				animator.Stop();
+				animator.Trigger(animationMovingID);
+			}
+		}
+		else if (dirX < 0)
+		{
+			if (animationMovingID != "RunLeft" || stopMoving)
+			{
+				animationIdleID = "IdleLeft";
+				animationMovingID = "RunLeft";
+				animator.Stop();
+				animator.Trigger(animationMovingID);
+			}
+		}
+		else
+		{
+			animator.Stop();
+			animator.Trigger(animationMovingID);
+		}
+		stopMoving = false;
 	}
 }
 
