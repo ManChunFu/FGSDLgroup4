@@ -25,11 +25,11 @@ Engine::Animation::~Animation()
 }
 
 
-void Engine::Animation::PlayAnimation(float x, float y)//(Vector2D& position)
+void Engine::Animation::PlayAnimation(Vector2D& position)
 {
 	framtime++;
-	destinationRect.x = x;//position.X;
-	destinationRect.y = y;//position.Y;
+	destinationRect.x =position.X;
+	destinationRect.y =position.Y;
 
 	if (framePerSecond/framtime == speed)
 	{
@@ -38,10 +38,8 @@ void Engine::Animation::PlayAnimation(float x, float y)//(Vector2D& position)
 		if (sourceRect.x >= spriteWidth)
 			sourceRect.x = 0;
 	}
-
 	
-	Engine::TextureManager::Draw(newAnimation, sourceRect, destinationRect, 0);
-	
+	Engine::TextureManager::Draw(newAnimation, sourceRect, destinationRect);
 }
 
 void Engine::Animation::ChangeScale(float amount)

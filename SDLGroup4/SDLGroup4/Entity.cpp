@@ -56,11 +56,11 @@ namespace Engine
 	{
 		if (texture)
 		{
-			destRect.x -= Engine::Camera::ActiveCamera->Position.X;
-			destRect.y -= Engine::Camera::ActiveCamera->Position.Y;
+			position.X -= Engine::Camera::ActiveCamera->Position.X;
+			position.Y -= Engine::Camera::ActiveCamera->Position.Y;
 			if (PlayAnimation)
 			{
-				animator.DisplayAnimation(destRect.x, destRect.y);
+				animator.DisplayAnimation(position);
 				animator.ChangeScale(ScaleX, ScaleY);
 			}
 			else

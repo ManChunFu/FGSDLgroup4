@@ -21,16 +21,17 @@ public:
 	Enemy(int hp) : Engine::Entity() {
 		player = MainScene::mainScene->player;
 		hitpoint = hp;
-		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 10, 1, 5));
+		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 8, 1, 5));
 		PlayAnimation = false;
-		ScaleX = 1;
-		ScaleY = 1;
+		ScaleX = 0.5f;
+		ScaleY = 0.5f;
 	}
 
 	int hitpoint;
 	void Update() override;
 	void Movement();
 	bool OnTriggerEnter();
+	static bool hasPathFound;
 	
 
 private:
@@ -41,9 +42,9 @@ private:
 	std::vector<Engine::Vector2D> pathToTarget;
 	Engine::Vector2D positionTemp;
 	float randomCounter = 0.f;
-	int pathCounter = 3;
+	int pathCounter = 2;
 	float frameCounter = 0.f;
-	Engine::Vector2D pathFindingPosition;
+	int movementTimer = 0;
 	
 
 

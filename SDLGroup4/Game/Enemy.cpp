@@ -8,12 +8,9 @@
 #include <GameTime.h>
 #include <thread>
 
-
+bool Enemy::hasPathFound;
 void Enemy::Update()
 {
-	/*std::thread t(&Enemy::Movement, this);
-	t.detach();*/
-	
 	Movement();
 
 	/*if (position.X < 0) position.X = 0;
@@ -31,28 +28,25 @@ void Enemy::Movement()
 
 	if (OnTriggerEnter())
 	{
-		//std::cout << "Alert!";
-
-		if (frameCounter > 1.f )//&& pathFindingPosition != player->position)
+		movementTimer ++;
+		if (frameCounter > 0.5f && !hasPathFound)
 		{
-			//pathFindingPosition = player->position;
+			hasPathFound = true;
 			frameCounter = 0.f;
-			pathToTarget = ai.pathFinding(player->position, position);//pathFindingPosition, position);
-			pathCounter = 3;
+			pathToTarget = ai.pathFinding(player->position, position);
+			pathCounter = 2;
 		}
 
-		if (pathToTarget.size() > pathCounter)
+		if (pathToTarget.size() > pathCounter && movementTimer % 2 == 0)
 		{
+			movementTimer = 0;
 			position = pathToTarget[pathToTarget.size() - pathCounter];
-			pathCounter+= 2;
+			pathCounter ++;
 		}
-		/*else
-			goto moveRandom;*/
 
 	}
 	else
 	{
-		//moveRandom:
 		randomCounter += Engine::GameTime::DeltaTime();
 		if (randomCounter > 1.f)
 		{
@@ -71,7 +65,7 @@ void Enemy::Movement()
 			newPosition.Y = 2;
 		else if (newPosition.Y > 900)
 			newPosition.Y = 898;
-		
+
 		position = newPosition;
 
 	}
@@ -85,7 +79,6 @@ bool Enemy::OnTriggerEnter()
 
 void Enemy::OnCollisionEnter(Engine::Collider* other)
 {
-	//std::cout << other->tag << std::endl;
 }
 
 

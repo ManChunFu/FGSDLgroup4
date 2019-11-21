@@ -96,6 +96,7 @@ void Engine::Application::Run()
 		Render();
 		frameTime = SDL_GetTicks() - frameStartTick;
 		if (frameDelay > frameTime) {
+			if(frameDelay - frameTime > 0)
 			SDL_Delay(frameDelay - frameTime);
 		}
 		Engine::GameTime::EndFrame();
