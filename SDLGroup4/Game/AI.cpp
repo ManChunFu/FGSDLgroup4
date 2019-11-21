@@ -23,7 +23,7 @@ std::vector<Engine::Vector2D> AI::pathFinding(Engine::Vector2D targetPosition, E
 	startPosInt.X = startPosIntX;
 	startPosInt.Y = startPosIntY;
 	nodelist = new NodeList(targetPosInt, startPosInt);
-	std::vector<Engine::Vector2D> list = nodelist->GetPath(); //need to give return a list
+	std::vector<Engine::Vector2D> list = nodelist->GetPath(); 
 
 	delete nodelist;
 	return list;
@@ -31,8 +31,8 @@ std::vector<Engine::Vector2D> AI::pathFinding(Engine::Vector2D targetPosition, E
 
 Engine::Vector2D AI::RandomMovement()
 {
-	float x = (rand() % 7) - 3;
-	float y = (rand() % 7) - 3;
+	float x = (rand() % 3) - 1;
+	float y = (rand() % 3) - 1;
 	
 	Engine::Vector2D position;
 	position.X = x;

@@ -11,9 +11,6 @@
 bool Enemy::hasPathFound;
 void Enemy::Update()
 {
-	/*std::thread t(&Enemy::Movement, this);
-	t.detach();*/
-
 	Movement();
 
 	/*if (position.X < 0) position.X = 0;
@@ -38,7 +35,6 @@ void Enemy::Movement()
 			frameCounter = 0.f;
 			pathToTarget = ai.pathFinding(player->position, position);
 			pathCounter = 2;
-
 		}
 
 		if (pathToTarget.size() > pathCounter && movementTimer % 2 == 0)
@@ -83,7 +79,6 @@ bool Enemy::OnTriggerEnter()
 
 void Enemy::OnCollisionEnter(Engine::Collider* other)
 {
-	//std::cout << other->tag << std::endl;
 }
 
 

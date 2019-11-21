@@ -21,11 +21,12 @@ void Engine::Animator::Stop()
 	currenAnimation = nullptr;
 }
 
-void Engine::Animator::DisplayAnimation(float x, float y)//(Vector2D position)
+
+void Engine::Animator::DisplayAnimation(Vector2D position)
 {
 	if (isTrigger)
 		if (currenAnimation != nullptr)
-			currenAnimation->PlayAnimation(x, y);//(position);
+			currenAnimation->PlayAnimation(position);
 }
 
 void Engine::Animator::ChangeScale(float amount)
