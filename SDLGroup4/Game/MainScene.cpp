@@ -21,6 +21,14 @@ void MainScene::CreateMap()
 	
 }
 
+void MainScene::Start()
+{
+	Scene::Start();
+	CreateMap();
+	CreatePlayer();
+	CreateEnemy();
+}
+
 void MainScene::CreateEnemy()
 {
 	for (int i = 0; i < 1; i++)

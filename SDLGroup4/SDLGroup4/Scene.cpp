@@ -54,6 +54,13 @@ namespace Engine {
 		entityManager->Render();
 	}
 
+	void Scene::Start()
+	{
+		ActiveScene = this;
+		colManager = new Engine::CollisionManager();
+		entityManager = new Engine::EntityManager();
+	}
+
 	void Scene::AddEntity(Entity* ent)
 	{
 		addQueue.push_back(ent);

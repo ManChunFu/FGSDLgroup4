@@ -74,7 +74,7 @@ bool Engine::Application::Initialize()
 	SoundManager::AddSoundEffect("Bell", "Assets/Sounds/bell.wav");
 	SoundManager::AddSoundEffect("Button", "Assets/Sounds/button.wav");
 	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
-	Engine::Scene::ActiveScene = scenes[activeScene];
+	Engine::Scene::ActiveScene = scenes[0];
 	return true;
 }
 
@@ -131,10 +131,7 @@ void Engine::Application::Shutdown()
 void Engine::Application::HandleEvents()
 {
 	if (!application->Pause)
-	{
-		if (activeScene > scenes.size()) activeScene = scenes.size();
-		scenes[activeScene]->HandleEvents();
-	}
+	{ Engine::Scene::ActiveScene->HandleEvents(); }
 }
 
 void Engine::Application::Update()
@@ -142,10 +139,7 @@ void Engine::Application::Update()
 	inputManager->Update(isRunning, application->Pause);
 	Engine::UIManager::Update();
 	if (!application->Pause)
-	{
-		if (activeScene > scenes.size() - 1) activeScene = scenes.size() - 1;
-		scenes[activeScene]->Update();
-	}
+	{ Engine::Scene::ActiveScene->Update(); }
 
 }
 
@@ -154,15 +148,15 @@ void Engine::Application::Render()
 	Engine::Window::RenderClear();
 	Engine::UIManager::Render();
 	SDL_SetRenderDrawColor(Engine::Window::Renderer, 100, 100, 100, 255);//background color
-	if (activeScene > scenes.size()) activeScene = scenes.size();
-	scenes[activeScene]->Render();
+	Engine::Scene::ActiveScene->Render();
 	Engine::Window::RenderPresent(); 
 }
 void Engine::Application::LoadScene(int scene) 
 {
+	Engine::Scene::ActiveScene->Shutdown();
 	Engine::Scene::ActiveScene = scenes[scene];
+	Engine::Scene::ActiveScene->Start();
 	Engine::Camera::ActiveCamera = scenes[scene]->Camera();
-	application->activeScene = scene;
 	inputManager->ClearClickables();
 	scenes[scene]->AddClickables();
 }

@@ -85,6 +85,7 @@ void Player::MovePlayer()
 		hasTeleported = true;
 		moveSpeed = teleportDistance;
 	}
+	
 	position.X +=dirX * moveSpeed *Engine::GameTime::DeltaTime();
 	position.Y +=dirY * moveSpeed * Engine::GameTime::DeltaTime();
 }

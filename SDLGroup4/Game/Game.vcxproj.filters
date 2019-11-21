@@ -32,4 +32,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Filter Include="HeaderFiles">
+      <UniqueIdentifier>{a4afbe70-36c2-4697-af2a-e9359f4365f0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
 </Project>

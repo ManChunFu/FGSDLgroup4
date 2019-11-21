@@ -27,9 +27,7 @@ public:
 		Engine::TextureManager::AddTexture("Ground02", "Assets/Sprites/floor_sand_rock_1.png");
 		Engine::TextureManager::AddTexture("Ground03", "Assets/Sprites/floor_sand_rock_2.png");
 		Engine::TextureManager::AddTexture("Ground04", "Assets/Sprites/floor_sand_rock_3.png");
-		CreateMap();
-		CreatePlayer(); 
-		CreateEnemy(); 
+		
 	}
 
 	Map* map;
@@ -38,6 +36,7 @@ public:
 	void Update() override;
 	void Render() override;
 private:
+	void Start() override;
 	void CreateEnemy();
 	std::vector<Enemy*> enemy;
 	Engine::Vector2D RandomeStartPos();

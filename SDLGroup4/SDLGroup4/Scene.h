@@ -24,6 +24,7 @@ namespace Engine
 		virtual void AddClickables() {};
 		CollisionManager* CollisionManager() { return colManager; };
 		virtual void SetUpUI() = 0;
+		virtual void Start();
 		void AddEntity(Entity* ent);
 		void Destroy(Entity* target);
 		Engine::Application* application;
