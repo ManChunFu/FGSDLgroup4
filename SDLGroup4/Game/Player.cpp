@@ -16,9 +16,9 @@ void Player::Update()
 
 	MovePlayer();
 	if (position.X < 0) position.X = 0;
-	if (position.X > 1440 - destRect.w) position.X = 1440 - destRect.w;
+	if (position.X > 1440 - (destRect.w)) position.X = 1440 - destRect.w;
 	if (position.Y < 0) position.Y = 0;
-	if (position.Y > 900 - destRect.h) position.Y = 900 - destRect.h;
+	if (position.Y > 900 - (destRect.h)) position.Y = 900 - destRect.h;
 	Engine::Entity::Update();
 	
 	Engine::Vector2D bulletpos;
@@ -87,8 +87,17 @@ void Player::MovePlayer()
 		moveSpeed = teleportDistance;
 	}
 	
+	
 	position.X +=dirX * moveSpeed *Engine::GameTime::DeltaTime();
 	position.Y +=dirY * moveSpeed * Engine::GameTime::DeltaTime();
+	animator.Stop();
+	animator.Trigger("Run");
+
+	if (dirX == 0 && dirY == 0)
+	{
+		animator.Stop();
+		animator.Trigger("Idle");
+	}
 }
 
 void Player::OnCollisionEnter(Engine::Collider* other)
