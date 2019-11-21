@@ -16,7 +16,14 @@ class Player : public Engine :: Entity
 {
 public:
 	Player(Engine::InputManager* input, int playerHP) : Engine::Entity() 
-	{ hitPoint = playerHP; inputManager = input; };
+	{ 
+		hitPoint = playerHP; 
+		inputManager = input; 
+		animator.Animations.push_back(new Engine::Animation("PlayerIdle", "Idle", 5, 1, 3));
+		animator.Animations.push_back(new Engine::Animation("PlayerRun", "Run", 5, 1, 5));
+		animator.Trigger("Idle");
+		PlayAnimation = true;
+	};
 
 
 	void Update() override;
@@ -26,7 +33,7 @@ public:
 private:
 	Engine::InputManager* inputManager = nullptr;
 	Engine::Animator* anim = nullptr;
-	float normalSpeed = 500.0f;
+	float normalSpeed = 200.0f;
 	float teleportDistance = 15000.0f;
 	int hitPoint = 0;
 	int dirX = 0;
@@ -41,11 +48,8 @@ private:
 	bool hasTeleported;
 	Engine::Projectile* projectile = nullptr; //alternative for shooting (um)
 
-
-	
 	void MovePlayer();
 	
-
 
 	// Inherited via Entity
 	virtual void OnCollisionEnter(Engine::Collider* other) override;

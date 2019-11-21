@@ -32,7 +32,7 @@ void MainScene::Start()
 
 void MainScene::CreateEnemy()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		enemy.push_back(new Enemy(1));
 		enemy[enemy.size() - 1]->AddCollider("Enemy");
@@ -57,11 +57,11 @@ Engine::Vector2D MainScene::RandomeStartPos()
 void MainScene::CreatePlayer()
 {
 	player = new Player(inputManager, 1);
-	player->AddCollider("Player");
+	player->AddCollider("PlayerIdle");
 	player->AddSprite("Player");
 	player->position.X = 500;
 	player->position.Y = 500;
-	player->collider->solid = true;
+	//player->collider->solid = true;
 }
 
 void MainScene::SetUpUI()

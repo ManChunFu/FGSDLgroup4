@@ -3,7 +3,7 @@
 
 // temporarily using to generate map
 
-int mainLevel[20][25] =
+int mainLevel[20][25] 
 {
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -36,11 +36,14 @@ Map::Map()
 	
 	LoadMap(mainLevel);
 	
-	srcRect.x = srcRect.y = 0;
-	srcRect.w = destRect.w = 32;
-	srcRect.h = destRect.h = 32;
+	sourceRect.x = sourceRect.y = 0;
+	sourceRect.w = destRect.w = 32;
+	sourceRect.h = destRect.h = 32;
 
 	destRect.x = destRect.y = 0;
+
+	ScaleX = 2;
+	ScaleY = 2;
 	
 }
 
@@ -51,7 +54,7 @@ Map::~Map()
 
 void Map::Update()
 {
-
+	Entity::Update();
 }
 
 void Map::LoadMap(int arr[20][25])
@@ -75,22 +78,22 @@ void Map::DrawMap()
 		{
 			type = map[row][column];
 
-			destRect.x = column * 32;
-			destRect.y = row * 32;
+			destRect.x = column * 32 * ScaleX;
+			destRect.y = row * 32 * ScaleY;
 
 			switch (type)
 			{
 			case 0:
-				Engine::TextureManager::Draw(sandFloor0, srcRect, destRect);
+				Engine::TextureManager::Draw(sandFloor0, sourceRect, destRect);
 				break;
 			case 1:
-				Engine::TextureManager::Draw(sandFloor1, srcRect, destRect);
+				Engine::TextureManager::Draw(sandFloor1, sourceRect, destRect);
 				break;
 			case 2:
-				Engine::TextureManager::Draw(sandFloor2, srcRect, destRect);
+				Engine::TextureManager::Draw(sandFloor2, sourceRect, destRect);
 				break;
 			case 3:
-				Engine::TextureManager::Draw(sandFloor3, srcRect, destRect);
+				Engine::TextureManager::Draw(sandFloor3, sourceRect, destRect);
 				break;
 			default:
 				break;

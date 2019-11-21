@@ -31,8 +31,8 @@ namespace Engine {
 	protected:
 		virtual void OnCollisionEnter(Engine::Collider* other) {}
 		SDL_Rect destRect = {0,0,0,0};
-	private:
 		SDL_Rect sourceRect = { 0,0,0,0 };
+	private:
 		SDL_Texture* texture = nullptr;
 	};
 

@@ -40,6 +40,7 @@ namespace Engine
 		{
 			position.X -= Engine::Camera::ActiveCamera->Position.X;
 			position.Y -= Engine::Camera::ActiveCamera->Position.Y;
+			UpdateCollisionBox();
 			if (PlayAnimation)
 			{
 				animator.DisplayAnimation(position);

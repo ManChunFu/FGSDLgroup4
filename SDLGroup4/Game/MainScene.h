@@ -14,12 +14,13 @@ public:
 	MainScene(Engine::Application* app, Engine::InputManager* input) : Scene(app, input) 
 	{ 
 		mainScene = this; 
-		/*sceneCam.Position.X = 100;
-		sceneCam.Position.Y = 100;*/
+		
 		Engine::TextureManager::AddTexture("Enemy", "Assets/Sprites/enemy.png");
 		Engine::TextureManager::AddTexture("EnemyRun", "Assets/Sprites/Run.png");
 		Engine::TextureManager::AddTexture("FireSpell", "Assets/Sprites/FireSpell.png");
-		Engine::TextureManager::AddTexture("Player", "Assets/Sprites/Hopping_rabbit_dude.png");
+		Engine::TextureManager::AddTexture("PlayerIdle", "Assets/Sprites/Player/IDLE.png");
+		Engine::TextureManager::AddTexture("Player", "Assets/Sprites/Player/sprite.png");
+		Engine::TextureManager::AddTexture("PlayerRun", "Assets/Sprites/Player/RUN.png");
 		Engine::TextureManager::AddTexture("Projectile1", "Assets/Sprites/laserX.png");
 		Engine::TextureManager::AddTexture("Projectile2", "Assets/Sprites/laserY.png");
 		Engine::TextureManager::AddTexture("Explosion", "Assets/2D Galaxy Assets/Game/Sprites/Explosion/Explosion_00019.png");
