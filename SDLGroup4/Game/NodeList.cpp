@@ -15,7 +15,6 @@ NodeList::~NodeList()
 
 std::vector<Engine::Vector2D> NodeList::GetPath()
 {
-	
 	examinatedNodeArea.push_back(new Node(startPos, GetHCost(startPos, targetPos), nullptr));
 
 	bool reachTarget = false;
@@ -30,8 +29,10 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 
 		for (Node* current : workingNodes)
 		{
-			//if (current->Position == targetPos)
-			if (current->Position == targetPos)
+			Engine::Vector2D closeEnough = targetPos - current->Position;
+			float distance = fabsf(closeEnough.X) + fabsf(closeEnough.Y);
+			
+			if (distance < 4)
 			{
 				reachTarget = true;
 				Node* nodesToTarget = current;
@@ -77,7 +78,7 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 				diagnoalNeighborY.Y += move.Y;
 
 				if ((newMovePosDiagnoal.X >= sceneSizeMinX && newMovePosDiagnoal.X <= sceneSizeMaxX) &&
-					(newMovePosDiagnoal.Y >= sceneSizeMinY && newMovePosDiagnoal.X <= sceneSizeMaxY))
+					(newMovePosDiagnoal.Y >= sceneSizeMinY && newMovePosDiagnoal.Y <= sceneSizeMaxY))
 				{
 					if (!CheckObstacle(newMovePosDiagnoal))
 					{

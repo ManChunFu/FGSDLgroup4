@@ -40,17 +40,17 @@ private:
 	
 	Engine::Vector2D moveByStraightLine[4] =
 	{
-		Engine::Vector2D(-1.0f, 0.0f), //left
-		Engine::Vector2D(0.0f, -1.0f), //up
-		Engine::Vector2D(1.0f, 0.0f), //right
-		Engine::Vector2D(0.0f, 1.0f) // down
+		Engine::Vector2D(-3.0f, 0.0f), //left
+		Engine::Vector2D(0.0f, -3.0f), //up
+		Engine::Vector2D(3.0f, 0.0f), //right
+		Engine::Vector2D(0.0f, 3.0f) // down
 	};
 	Engine::Vector2D moveByDiagnoalLine [4] =
 	{
-		Engine::Vector2D(-1.0f, -1.0f), //top left corner
-		Engine::Vector2D(1.0f, -1.0f), //top right corner
-		Engine::Vector2D(1.0f, 1.0f),//bottom right corner
-		Engine::Vector2D(-1.0f, 1.0f) // bottom left corner
+		Engine::Vector2D(-3.0f, -3.0f), //top left corner
+		Engine::Vector2D(3.0f, -3.0f), //top right corner
+		Engine::Vector2D(3.0f, 3.0f),//bottom right corner
+		Engine::Vector2D(-3.0f, 3.0f) // bottom left corner
 	};
 	
 };
