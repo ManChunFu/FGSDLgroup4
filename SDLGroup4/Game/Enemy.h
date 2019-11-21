@@ -21,10 +21,10 @@ public:
 	Enemy(int hp) : Engine::Entity() {
 		player = MainScene::mainScene->player;
 		hitpoint = hp;
-		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 8, 1, 5));
-		PlayAnimation = true;
-		ScaleX = .5f;
-		ScaleY = 0.5f;
+		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 10, 1, 5));
+		PlayAnimation = false;
+		ScaleX = 1;
+		ScaleY = 1;
 	}
 
 	int hitpoint;

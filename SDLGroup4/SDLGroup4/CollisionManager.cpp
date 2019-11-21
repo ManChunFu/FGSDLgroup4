@@ -14,7 +14,13 @@ namespace Engine {
 		{
 			for (int a = i + 1; a < colliders.size(); a++)
 			{
-				if (colliders[i] != colliders[a] && colliders[i]->LeftBorder() < colliders[a]->RightBorder() && 
+				if (colliders[i]->TestCollision(colliders[a])) 
+				{
+					std::cout << "Fuck";
+					colliders[i]->collisions.push_back(colliders[a]);
+					colliders[a]->collisions.push_back(colliders[i]);
+				}
+				/*if (colliders[i] != colliders[a] && colliders[i]->LeftBorder() < colliders[a]->RightBorder() && 
 					colliders[i]->TopBorder() < colliders[a]->BottomBorder() && colliders[i]->RightBorder() > colliders[a]->LeftBorder() 
 				    && colliders[i]->BottomBorder() > colliders[a]->TopBorder())
 				{ 
@@ -41,7 +47,7 @@ namespace Engine {
 						if (directionY < 0) colliders[i]->GameObject->position.Y = colliders[a]->TopBorder() + offset - (colliders[i]->BottomBorder() - colliders[i]->TopBorder());
 						colliders[i]->GameObject->UpdateCollisionBox();
 					}
-				}
+				}*/
 			}
 		}
 	}

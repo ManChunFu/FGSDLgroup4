@@ -40,7 +40,7 @@ void Engine::Animation::PlayAnimation(float x, float y)//(Vector2D& position)
 	}
 
 	
-	Engine::TextureManager::Draw(newAnimation, sourceRect, destinationRect);
+	Engine::TextureManager::Draw(newAnimation, sourceRect, destinationRect, 0);
 	
 }
 

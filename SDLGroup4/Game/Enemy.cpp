@@ -31,7 +31,7 @@ void Enemy::Movement()
 
 	if (OnTriggerEnter())
 	{
-		std::cout << "Alert!";
+		//std::cout << "Alert!";
 
 		if (frameCounter > 1.f )//&& pathFindingPosition != player->position)
 		{

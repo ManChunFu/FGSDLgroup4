@@ -8,9 +8,9 @@
 
 namespace Engine {
 	Textures TextureManager::textures;
-	void TextureManager::Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect)
+	void TextureManager::Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect, float rotation)
 	{
-		if(sprite && Engine::Window::Renderer) SDL_RenderCopy(Engine::Window::Renderer, sprite, &srcRect, &desRect);
+		if(sprite && Engine::Window::Renderer) SDL_RenderCopyEx(Engine::Window::Renderer, sprite, &srcRect, &desRect, rotation, 0 , SDL_FLIP_NONE);
 	}
 
 	SDL_Texture* TextureManager::LoadTexture(const std::string& texturePath)

@@ -1,7 +1,14 @@
 #include "Entity.h"
 #include "Camera.h"
+#include "BoxCollider.h"
+#include "CircleCollider.h"
 namespace Engine 
 {
+	void Entity::AddCollider(std::string tag, bool _boxCollider)
+	{
+		if (_boxCollider) boxCollider = new BoxCollider(destRect, 0, tag, this);
+		else  circleCollider = new CircleCollider(destRect, tag, this);
+	}
 	void Entity::AddSprite(std::string _name, float scaleX, float scaleY)
 	{
 		texture = Engine::TextureManager::GetTexture(_name);
@@ -24,14 +31,25 @@ namespace Engine
 		destRect.w = ScaleX * sourceRect.w;
 		destRect.h = ScaleY * sourceRect.h;
 		
-		if (collider)
+		if (boxCollider || circleCollider)
 		{
-			if (collider->collisions.size() > 0)
-			{
-				for (auto col : collider->collisions)
-					OnCollisionEnter(col);
+			if (boxCollider) {
+				if (boxCollider->collisions.size() > 0)
+				{
+					for (auto col : boxCollider->collisions)
+						OnCollisionEnter(col);
+				}
+				boxCollider->UpdateCollider(destRect, rotation);
 			}
-			collider->UpdateBorders(destRect);
+			else 
+			{
+				if (circleCollider->collisions.size() > 0)
+				{
+					for (auto col : circleCollider->collisions)
+						OnCollisionEnter(col);
+				}
+				circleCollider->UpdateCollider(destRect, 0);
+			}
 		}
 	}
 	void Entity::Render()
@@ -46,17 +64,18 @@ namespace Engine
 				animator.ChangeScale(ScaleX, ScaleY);
 			}
 			else
-			{ Engine::TextureManager::Draw(texture, sourceRect, destRect); }
+			{ Engine::TextureManager::Draw(texture, sourceRect, destRect, rotation); }
 			
 			
 		}
 	}
 	void Entity::UpdateCollisionBox()
 	{
-		if (collider)
+		if (boxCollider)
 		{
-			collider->UpdateBorders(destRect);
+			boxCollider->UpdateCollider(destRect, rotation);
 		}
+		if (circleCollider) circleCollider->UpdateCollider(destRect, 0);
 		destRect.x = position.X; destRect.y = position.Y;
 	}
 }
