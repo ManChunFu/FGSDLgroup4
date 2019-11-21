@@ -41,8 +41,10 @@ private:
 	std::vector<Engine::Vector2D> pathToTarget;
 	Engine::Vector2D positionTemp;
 	float randomCounter = 0.f;
-	int pathCounter = 2;
+	int pathCounter = 3;
 	float frameCounter = 0.f;
+	Engine::Vector2D pathFindingPosition;
+	
 
 
 };

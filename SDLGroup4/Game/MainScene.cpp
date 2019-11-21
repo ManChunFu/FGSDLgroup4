@@ -36,8 +36,8 @@ void MainScene::CreateEnemy()
 
 Engine::Vector2D MainScene::RandomeStartPos()
 {
-	float x = rand() % 800 + 1;
-	float y = rand() % 450 + 1;
+	float x = rand() % 800 + 100;
+	float y = rand() % 450 + 100;
 
 	Engine::Vector2D position;
 	position.X = x;

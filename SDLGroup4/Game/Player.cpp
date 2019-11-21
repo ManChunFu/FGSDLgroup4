@@ -6,7 +6,6 @@
 #include<Projectile.h>
 #include "TimedExplosive.h"
 
-
 void Player::Update()
 {
 	if (mineTimer > 0) mineTimer -= Engine::GameTime::DeltaTime();
