@@ -39,7 +39,7 @@ void Engine::Animation::PlayAnimation(Vector2D& position)
 			sourceRect.x = 0;
 	}
 	
-	Engine::TextureManager::Draw(newAnimation, sourceRect, destinationRect);
+	Engine::TextureManager::Draw(newAnimation, sourceRect, destinationRect, 0);
 }
 
 void Engine::Animation::ChangeScale(float amount)
