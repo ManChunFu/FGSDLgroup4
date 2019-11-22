@@ -7,10 +7,16 @@
 
 
 namespace Engine {
+
 	Textures TextureManager::textures;
-	void TextureManager::Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect, float rotation)
+	void TextureManager::Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect)
 	{
-		if(sprite && Engine::Window::Renderer) SDL_RenderCopyEx(Engine::Window::Renderer, sprite, &srcRect, &desRect, rotation, 0 , SDL_FLIP_NONE);
+		if (sprite && Engine::Window::Renderer)
+			SDL_RenderCopy(Engine::Window::Renderer, sprite, &srcRect, &desRect);
+	}
+	void TextureManager::Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect, float rotation, SDL_RendererFlip flip)
+	{
+		if(sprite && Engine::Window::Renderer) SDL_RenderCopyEx(Engine::Window::Renderer, sprite, &srcRect, &desRect, rotation, 0 , flip);
 	}
 
 	SDL_Texture* TextureManager::LoadTexture(const std::string& texturePath)

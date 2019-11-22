@@ -61,11 +61,11 @@ namespace Engine
 			UpdateCollisionBox();
 			if (PlayAnimation)
 			{
-				animator.DisplayAnimation(position);
+				animator.DisplayAnimation(position, spriteFlip);
 				animator.ChangeScale(ScaleX, ScaleY);
 			}
 			else
-			{ Engine::TextureManager::Draw(texture, sourceRect, destRect, rotation); }
+			{ Engine::TextureManager::Draw(texture, sourceRect, destRect, rotation, spriteFlip); }
 			
 			
 		}

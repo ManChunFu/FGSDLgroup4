@@ -19,10 +19,8 @@ public:
 		Engine::TextureManager::AddTexture("EnemyRun", "Assets/Sprites/char.png");
 		Engine::TextureManager::AddTexture("FireSpell", "Assets/Sprites/FireSpell.png");
 		Engine::TextureManager::AddTexture("Player", "Assets/Sprites/Player/sprite.png");
-		Engine::TextureManager::AddTexture("PlayerIdleLeft", "Assets/Sprites/Player/IDLELEFT.png");
-		Engine::TextureManager::AddTexture("PlayerIdleRight", "Assets/Sprites/Player/IDLE.png");
-		Engine::TextureManager::AddTexture("PlayerRunLeft", "Assets/Sprites/Player/RUNLEFT.png");
-		Engine::TextureManager::AddTexture("PlayerRunRight", "Assets/Sprites/Player/RUN.png");
+		Engine::TextureManager::AddTexture("PlayerIdle", "Assets/Sprites/Player/IDLE.png");
+		Engine::TextureManager::AddTexture("PlayerRun", "Assets/Sprites/Player/RUN.png");
 		Engine::TextureManager::AddTexture("Projectile1", "Assets/Sprites/laserX.png");
 		Engine::TextureManager::AddTexture("Projectile2", "Assets/Sprites/laserY.png");
 		Engine::TextureManager::AddTexture("Explosion", "Assets/2D Galaxy Assets/Game/Sprites/Explosion/Explosion_00019.png");

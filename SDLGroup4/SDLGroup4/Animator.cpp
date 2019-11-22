@@ -22,11 +22,11 @@ void Engine::Animator::Stop()
 }
 
 
-void Engine::Animator::DisplayAnimation(Vector2D position)
+void Engine::Animator::DisplayAnimation(Vector2D position, SDL_RendererFlip flip)
 {
 	if (isTrigger)
 		if (currenAnimation != nullptr)
-			currenAnimation->PlayAnimation(position);
+			currenAnimation->PlayAnimation(position, flip);
 }
 
 void Engine::Animator::ChangeScale(float amount)

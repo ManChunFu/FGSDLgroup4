@@ -26,5 +26,5 @@ void Engine::Image::Render()
 	SDL_Rect srcRect = { 0, 0, width, height };
 	SDL_Rect desRect = { xCoordinate, yCoordinate, width, height };
 
-	Engine::TextureManager::Draw(newImage, srcRect, desRect, 0);
+	Engine::TextureManager::Draw(newImage, srcRect, desRect);
 }
