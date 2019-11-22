@@ -25,7 +25,10 @@ namespace Engine {
 	void CollisionManager::Shutdown()
 	{
 		for (auto col : colliders)
-		{ delete col; }
+		{
+			col->Shutdown();
+			delete col; 
+		}
 		colliders.clear();
 	}
 	void CollisionManager::RemoveCollider(Engine::Collider* col)
@@ -34,6 +37,7 @@ namespace Engine {
 		{
 			if (colliders[i] == col) 
 			{
+				colliders[i]->Shutdown();
 				delete colliders[i];
 				colliders.erase(colliders.begin() + i);
 				return;

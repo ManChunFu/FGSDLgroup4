@@ -66,7 +66,7 @@ namespace Engine
 	}
 	void Entity::UpdateCollisionBox()
 	{
-		collider->UpdateCollider(destRect, rotation);
+		if(collider) collider->UpdateCollider(destRect, rotation);
 		destRect.x = position.X; destRect.y = position.Y;
 	}
 }

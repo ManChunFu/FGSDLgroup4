@@ -12,6 +12,8 @@ namespace Engine {
 		
 		~Collider()
 		{
+		}
+		virtual void Shutdown(){
 			GameObject = nullptr;
 			collisions.clear();
 		}

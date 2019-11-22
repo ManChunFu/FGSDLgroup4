@@ -17,6 +17,7 @@
 		virtual bool TestCollision(Collider* other) override;
 		bool BoxToBoxCollision(BoxCollider* other);
 		float radius;
+		virtual void Shutdown() override { Engine::Collider::Shutdown(); parentCollider = nullptr; }
 		Engine::Vector2D middlePoint;
 		std::vector<Collider*> collisions;
 		Engine::Vector2D points[4];

@@ -8,8 +8,8 @@
 
 void Player::Update()
 {
-	rotation = 100;
 	if (mineTimer > 0) mineTimer -= Engine::GameTime::DeltaTime();
+	collider->solid = true;
 	currPos = position;
 	dirX = inputManager->GetAxis("Horizontal");
 	dirY = inputManager->GetAxis("Vertical");

@@ -111,6 +111,7 @@ void Map::DrawMap()
 					sourceRect.h = destRect.h = 32;
 					destRect.x = column * 32 * ScaleX;
 					destRect.y = row * 32 * ScaleY;
+					obstacle->position.X = column * 32 * ScaleX;;
 					obstacle->AddSprite("Obstacle01");
 					obstacle->AddCollider("Obstacle01", true);
 				}

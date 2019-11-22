@@ -3,10 +3,6 @@
 #include <iostream>
 
 
-CircleCollider::~CircleCollider()
-{
-	delete ThisBoxCollider;
-}
 
 void CircleCollider::UpdateCollider(SDL_Rect destRect, float rotation)
 {

@@ -4,7 +4,12 @@ class BoxCollider;
 	class CircleCollider : public Engine::Collider
 	{
 	public:
-		~CircleCollider();
+		virtual void Shutdown() override 
+		{ 
+			Engine::Collider::Shutdown(); 
+			if(ThisBoxCollider) delete ThisBoxCollider; 
+			ThisBoxCollider = nullptr; 
+		};
 		CircleCollider(SDL_Rect destRect, std::string colliderTag, Engine::Entity* entity) : Collider(colliderTag, entity)
 		{
 			
