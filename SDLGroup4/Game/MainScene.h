@@ -29,7 +29,7 @@ public:
 		Engine::TextureManager::AddTexture("Ground02", "Assets/Sprites/floor_sand_rock_1.png");
 		Engine::TextureManager::AddTexture("Ground03", "Assets/Sprites/floor_sand_rock_2.png");
 		Engine::TextureManager::AddTexture("Ground04", "Assets/Sprites/floor_sand_rock_3.png");
-		
+		Engine::TextureManager::AddTexture("Obstacle01", "Assets/Sprites/Enviroment/bars_red_2.png");
 	}
 
 	Map* map;

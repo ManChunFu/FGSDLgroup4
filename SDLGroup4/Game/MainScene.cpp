@@ -25,9 +25,9 @@ void MainScene::CreateMap()
 void MainScene::Start()
 {
 	Scene::Start();
-	CreateMap();
 	CreatePlayer();
 	CreateEnemy();
+	CreateMap();
 }
 
 void MainScene::CreateEnemy()
