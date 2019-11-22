@@ -19,9 +19,9 @@ public:
 	{ 
 		hitPoint = playerHP; 
 		inputManager = input; 
-		animator.Animations.push_back(new Engine::Animation("PlayerIdle", "Idle", 5, 1, 3));
-		animator.Animations.push_back(new Engine::Animation("PlayerRun", "Run", 5, 1, 15));
-		animator.Animations.push_back(new Engine::Animation("PlayerAttack", "Attack", 5, 1, 10));
+		animator.Animations.push_back(new Engine::Animation("PlayerIdle", "Idle", 5, 1, 3, false));
+		animator.Animations.push_back(new Engine::Animation("PlayerRun", "Run", 5, 1, 15, false));
+		animator.Animations.push_back(new Engine::Animation("PlayerAttack", "Attack", 5, 1, 10, true));
 
 		animator.Trigger("Idle");
 		PlayAnimation = true;
@@ -53,8 +53,6 @@ private:
 	float shootTimer = 0;
 	void MovePlayer();
 	void Shoot();
-	bool isAttacking;
-	bool isMoving;
 	
 	
 

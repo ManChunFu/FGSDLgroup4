@@ -21,7 +21,7 @@ public:
 	Enemy(int hp) : Engine::Entity() {
 		player = MainScene::mainScene->player;
 		hitpoint = hp;
-		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 8, 1, 5));
+		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 8, 1, 5, false));
 		PlayAnimation = false;
 		ScaleX = 0.5f;
 		ScaleY = 0.5f;

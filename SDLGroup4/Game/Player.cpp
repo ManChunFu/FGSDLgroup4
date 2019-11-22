@@ -50,13 +50,13 @@ void Player::MovePlayer()
 	position.X += dirX * moveSpeed * Engine::GameTime::DeltaTime();
 	position.Y += dirY * moveSpeed * Engine::GameTime::DeltaTime();
 
-	if (!isAttacking)
-	{
+	if (animator.currenAnimation->runFullClip)
+		return;
+
 		if (dirX == 0 && dirY == 0)
 		{
 			animator.Stop();
 			animator.Trigger("Idle");
-
 		}
 		else
 		{
@@ -77,9 +77,10 @@ void Player::MovePlayer()
 			{
 				animator.Stop();
 				animator.Trigger("Run");
+
 			}
+			
 		}
-	}
 }
 
 void Player::Shoot()
@@ -98,14 +99,12 @@ void Player::Shoot()
 	projectilePos.Y += position.Y + (40.f * lastDirection.Y);
 
 	if (inputManager->GetAxis("Fire2") == 1)
-	{
+	{	
 		animator.Stop();
 		animator.Trigger("Attack");
-		isAttacking = true;
 
-		if (shootTimer > 0.5f)
+		if (shootTimer > 0.4f)
 		{
-			isAttacking = false;
 			shootTimer = 0;
 			projectile = new Engine::Projectile(3, projectilePos, lastDirection.X, lastDirection.Y);
 			if (lastDirection.Y != 0)

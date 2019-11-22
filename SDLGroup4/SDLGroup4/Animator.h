@@ -20,6 +20,9 @@ namespace Engine
 		std::vector<Animation*> Animations;
 		Animation* currenAnimation = nullptr;
 		bool isTrigger;
+		std::string baseAnimation;
+	private:
+		
 	};
 }
 
