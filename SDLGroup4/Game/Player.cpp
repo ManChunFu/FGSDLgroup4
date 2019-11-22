@@ -8,8 +8,7 @@
 
 void Player::Update()
 {
-	rotation = 90;
-	collider->solid = true;
+	rotation = 100;
 	if (mineTimer > 0) mineTimer -= Engine::GameTime::DeltaTime();
 	currPos = position;
 	dirX = inputManager->GetAxis("Horizontal");
@@ -21,23 +20,23 @@ void Player::Update()
 	if (position.Y < 0) position.Y = 0;
 	if (position.Y > 900 - (destRect.h)) position.Y = 900 - destRect.h;
 	Engine::Entity::Update();
-	
+
 	Engine::Vector2D bulletpos;
 	bulletpos.X = position.X;
 	bulletpos.Y = position.Y;
-	if (inputManager->IsKeyPressed(Key::RETURN) && mineTimer < 0) 
+	if (inputManager->IsKeyPressed(Key::RETURN) && mineTimer < 0)
 	{
-		bullet = new TimedExplosive(3, bulletpos); 
+		bullet = new TimedExplosive(3, bulletpos);
 		mineTimer = mineCooldown;
 	}
 
 	Engine::Vector2D projectilePos;
-	projectilePos.X +=  position.X  + 100.f;
-	projectilePos.Y +=  position.Y + 100.f;
+	projectilePos.X += position.X + 100.f;
+	projectilePos.Y += position.Y + 100.f;
 
-	if (inputManager->GetAxis("Fire2")== 1)
-	{	
 	projectile = new Engine::Projectile(3, position, lastDirection.X, lastDirection.Y);
+	if (inputManager->GetAxis("Fire2") == 1)
+	{
 		if (lastDirection.Y != 0)
 		{
 			projectile->AddSprite("Projectile2");
@@ -45,9 +44,9 @@ void Player::Update()
 		else
 		{
 			projectile->AddSprite("Projectile1");
-		}	
+		}
 	}
-	if (dirX != 0 || dirY != 0) 
+	if (dirX != 0 || dirY != 0)
 	{
 		lastDirection.X = dirX;
 		lastDirection.Y = dirY;
@@ -58,7 +57,7 @@ void Player::Update()
 
 void Player::MovePlayer()
 {
-	
+
 	/*if (inputManager->IsKeyDown(SDL_SCANCODE_UP))
 	{
 		movement.Y = -10.0f;
@@ -75,29 +74,47 @@ void Player::MovePlayer()
 	{
 		movement.X = -10.0f;
 	}*/
-	if (teleportTimer > 0) 
+	if (teleportTimer > 0)
 	{
 		teleportTimer -= Engine::GameTime::DeltaTime();
 		if (inputManager->IsKeyReleased(Key::SPACE)) hasTeleported = false;
 	}
-		moveSpeed = normalSpeed;
-	if (teleportTimer <= 0 && !hasTeleported && inputManager->GetAxis("Space") != 0) 
+	moveSpeed = normalSpeed;
+	if (teleportTimer <= 0 && !hasTeleported && inputManager->GetAxis("Space") != 0)
 	{
 		teleportTimer = teleportCooldown;
 		hasTeleported = true;
 		moveSpeed = teleportDistance;
 	}
-	
-	
-	position.X +=dirX * moveSpeed *Engine::GameTime::DeltaTime();
-	position.Y +=dirY * moveSpeed * Engine::GameTime::DeltaTime();
-	animator.Stop();
-	animator.Trigger("Run");
+
+	position.X += dirX * moveSpeed * Engine::GameTime::DeltaTime();
+	position.Y += dirY * moveSpeed * Engine::GameTime::DeltaTime();
+
 
 	if (dirX == 0 && dirY == 0)
 	{
 		animator.Stop();
 		animator.Trigger("Idle");
+	}
+	else
+	{
+		if (dirX > 0)
+		{
+			animator.Stop();
+			animator.Trigger("Run");
+			spriteFlip = SDL_FLIP_NONE;
+		}
+		else if (dirX < 0)
+		{
+			animator.Stop();
+			animator.Trigger("Run");
+			spriteFlip = SDL_FLIP_HORIZONTAL;
+		}
+		else
+		{
+			animator.Stop();
+			animator.Trigger("Run");
+		}
 	}
 }
 

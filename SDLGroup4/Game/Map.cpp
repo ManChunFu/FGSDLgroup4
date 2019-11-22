@@ -1,11 +1,17 @@
 #include "Map.h"
 #include <TextureManager.h>
 
+namespace Engine
+{
+	class Collider;
+}
+
+
 // temporarily using to generate map
 
 int mainLevel[20][25] 
 {
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+	{4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -33,6 +39,7 @@ Map::Map()
 	sandFloor1 = Engine::TextureManager::GetTexture("Ground02");
 	sandFloor2 = Engine::TextureManager::GetTexture("Ground03");
 	sandFloor3 = Engine::TextureManager::GetTexture("Ground04");
+	Obstcl0 = Engine::TextureManager::GetTexture("Obstacle01");
 	
 	LoadMap(mainLevel);
 	
@@ -84,17 +91,32 @@ void Map::DrawMap()
 			switch (type)
 			{
 			case 0:
-				Engine::TextureManager::Draw(sandFloor0, sourceRect, destRect,0);
+				Engine::TextureManager::Draw(sandFloor0, sourceRect, destRect);
 				break;
 			case 1:
-				Engine::TextureManager::Draw(sandFloor1, sourceRect, destRect, 0);
+				Engine::TextureManager::Draw(sandFloor1, sourceRect, destRect);
 				break;
 			case 2:
-				Engine::TextureManager::Draw(sandFloor2, sourceRect, destRect, 0);
+				Engine::TextureManager::Draw(sandFloor2, sourceRect, destRect);
 				break;
 			case 3:
-				Engine::TextureManager::Draw(sandFloor3, sourceRect, destRect,0);
+				Engine::TextureManager::Draw(sandFloor3, sourceRect, destRect);
 				break;
+			case 4:
+				if (!obstacle)
+				{
+					obstacle = new Entity();
+					sourceRect.x = sourceRect.y = 0;
+					sourceRect.w = destRect.w = 32;
+					sourceRect.h = destRect.h = 32;
+					destRect.x = column * 32 * ScaleX;
+					destRect.y = row * 32 * ScaleY;
+					obstacle->AddSprite("Obstacle01");
+					obstacle->AddCollider("Obstacle01", true);
+				}
+				
+				break;
+
 			default:
 				break;
 			}

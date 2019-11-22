@@ -18,8 +18,8 @@ public:
 		Engine::TextureManager::AddTexture("Enemy", "Assets/Sprites/enemy.png");
 		Engine::TextureManager::AddTexture("EnemyRun", "Assets/Sprites/char.png");
 		Engine::TextureManager::AddTexture("FireSpell", "Assets/Sprites/FireSpell.png");
-		Engine::TextureManager::AddTexture("PlayerIdle", "Assets/Sprites/Player/IDLE.png");
 		Engine::TextureManager::AddTexture("Player", "Assets/Sprites/Player/sprite.png");
+		Engine::TextureManager::AddTexture("PlayerIdle", "Assets/Sprites/Player/IDLE.png");
 		Engine::TextureManager::AddTexture("PlayerRun", "Assets/Sprites/Player/RUN.png");
 		Engine::TextureManager::AddTexture("Projectile1", "Assets/Sprites/laserX.png");
 		Engine::TextureManager::AddTexture("Projectile2", "Assets/Sprites/laserY.png");
@@ -28,7 +28,7 @@ public:
 		Engine::TextureManager::AddTexture("Ground02", "Assets/Sprites/floor_sand_rock_1.png");
 		Engine::TextureManager::AddTexture("Ground03", "Assets/Sprites/floor_sand_rock_2.png");
 		Engine::TextureManager::AddTexture("Ground04", "Assets/Sprites/floor_sand_rock_3.png");
-		
+		Engine::TextureManager::AddTexture("Obstacle01", "Assets/Sprites/Enviroment/bars_red_2.png");
 	}
 
 	Map* map;

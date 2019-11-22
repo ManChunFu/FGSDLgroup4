@@ -20,7 +20,7 @@ public:
 		hitPoint = playerHP; 
 		inputManager = input; 
 		animator.Animations.push_back(new Engine::Animation("PlayerIdle", "Idle", 5, 1, 3));
-		animator.Animations.push_back(new Engine::Animation("PlayerRun", "Run", 5, 1, 5));
+		animator.Animations.push_back(new Engine::Animation("PlayerRun", "Run", 5, 1, 15));
 		animator.Trigger("Idle");
 		PlayAnimation = false;
 	};
@@ -32,7 +32,6 @@ public:
 
 private:
 	Engine::InputManager* inputManager = nullptr;
-	Engine::Animator* anim = nullptr;
 	float normalSpeed = 200.0f;
 	float teleportDistance = 15000.0f;
 	int hitPoint = 0;
@@ -47,8 +46,9 @@ private:
 	float teleportTimer;
 	bool hasTeleported;
 	Engine::Projectile* projectile = nullptr; //alternative for shooting (um)
-
+	bool stopMoving = false;
 	void MovePlayer();
+	
 	
 
 	// Inherited via Entity
