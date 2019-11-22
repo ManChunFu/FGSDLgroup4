@@ -19,11 +19,9 @@ public:
 	{ 
 		hitPoint = playerHP; 
 		inputManager = input; 
-		animator.Animations.push_back(new Engine::Animation("PlayerIdleLeft", "IdleLeft", 5, 1, 3));
-		animator.Animations.push_back(new Engine::Animation("PlayerIdleRight", "IdleRight", 5, 1, 3));
-		animator.Animations.push_back(new Engine::Animation("PlayerRunLeft", "RunLeft", 5, 1, 15));
-		animator.Animations.push_back(new Engine::Animation("PlayerRunRight", "RunRight", 5, 1, 15));
-		animator.Trigger(animationIdleID);
+		animator.Animations.push_back(new Engine::Animation("PlayerIdle", "Idle", 5, 1, 3));
+		animator.Animations.push_back(new Engine::Animation("PlayerRun", "Run", 5, 1, 15));
+		animator.Trigger("Idle");
 		PlayAnimation = true;
 	};
 
@@ -48,10 +46,9 @@ private:
 	float teleportTimer;
 	bool hasTeleported;
 	Engine::Projectile* projectile = nullptr; //alternative for shooting (um)
-	std::string animationMovingID = "RunRight";
-	std::string animationIdleID = "IdleRight";
 	bool stopMoving = false;
 	void MovePlayer();
+	
 	
 
 	// Inherited via Entity

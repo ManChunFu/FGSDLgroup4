@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-Engine::Animation::Animation(const std::string spritePath, std::string name, int spriteSheetLenghtX, int spriteSheetLengthY, int speed) :
+Engine::Animation::Animation(const std::string& spritePath, const std::string& name, int spriteSheetLenghtX, int spriteSheetLengthY, int speed) :
 	spritePath(spritePath), name(name.c_str()), speed(speed)
 {
 	newAnimation = Engine::TextureManager::GetTexture(spritePath);
@@ -25,7 +25,7 @@ Engine::Animation::~Animation()
 }
 
 
-void Engine::Animation::PlayAnimation(Vector2D& position)
+void Engine::Animation::PlayAnimation(Vector2D& position, SDL_RendererFlip flip)
 {
 	framtime++;
 	destinationRect.x =position.X;
@@ -39,7 +39,7 @@ void Engine::Animation::PlayAnimation(Vector2D& position)
 			sourceRect.x = 0;
 	}
 	
-	Engine::TextureManager::Draw(newAnimation, sourceRect, destinationRect, 0);
+	Engine::TextureManager::Draw(newAnimation, sourceRect, destinationRect, 0, flip);
 }
 
 void Engine::Animation::ChangeScale(float amount)
