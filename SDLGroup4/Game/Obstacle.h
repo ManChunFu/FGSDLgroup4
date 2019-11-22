@@ -7,6 +7,8 @@ class Obsticale : public Engine::Entity
 public:
 	Obsticale() : Engine::Entity()
 	{
+		ScaleX = 2;
+		ScaleY = 2;
 	}
 
 	void Update() override;

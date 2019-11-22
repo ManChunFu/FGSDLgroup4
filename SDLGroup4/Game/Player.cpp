@@ -31,7 +31,6 @@ void Player::Update()
 }
 
 
-
 void Player::MovePlayer()
 {
 	if (teleportTimer > 0)
@@ -66,6 +65,7 @@ void Player::MovePlayer()
 		}
 		else if (dirX < 0)
 		{
+			
 			animator.Stop();
 			animator.Trigger("Run");
 			spriteFlip = SDL_FLIP_HORIZONTAL;
@@ -84,6 +84,7 @@ void Player::Shoot()
 	{
 		animator.Stop();
 		animator.Trigger("Attack");
+
 	}
 
 	Engine::Vector2D bulletpos;
@@ -104,11 +105,15 @@ void Player::Shoot()
 	{
 		if (lastDirection.Y != 0)
 		{
-			projectile->AddSprite("Projectile2");
+			//projectile->AddSprite("Projectile2");
+			animator.Stop();
+			animator.Trigger("FireIce");
 		}
 		else
 		{
-			projectile->AddSprite("Projectile1");
+			//projectile->AddSprite("Projectile1");
+			animator.Stop();
+			animator.Trigger("FireIce");
 		}
 	}
 }

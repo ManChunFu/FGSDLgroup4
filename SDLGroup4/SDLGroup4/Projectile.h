@@ -19,6 +19,8 @@ namespace Engine {
 			dirX = _dirX;
 			dirY = _dirY;
 			position = startPos;
+			animator.Animations.push_back(new Engine::Animation("IceBall", "FireIce", 5, 1, 5));
+			animator.Animations.push_back(new Engine::Animation("FireBall", "FireIce", 5, 1, 5));
 		}
 
 		void Update() override;

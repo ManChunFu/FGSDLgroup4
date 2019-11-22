@@ -22,6 +22,9 @@ public:
 		animator.Animations.push_back(new Engine::Animation("PlayerIdle", "Idle", 5, 1, 3));
 		animator.Animations.push_back(new Engine::Animation("PlayerRun", "Run", 5, 1, 15));
 		animator.Animations.push_back(new Engine::Animation("PlayerAttack", "Attack", 5, 1, 5));
+		//animator.Animations.push_back(new Engine::Animation("IceBall", "FireIce", 5, 1, 5));
+		animator.Animations.push_back(new Engine::Animation("FireBall", "FireIce", 5, 1, 5));
+
 		animator.Trigger("Idle");
 		PlayAnimation = true;
 	};
