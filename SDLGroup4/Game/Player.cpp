@@ -21,31 +21,8 @@ void Player::Update()
 	if (position.Y > 900 - (destRect.h)) position.Y = 900 - destRect.h;
 	Engine::Entity::Update();
 
-	Engine::Vector2D bulletpos;
-	bulletpos.X = position.X;
-	bulletpos.Y = position.Y;
-	if (inputManager->IsKeyPressed(Key::RETURN) && mineTimer < 0)
-	{
-		bullet = new TimedExplosive(3, bulletpos);
-		mineTimer = mineCooldown;
-	}
-
-	Engine::Vector2D projectilePos;
-	projectilePos.X += position.X + 100.f;
-	projectilePos.Y += position.Y + 100.f;
-
-	projectile = new Engine::Projectile(3, position, lastDirection.X, lastDirection.Y);
-	if (inputManager->GetAxis("Fire2") == 1)
-	{
-		if (lastDirection.Y != 0)
-		{
-			projectile->AddSprite("Projectile2");
-		}
-		else
-		{
-			projectile->AddSprite("Projectile1");
-		}
-	}
+	Shoot();
+	
 	if (dirX != 0 || dirY != 0)
 	{
 		lastDirection.X = dirX;
@@ -57,23 +34,6 @@ void Player::Update()
 
 void Player::MovePlayer()
 {
-
-	/*if (inputManager->IsKeyDown(SDL_SCANCODE_UP))
-	{
-		movement.Y = -10.0f;
-	}
-	if (inputManager->IsKeyDown(SDL_SCANCODE_DOWN))
-	{
-		movement.Y = 10.0f;
-	}
-	if (inputManager->IsKeyDown(SDL_SCANCODE_RIGHT))
-	{
-		movement.X = 10.0f;
-	}
-	if (inputManager->IsKeyDown(SDL_SCANCODE_LEFT))
-	{
-		movement.X = -10.0f;
-	}*/
 	if (teleportTimer > 0)
 	{
 		teleportTimer -= Engine::GameTime::DeltaTime();
@@ -114,6 +74,41 @@ void Player::MovePlayer()
 		{
 			animator.Stop();
 			animator.Trigger("Run");
+		}
+	}
+}
+
+void Player::Shoot()
+{
+	if (inputManager->GetAxis("Fire2") == 1)
+	{
+		animator.Stop();
+		animator.Trigger("Attack");
+	}
+
+	Engine::Vector2D bulletpos;
+	bulletpos.X = position.X;
+	bulletpos.Y = position.Y;
+	if (inputManager->IsKeyPressed(Key::RETURN) && mineTimer < 0)
+	{
+		bullet = new TimedExplosive(3, bulletpos);
+		mineTimer = mineCooldown;
+	}
+
+	Engine::Vector2D projectilePos;
+	projectilePos.X += position.X + 100.f;
+	projectilePos.Y += position.Y + 100.f;
+
+	projectile = new Engine::Projectile(3, position, lastDirection.X, lastDirection.Y);
+	if (inputManager->GetAxis("Fire2") == 1)
+	{
+		if (lastDirection.Y != 0)
+		{
+			projectile->AddSprite("Projectile2");
+		}
+		else
+		{
+			projectile->AddSprite("Projectile1");
 		}
 	}
 }
