@@ -26,7 +26,7 @@ public:
 		animator.Animations.push_back(new Engine::Animation("FireBall", "FireIce", 5, 1, 5));
 
 		animator.Trigger("Idle");
-		PlayAnimation = true;
+		PlayAnimation = false;
 	};
 
 

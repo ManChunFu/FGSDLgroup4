@@ -22,6 +22,7 @@ namespace Engine {
 		std::string tag = "";
 		virtual bool TestCollision(Collider* other) = 0;
 		float radius;
+		bool movable = true;
 		Engine::Vector2D middlePoint;
 	protected:
 		Collider(std::string colliderTag, Entity* entity)

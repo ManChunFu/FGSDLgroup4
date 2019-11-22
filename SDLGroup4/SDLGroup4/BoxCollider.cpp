@@ -1,11 +1,11 @@
 #include "BoxCollider.h"
 #include <iostream>
 #include "Window.h"
-
+#include "Entity.h"
 #include <SDL_render.h>
 void BoxCollider::UpdateCollider(SDL_Rect destRect, float rotation)
 {
-
+	rotation = rotation;
 	points[0].X = destRect.x;
 	points[0].Y = destRect.y;
 	points[1].Y = destRect.y;
@@ -15,24 +15,31 @@ void BoxCollider::UpdateCollider(SDL_Rect destRect, float rotation)
 	points[3].X = destRect.x + destRect.w;
 	points[3].Y = destRect.y + destRect.h;
 	radius = destRect.w * 0.5f;
-	middlePoint.X = points[3].X - radius;
-	middlePoint.Y = points[3].Y - radius;
+	middlePoint.X = ((points[3].X - points[0].X) * 0.5f) + points[0].X;
+	middlePoint.Y = ((points[3].Y - points[0].Y) * 0.5f) + points[0].Y;
+	/*for (auto i : points)
+	{
+		int tempX = middlePoint.X + (i.X - middlePoint.X) * cosf(rotation) - (i.Y - middlePoint.Y) * sinf(rotation);
+		i.Y = middlePoint.Y + (i.X - middlePoint.X) * sinf(rotation) + (i.Y - middlePoint.Y) * cosf(rotation);
+		i.X = tempX;
+	}*/
+	if (parentCollider) parentCollider->UpdateCollider(destRect, 0);
+	float lowestY = 2000;
+	float lowestX = 2000;
+	float highestX = 0;
+	float highestY = 0;
 	for (auto i : points)
 	{
-		/*i.X = ((i.X - middlePoint.X) * cos(rotation) - (middlePoint.Y - i.Y) * sin(rotation)) + middlePoint.X;
-		i.Y = ((middlePoint.X - i.Y) * cos(rotation) - (i.X - middlePoint.X) * sin(rotation)) + middlePoint.Y;*/
-		/*i.X -= middlePoint.X;
-		i.Y -= middlePoint.Y;
-		i.X = (i.X * cos(rotation)) - (i.Y * sin(rotation));
-		i.Y = (i.X * sin(rotation)) - (i.Y * cos(rotation));
-		i.X += middlePoint.X;
-		i.Y += middlePoint.Y;*/
+		if (i.Y < lowestY) lowestY = i.Y;
+		if (i.Y > highestY) highestY = i.Y;
+		if (i.X < lowestX) lowestX = i.X;
+		if (i.X > highestX) highestX = i.X;
 	}
-	if (parentCollider) parentCollider->UpdateCollider(destRect, 0);
-	SDL_Rect rect = { points[0].X, points[0].Y, points[1].X - points[0].X, points[2].Y - points[0].Y };
+	SDL_Rect drawrect = { lowestX, lowestY, highestX - lowestX, highestY - lowestY };
 	SDL_SetRenderDrawColor(Engine::Window::Renderer, 255, 0, 0, 255);
-	SDL_RenderDrawRect(Engine::Window::Renderer, &rect);
+	SDL_RenderDrawRect(Engine::Window::Renderer, &drawrect);
 	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);
+
 }
 
 bool BoxCollider::TestCollision(Collider* other)
@@ -42,21 +49,82 @@ bool BoxCollider::TestCollision(Collider* other)
 
 bool BoxCollider::BoxToBoxCollision(BoxCollider* other)
 {
+	float otherLowestY = 2000;
+	float otherLowestX = 2000;
+	float otherHighestX = 0;
+	float otherHighestY = 0;
+	for (auto i : other->points)
+	{
+		if (i.Y < otherLowestY) otherLowestY = i.Y;
+		if (i.Y > otherHighestY) otherHighestY = i.Y;
+		if (i.X < otherLowestX) otherLowestX = i.X;
+		if (i.X > otherHighestX) otherHighestX = i.X;
+	}
 	float lowestY = 2000;
 	float lowestX = 2000;
 	float highestX = 0;
 	float highestY = 0;
-	for (auto i : other->points)
+	for (auto i : points)
 	{
 		if (i.Y < lowestY) lowestY = i.Y;
-		if (i.Y > highestY) highestY = i.Y;
+		if (i.Y > highestY)highestY = i.Y;
 		if (i.X < lowestX) lowestX = i.X;
 		if (i.X > highestX) highestX = i.X;
 	}
 	for (auto i : points)
 	{
-		if (i.X < highestX && i.X > lowestX && i.Y < highestY && i.Y > lowestY)
+		if (lowestX < otherHighestX && highestX > otherLowestX && lowestY < otherHighestY && highestY > otherLowestY) 
+		{
+			if (solid && other->solid)
+			{
+				int directionX = 0;
+				int directionY = 0;
+				int offset = 1;
+				if (otherHighestX - i.X < i.X - otherLowestX && otherLowestX < lowestX) directionX = (otherHighestX - i.X);
+				else directionX = (i.X - otherLowestX);
+				if (otherHighestY - i.Y < i.Y - otherLowestY && otherLowestY < lowestY) directionY = (otherHighestY - i.Y);
+				else directionY = (i.Y - otherLowestY);
+				if(directionX != 0 && directionY != 0) 
+				{
+					if (directionY == (i.Y - otherLowestY) && directionX == (i.X - otherLowestX))
+					{
+						 if (abs(directionX) < abs(directionY)) directionX = 0;
+						 else directionY = 0;
+					}
+					else if (directionY == (otherHighestY - i.Y) && directionX == (otherHighestX - i.X)) directionY = 0;
+					else if (directionY == (otherHighestY - i.Y) && directionX == (i.X - otherLowestX)) 
+					{
+						directionX = 0;
+					}
+					else if (directionY == (i.Y - otherLowestY) && directionX == (otherHighestX - i.X)) directionY = 0;
+					
+				}
+
+				if (directionX > 0)
+				{
+					if(movable)GameObject->position.X = otherHighestX;
+					if(other->movable)other->GameObject->position.X = lowestX - other->GameObject->GetSpriteWidth() - offset;
+				}
+				if (directionX < 0)
+				{
+					if (movable)GameObject->position.X = otherLowestX - GameObject->GetSpriteWidth() ;
+					if (other->movable)other->GameObject->position.X = highestX  + offset;
+				}
+				if (directionY > 0)
+				{
+					if (movable)GameObject->position.Y = otherHighestY;
+					if (other->movable)other->GameObject->position.Y = lowestY - other->GameObject->GetSpriteHeight() - offset;
+				}
+				if (directionY < 0)
+				{
+					if (movable)GameObject->position.Y = otherLowestY - GameObject->GetSpriteHeight();
+					if (other->movable) other->GameObject->position.Y = highestY + offset;
+				}
+				GameObject->UpdateCollisionBox();
+				other->GameObject->UpdateCollisionBox();
+			}
 			return true;
+		}
 	}
 	return false;
 }
