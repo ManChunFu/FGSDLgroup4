@@ -36,8 +36,7 @@ namespace Engine {
 		entityManager->Update();
 		for (Entity* i : destroyQueue)
 		{
-			if (i->boxCollider) colManager->RemoveCollider(i->boxCollider);
-			if (i->circleCollider) colManager->RemoveCollider(i->circleCollider);
+			if (i->collider) colManager->RemoveCollider(i->collider);
 			entityManager->RemoveEntity(i);
 			delete i;
 		}

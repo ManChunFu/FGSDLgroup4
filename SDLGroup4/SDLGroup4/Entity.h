@@ -24,9 +24,9 @@ namespace Engine {
 		void Render();
 		Engine::Animator animator;
 		Vector2D position;
+		Vector2D lastPosition;
 		void UpdateCollisionBox();
-		BoxCollider* boxCollider = nullptr;
-		CircleCollider* circleCollider = nullptr;
+		Collider* collider;
 		float ScaleX = 1, ScaleY = 1;
 		int GetSpriteWidth() { return destRect.w; };
 		int GetSpriteHeight() { return destRect.h; };

@@ -8,7 +8,8 @@
 
 void Player::Update()
 {
-	rotation = 100;
+	rotation = 90;
+	collider->solid = true;
 	if (mineTimer > 0) mineTimer -= Engine::GameTime::DeltaTime();
 	currPos = position;
 	dirX = inputManager->GetAxis("Horizontal");
@@ -34,9 +35,9 @@ void Player::Update()
 	projectilePos.X +=  position.X  + 100.f;
 	projectilePos.Y +=  position.Y + 100.f;
 
-	projectile = new Engine::Projectile(3, position, lastDirection.X, lastDirection.Y);
 	if (inputManager->GetAxis("Fire2")== 1)
 	{	
+	projectile = new Engine::Projectile(3, position, lastDirection.X, lastDirection.Y);
 		if (lastDirection.Y != 0)
 		{
 			projectile->AddSprite("Projectile2");

@@ -6,8 +6,11 @@ namespace Engine
 {
 	void Entity::AddCollider(std::string tag, bool _boxCollider)
 	{
-		if (_boxCollider) boxCollider = new BoxCollider(destRect, 0, tag, this);
-		else  circleCollider = new CircleCollider(destRect, tag, this);
+		if (!collider) 
+		{
+			if (_boxCollider) collider = new BoxCollider(destRect, 0, tag, this);
+			else  collider = new CircleCollider(destRect, tag, this);
+		}
 	}
 	void Entity::AddSprite(std::string _name, float scaleX, float scaleY)
 	{
@@ -31,26 +34,17 @@ namespace Engine
 		destRect.w = ScaleX * sourceRect.w;
 		destRect.h = ScaleY * sourceRect.h;
 		
-		if (boxCollider || circleCollider)
+		if (collider)
 		{
-			if (boxCollider) {
-				if (boxCollider->collisions.size() > 0)
+				if (collider->collisions.size() > 0)
 				{
-					for (auto col : boxCollider->collisions)
+					for (auto col : collider->collisions)
 						OnCollisionEnter(col);
 				}
-				boxCollider->UpdateCollider(destRect, rotation);
-			}
-			else 
-			{
-				if (circleCollider->collisions.size() > 0)
-				{
-					for (auto col : circleCollider->collisions)
-						OnCollisionEnter(col);
-				}
-				circleCollider->UpdateCollider(destRect, 0);
-			}
+				collider->UpdateCollider(destRect, rotation);
+			
 		}
+		lastPosition = position;
 	}
 	void Entity::Render()
 	{
@@ -72,11 +66,7 @@ namespace Engine
 	}
 	void Entity::UpdateCollisionBox()
 	{
-		if (boxCollider)
-		{
-			boxCollider->UpdateCollider(destRect, rotation);
-		}
-		if (circleCollider) circleCollider->UpdateCollider(destRect, 0);
+		collider->UpdateCollider(destRect, rotation);
 		destRect.x = position.X; destRect.y = position.Y;
 	}
 }

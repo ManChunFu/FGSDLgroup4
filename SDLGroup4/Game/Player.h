@@ -22,7 +22,7 @@ public:
 		animator.Animations.push_back(new Engine::Animation("PlayerIdle", "Idle", 5, 1, 3));
 		animator.Animations.push_back(new Engine::Animation("PlayerRun", "Run", 5, 1, 5));
 		animator.Trigger("Idle");
-		PlayAnimation = true;
+		PlayAnimation = false;
 	};
 
 
