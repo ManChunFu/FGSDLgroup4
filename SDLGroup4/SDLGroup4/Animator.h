@@ -18,11 +18,11 @@ namespace Engine
 		void ChangeScale(float amount);
 		void ChangeScale(float x, float y);
 		std::vector<Animation*> Animations;
-		Animation* currenAnimation = nullptr;
-		bool isTrigger;
-		std::string baseAnimation;
+		Animation* CurrenAnimation = nullptr;
+		std::string BaseAnimation;
+
 	private:
-		
+		bool isTrigger;
 	};
 }
 

@@ -4,10 +4,10 @@
 
 
 Engine::Animation::Animation(const std::string& _spritePath, const std::string& _name, int _spriteSheetLenghtX, int _spriteSheetLengthY, int _speed, bool _runFullClip) :
-	spritePath(_spritePath), name(_name.c_str()), speed(_speed), runFullClip(_runFullClip)
+	spritePath(_spritePath), name(_name.c_str()), speed(_speed), RunFullClip(_runFullClip)
 {
 	newAnimation = Engine::TextureManager::GetTexture(spritePath);
-	
+
 	SDL_QueryTexture(newAnimation, nullptr, nullptr, &spriteWidth, &spriteHeight);
 
 	frameWidth = spriteWidth / _spriteSheetLenghtX;
@@ -24,22 +24,21 @@ Engine::Animation::Animation(const std::string& _spritePath, const std::string& 
 void Engine::Animation::PlayAnimation(Vector2D& position, SDL_RendererFlip flip)
 {
 	framtime++;
-	destinationRect.x =position.X;
-	destinationRect.y =position.Y;
+	destinationRect.x = position.X;
+	destinationRect.y = position.Y;
 
-	if (framePerSecond/framtime == speed)
+	if (framePerSecond / framtime == speed)
 	{
 		framtime = 0;
 		sourceRect.x += frameWidth;
 		if (sourceRect.x >= spriteWidth)
 		{
-			if (runFullClip)
-				stopPlaying = true;
-
 			sourceRect.x = 0;
+			if (RunFullClip)
+				StopPlaying = true;
 		}
 	}
-	
+
 	Engine::TextureManager::Draw(newAnimation, sourceRect, destinationRect, 0, flip);
 }
 

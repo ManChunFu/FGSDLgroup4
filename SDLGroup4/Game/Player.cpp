@@ -50,37 +50,36 @@ void Player::MovePlayer()
 	position.X += dirX * moveSpeed * Engine::GameTime::DeltaTime();
 	position.Y += dirY * moveSpeed * Engine::GameTime::DeltaTime();
 
-	if (animator.currenAnimation->runFullClip)
+
+	if (animator.CurrenAnimation->RunFullClip)
 		return;
 
-		if (dirX == 0 && dirY == 0)
+	if (dirX == 0 && dirY == 0)
+	{
+		animator.Stop();
+		animator.Trigger("Idle");
+	}
+	else
+	{
+		if (dirX > 0)
 		{
 			animator.Stop();
-			animator.Trigger("Idle");
+			animator.Trigger("Run");
+			spriteFlip = SDL_FLIP_NONE;
+		}
+		else if (dirX < 0)
+		{
+			animator.Stop();
+			animator.Trigger("Run");
+			spriteFlip = SDL_FLIP_HORIZONTAL;
 		}
 		else
 		{
-			if (dirX > 0)
-			{
-				animator.Stop();
-				animator.Trigger("Run");
-				spriteFlip = SDL_FLIP_NONE;
-			}
-			else if (dirX < 0)
-			{
-
-				animator.Stop();
-				animator.Trigger("Run");
-				spriteFlip = SDL_FLIP_HORIZONTAL;
-			}
-			else
-			{
-				animator.Stop();
-				animator.Trigger("Run");
-
-			}
-			
+			animator.Stop();
+			animator.Trigger("Run");
 		}
+
+	}
 }
 
 void Player::Shoot()
@@ -99,7 +98,7 @@ void Player::Shoot()
 	projectilePos.Y += position.Y + (40.f * lastDirection.Y);
 
 	if (inputManager->GetAxis("Fire2") == 1)
-	{	
+	{
 		animator.Stop();
 		animator.Trigger("Attack");
 

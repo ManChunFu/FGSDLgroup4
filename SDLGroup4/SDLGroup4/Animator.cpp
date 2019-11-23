@@ -6,12 +6,13 @@ void Engine::Animator::Trigger(const std::string& name)
 	{
 		if (Animations[animationClipID]->name == name.c_str())
 		{			
-			currenAnimation = Animations[animationClipID];
-			currenAnimation->stopPlaying = false;
+			CurrenAnimation = Animations[animationClipID];
+			CurrenAnimation->StopPlaying = false;
 			Animations.erase(Animations.begin() + animationClipID);
 			isTrigger = true;
-			if (!currenAnimation->runFullClip)
-				baseAnimation = name;
+			if (!CurrenAnimation->RunFullClip)
+				BaseAnimation = name;
+			return;
 		}
 	}
 }
@@ -19,34 +20,32 @@ void Engine::Animator::Trigger(const std::string& name)
 void Engine::Animator::Stop()
 {
 	isTrigger = false;
-	Animations.push_back(currenAnimation);
-	currenAnimation = nullptr;
+	Animations.push_back(CurrenAnimation);
+	CurrenAnimation = nullptr;
 }
 
 void Engine::Animator::DisplayAnimation(Vector2D position, SDL_RendererFlip flip)
 {
 	if (isTrigger)
 	{
-		if (currenAnimation != nullptr)
+		if (CurrenAnimation != nullptr)
 		{
-			if (currenAnimation->stopPlaying)
+			if (CurrenAnimation->StopPlaying && BaseAnimation != "")
 			{
 				Stop();
-				Trigger(baseAnimation);
-				return;
+				Trigger(BaseAnimation);				
 			}
-
-			currenAnimation->PlayAnimation(position, flip);
+			CurrenAnimation->PlayAnimation(position, flip);
 		}
 	}
 }
 
 void Engine::Animator::ChangeScale(float amount)
 {
-	if(currenAnimation) currenAnimation->ChangeScale(amount);
+	if(CurrenAnimation) CurrenAnimation->ChangeScale(amount);
 }
 
 void Engine::Animator::ChangeScale(float x, float y)
 {
-	if(currenAnimation) currenAnimation->ChangeScale(x, y);
+	if(CurrenAnimation) CurrenAnimation->ChangeScale(x, y);
 }
