@@ -21,7 +21,7 @@ public:
 		inputManager = input; 
 		animator.Animations.push_back(new Engine::Animation("PlayerIdle", "Idle", 5, 1, 3, false));
 		animator.Animations.push_back(new Engine::Animation("PlayerRun", "Run", 5, 1, 12, false));
-		animator.Animations.push_back(new Engine::Animation("PlayerAttack", "Attack", 5, 1, 10, true));
+		animator.Animations.push_back(new Engine::Animation("PlayerAttack", "Attack", 5, 1, 15, true));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
 
