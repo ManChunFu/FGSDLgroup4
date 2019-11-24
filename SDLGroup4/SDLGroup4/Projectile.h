@@ -20,7 +20,7 @@ namespace Engine {
 			dirY = _dirY;
 			position = startPos;
 			animator.Animations.push_back(new Engine::Animation("IceBall", "FireIce", 3, 1, 2, true));
-			animator.Animations.push_back(new Engine::Animation("FireBall", "Firefire", 3, 1, 2, true));
+			animator.Animations.push_back(new Engine::Animation("FireBall", "FireFire", 3, 1, 2, true));
 			AddSprite("Player");//Todo: change to icaball sprite
 			PlayAnimation = true;
 		}

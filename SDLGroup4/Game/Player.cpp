@@ -94,8 +94,8 @@ void Player::Shoot()
 	}
 
 	Engine::Vector2D projectilePos;
-	projectilePos.X += position.X + (40.f * lastDirection.X);
-	projectilePos.Y += position.Y + (40.f * lastDirection.Y);
+	projectilePos.X += position.X + (55.f * lastDirection.X);
+	projectilePos.Y += position.Y + (60.f * lastDirection.Y);
 
 	if (inputManager->GetAxis("Fire2") == 1)
 	{
@@ -108,11 +108,13 @@ void Player::Shoot()
 			projectile = new Engine::Projectile(3, projectilePos, lastDirection.X, lastDirection.Y);
 			if (lastDirection.Y != 0)
 			{
-				projectile->animator.Trigger("FireIce");
+				projectile->position.X = position.X + 20.f;
+				projectile->animator.Trigger("FireFire");
 			}
 			else
 			{
-				projectile->animator.Trigger("Firefire");
+				projectile->position.Y = position.Y + 15.f;
+				projectile->animator.Trigger("FireIce");
 			}
 		}
 	}
