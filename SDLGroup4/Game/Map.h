@@ -6,14 +6,12 @@
 
 namespace Engine
 { 
-	class Collider;
-
+	
 }
 
 class Map : public Engine :: Entity 
 {
 public:
-	Engine::Collider* col;
 	Engine::Entity* obstacle;
 	Map();
 	~Map();

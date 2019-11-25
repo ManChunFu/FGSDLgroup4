@@ -21,31 +21,9 @@ void Player::Update()
 	if (position.Y > 900 - (destRect.h)) position.Y = 900 - destRect.h;
 	Engine::Entity::Update();
 
-	Engine::Vector2D bulletpos;
-	bulletpos.X = position.X;
-	bulletpos.Y = position.Y;
-	if (inputManager->IsKeyPressed(Key::RETURN) && mineTimer < 0)
-	{
-		bullet = new TimedExplosive(3, bulletpos);
-		mineTimer = mineCooldown;
-	}
+	shootTimer += Engine::GameTime::DeltaTime();
+	Shoot();
 
-	Engine::Vector2D projectilePos;
-	projectilePos.X += position.X + 100.f;
-	projectilePos.Y += position.Y + 100.f;
-
-	projectile = new Engine::Projectile(3, position, lastDirection.X, lastDirection.Y);
-	if (inputManager->GetAxis("Fire2") == 1)
-	{
-		if (lastDirection.Y != 0)
-		{
-			projectile->AddSprite("Projectile2");
-		}
-		else
-		{
-			projectile->AddSprite("Projectile1");
-		}
-	}
 	if (dirX != 0 || dirY != 0)
 	{
 		lastDirection.X = dirX;
@@ -54,26 +32,8 @@ void Player::Update()
 }
 
 
-
 void Player::MovePlayer()
 {
-
-	/*if (inputManager->IsKeyDown(SDL_SCANCODE_UP))
-	{
-		movement.Y = -10.0f;
-	}
-	if (inputManager->IsKeyDown(SDL_SCANCODE_DOWN))
-	{
-		movement.Y = 10.0f;
-	}
-	if (inputManager->IsKeyDown(SDL_SCANCODE_RIGHT))
-	{
-		movement.X = 10.0f;
-	}
-	if (inputManager->IsKeyDown(SDL_SCANCODE_LEFT))
-	{
-		movement.X = -10.0f;
-	}*/
 	if (teleportTimer > 0)
 	{
 		teleportTimer -= Engine::GameTime::DeltaTime();
@@ -90,30 +50,72 @@ void Player::MovePlayer()
 	position.X += dirX * moveSpeed * Engine::GameTime::DeltaTime();
 	position.Y += dirY * moveSpeed * Engine::GameTime::DeltaTime();
 
+	if (!isAttacking)
+	{
+		if (dirX == 0 && dirY == 0)
+		{
+			animator.Stop();
+			animator.Trigger("Idle");
 
-	if (dirX == 0 && dirY == 0)
-	{
-		animator.Stop();
-		animator.Trigger("Idle");
-	}
-	else
-	{
-		if (dirX > 0)
-		{
-			animator.Stop();
-			animator.Trigger("Run");
-			spriteFlip = SDL_FLIP_NONE;
-		}
-		else if (dirX < 0)
-		{
-			animator.Stop();
-			animator.Trigger("Run");
-			spriteFlip = SDL_FLIP_HORIZONTAL;
 		}
 		else
 		{
-			animator.Stop();
-			animator.Trigger("Run");
+			if (dirX > 0)
+			{
+				animator.Stop();
+				animator.Trigger("Run");
+				spriteFlip = SDL_FLIP_NONE;
+			}
+			else if (dirX < 0)
+			{
+
+				animator.Stop();
+				animator.Trigger("Run");
+				spriteFlip = SDL_FLIP_HORIZONTAL;
+			}
+			else
+			{
+				animator.Stop();
+				animator.Trigger("Run");
+			}
+		}
+	}
+}
+
+void Player::Shoot()
+{
+	Engine::Vector2D bulletpos;
+	bulletpos.X = position.X;
+	bulletpos.Y = position.Y;
+	if (inputManager->IsKeyPressed(Key::RETURN) && mineTimer < 0)
+	{
+		bullet = new TimedExplosive(3, bulletpos);
+		mineTimer = mineCooldown;
+	}
+
+	Engine::Vector2D projectilePos;
+	projectilePos.X += position.X + (40.f * lastDirection.X);
+	projectilePos.Y += position.Y + (40.f * lastDirection.Y);
+
+	if (inputManager->GetAxis("Fire2") == 1)
+	{
+		animator.Stop();
+		animator.Trigger("Attack");
+		isAttacking = true;
+
+		if (shootTimer > 0.5f)
+		{
+			isAttacking = false;
+			shootTimer = 0;
+			projectile = new Engine::Projectile(3, projectilePos, lastDirection.X, lastDirection.Y);
+			if (lastDirection.Y != 0)
+			{
+				projectile->animator.Trigger("FireIce");
+			}
+			else
+			{
+				projectile->animator.Trigger("Firefire");
+			}
 		}
 	}
 }
