@@ -90,6 +90,7 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="TimedExplosive.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />

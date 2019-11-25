@@ -37,6 +37,7 @@
     <ClCompile Include="TimedExplosive.cpp">
       <Filter>Cpp files\Character Related</Filter>
     </ClCompile>
+    <ClCompile Include="Obstacle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background.h">

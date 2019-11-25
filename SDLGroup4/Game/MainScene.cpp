@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "Map.h"
+#include "Obstacle.h"
 
 MainScene* MainScene::mainScene = nullptr;
 void MainScene::Update()
@@ -25,6 +26,7 @@ void MainScene::CreateMap()
 void MainScene::Start()
 {
 	Scene::Start();
+	CreateObstacle();
 	CreatePlayer();
 	CreateEnemy();
 	CreateMap();
@@ -53,6 +55,26 @@ Engine::Vector2D MainScene::RandomeStartPos()
 	return position;
 }
 
+void MainScene::CreateObstacle()
+{
+	lastPosition.X = 0;
+	lastPosition.Y = 0;
+
+	for (int row = 0; row < 5; row++)
+	{
+		 obstacle.push_back(new Obstacle());
+		 obstacle[obstacle.size() - 1]->AddCollider("Obstacle01", true);
+		 obstacle[obstacle.size() - 1]->AddSprite("Obstacle01");
+		 obstacle[row]->position = ObstaclePlacement(lastPosition);
+		 lastPosition = obstacle[row]->position;
+		/*obstacle->AddSprite("Obstacle01");
+		obstacle->AddCollider("Obstacle01", true);
+		obstacle->collider->solid = true;*/
+		
+	}
+
+}
+
 void MainScene::CreatePlayer()
 {
 	player = new Player(inputManager, 1);
@@ -61,6 +83,15 @@ void MainScene::CreatePlayer()
 	player->position.X = 500;
 	player->position.Y = 500;
 	//player->collider->solid = true;
+}
+
+Engine::Vector2D MainScene::ObstaclePlacement(Engine::Vector2D pos)
+{
+	Engine::Vector2D position;
+	position.X = pos.X + 32;
+	position.Y = pos.Y + 32;
+
+	return position;
 }
 
 void MainScene::SetUpUI()

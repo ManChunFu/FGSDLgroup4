@@ -3,10 +3,12 @@
 #include <vector>
 #include <TextureManager.h>
 #include "Map.h"
+#include "Obstacle.h"
 
 class Player;
 class Enemy;
 class Map;
+class Obstacle;
 
 class MainScene : public Engine::Scene
 {
@@ -28,11 +30,14 @@ public:
 		Engine::TextureManager::AddTexture("Ground01", "Assets/Sprites/floor_sand_rock_0.png");
 		Engine::TextureManager::AddTexture("Ground02", "Assets/Sprites/floor_sand_rock_1.png");
 		Engine::TextureManager::AddTexture("Ground03", "Assets/Sprites/floor_sand_rock_2.png");
-		Engine::TextureManager::AddTexture("Ground04", "Assets/Sprites/floor_sand_rock_3.png");
-		Engine::TextureManager::AddTexture("Obstacle01", "Assets/Sprites/Enviroment/bars_red_2.png");
+		Engine::TextureManager::AddTexture("Stone", "Assets/Sprites/Enviroment/stone_brick_1.png");
+		Engine::TextureManager::AddTexture("Border", "Assets/Sprites/Enviroment/bars_red_2.png");
+		Engine::TextureManager::AddTexture("Obstacle01", "Assets/Sprites/Enviroment/granite_statue.png");
 	}
 
-	Map* map;
+	/*Obstacle* obstacle;*/
+	std::vector<Obstacle*>obstacle;
+	Map* map; 
 	Player* player;
 	static MainScene* mainScene;
 	void Update() override;
@@ -42,9 +47,10 @@ private:
 	void CreateEnemy();
 	std::vector<Enemy*> enemy;
 	Engine::Vector2D RandomeStartPos();
-
+	void CreateObstacle();
 	void CreatePlayer();
-
+	Engine::Vector2D ObstaclePlacement(Engine::Vector2D pos);
+	Engine::Vector2D lastPosition;
 	//trying different techniques to create tilemap (um)
 	void CreateMap();
 	

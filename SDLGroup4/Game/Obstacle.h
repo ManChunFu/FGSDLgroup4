@@ -1,18 +1,34 @@
 #pragma once
 #include <Entity.h>
 #include <Scene.h>
+#include "Collider.h"
+#include "MainScene.h"
 
-class Obsticale : public Engine::Entity
+namespace Engine 
+{
+	class Collider;
+	class CollisionManager;
+}
+
+
+class Obstacle : public Engine::Entity
 {
 public:
-	Obsticale() : Engine::Entity()
+	Obstacle(): Engine::Entity()
 	{
-		ScaleX = 2;
-		ScaleY = 2;
-	}
+		Engine::TextureManager::GetTexture("Obstacle01");
+	};
+	~Obstacle();
 
 	void Update() override;
+	
 
 private:
+
+	SDL_Texture* Obstcl0;
+	int _posX;
+	int _posY;
+	Engine::Collider* collid;
 	void OnCollisionEnter(Engine::Collider* other) override;
+
 };

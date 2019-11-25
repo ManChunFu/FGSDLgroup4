@@ -12,7 +12,7 @@ namespace Engine
 class Map : public Engine :: Entity 
 {
 public:
-	Engine::Entity* obstacle;
+	/*Engine::Entity* obstacle;*/
 	Map();
 	~Map();
 
@@ -25,8 +25,9 @@ private:
 	SDL_Texture* sandFloor0;
 	SDL_Texture* sandFloor1;
 	SDL_Texture* sandFloor2;
-	SDL_Texture* sandFloor3;
-	SDL_Texture* Obstcl0;
+	SDL_Texture* stonefloor;
+	SDL_Texture* redTiles0;
+	
 
 	int map[20][25]; //tileholder 
 
