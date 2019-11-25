@@ -12,7 +12,7 @@ bool Enemy::hasPathFound;
 void Enemy::Update()
 {
 	Movement();
-	
+
 	Engine::Entity::Update();
 }
 
@@ -23,7 +23,7 @@ void Enemy::Movement()
 	collider->solid = true;
 	if (OnTriggerEnter())
 	{
-		movementTimer ++;
+		movementTimer++;
 		if (frameCounter > 0.5f && !hasPathFound)
 		{
 			hasPathFound = true;
@@ -32,23 +32,64 @@ void Enemy::Movement()
 			pathCounter = 2;
 		}
 
-		if (pathToTarget.size() > pathCounter && movementTimer % 2 == 0)
+		if (pathToTarget.size() > pathCounter&& movementTimer % 2 == 0)
 		{
 			movementTimer = 0;
 			position = pathToTarget[pathToTarget.size() - pathCounter];
-			pathCounter ++;
+			pathCounter++;
 		}
 
 	}
 	else
 	{
 		randomCounter += Engine::GameTime::DeltaTime();
-		if (randomCounter > 1.f)
+		if (randomCounter > 1.5f)
 		{
 			randomCounter = 0.f;
 			positionTemp = ai.RandomMovement();
 		}
 		newPosition = position + positionTemp;
+
+		if (positionTemp.X == 0 && positionTemp.Y == 0)
+		{
+			if (animationID != 0)
+			{
+				animator.Stop();
+				animator.Trigger("Idle");
+				animationID = 0;
+			}
+		}
+		else if (positionTemp.X > 0)
+		{
+			/*if (animationID != 1)
+			{*/
+				animator.Stop();
+				animator.Trigger("Walk");
+				animationID = 1;
+				spriteFlip = SDL_FLIP_NONE;
+			//}
+		}
+		else if (positionTemp.X < 0)
+		{
+			/*if (animationID != 1)
+			{*/
+				animator.Stop();
+				animator.Trigger("Walk");
+				animationID = 1;
+				spriteFlip = SDL_FLIP_HORIZONTAL;
+			//}
+		}
+		else
+		{
+			/*if (animationID != 1)
+			{*/
+				animator.Stop();
+				animator.Trigger("Walk");
+				animationID = 1;
+			//}
+		}
+
+
 
 		if (newPosition.X < 0)
 			newPosition.X = 2;
@@ -62,11 +103,6 @@ void Enemy::Movement()
 
 		position = newPosition;
 
-		
-			animator.Stop();
-			animator.Trigger("Walk");
-		
-		
 	}
 }
 

@@ -45,6 +45,7 @@ private:
 	int pathCounter = 2;
 	float frameCounter = 0.f;
 	int movementTimer = 0;
+	int animationID = 0; // 0 = Idle, 1 = Walk, 2 = Run
 	
 
 
