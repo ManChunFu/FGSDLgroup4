@@ -10,6 +10,7 @@ void Obstacle::Update()
 {
 	Engine::Entity::Update();
 	collider->solid = true;
+	collider->movable = false;
 }
 
 

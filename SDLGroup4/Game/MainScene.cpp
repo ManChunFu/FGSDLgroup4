@@ -20,7 +20,7 @@ void MainScene::Render()
 void MainScene::CreateMap()
 {
 	map = new Map();
-	
+
 }
 
 void MainScene::Start()
@@ -60,18 +60,22 @@ void MainScene::CreateObstacle()
 {
 	lastPosition.X = 0;
 	lastPosition.Y = 0;
+	obstacle.push_back(new Obstacle());
+	obstacle[obstacle.size() - 1]->AddCollider("Obstacle01", true);
+	obstacle[obstacle.size() - 1]->AddSprite("Obstacle01");
+	obstacle[0]->position = lastPosition;
 
-	for (int row = 0; row < 5; row++)
+	for (int row = 1; row < 5; row++)
 	{
-		 obstacle.push_back(new Obstacle());
-		 obstacle[obstacle.size() - 1]->AddCollider("Obstacle01", true);
-		 obstacle[obstacle.size() - 1]->AddSprite("Obstacle01");
-		 obstacle[row]->position = ObstaclePlacement(lastPosition);
-		 lastPosition = obstacle[row]->position;
+		obstacle.push_back(new Obstacle());
+		obstacle[obstacle.size() - 1]->AddCollider("Obstacle01", true);
+		obstacle[obstacle.size() - 1]->AddSprite("Obstacle01");
+		obstacle[row]->position = ObstaclePlacement(lastPosition);
+		lastPosition = obstacle[row]->position;
 		/*obstacle->AddSprite("Obstacle01");
 		obstacle->AddCollider("Obstacle01", true);
 		obstacle->collider->solid = true;*/
-		
+
 	}
 
 }
@@ -90,7 +94,8 @@ Engine::Vector2D MainScene::ObstaclePlacement(Engine::Vector2D pos)
 {
 	Engine::Vector2D position;
 	position.X = pos.X + 32;
-	position.Y = pos.Y + 32;
+
+	//use mandy's fanstatic logic for columns
 
 	return position;
 }
