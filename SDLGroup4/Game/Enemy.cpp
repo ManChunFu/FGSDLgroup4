@@ -38,12 +38,45 @@ void Enemy::Movement()
 			pathCounter = 2;
 		}
 
-		if (pathToTarget.size() > pathCounter && movementTimer % 2 == 0)
+		if (pathToTarget.size() > pathCounter)//&& movementTimer % 2 == 0)
 		{
 			movementTimer = 0;
 			position = pathToTarget[pathToTarget.size() - pathCounter];
 			pathCounter++;
+			if (position.X > lastDirectionX)
+			{
+				if (state != RUNRIGHT)
+				{
+					animator.Stop();
+					animator.Trigger("Run");
+					spriteFlip = SDL_FLIP_NONE;
+					state = RUNRIGHT;
+				}
+			}
+			else if (position.X < lastDirectionX)
+			{
+				if (state != RUNLEFT)
+				{
+					animator.Stop();
+					animator.Trigger("Run");
+					spriteFlip = SDL_FLIP_HORIZONTAL;
+					state = RUNLEFT;
+				}
+			}
+			else
+			{
+				animator.Stop();
+				animator.Trigger("Run");
+			}
 			
+			if (Distance(position, player->position) < 200 )
+			{
+				collider->solid = false;
+				animator.Stop();
+				animator.Trigger("Attack");
+			}
+
+			lastDirectionX = position.X;
 		}
 	}
 	else
@@ -86,16 +119,17 @@ void Enemy::Movement()
 			}
 		}
 		else
+		{
+			animator.Stop();
 			animator.Trigger("Walk");
-
+		}
 		position = newPosition;
-
 	}
 }
 
 bool Enemy::OnTriggerEnter()
 {
-	return (ai.EnterDangerZone(300.0f, position, player->position));
+	return (ai.EnterDangerZone(450.0f, position, player->position));
 }
 
 
@@ -105,6 +139,12 @@ void Enemy::OnCollisionEnter(Engine::Collider* other)
 	{
 		hitpoint--;
 	}
+}
+
+float Enemy::Distance(Engine::Vector2D position, Engine::Vector2D targetPosition)
+{
+	float distance = _hypotf(fabsf(targetPosition.X - position.X), fabsf(targetPosition.Y - position.Y));
+	return distance;
 }
 
 
