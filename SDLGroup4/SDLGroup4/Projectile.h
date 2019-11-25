@@ -22,6 +22,7 @@ namespace Engine {
 			animator.Animations.push_back(new Engine::Animation("IceBall", "FireIce", 3, 1, 2));
 			animator.Animations.push_back(new Engine::Animation("FireBall", "Firefire", 3, 1, 2));
 			AddSprite("Player");
+			AddCollider("Spell", false);
 			PlayAnimation = true;
 		}
 

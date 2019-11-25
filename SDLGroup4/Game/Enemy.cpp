@@ -78,6 +78,10 @@ bool Enemy::OnTriggerEnter()
 
 void Enemy::OnCollisionEnter(Engine::Collider* other)
 {
+	if (other->tag == "Spell") 
+	{
+		std::cout << "Hit!";
+	}
 }
 
 

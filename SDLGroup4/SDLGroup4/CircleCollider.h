@@ -24,6 +24,7 @@ class BoxCollider;
 		
 	private:
 		bool BoxToCircleCollision(BoxCollider* box);
+		bool BoxToCircleCollision(BoxCollider* box, CircleCollider* circle);
 		bool CircleToCircleCollision(CircleCollider* circle);
 	};
 

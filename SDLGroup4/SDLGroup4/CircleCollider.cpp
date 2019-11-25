@@ -6,7 +6,9 @@
 
 void CircleCollider::UpdateCollider(SDL_Rect destRect, float rotation)
 {
-	radius = ((destRect.x + destRect.w - destRect.x) + (destRect.y + destRect.h - destRect.y)) * 0.5f;
+	if(destRect.w > destRect.h) radius = destRect.w * 0.5f;
+	else radius = destRect.h * 0.5f;
+	
 	middlePoint.X = destRect.x + destRect.w - radius;
 	middlePoint.Y = destRect.y + destRect.h - radius;
 }
@@ -27,6 +29,7 @@ bool CircleCollider::TestCollision(Collider* other)
 		}
 		else 
 		{
+			if (ThisBoxCollider && CircleToCircleCollision(circle)) return BoxToCircleCollision(ThisBoxCollider, circle);
 			return CircleToCircleCollision(circle);
 		}
 	}
@@ -37,7 +40,15 @@ bool CircleCollider::TestCollision(Collider* other)
 bool CircleCollider::BoxToCircleCollision(BoxCollider* box)
 {
 	float distance = (middlePoint - box->middlePoint).X + (middlePoint - box->middlePoint).Y;
-	if (distance < radius + box->radius) return true;
+	if (distance < radius + box->radius) 
+		return true;
+	else return false;
+}
+
+bool CircleCollider::BoxToCircleCollision(BoxCollider* box, CircleCollider* circle)
+{
+	float distance = (circle->middlePoint - box->middlePoint).X + (circle->middlePoint - box->middlePoint).Y;
+	if (distance < circle->radius + (box->Width() * 0.5f)) return true;
 	else return false;
 }
 

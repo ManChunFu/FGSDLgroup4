@@ -110,8 +110,8 @@ void Map::DrawMap()
 					//obstacle->Update();
 					obstacle->AddSprite("Obstacle01", 2, 2);
 					obstacle->AddCollider("Obstacle01", true);
-					obstacle->position.X = column * 32;
-					obstacle->position.Y = row * 32;
+					obstacle->position.X = column * 32 * ScaleX;
+					obstacle->position.Y = row * 32 * ScaleY;
 					obstacle->collider->solid = true;
 					obstacle->collider->movable = false;
 				}

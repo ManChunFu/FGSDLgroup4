@@ -3,12 +3,12 @@
 #include <Entity.h>
 #include <TextureManager.h>
 #include "MainScene.h"
-
+#include <vector>
+#include <unordered_map>
 namespace Engine
 { 
 	
 }
-
 class Map : public Engine :: Entity 
 {
 public:
@@ -27,7 +27,6 @@ private:
 	SDL_Texture* sandFloor2;
 	SDL_Texture* sandFloor3;
 	SDL_Texture* Obstcl0;
-
 	int map[20][25]; //tileholder 
 
 };
