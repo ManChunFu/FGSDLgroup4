@@ -14,7 +14,7 @@ namespace Engine
 	{
 	public:
 		static void Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect);
-		static void Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect, float rotation, SDL_RendererFlip flip);
+		static void Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect, float rotation, /*SDL_Point pivot*/ SDL_RendererFlip flip);
 		static void AddTexture(std::string name, const std::string& _path);
 		static bool HasTexture(std::string name);
 		static SDL_Texture* GetTexture(std::string name);

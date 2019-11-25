@@ -22,7 +22,8 @@ public:
 		player = MainScene::mainScene->player;
 		animator.Animations.push_back(new Engine::Animation("EnemyIdle", "Idle", 7, 1, 5, false));
 		animator.Animations.push_back(new Engine::Animation("EnemyWalk", "Walk", 7, 1, 10, false));
-		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 7, 1, 15, false));
+		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 7, 1, 12, false));
+		animator.Animations.push_back(new Engine::Animation("EnemyAttack", "Attack", 7, 1, 12, false));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
 	}
@@ -36,6 +37,7 @@ public:
 
 private:
 	void OnCollisionEnter(Engine::Collider* other) override;
+	float Distance(Engine::Vector2D position, Engine::Vector2D targetPosition);
 	Engine::InputManager* inputManager = nullptr;
 	AI ai;
 	Player* player = nullptr;
@@ -45,7 +47,7 @@ private:
 	int pathCounter = 2;
 	float frameCounter = 0.f;
 	int movementTimer = 0;
-	int animationID = 0; // 0 = Idle, 1 = Walk, 2 = Run
+	float lastDirectionX;
 
 	enum States
 	{
