@@ -6,7 +6,7 @@ namespace Engine
 	void UIManager::Initialize()
 	{
 		ActiveCanvas = 0;
-		CreateCanvas();
+		CreateCanvas({ 0,0,0,255 }, {1440,900,0,0});
 	}
 	void UIManager::Initialize(SDL_Color color, GameElement base)
 	{

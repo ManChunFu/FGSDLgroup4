@@ -37,6 +37,9 @@
     <ClCompile Include="TimedExplosive.cpp">
       <Filter>Cpp files\Character Related</Filter>
     </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Cpp files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background.h">
@@ -77,6 +80,9 @@
     </ClInclude>
     <ClInclude Include="Obstacle.h">
       <Filter>Header Files\Character related stuff</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseMenu.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

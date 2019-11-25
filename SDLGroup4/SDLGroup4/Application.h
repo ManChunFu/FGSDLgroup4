@@ -21,12 +21,12 @@ namespace Engine
 		Engine::InputManager* inputManager = nullptr;
 		void LoadScene(int scene);
 		bool Pause = false;
+		bool isRunning = true;
 	private:
 		std::vector<Scene*> scenes;
 		void Update();
 		void HandleEvents();
 		void Render();
-		bool isRunning = true;
 
 
 	};

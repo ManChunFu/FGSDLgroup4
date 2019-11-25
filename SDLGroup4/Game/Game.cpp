@@ -14,6 +14,7 @@
 #include "GameOverScene.h"
 #include <TextureManager.h>
 #include <Camera.h>
+#include "PauseMenu.h"
 #pragma warning( push )
 #pragma warning( disable : 4267)
 //todo: add game over screen and on hover sounds to buttons
@@ -71,6 +72,7 @@ bool Engine::Application::Initialize()
 	scenes.push_back(new MainMenu(this, inputManager));
 	scenes.push_back(new MainScene(this, inputManager));
 	scenes.push_back(new GameOverScene(this, inputManager));
+	scenes.push_back(new PauseMenu(this, inputManager));
 	SoundManager::AddSoundEffect("Bell", "Assets/Sounds/bell.wav");
 	SoundManager::AddSoundEffect("Button", "Assets/Sounds/button.wav");
 	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
@@ -91,6 +93,7 @@ void Engine::Application::Run()
 	{
 		Engine::GameTime::StartFrame();
 		frameStartTick = SDL_GetTicks();
+		if (Pause) Engine::UIManager::ActiveCanvas = 2;
 		Update();
 		HandleEvents();
 		Render();
@@ -146,6 +149,20 @@ void Engine::Application::HandleEvents()
 void Engine::Application::Update()
 {
 	inputManager->Update(isRunning, application->Pause);
+	if (inputManager->IsKeyPressed(Key::ESCAPE)) 
+	{
+		Pause = !Pause;
+		if (!Pause)
+		{
+			inputManager->ClearClickables();
+			Engine::UIManager::ActiveCanvas = 10;
+		}
+		else 
+		{ 
+			Engine::UIManager::ActiveCanvas = 2; 
+			scenes[3]->Start();
+		}
+	}
 	Engine::UIManager::Update();
 	if (!application->Pause)
 	{ Engine::Scene::ActiveScene->Update(); }
@@ -155,9 +172,9 @@ void Engine::Application::Update()
 void Engine::Application::Render()
 {
 	Engine::Window::RenderClear();
-	Engine::UIManager::Render();
 	SDL_SetRenderDrawColor(Engine::Window::Renderer, 100, 100, 100, 255);//background color
 	Engine::Scene::ActiveScene->Render();
+	Engine::UIManager::Render();
 	Engine::Window::RenderPresent(); 
 }
 void Engine::Application::LoadScene(int scene) 
