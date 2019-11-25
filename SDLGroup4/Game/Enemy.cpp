@@ -12,8 +12,14 @@ bool Enemy::hasPathFound;
 void Enemy::Update()
 {
 	Movement();
+	if (position.X < 0) position.X = 0;
+	if (position.X > 1440 - (destRect.w)) position.X = 1440 - destRect.w;
+	if (position.Y < 0) position.Y = 0;
+	if (position.Y > 900 - (destRect.h)) position.Y = 900 - destRect.h;
 
 	Engine::Entity::Update();
+	if (hitpoint < 1)
+		Engine::Scene::ActiveScene->Destroy(this);
 }
 
 void Enemy::Movement()
@@ -32,18 +38,18 @@ void Enemy::Movement()
 			pathCounter = 2;
 		}
 
-		if (pathToTarget.size() > pathCounter&& movementTimer % 2 == 0)
+		if (pathToTarget.size() > pathCounter && movementTimer % 2 == 0)
 		{
 			movementTimer = 0;
 			position = pathToTarget[pathToTarget.size() - pathCounter];
 			pathCounter++;
+			
 		}
-
 	}
 	else
 	{
 		randomCounter += Engine::GameTime::DeltaTime();
-		if (randomCounter > 1.5f)
+		if (randomCounter > 1.f)
 		{
 			randomCounter = 0.f;
 			positionTemp = ai.RandomMovement();
@@ -52,54 +58,35 @@ void Enemy::Movement()
 
 		if (positionTemp.X == 0 && positionTemp.Y == 0)
 		{
-			if (animationID != 0)
+			if (state != IDLE)
 			{
 				animator.Stop();
 				animator.Trigger("Idle");
-				animationID = 0;
+				state = IDLE;
 			}
 		}
 		else if (positionTemp.X > 0)
 		{
-			/*if (animationID != 1)
-			{*/
+			if (state != WALKRIGHT)
+			{
 				animator.Stop();
 				animator.Trigger("Walk");
-				animationID = 1;
 				spriteFlip = SDL_FLIP_NONE;
-			//}
+				state = WALKRIGHT;
+			}
 		}
 		else if (positionTemp.X < 0)
 		{
-			/*if (animationID != 1)
-			{*/
+			if (state != WALKLEFT)
+			{
 				animator.Stop();
 				animator.Trigger("Walk");
-				animationID = 1;
 				spriteFlip = SDL_FLIP_HORIZONTAL;
-			//}
+				state = WALKLEFT;
+			}
 		}
 		else
-		{
-			/*if (animationID != 1)
-			{*/
-				animator.Stop();
-				animator.Trigger("Walk");
-				animationID = 1;
-			//}
-		}
-
-
-
-		if (newPosition.X < 0)
-			newPosition.X = 2;
-		else if (newPosition.X > 1440)
-			newPosition.X = 1438;
-
-		if (newPosition.Y < 0)
-			newPosition.Y = 2;
-		else if (newPosition.Y > 900)
-			newPosition.Y = 898;
+			animator.Trigger("Walk");
 
 		position = newPosition;
 
@@ -114,6 +101,10 @@ bool Enemy::OnTriggerEnter()
 
 void Enemy::OnCollisionEnter(Engine::Collider* other)
 {
+	if (other->tag == "Spell")
+	{
+		hitpoint--;
+	}
 }
 
 
