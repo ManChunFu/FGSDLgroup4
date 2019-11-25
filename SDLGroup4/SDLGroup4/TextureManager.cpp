@@ -14,9 +14,10 @@ namespace Engine {
 		if (sprite && Engine::Window::Renderer)
 			SDL_RenderCopy(Engine::Window::Renderer, sprite, &srcRect, &desRect);
 	}
-	void TextureManager::Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect, float rotation, /*SDL_Point pivot*/ SDL_RendererFlip flip)
+	void TextureManager::Draw(SDL_Texture* sprite, SDL_Rect srcRect, SDL_Rect desRect, float rotation, SDL_RendererFlip flip)
 	{
-		if(sprite && Engine::Window::Renderer) SDL_RenderCopyEx(Engine::Window::Renderer, sprite, &srcRect, &desRect, rotation, 0 /*&pivot*/, flip);
+		if(sprite && Engine::Window::Renderer) 
+			SDL_RenderCopyEx(Engine::Window::Renderer, sprite, &srcRect, &desRect, rotation, nullptr, flip);
 	}
 
 	SDL_Texture* TextureManager::LoadTexture(const std::string& texturePath)

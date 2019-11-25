@@ -23,7 +23,8 @@ namespace Engine
 
 	void Projectile::OnCollisionEnter(Collider* other)
 	{
-		if(other->tag != "Player") Scene::ActiveScene->Destroy(this);
+		if(other->tag == "Enemy") 
+			Scene::ActiveScene->Destroy(this);
 	}
 
 }

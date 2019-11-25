@@ -29,6 +29,9 @@ void Player::Update()
 		lastDirection.X = dirX;
 		lastDirection.Y = dirY;
 	}
+
+	if (hitPoint < 1)
+		Engine::Scene::ActiveScene->Destroy(this);
 }
 
 
@@ -122,4 +125,9 @@ void Player::Shoot()
 
 void Player::OnCollisionEnter(Engine::Collider* other)
 {
+	if (other->tag == "Enemy")
+	{
+		collider->solid = false;
+		hitPoint--;
+	}
 }

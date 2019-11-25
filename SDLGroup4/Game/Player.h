@@ -37,7 +37,7 @@ private:
 	Engine::InputManager* inputManager = nullptr;
 	float normalSpeed = 300.0f;
 	float teleportDistance = 15000.0f;
-	int hitPoint = 0;
+	int hitPoint;
 	int dirX = 0;
 	int dirY = 0;
 	Engine::Vector2D lastDirection;

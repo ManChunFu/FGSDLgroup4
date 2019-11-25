@@ -19,16 +19,17 @@ class Enemy : public Engine::Entity
 {
 public:
 	Enemy(int hp) : Engine::Entity() {
+		hitpoint = hp;
 		player = MainScene::mainScene->player;
 		animator.Animations.push_back(new Engine::Animation("EnemyIdle", "Idle", 7, 1, 5, false));
 		animator.Animations.push_back(new Engine::Animation("EnemyWalk", "Walk", 7, 1, 10, false));
 		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 7, 1, 12, false));
-		animator.Animations.push_back(new Engine::Animation("EnemyAttack", "Attack", 7, 1, 12, false));
+		animator.Animations.push_back(new Engine::Animation("EnemyAttack", "Attack", 7, 1, 12, true));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
 	}
 
-	int hitpoint = 5;
+	int hitpoint;
 	void Update() override;
 	void Movement();
 	bool OnTriggerEnter();
@@ -48,6 +49,7 @@ private:
 	float frameCounter = 0.f;
 	int movementTimer = 0;
 	float lastDirectionX;
+	bool movePause = false;
 
 	enum States
 	{

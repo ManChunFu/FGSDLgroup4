@@ -36,9 +36,10 @@ void Enemy::Movement()
 			frameCounter = 0.f;
 			pathToTarget = ai.pathFinding(player->position, position);
 			pathCounter = 2;
+			movePause = false;
 		}
 
-		if (pathToTarget.size() > pathCounter)//&& movementTimer % 2 == 0)
+		if (pathToTarget.size() > pathCounter && !movePause)//&& movementTimer % 2 == 0)
 		{
 			movementTimer = 0;
 			position = pathToTarget[pathToTarget.size() - pathCounter];
@@ -69,13 +70,29 @@ void Enemy::Movement()
 				animator.Trigger("Run");
 			}
 			
-			if (Distance(position, player->position) < 200 )
+			if (Distance(position, player->position) < 120 )
 			{
-				collider->solid = false;
-				animator.Stop();
-				animator.Trigger("Attack");
+				if (state == RUNLEFT)
+				{
+					if (Distance(position, player->position) < 60)
+					{
+						collider->solid = false;
+						animator.Stop();
+						animator.Trigger("Attack");
+						position.Y -= 50.f;
+						movePause = true;
+					}
+				}
+				else
+				{
+					collider->solid = false;
+					animator.Stop();
+					animator.Trigger("Attack");
+					position.Y -= 30.f;
+					movePause = true;
+				}
 			}
-
+			
 			lastDirectionX = position.X;
 		}
 	}
@@ -136,9 +153,7 @@ bool Enemy::OnTriggerEnter()
 void Enemy::OnCollisionEnter(Engine::Collider* other)
 {
 	if (other->tag == "Spell")
-	{
 		hitpoint--;
-	}
 }
 
 float Enemy::Distance(Engine::Vector2D position, Engine::Vector2D targetPosition)
