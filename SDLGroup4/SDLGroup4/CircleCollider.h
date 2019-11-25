@@ -4,7 +4,12 @@ class BoxCollider;
 	class CircleCollider : public Engine::Collider
 	{
 	public:
-		~CircleCollider();
+		virtual void Shutdown() override 
+		{ 
+			Engine::Collider::Shutdown(); 
+			if(ThisBoxCollider) delete ThisBoxCollider; 
+			ThisBoxCollider = nullptr; 
+		};
 		CircleCollider(SDL_Rect destRect, std::string colliderTag, Engine::Entity* entity) : Collider(colliderTag, entity)
 		{
 			
@@ -15,10 +20,12 @@ class BoxCollider;
 		// Inherited via Collider
 		virtual void UpdateCollider(SDL_Rect destrect, float rotation) override;
 		virtual bool TestCollision(Collider* other) override;
-		
+		virtual void AddCollision(Collider* other);
+		void ClearCollision() override;
 		
 	private:
 		bool BoxToCircleCollision(BoxCollider* box);
+		bool BoxToCircleCollision(BoxCollider* box, CircleCollider* circle);
 		bool CircleToCircleCollision(CircleCollider* circle);
 	};
 

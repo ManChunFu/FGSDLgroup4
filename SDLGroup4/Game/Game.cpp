@@ -136,6 +136,11 @@ void Engine::Application::HandleEvents()
 {
 	if (!application->Pause)
 	{ Engine::Scene::ActiveScene->HandleEvents(); }
+	if (inputManager->IsKeyPressed(Key::BACKSPACE)) 
+	{ 
+		LoadScene(0); 
+		UIManager::ActiveCanvas = 0;
+	}
 }
 
 void Engine::Application::Update()

@@ -56,7 +56,7 @@ Engine::Vector2D MainScene::RandomeStartPos()
 void MainScene::CreatePlayer()
 {
 	player = new Player(inputManager, 1);
-	player->AddCollider("PlayerIdle", true);
+	player->AddCollider("Player", true);
 	player->AddSprite("Player");
 	player->position.X = 500;
 	player->position.Y = 500;
