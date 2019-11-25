@@ -12,8 +12,14 @@ bool Enemy::hasPathFound;
 void Enemy::Update()
 {
 	Movement();
-	if (hitpoint < 1) Engine::Scene::ActiveScene->Destroy(this);
+	if (position.X < 0) position.X = 0;
+	if (position.X > 1440 - (destRect.w)) position.X = 1440 - destRect.w;
+	if (position.Y < 0) position.Y = 0;
+	if (position.Y > 900 - (destRect.h)) position.Y = 900 - destRect.h;
+
 	Engine::Entity::Update();
+	if (hitpoint < 1)
+		Engine::Scene::ActiveScene->Destroy(this);
 }
 
 void Enemy::Movement()
@@ -23,7 +29,7 @@ void Enemy::Movement()
 	collider->solid = true;
 	if (OnTriggerEnter())
 	{
-		movementTimer ++;
+		movementTimer++;
 		if (frameCounter > 0.5f && !hasPathFound)
 		{
 			hasPathFound = true;
@@ -36,9 +42,9 @@ void Enemy::Movement()
 		{
 			movementTimer = 0;
 			position = pathToTarget[pathToTarget.size() - pathCounter];
-			pathCounter ++;
+			pathCounter++;
+			
 		}
-
 	}
 	else
 	{
@@ -50,23 +56,40 @@ void Enemy::Movement()
 		}
 		newPosition = position + positionTemp;
 
-		if (newPosition.X < 0)
-			newPosition.X = 2;
-		else if (newPosition.X > 1440)
-			newPosition.X = 1438;
-
-		if (newPosition.Y < 0)
-			newPosition.Y = 2;
-		else if (newPosition.Y > 900)
-			newPosition.Y = 898;
+		if (positionTemp.X == 0 && positionTemp.Y == 0)
+		{
+			if (state != IDLE)
+			{
+				animator.Stop();
+				animator.Trigger("Idle");
+				state = IDLE;
+			}
+		}
+		else if (positionTemp.X > 0)
+		{
+			if (state != WALKRIGHT)
+			{
+				animator.Stop();
+				animator.Trigger("Walk");
+				spriteFlip = SDL_FLIP_NONE;
+				state = WALKRIGHT;
+			}
+		}
+		else if (positionTemp.X < 0)
+		{
+			if (state != WALKLEFT)
+			{
+				animator.Stop();
+				animator.Trigger("Walk");
+				spriteFlip = SDL_FLIP_HORIZONTAL;
+				state = WALKLEFT;
+			}
+		}
+		else
+			animator.Trigger("Walk");
 
 		position = newPosition;
 
-		
-			animator.Stop();
-			animator.Trigger("Walk");
-		
-		
 	}
 }
 
@@ -78,14 +101,9 @@ bool Enemy::OnTriggerEnter()
 
 void Enemy::OnCollisionEnter(Engine::Collider* other)
 {
-	if (other->tag == "Spell") 
+	if (other->tag == "Spell")
 	{
-		std::cout << "Hit!";
 		hitpoint--;
-	}
-	if (other->tag == "Player")
-	{
-		std::cout << "Player!";
 	}
 }
 
