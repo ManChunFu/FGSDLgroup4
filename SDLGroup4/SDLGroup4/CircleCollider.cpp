@@ -51,7 +51,7 @@ void CircleCollider::ClearCollision()
 
 bool CircleCollider::BoxToCircleCollision(BoxCollider* box)
 {
-	float distance = (middlePoint - box->middlePoint).X + (middlePoint - box->middlePoint).Y;
+	float distance = sqrt(pow((middlePoint - box->middlePoint).X ,2) + pow((middlePoint - box->middlePoint).Y, 2));
 	if (distance < radius + box->radius) 
 		return true;
 	else return false;
@@ -59,14 +59,14 @@ bool CircleCollider::BoxToCircleCollision(BoxCollider* box)
 
 bool CircleCollider::BoxToCircleCollision(BoxCollider* box, CircleCollider* circle)
 {
-	float distance = (circle->middlePoint - box->middlePoint).X + (circle->middlePoint - box->middlePoint).Y;
+	float distance = sqrt(pow((circle->middlePoint - box->middlePoint).X, 2) + pow((circle->middlePoint - box->middlePoint).Y, 2));
 	if (distance < circle->radius + (box->Width() * 0.5f)) return true;
 	else return false;
 }
 
 bool CircleCollider::CircleToCircleCollision(CircleCollider* circle)
 {
-	float distance = abs((circle->middlePoint - middlePoint).X) + abs((circle->middlePoint - middlePoint).Y);
+	float distance = sqrt(pow((circle->middlePoint - middlePoint).X, 2) + pow((circle->middlePoint - middlePoint).Y, 2));
 	if (distance < radius + circle->radius) return true;
 	else return false;
 }

@@ -29,8 +29,9 @@ namespace Engine {
 		void Update() override;
 
 	private:
-		int shootX = 200;
-		int shootY = 200;
+		void OnCollisionEnter(Collider* other) override;
+		int shootX = 400;
+		int shootY = 400;
 
 		int dirX;
 		int dirY;

@@ -12,7 +12,7 @@ bool Enemy::hasPathFound;
 void Enemy::Update()
 {
 	Movement();
-	
+	if (hitpoint < 1) Engine::Scene::ActiveScene->Destroy(this);
 	Engine::Entity::Update();
 }
 
@@ -81,6 +81,11 @@ void Enemy::OnCollisionEnter(Engine::Collider* other)
 	if (other->tag == "Spell") 
 	{
 		std::cout << "Hit!";
+		hitpoint--;
+	}
+	if (other->tag == "Player")
+	{
+		std::cout << "Player!";
 	}
 }
 

@@ -68,6 +68,8 @@ namespace Engine {
 
 	void Scene::Destroy(Entity* target)
 	{
+		for (Entity* i : destroyQueue)
+		{ if (i == target) return; }
 		destroyQueue.push_back(target);
 	}
 
