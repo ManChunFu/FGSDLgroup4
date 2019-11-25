@@ -12,11 +12,7 @@ bool Enemy::hasPathFound;
 void Enemy::Update()
 {
 	Movement();
-	/*if (position.X < 0) position.X = 0;
-	if (position.X > 1440 - destRect.w) position.X = 1440 - destRect.w;
-	if (position.Y < 0) position.Y = 0;
-	if (position.Y > 900 - destRect.h) position.Y = 900 - destRect.h;*/
-
+	
 	Engine::Entity::Update();
 }
 
@@ -53,7 +49,6 @@ void Enemy::Movement()
 			positionTemp = ai.RandomMovement();
 		}
 		newPosition = position + positionTemp;
-		animator.Trigger("Run");
 
 		if (newPosition.X < 0)
 			newPosition.X = 2;
@@ -67,6 +62,11 @@ void Enemy::Movement()
 
 		position = newPosition;
 
+		
+			animator.Stop();
+			animator.Trigger("Walk");
+		
+		
 	}
 }
 

@@ -3,15 +3,15 @@
 #include <iostream>
 
 
-Engine::Animation::Animation(const std::string& spritePath, const std::string& name, int spriteSheetLenghtX, int spriteSheetLengthY, int speed) :
-	spritePath(spritePath), name(name.c_str()), speed(speed)
+Engine::Animation::Animation(const std::string& _spritePath, const std::string& _name, int _spriteSheetLenghtX, int _spriteSheetLengthY, int _speed, bool _runFullClip) :
+	spritePath(_spritePath), name(_name.c_str()), speed(_speed), RunFullClip(_runFullClip)
 {
 	newAnimation = Engine::TextureManager::GetTexture(spritePath);
-	
+
 	SDL_QueryTexture(newAnimation, nullptr, nullptr, &spriteWidth, &spriteHeight);
 
-	frameWidth = spriteWidth / spriteSheetLenghtX;
-	frameHeight = spriteHeight / spriteSheetLengthY;
+	frameWidth = spriteWidth / _spriteSheetLenghtX;
+	frameHeight = spriteHeight / _spriteSheetLengthY;
 	sourceRect.x = sourceRect.y = 0;
 	sourceRect.w = destinationRect.w = frameWidth;
 	sourceRect.h = destinationRect.h = frameHeight;
@@ -20,27 +20,28 @@ Engine::Animation::Animation(const std::string& spritePath, const std::string& n
 		std::cout << "Failed to setup animated sprite's source / destination value. SDL Error: " << SDL_GetError << std::endl;
 }
 
-Engine::Animation::~Animation()
-{
-}
-
 
 void Engine::Animation::PlayAnimation(Vector2D& position, SDL_RendererFlip flip)
 {
 	framtime++;
-	destinationRect.x =position.X;
-	destinationRect.y =position.Y;
+	destinationRect.x = position.X;
+	destinationRect.y = position.Y;
 
-	if (framePerSecond/framtime == speed)
+	if (framePerSecond / framtime == speed)
 	{
 		framtime = 0;
 		sourceRect.x += frameWidth;
 		if (sourceRect.x >= spriteWidth)
+		{
 			sourceRect.x = 0;
+			if (RunFullClip)
+				StopPlaying = true;
+		}
 	}
-	
+
 	Engine::TextureManager::Draw(newAnimation, sourceRect, destinationRect, 0, flip);
 }
+
 
 void Engine::Animation::ChangeScale(float amount)
 {
