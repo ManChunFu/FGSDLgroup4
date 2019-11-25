@@ -37,6 +37,18 @@ bool CircleCollider::TestCollision(Collider* other)
 	return false;
 }
 
+void CircleCollider::AddCollision(Collider* other)
+{
+	if (ThisBoxCollider) ThisBoxCollider->collisions.push_back(other);
+	else collisions.push_back(other);
+}
+
+void CircleCollider::ClearCollision()
+{
+	if (ThisBoxCollider) ThisBoxCollider->collisions.clear();
+	else collisions.clear();
+}
+
 bool CircleCollider::BoxToCircleCollision(BoxCollider* box)
 {
 	float distance = (middlePoint - box->middlePoint).X + (middlePoint - box->middlePoint).Y;

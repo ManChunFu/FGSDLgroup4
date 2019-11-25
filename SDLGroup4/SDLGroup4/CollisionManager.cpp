@@ -9,15 +9,15 @@ namespace Engine {
 	void CollisionManager::Update()
 	{
 		for (int i = 0; i < colliders.size(); i++)
-		{ colliders[i]->collisions.clear(); }
+		{ colliders[i]->ClearCollision(); }
 		for (int i = 0; i < colliders.size(); i++)
 		{
 			for (int a = i + 1; a < colliders.size(); a++)
 			{
 				if (colliders[i]->TestCollision(colliders[a])) 
 				{
-					colliders[i]->collisions.push_back(colliders[a]);
-					colliders[a]->collisions.push_back(colliders[i]);
+					colliders[i]->AddCollision(colliders[a]);
+					colliders[a]->AddCollision(colliders[i]);
 				}
 			}
 		}

@@ -19,7 +19,6 @@
 		float radius;
 		virtual void Shutdown() override { Engine::Collider::Shutdown(); parentCollider = nullptr; }
 		Engine::Vector2D middlePoint;
-		std::vector<Collider*> collisions;
 		Engine::Vector2D points[4];
 		float Width() { return points[3].X - points[0].X; }
 	private:

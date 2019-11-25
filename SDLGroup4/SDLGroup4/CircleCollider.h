@@ -20,7 +20,8 @@ class BoxCollider;
 		// Inherited via Collider
 		virtual void UpdateCollider(SDL_Rect destrect, float rotation) override;
 		virtual bool TestCollision(Collider* other) override;
-		
+		virtual void AddCollision(Collider* other);
+		void ClearCollision() override;
 		
 	private:
 		bool BoxToCircleCollision(BoxCollider* box);
