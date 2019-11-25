@@ -24,6 +24,7 @@ void MainScene::CreateMap()
 
 void MainScene::Start()
 {
+	Engine::UIManager::ActiveCanvas = 10;
 	Scene::Start();
 	CreatePlayer();
 	CreateEnemy();

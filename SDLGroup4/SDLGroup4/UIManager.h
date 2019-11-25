@@ -17,6 +17,7 @@ namespace Engine
 #pragma warning( push )
 #pragma warning( disable : 4267)
 		static int CreateCanvas(SDL_Color color, GameElement base) { ExistingCanvas.push_back(new Canvas(color, base)); return ExistingCanvas.size(); }
+		static int CreateCanvas(SDL_Color color) { ExistingCanvas.push_back(new Canvas(color, { 900, 600, 250, 150 })); return ExistingCanvas.size(); }
 		static int CreateCanvas() { ExistingCanvas.push_back(new Canvas({ 0, 0, 0, 255 }, { 900, 600, 250, 150 })); return ExistingCanvas.size(); }
 		static void Update() {}
 		static void Shutdown() 

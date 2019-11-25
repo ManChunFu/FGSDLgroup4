@@ -31,7 +31,6 @@ namespace Engine
 		{
 			if(event.type == SDL_QUIT)
 			{ isRunning = false; return; }
-			if (IsKeyDown(SDL_SCANCODE_ESCAPE)) { pause = !pause; return; }
 			CheckMouseOnClickable();
 		}
 	}
