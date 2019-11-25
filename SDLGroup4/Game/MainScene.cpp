@@ -25,6 +25,7 @@ void MainScene::CreateMap()
 
 void MainScene::Start()
 {
+	Engine::UIManager::ActiveCanvas = 10;
 	Scene::Start();
 	CreateObstacle();
 	CreatePlayer();
@@ -78,7 +79,7 @@ void MainScene::CreateObstacle()
 void MainScene::CreatePlayer()
 {
 	player = new Player(inputManager, 1);
-	player->AddCollider("PlayerIdle", true);
+	player->AddCollider("Player", true);
 	player->AddSprite("Player");
 	player->position.X = 500;
 	player->position.Y = 500;

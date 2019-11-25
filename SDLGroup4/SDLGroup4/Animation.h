@@ -11,11 +11,12 @@ namespace Engine
 	class Animation
 	{
 	public:
-		Animation(const std::string& spritePath, const std::string& name, int spriteSheetLenghtX, int spriteSheetLengthY, int speed);
-		~Animation();
+		Animation(const std::string& _spritePath, const std::string& _name, int _spriteSheetLenghtX, int _spriteSheetLengthY, int _speed, bool _runFullClip);
+		~Animation() {}
 		void PlayAnimation(Vector2D& position, SDL_RendererFlip flip);
-
 		std::string name = "";
+		bool StopPlaying = false; 
+		bool RunFullClip = false;
 		void ChangeScale(float amount);
 		void ChangeScale(float x, float y);
 	private:

@@ -34,6 +34,9 @@
     <Filter Include="Source Files\Animation">
       <UniqueIdentifier>{ab17f748-7914-4803-bd80-c6feb5d8b928}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Colliders">
+      <UniqueIdentifier>{d7209e07-fd08-4483-ab3b-9f826a0c74ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
@@ -113,9 +116,6 @@
     <ClInclude Include="Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -183,10 +183,13 @@
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
     <ClInclude Include="BoxCollider.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Colliders</Filter>
     </ClInclude>
     <ClInclude Include="CircleCollider.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files\Colliders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

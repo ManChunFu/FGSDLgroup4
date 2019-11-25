@@ -12,6 +12,8 @@ namespace Engine {
 		
 		~Collider()
 		{
+		}
+		virtual void Shutdown(){
 			GameObject = nullptr;
 			collisions.clear();
 		}
@@ -24,6 +26,8 @@ namespace Engine {
 		float radius;
 		bool movable = true;
 		Engine::Vector2D middlePoint;
+		virtual void AddCollision(Collider* col) {};
+		virtual void ClearCollision() {};
 	protected:
 		Collider(std::string colliderTag, Entity* entity)
 		{

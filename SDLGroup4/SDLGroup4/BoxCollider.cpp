@@ -120,8 +120,8 @@ bool BoxCollider::BoxToBoxCollision(BoxCollider* other)
 					if (movable)GameObject->position.Y = otherLowestY - GameObject->GetSpriteHeight();
 					if (other->movable) other->GameObject->position.Y = highestY + offset;
 				}
-				GameObject->UpdateCollisionBox();
-				other->GameObject->UpdateCollisionBox();
+				if(movable)GameObject->UpdateCollisionBox();
+				if(other->movable) other->GameObject->UpdateCollisionBox();
 			}
 			return true;
 		}
