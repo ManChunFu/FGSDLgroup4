@@ -107,8 +107,12 @@ void Map::DrawMap()
 				{
 					
 					obstacle = new Entity();
-					//obstacle->Update();
-					obstacle->AddSprite("Obstacle01", 2, 2);
+					sourceRect.x = sourceRect.y = 0;
+					sourceRect.w = destRect.w = 32;
+					sourceRect.h = destRect.h = 32;
+					destRect.x = column * 32 * ScaleX;
+					destRect.y = row * 32 * ScaleY;
+					obstacle->AddSprite("Obstacle01");
 					obstacle->AddCollider("Obstacle01", true);
 					obstacle->position.X = column * 32;
 					obstacle->position.Y = row * 32;
