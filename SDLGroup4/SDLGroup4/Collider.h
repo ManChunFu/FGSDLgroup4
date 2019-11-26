@@ -21,13 +21,15 @@ namespace Engine {
 		bool solid = false;
 		Entity* GameObject;
 		std::vector<Collider*> collisions;
+		std::vector<Collider*> collisionExit;
 		std::string tag = "";
 		virtual bool TestCollision(Collider* other) = 0;
 		float radius;
 		bool movable = true;
 		Engine::Vector2D middlePoint;
-		virtual void AddCollision(Collider* col) {};
+		virtual void AddCollision(Collider* col) { collisions.push_back(col); lastFrameCollisions.push_back(col); };
 		virtual void ClearCollision() {};
+		virtual void RemoveCollision(Collider* col) {};
 	protected:
 		Collider(std::string colliderTag, Entity* entity)
 		{
@@ -36,6 +38,6 @@ namespace Engine {
 		};
 	private:
 		float scale = 0;
-
+		std::vector<Collider*> lastFrameCollisions;
 	};
 }

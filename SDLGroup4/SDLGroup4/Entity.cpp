@@ -41,6 +41,9 @@ namespace Engine
 					for (auto col : collider->collisions)
 						OnCollisionEnter(col);
 				}
+				if(collider->collisionExit.size() > 0)
+					for (auto col : collider->collisionExit)
+						OnCollisionExit(col);
 				collider->UpdateCollider(destRect, rotation);
 			
 		}

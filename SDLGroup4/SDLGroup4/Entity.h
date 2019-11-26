@@ -34,6 +34,7 @@ namespace Engine {
 		float rotation = 0;
 	protected:
 		virtual void OnCollisionEnter(Engine::Collider* other) {}
+		virtual void OnCollisionExit(Engine::Collider* other) {}
 		SDL_Rect destRect = {0,0,0,0};
 		SDL_Rect sourceRect = { 0,0,0,0 };
 		SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
