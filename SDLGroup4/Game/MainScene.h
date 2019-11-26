@@ -20,13 +20,15 @@ public:
 		Engine::TextureManager::AddTexture("Enemy", "Assets/Sprites/Enemy/sprite.png");
 		Engine::TextureManager::AddTexture("EnemyIdle", "Assets/Sprites/Enemy/IDLE1.png");
 		Engine::TextureManager::AddTexture("EnemyWalk", "Assets/Sprites/Enemy/WALK.png");
-		Engine::TextureManager::AddTexture("EnemyRun", "Assets/Sprites/Enemy/RUN.png");
+		Engine::TextureManager::AddTexture("EnemyRun", "Assets/Sprites/Enemy/RUNchangedCanvas.png");
 		Engine::TextureManager::AddTexture("EnemyAttack", "Assets/Sprites/Enemy/ATTACK.png");
+		Engine::TextureManager::AddTexture("EnemyHurt", "Assets/Sprites/Enemy/HURT.png");
 		Engine::TextureManager::AddTexture("FireSpell", "Assets/Sprites/FireSpell.png");
 		Engine::TextureManager::AddTexture("Player", "Assets/Sprites/Player/sprite.png");
 		Engine::TextureManager::AddTexture("PlayerIdle", "Assets/Sprites/Player/IDLE.png");
 		Engine::TextureManager::AddTexture("PlayerRun", "Assets/Sprites/Player/RUN.png");
 		Engine::TextureManager::AddTexture("PlayerAttack", "Assets/Sprites/Player/ATTACK.png");
+		Engine::TextureManager::AddTexture("PlayerHurt", "Assets/Sprites/Player/HURT.png");
 		Engine::TextureManager::AddTexture("IceBallSprite", "Assets/Sprites/Player/ICEBALLSprite.png");
 		Engine::TextureManager::AddTexture("IceBall", "Assets/Sprites/Player/ICEBALL1.png");
 		Engine::TextureManager::AddTexture("FireBall", "Assets/Sprites/player/FIREBALL1.png");
@@ -43,13 +45,13 @@ public:
 	std::vector<Obstacle*>obstacle;
 	Map* map; 
 	Player* player;
+	std::vector<Enemy*> enemy;
 	static MainScene* mainScene;
 	void Update() override;
 	void Render() override;
 private:
 	void Start() override;
 	void CreateEnemy();
-	std::vector<Enemy*> enemy;
 	Engine::Vector2D RandomeStartPos();
 	void CreateObstacle();
 	void CreatePlayer();

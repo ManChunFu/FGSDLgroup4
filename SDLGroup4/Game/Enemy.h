@@ -25,6 +25,7 @@ public:
 		animator.Animations.push_back(new Engine::Animation("EnemyWalk", "Walk", 7, 1, 10, false));
 		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 7, 1, 12, false));
 		animator.Animations.push_back(new Engine::Animation("EnemyAttack", "Attack", 7, 1, 12, true));
+		animator.Animations.push_back(new Engine::Animation("EnemyHurt", "Hurt", 7, 1, 15, false));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
 	}
@@ -34,6 +35,7 @@ public:
 	void Movement();
 	bool OnTriggerEnter();
 	static bool hasPathFound;
+	bool Attack = false;
 	
 
 private:
@@ -49,7 +51,7 @@ private:
 	float frameCounter = 0.f;
 	int movementTimer = 0;
 	float lastDirectionX;
-	bool movePause = false;
+	bool isHurt = false;
 
 	enum States
 	{
@@ -57,7 +59,8 @@ private:
 		WALKLEFT,
 		WALKRIGHT,
 		RUNLEFT,
-		RUNRIGHT
+		RUNRIGHT,
+		HURT,
 	};
 
 	States state;

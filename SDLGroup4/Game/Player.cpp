@@ -5,6 +5,7 @@
 #include<Vector2D.h>
 #include<Projectile.h>
 #include "TimedExplosive.h"
+#include "MainScene.h"
 
 void Player::Update()
 {
@@ -59,29 +60,36 @@ void Player::MovePlayer()
 
 	if (dirX == 0 && dirY == 0)
 	{
-		animator.Stop();
-		animator.Trigger("Idle");
+		if (state != IDLE)
+		{
+			animator.Stop();
+			animator.Trigger("Idle");
+			state = IDLE;
+		}
 	}
 	else
 	{
 		if (dirX > 0)
 		{
+			if (state != RUNRIGHT)
 			animator.Stop();
 			animator.Trigger("Run");
 			spriteFlip = SDL_FLIP_NONE;
+			state = RUNRIGHT;
 		}
 		else if (dirX < 0)
 		{
+			if (state != RUNLEFT)
 			animator.Stop();
 			animator.Trigger("Run");
 			spriteFlip = SDL_FLIP_HORIZONTAL;
+			state = RUNLEFT;
 		}
 		else
 		{
 			animator.Stop();
 			animator.Trigger("Run");
 		}
-
 	}
 }
 
@@ -125,9 +133,16 @@ void Player::Shoot()
 
 void Player::OnCollisionEnter(Engine::Collider* other)
 {
+	//Todo : get access to enemy. attack
 	if (other->tag == "Enemy")
 	{
+		if (state != HURT)
+		{
+			animator.Stop();
+			animator.Trigger("Hurt");
+			state = HURT;
+		}
 		collider->solid = false;
-		hitPoint--;
+		//hitPoint--;
 	}
 }

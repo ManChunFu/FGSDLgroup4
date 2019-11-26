@@ -4,7 +4,6 @@
 #include <Time.h>
 #include <iostream>
 #include "Player.h"
-#include "MainScene.h"
 #include <GameTime.h>
 #include <thread>
 
@@ -36,10 +35,11 @@ void Enemy::Movement()
 			frameCounter = 0.f;
 			pathToTarget = ai.pathFinding(player->position, position);
 			pathCounter = 2;
-			movePause = false;
+			Attack = false;
+			isHurt = false;
 		}
 
-		if (pathToTarget.size() > pathCounter && !movePause)//&& movementTimer % 2 == 0)
+		if (pathToTarget.size() > pathCounter && !Attack && !isHurt)//&& movementTimer % 2 == 0)
 		{
 			movementTimer = 0;
 			position = pathToTarget[pathToTarget.size() - pathCounter];
@@ -74,22 +74,24 @@ void Enemy::Movement()
 			{
 				if (state == RUNLEFT)
 				{
-					if (Distance(position, player->position) < 60)
+					if (Distance(position, player->position) < 50)
 					{
 						collider->solid = false;
 						animator.Stop();
+						//position.Y -= 43.f; // sprite pivot fixed in a ugly way
 						animator.Trigger("Attack");
-						position.Y -= 50.f;
-						movePause = true;
+						Attack = true;
+						return;
 					}
 				}
 				else
 				{
 					collider->solid = false;
 					animator.Stop();
+					//position.Y -= 43.f;
 					animator.Trigger("Attack");
-					position.Y -= 30.f;
-					movePause = true;
+					Attack = true;
+					return;
 				}
 			}
 			
@@ -153,7 +155,16 @@ bool Enemy::OnTriggerEnter()
 void Enemy::OnCollisionEnter(Engine::Collider* other)
 {
 	if (other->tag == "Spell")
+	{
+		if (state != HURT)
+		{
+			animator.Stop();
+			animator.Trigger("Hurt");
+			isHurt = true;
+			state = HURT;
+		}
 		hitpoint--;
+	}
 }
 
 float Enemy::Distance(Engine::Vector2D position, Engine::Vector2D targetPosition)
