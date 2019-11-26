@@ -46,7 +46,7 @@ void Engine::Button::Render()
 void Engine::Button::OnHover()
 {
 	TextElement->ChangeTextColor(HoverForegroundColor);
-	SoundManager::PlaySoundEffect("Button", 0, 100);
+	SoundManager::PlaySoundEffect("Button", 0, 30, 2);
 }
 
 void Engine::Button::LeavingHover()

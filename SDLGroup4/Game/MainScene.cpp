@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "Map.h"
 #include "Obstacle.h"
-
+#include <SoundManager.h>
 MainScene* MainScene::mainScene = nullptr;
 void MainScene::Update()
 {
@@ -31,6 +31,7 @@ void MainScene::Start()
 	CreatePlayer();
 	CreateEnemy();
 	CreateMap();
+	Engine::SoundManager::SetMusic("Assets/Sounds/BackgroundMusic.mp3", 20);
 }
 
 void MainScene::CreateEnemy()

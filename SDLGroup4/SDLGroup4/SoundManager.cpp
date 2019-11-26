@@ -7,9 +7,15 @@ namespace Engine {
 	SoundEffects SoundManager::soundeffects;
 	void SoundManager::PlaySoundEffect(std::string soundName, int loops, int volume)
 	{
-		Mix_Volume(-1, volume);
-		if (HasSoundEffect(soundName)) 
-		{ Mix_PlayChannel(-1, soundeffects.find(soundName)->second, loops); }
+		PlaySoundEffect(soundName, loops, volume, -1);
+	}
+	void SoundManager::PlaySoundEffect(std::string soundName, int loops, int volume, int channel)
+	{
+		Mix_Volume(channel, volume);
+		if (HasSoundEffect(soundName))
+		{
+			Mix_PlayChannel(channel, soundeffects.find(soundName)->second, loops);
+		}
 	}
 	void SoundManager::SetMusic(const char* _path, int volume)
 	{

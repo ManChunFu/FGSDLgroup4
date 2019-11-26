@@ -9,6 +9,7 @@ namespace Engine {
 	{
 	public:
 		static void PlaySoundEffect(std::string soundName, int loops, int volume);
+		static void PlaySoundEffect(std::string soundName, int loops, int volume, int channel);
 		static void SetMusic(const char* _path, int volume);
 		static bool AddSoundEffect(const std::string& name, const char* _path);
 		static bool HasSoundEffect(const std::string& name);

@@ -1,7 +1,7 @@
 #include "MainMenu.h"
 #include <Application.h>
 #include <InputManager.h>
-
+#include <SoundManager.h>
 MainMenu* MainMenu::mainMenu = nullptr;
 void MainMenu::Shutdown()
 {
@@ -19,6 +19,7 @@ void MainMenu::AddClickables()
 	inputManager->AddClickableElement(playButton);
 	inputManager->AddClickableElement(exitButton);
 	inputManager->AddClickableElement(scoreButton);
+	Engine::SoundManager::SetMusic("Assets/Sounds/Menu.mp3", 20);
 }
 void MainMenu::SetUpUI()
 {
