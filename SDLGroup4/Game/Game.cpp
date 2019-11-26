@@ -75,7 +75,7 @@ bool Engine::Application::Initialize()
 	scenes.push_back(new PauseMenu(this, inputManager));
 	SoundManager::AddSoundEffect("Bell", "Assets/Sounds/bell.wav");
 	SoundManager::AddSoundEffect("Button", "Assets/Sounds/button.wav");
-	Engine::SoundManager::SetMusic("Assets/Sounds/Rain.wav", 20);
+	Engine::SoundManager::SetMusic("Assets/Sounds/BackgroundMusic.mp3", 20);
 	for (auto i : scenes)
 	{ i->Shutdown(); }
 	Engine::Scene::ActiveScene = scenes[0];
