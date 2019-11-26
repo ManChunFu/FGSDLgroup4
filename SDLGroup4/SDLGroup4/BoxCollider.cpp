@@ -5,7 +5,6 @@
 #include <SDL_render.h>
 void BoxCollider::UpdateCollider(SDL_Rect destRect, float rotation)
 {
-	rotation = rotation;
 	points[0].X = destRect.x;
 	points[0].Y = destRect.y;
 	points[1].Y = destRect.y;
@@ -14,7 +13,8 @@ void BoxCollider::UpdateCollider(SDL_Rect destRect, float rotation)
 	points[2].X = destRect.x;
 	points[3].X = destRect.x + destRect.w;
 	points[3].Y = destRect.y + destRect.h;
-	radius = destRect.w * 0.5f;
+	if(destRect.w > destRect.h) radius = destRect.w * 0.5f;
+	else radius = destRect.h * 0.5f;
 	middlePoint.X = ((points[3].X - points[0].X) * 0.5f) + points[0].X;
 	middlePoint.Y = ((points[3].Y - points[0].Y) * 0.5f) + points[0].Y;
 	/*for (auto i : points)
@@ -121,7 +121,7 @@ bool BoxCollider::BoxToBoxCollision(BoxCollider* other)
 					if (other->movable) other->GameObject->position.Y = highestY + offset;
 				}
 				if(movable)GameObject->UpdateCollisionBox();
-				if(other->movable) other->GameObject->UpdateCollisionBox();
+				if(other->GameObject && other->movable) other->GameObject->UpdateCollisionBox();
 			}
 			return true;
 		}

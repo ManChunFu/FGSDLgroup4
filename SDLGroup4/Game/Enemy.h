@@ -20,13 +20,14 @@ class Enemy : public Engine::Entity
 public:
 	Enemy(int hp) : Engine::Entity() {
 		hitpoint = hp;
+		AddSprite("Enemy");
+		AddCollider("Enemy", true);
 		player = MainScene::mainScene->player;
-		animator.Animations.push_back(new Engine::Animation("EnemyIdle", "Idle", 7, 1, 5, false));
-		animator.Animations.push_back(new Engine::Animation("EnemyWalk", "Walk", 7, 1, 10, false));
-		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 7, 1, 12, false));
-		animator.Animations.push_back(new Engine::Animation("EnemyAttack", "Attack", 7, 1, 12, true));
-		animator.Animations.push_back(new Engine::Animation("EnemyHurt", "Hurt", 7, 1, 15, false));
-		animator.Animations.push_back(new Engine::Animation("EnemyDie", "Die", 7, 1, 15, true));
+		animator.Animations.push_back(new Engine::Animation("EnemyIdle", "Idle", 7, 1, 5, false, destRect));
+		animator.Animations.push_back(new Engine::Animation("EnemyWalk", "Walk", 7, 1, 10, false, destRect));
+		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 7, 1, 12, false, destRect));
+		animator.Animations.push_back(new Engine::Animation("EnemyAttack", "Attack", 7, 1, 12, true, destRect));
+		animator.Animations.push_back(new Engine::Animation("EnemyHurt", "Hurt", 7, 1, 15, false, destRect));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
 	}
@@ -63,7 +64,6 @@ private:
 		RUNLEFT,
 		RUNRIGHT,
 		HURT,
-		DIE
 	};
 
 	States state;

@@ -19,9 +19,9 @@ namespace Engine {
 			dirX = _dirX;
 			dirY = _dirY;
 			position = startPos;
-			animator.Animations.push_back(new Engine::Animation("IceBall", "FireIce", 3, 1, 10, true));
-			animator.Animations.push_back(new Engine::Animation("FireBall", "FireFire", 3, 1, 10, true));
 			AddSprite("IceBallSprite");
+			animator.Animations.push_back(new Engine::Animation("IceBall", "FireIce", 3, 1, 10, true, destRect));
+			animator.Animations.push_back(new Engine::Animation("FireBall", "FireFire", 3, 1, 10, true, destRect));
 			AddCollider("Spell", false);
 			PlayAnimation = true;
 		}

@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "Map.h"
 #include "Obstacle.h"
-
+#include <SoundManager.h>
 MainScene* MainScene::mainScene = nullptr;
 void MainScene::Update()
 {
@@ -31,6 +31,7 @@ void MainScene::Start()
 	CreatePlayer();
 	CreateEnemy();
 	CreateMap();
+	Engine::SoundManager::SetMusic("Assets/Sounds/BackgroundMusic.mp3", 20);
 }
 
 void MainScene::CreateEnemy()
@@ -38,8 +39,6 @@ void MainScene::CreateEnemy()
 	for (int i = 0; i < 1; i++)
 	{
 		enemy.push_back(new Enemy(5));
-		enemy[enemy.size() - 1]->AddCollider("Enemy", true);
-		enemy[enemy.size() - 1]->AddSprite("Enemy");
 		Engine::Vector2D randomPos = RandomeStartPos();
 		enemy[i]->position = randomPos;
 	}
@@ -81,8 +80,7 @@ void MainScene::CreateObstacle()
 void MainScene::CreatePlayer()
 {
 	player = new Player(inputManager, 100);
-	player->AddCollider("Player", true);
-	player->AddSprite("Player");
+	
 	player->position.X = 500;
 	player->position.Y = 500;
 	//player->collider->solid = true;

@@ -38,6 +38,9 @@ namespace Engine {
 	}
 	void CollisionManager::RemoveCollider(Engine::Collider* col)
 	{
+		
+		BoxCollider* box = dynamic_cast<BoxCollider*>(col);
+		if (box) col = box->parentCollider;
 		for (int i = 0; i < colliders.size(); i++)
 		{
 			if (colliders[i] == col) 

@@ -11,7 +11,7 @@ namespace Engine
 	class Animation
 	{
 	public:
-		Animation(const std::string& _spritePath, const std::string& _name, int _spriteSheetLenghtX, int _spriteSheetLengthY, int _speed, bool _runFullClip);
+		Animation(const std::string& _spritePath, const std::string& _name, int _spriteSheetLenghtX, int _spriteSheetLengthY, int _speed, bool _runFullClip, SDL_Rect _originSprite);
 		~Animation() {}
 		void PlayAnimation(Vector2D& position, SDL_RendererFlip flip);
 		std::string name = "";
@@ -25,7 +25,7 @@ namespace Engine
 		int speed = 0;
 		int spriteWidth = 0, spriteHeight = 0;
 		int frameWidth = 0, frameHeight = 0;
-		SDL_Rect sourceRect, destinationRect;
+		SDL_Rect sourceRect, destinationRect, originSprite;
 		SDL_Texture* newAnimation;
 		const int framePerSecond = 60;
 		int framtime = 0;
