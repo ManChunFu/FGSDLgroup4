@@ -11,6 +11,8 @@ private:
 	Engine::Text* playText;
 	Engine::Button* exitButton;
 	Engine::Text* exitText;
+	Engine::Button* menuButton;
+	Engine::Text* menuText;
 	
 	// Inherited via Scene
 	virtual void SetUpUI() override;
@@ -20,4 +22,5 @@ namespace button
 {
 	void OnPlay();
 	void OnExit();
+	void OnMenu();
 }

@@ -134,7 +134,7 @@ void Player::Shoot()
 
 void Player::OnCollisionExit(Engine::Collider* other)
 {
-	std::cout << "Exit!";
+	collider->solid = true;
 }
 
 void Player::OnCollisionEnter(Engine::Collider* other)

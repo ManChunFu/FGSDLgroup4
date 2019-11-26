@@ -35,10 +35,10 @@ void BoxCollider::UpdateCollider(SDL_Rect destRect, float rotation)
 		if (i.X < lowestX) lowestX = i.X;
 		if (i.X > highestX) highestX = i.X;
 	}
-	SDL_Rect drawrect = { lowestX, lowestY, highestX - lowestX, highestY - lowestY };
+	/*SDL_Rect drawrect = { lowestX, lowestY, highestX - lowestX, highestY - lowestY };
 	SDL_SetRenderDrawColor(Engine::Window::Renderer, 255, 0, 0, 255);
 	SDL_RenderDrawRect(Engine::Window::Renderer, &drawrect);
-	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);
+	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);*/
 
 }
 
