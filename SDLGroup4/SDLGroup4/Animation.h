@@ -15,7 +15,7 @@ namespace Engine
 		~Animation() {}
 		void PlayAnimation(Vector2D& position, SDL_RendererFlip flip);
 		std::string name = "";
-		bool StopPlaying = false; 
+		bool StopPlaying = false;
 		bool RunFullClip = false;
 		void ChangeScale(float amount);
 		void ChangeScale(float x, float y);

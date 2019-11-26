@@ -9,14 +9,16 @@
 bool Enemy::hasPathFound;
 void Enemy::Update()
 {
-	Movement();
+	if (state != DIE)
+		Movement();
+
 	if (position.X < 0) position.X = 0;
 	if (position.X > 1440 - (destRect.w)) position.X = 1440 - destRect.w;
 	if (position.Y < 0) position.Y = 0;
 	if (position.Y > 900 - (destRect.h)) position.Y = 900 - destRect.h;
 
 	Engine::Entity::Update();
-	
+
 
 	if (hitpoint < 1 && state != DIE)
 	{
@@ -24,7 +26,7 @@ void Enemy::Update()
 		animator.Trigger("Die");
 		state = DIE;
 	}
-	
+
 	if (state == DIE && animator.CurrenAnimation->StopPlaying)
 		Engine::Scene::ActiveScene->Destroy(this);
 
@@ -106,52 +108,52 @@ void Enemy::Movement()
 	}
 	else
 	{
+		if (animator.CurrenAnimation->RunFullClip)
+			return;
 		randomCounter += Engine::GameTime::DeltaTime();
-		if (!isHurt)
-		{
-			if (randomCounter > 1.f)
-			{
-				randomCounter = 0.f;
-				positionTemp = ai.RandomMovement();
-			}
-			newPosition = position + positionTemp;
 
-			if (positionTemp.X == 0 && positionTemp.Y == 0)
+		if (randomCounter > 1.f)
+		{
+			randomCounter = 0.f;
+			positionTemp = ai.RandomMovement();
+		}
+		newPosition = position + positionTemp;
+
+		if (positionTemp.X == 0 && positionTemp.Y == 0)
+		{
+			if (state != IDLE)
 			{
-				if (state != IDLE)
-				{
-					animator.Stop();
-					animator.Trigger("Idle");
-					state = IDLE;
-				}
+				animator.Stop();
+				animator.Trigger("Idle");
+				state = IDLE;
 			}
-			else if (positionTemp.X > 0)
-			{
-				if (state != WALKRIGHT)
-				{
-					animator.Stop();
-					animator.Trigger("Walk");
-					spriteFlip = SDL_FLIP_NONE;
-					state = WALKRIGHT;
-				}
-			}
-			else if (positionTemp.X < 0)
-			{
-				if (state != WALKLEFT)
-				{
-					animator.Stop();
-					animator.Trigger("Walk");
-					spriteFlip = SDL_FLIP_HORIZONTAL;
-					state = WALKLEFT;
-				}
-			}
-			else
+		}
+		else if (positionTemp.X > 0)
+		{
+			if (state != WALKRIGHT)
 			{
 				animator.Stop();
 				animator.Trigger("Walk");
+				spriteFlip = SDL_FLIP_NONE;
+				state = WALKRIGHT;
 			}
-			position = newPosition;
 		}
+		else if (positionTemp.X < 0)
+		{
+			if (state != WALKLEFT)
+			{
+				animator.Stop();
+				animator.Trigger("Walk");
+				spriteFlip = SDL_FLIP_HORIZONTAL;
+				state = WALKLEFT;
+			}
+		}
+		else
+		{
+			animator.Stop();
+			animator.Trigger("Walk");
+		}
+		position = newPosition;
 	}
 }
 
@@ -179,8 +181,8 @@ void Enemy::OnCollisionEnter(Engine::Collider* other)
 void Enemy::OnCollisionExit(Engine::Collider* other)
 {
 	std::cout << "NOTHING" << std::endl;
-	isHurt = false;
-	state = IDLE;
+	//isHurt = false;
+	//state = IDLE;
 }
 
 float Enemy::Distance(Engine::Vector2D position, Engine::Vector2D targetPosition)

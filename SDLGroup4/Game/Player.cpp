@@ -16,7 +16,10 @@ void Player::Update()
 	dirX = inputManager->GetAxis("Horizontal");
 	dirY = inputManager->GetAxis("Vertical");
 
-	MovePlayer();
+	if (state != DIE)
+	{
+		MovePlayer();
+	}
 	if (position.X < 0) position.X = 0;
 	if (position.X > 1440 - (destRect.w)) position.X = 1440 - destRect.w;
 	if (position.Y < 0) position.Y = 0;
@@ -39,6 +42,9 @@ void Player::Update()
 		state = DIE;
 	}
 	if (state == DIE && animator.CurrenAnimation->StopPlaying)
+	{
+		//active gameover scene
+	}
 		
 }
 

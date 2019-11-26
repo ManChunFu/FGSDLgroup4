@@ -27,8 +27,8 @@ public:
 		animator.Animations.push_back(new Engine::Animation("EnemyWalk", "Walk", 7, 1, 10, false, destRect));
 		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 7, 1, 12, false, destRect));
 		animator.Animations.push_back(new Engine::Animation("EnemyAttack", "Attack", 7, 1, 12, true, destRect));
-		animator.Animations.push_back(new Engine::Animation("EnemyHurt", "Hurt", 7, 1, 20, false, destRect));
-		animator.Animations.push_back(new Engine::Animation("EnemyDie", "Die", 7, 1, 15, true, destRect));
+		animator.Animations.push_back(new Engine::Animation("EnemyHurt", "Hurt", 7, 1, 20, true, destRect));
+		animator.Animations.push_back(new Engine::Animation("EnemyDie", "Die", 12, 1, 10, true, destRect));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
 	}
@@ -56,7 +56,7 @@ private:
 	int movementTimer = 0;
 	float lastDirectionX;
 	bool isHurt = false;
-
+	
 	enum States
 	{
 		IDLE,

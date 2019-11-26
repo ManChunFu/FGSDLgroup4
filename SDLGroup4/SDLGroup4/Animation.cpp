@@ -36,7 +36,10 @@ void Engine::Animation::PlayAnimation(Vector2D& position, SDL_RendererFlip flip)
 		{
 			sourceRect.x = 0;
 			if (RunFullClip)
+			{
 				StopPlaying = true;
+				return;
+			}
 		}
 	}
 	
