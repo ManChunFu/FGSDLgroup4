@@ -29,6 +29,7 @@ namespace Engine
 		SDL_Texture* newAnimation;
 		const int framePerSecond = 60;
 		int framtime = 0;
+		SDL_Point* pivot;
 	};
 }
 

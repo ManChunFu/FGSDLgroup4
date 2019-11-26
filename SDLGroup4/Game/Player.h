@@ -1,6 +1,6 @@
 #pragma once
 #include <Entity.h>
-#include <Scene.h>
+#include "MainScene.h"|
 class TimedExplosive;
 namespace Engine 
 {
@@ -10,18 +10,22 @@ namespace Engine
 	class Vector2D;
 	class TextureManager;
 	class Projectile;
+	class Scene;
 }
 
+class Enemy;
 class Player : public Engine :: Entity
 {
 public:
 	Player(Engine::InputManager* input, int playerHP) : Engine::Entity() 
 	{ 
+
 		hitPoint = playerHP; 
 		inputManager = input; 
 		animator.Animations.push_back(new Engine::Animation("PlayerIdle", "Idle", 5, 1, 3, false));
 		animator.Animations.push_back(new Engine::Animation("PlayerRun", "Run", 5, 1, 15, false));
 		animator.Animations.push_back(new Engine::Animation("PlayerAttack", "Attack", 5, 1, 15, true));
+		animator.Animations.push_back(new Engine::Animation("PlayerHurt", "Hurt", 5, 1, 15, true));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
 
@@ -34,6 +38,7 @@ public:
 	float moveSpeed = normalSpeed;
 
 private:
+	Enemy* enemy = nullptr;
 	Engine::InputManager* inputManager = nullptr;
 	float normalSpeed = 300.0f;
 	float teleportDistance = 15000.0f;
@@ -52,11 +57,23 @@ private:
 	float shootTimer = 0;
 	void MovePlayer();
 	void Shoot();
-	virtual void OnCollisionExit(Engine::Collider* other) override;
+
+	enum States
+	{
+		IDLE,
+		RUNLEFT,
+		RUNRIGHT,
+		ATTACK,
+		HURT
+	};	
+
+	States state;
+	
 	
 
 	// Inherited via Entity
 	virtual void OnCollisionEnter(Engine::Collider* other) override;
+	virtual void OnCollisionExit(Engine::Collider* other) override;
 
 };
 
