@@ -21,11 +21,13 @@ public:
 	{ 
 
 		hitPoint = playerHP; 
-		inputManager = input; 
-		animator.Animations.push_back(new Engine::Animation("PlayerIdle", "Idle", 5, 1, 3, false));
-		animator.Animations.push_back(new Engine::Animation("PlayerRun", "Run", 5, 1, 15, false));
-		animator.Animations.push_back(new Engine::Animation("PlayerAttack", "Attack", 5, 1, 15, true));
-		animator.Animations.push_back(new Engine::Animation("PlayerHurt", "Hurt", 5, 1, 15, true));
+		inputManager = input;
+		AddSprite("Player");
+		AddCollider("Player", true);
+		animator.Animations.push_back(new Engine::Animation("PlayerIdle", "Idle", 5, 1, 3, false, destRect));
+		animator.Animations.push_back(new Engine::Animation("PlayerRun", "Run", 5, 1, 15, false, destRect));
+		animator.Animations.push_back(new Engine::Animation("PlayerAttack", "Attack", 5, 1, 15, true, destRect));
+		animator.Animations.push_back(new Engine::Animation("PlayerHurt", "Hurt", 5, 1, 15, true, destRect));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
 
