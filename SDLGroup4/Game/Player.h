@@ -73,6 +73,7 @@ private:
 
 	// Inherited via Entity
 	virtual void OnCollisionEnter(Engine::Collider* other) override;
+	virtual void OnCollisionExit(Engine::Collider* other) override;
 
 };
 

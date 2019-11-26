@@ -131,6 +131,11 @@ void Player::Shoot()
 	}
 }
 
+void Player::OnCollisionExit(Engine::Collider* other)
+{
+	std::cout << "Exit!";
+}
+
 void Player::OnCollisionEnter(Engine::Collider* other)
 {
 	//Todo : get access to enemy. attack

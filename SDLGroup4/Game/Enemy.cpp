@@ -78,7 +78,7 @@ void Enemy::Movement()
 					{
 						collider->solid = false;
 						animator.Stop();
-						//position.Y -= 43.f; // sprite pivot fixed in a ugly way
+						position.Y -= 43.f; // sprite pivot fixed in a ugly way
 						animator.Trigger("Attack");
 						Attack = true;
 						return;
@@ -88,7 +88,7 @@ void Enemy::Movement()
 				{
 					collider->solid = false;
 					animator.Stop();
-					//position.Y -= 43.f;
+					position.Y -= 43.f;
 					animator.Trigger("Attack");
 					Attack = true;
 					return;
@@ -165,6 +165,11 @@ void Enemy::OnCollisionEnter(Engine::Collider* other)
 		}
 		hitpoint--;
 	}
+}
+
+void Enemy::OnCollisionExit(Engine::Collider* other)
+{
+	isHurt = false;
 }
 
 float Enemy::Distance(Engine::Vector2D position, Engine::Vector2D targetPosition)

@@ -40,6 +40,7 @@ public:
 
 private:
 	void OnCollisionEnter(Engine::Collider* other) override;
+	void OnCollisionExit(Engine::Collider* other) override;
 	float Distance(Engine::Vector2D position, Engine::Vector2D targetPosition);
 	Engine::InputManager* inputManager = nullptr;
 	AI ai;
