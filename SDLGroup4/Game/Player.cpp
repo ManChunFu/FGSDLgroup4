@@ -123,8 +123,14 @@ void Player::Shoot()
 	}
 }
 
+void Player::OnCollisionExit(Engine::Collider* other)
+{
+	std::cout << "Exit!";
+}
+
 void Player::OnCollisionEnter(Engine::Collider* other)
 {
+	std::cout << "Enter!";
 	if (other->tag == "Enemy")
 	{
 		collider->solid = false;

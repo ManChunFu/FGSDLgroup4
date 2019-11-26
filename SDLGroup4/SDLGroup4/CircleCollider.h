@@ -22,6 +22,7 @@ class BoxCollider;
 		virtual bool TestCollision(Collider* other) override;
 		virtual void AddCollision(Collider* other);
 		void ClearCollision() override;
+		virtual void RemoveCollision(Collider* other) override;
 		
 	private:
 		bool BoxToCircleCollision(BoxCollider* box);

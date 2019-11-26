@@ -52,7 +52,7 @@ private:
 	float shootTimer = 0;
 	void MovePlayer();
 	void Shoot();
-	
+	virtual void OnCollisionExit(Engine::Collider* other) override;
 	
 
 	// Inherited via Entity

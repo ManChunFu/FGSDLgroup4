@@ -39,14 +39,55 @@ bool CircleCollider::TestCollision(Collider* other)
 
 void CircleCollider::AddCollision(Collider* other)
 {
+	if (ThisBoxCollider) 
+	{
+		for (auto i : ThisBoxCollider->collisions)
+		{ if (i == other) return; }
+	}
+	else
+	{
+		for (auto i : collisions)
+		{  if (i == other) return; }
+	}
+
 	if (ThisBoxCollider) ThisBoxCollider->collisions.push_back(other);
 	else collisions.push_back(other);
 }
 
 void CircleCollider::ClearCollision()
 {
-	if (ThisBoxCollider) ThisBoxCollider->collisions.clear();
-	else collisions.clear();
+	if (ThisBoxCollider) ThisBoxCollider->collisionExit.clear();
+	else collisionExit.clear();
+}
+
+void CircleCollider::RemoveCollision(Collider* other)
+{
+	int length = collisions.size();
+	if (ThisBoxCollider) length = ThisBoxCollider->collisions.size();
+	if (length > 0)
+	{
+		for (int i = 0; i < length; i++)
+		{
+			if (ThisBoxCollider)
+			{
+				if (ThisBoxCollider->collisions[i] == other)
+				{
+					ThisBoxCollider->collisions.erase(ThisBoxCollider->collisions.begin() + i);
+					ThisBoxCollider->collisionExit.push_back(other);
+					return;
+				}
+			}
+			else
+			{
+				if (collisions[i] == other)
+				{
+					collisions.erase(collisions.begin() + i + 1);
+					collisionExit.push_back(other);
+					return;
+				}
+			}
+		}
+	}
 }
 
 bool CircleCollider::BoxToCircleCollision(BoxCollider* box)

@@ -19,6 +19,11 @@ namespace Engine {
 					colliders[i]->AddCollision(colliders[a]);
 					colliders[a]->AddCollision(colliders[i]);
 				}
+				else
+				{
+					colliders[i]->RemoveCollision(colliders[a]);
+					colliders[a]->RemoveCollision(colliders[i]);
+				}
 			}
 		}
 	}
