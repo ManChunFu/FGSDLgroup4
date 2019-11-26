@@ -81,7 +81,7 @@ void CircleCollider::RemoveCollision(Collider* other)
 			{
 				if (collisions[i] == other)
 				{
-					collisions.erase(collisions.begin() + i + 1);
+					collisions.erase(collisions.begin() + i);
 					collisionExit.push_back(other);
 					return;
 				}
