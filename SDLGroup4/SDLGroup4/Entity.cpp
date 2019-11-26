@@ -59,7 +59,7 @@ namespace Engine
 			if (PlayAnimation)
 			{
 				animator.DisplayAnimation(position, spriteFlip);
-				//animator.ChangeScale(ScaleX, ScaleY);
+				animator.ChangeScale(ScaleX, ScaleY);
 			}
 			else
 			{ Engine::TextureManager::Draw(texture, sourceRect, destRect, rotation, spriteFlip); }

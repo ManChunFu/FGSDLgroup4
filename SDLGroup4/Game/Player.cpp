@@ -32,8 +32,14 @@ void Player::Update()
 		lastDirection.Y = dirY;
 	}
 
-	if (hitPoint < 1)
-		Engine::Scene::ActiveScene->Destroy(this);
+	if (hitPoint < 1 && state != DIE)
+	{
+		animator.Stop();
+		animator.Trigger("Die");
+		state = DIE;
+	}
+	if (state == DIE && animator.CurrenAnimation->StopPlaying)
+		
 }
 
 
