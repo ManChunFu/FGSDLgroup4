@@ -6,6 +6,7 @@
 #include<Projectile.h>
 #include "TimedExplosive.h"
 #include "MainScene.h"
+#include "Enemy.h"
 
 void Player::Update()
 {
@@ -138,16 +139,19 @@ void Player::OnCollisionExit(Engine::Collider* other)
 
 void Player::OnCollisionEnter(Engine::Collider* other)
 {
-	//Todo : get access to enemy. attack
+	Enemy* enemy = dynamic_cast<Enemy*>(other->GameObject);
 	if (other->tag == "Enemy")
 	{
-		if (state != HURT)
-		{
-			animator.Stop();
-			animator.Trigger("Hurt");
-			state = HURT;
-		}
 		collider->solid = false;
-		//hitPoint--;
+		if (enemy->Attack)
+		{
+			if (state != HURT)
+			{
+				animator.Stop();
+				animator.Trigger("Hurt");
+				state = HURT;
+			}
+			hitPoint--;
+		}
 	}
 }

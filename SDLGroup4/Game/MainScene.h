@@ -23,6 +23,7 @@ public:
 		Engine::TextureManager::AddTexture("EnemyRun", "Assets/Sprites/Enemy/RUN.png");
 		Engine::TextureManager::AddTexture("EnemyAttack", "Assets/Sprites/Enemy/ATTACK.png");
 		Engine::TextureManager::AddTexture("EnemyHurt", "Assets/Sprites/Enemy/HURT.png");
+		Engine::TextureManager::AddTexture("EnemyDie", "Assets/Sprites/Enemy/DIE.png");
 		Engine::TextureManager::AddTexture("FireSpell", "Assets/Sprites/FireSpell.png");
 		Engine::TextureManager::AddTexture("Player", "Assets/Sprites/Player/sprite.png");
 		Engine::TextureManager::AddTexture("PlayerIdle", "Assets/Sprites/Player/IDLE.png");

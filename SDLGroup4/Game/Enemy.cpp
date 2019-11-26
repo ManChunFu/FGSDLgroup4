@@ -17,8 +17,16 @@ void Enemy::Update()
 	if (position.Y > 900 - (destRect.h)) position.Y = 900 - destRect.h;
 
 	Engine::Entity::Update();
-	if (hitpoint < 1)
-		Engine::Scene::ActiveScene->Destroy(this);
+	
+	/*if (hitpoint < 1)
+	{
+		animator.Stop();
+		animator.Trigger("Die");
+		state = DIE;
+	}
+
+	if (state == DIE && animator.CurrenAnimation->StopPlaying)
+		Engine::Scene::ActiveScene->Destroy(this);*/
 }
 
 void Enemy::Movement()
@@ -69,8 +77,8 @@ void Enemy::Movement()
 				animator.Stop();
 				animator.Trigger("Run");
 			}
-			
-			if (Distance(position, player->position) < 120 )
+
+			if (Distance(position, player->position) < 120)
 			{
 				if (state == RUNLEFT)
 				{
@@ -94,14 +102,14 @@ void Enemy::Movement()
 					return;
 				}
 			}
-			
+
 			lastDirectionX = position.X;
 		}
 	}
 	else
 	{
 		randomCounter += Engine::GameTime::DeltaTime();
-		if (randomCounter > 1.f)
+		if (randomCounter > 1.f && !isHurt)
 		{
 			randomCounter = 0.f;
 			positionTemp = ai.RandomMovement();

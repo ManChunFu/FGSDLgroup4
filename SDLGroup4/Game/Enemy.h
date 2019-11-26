@@ -26,6 +26,7 @@ public:
 		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 7, 1, 12, false));
 		animator.Animations.push_back(new Engine::Animation("EnemyAttack", "Attack", 7, 1, 12, true));
 		animator.Animations.push_back(new Engine::Animation("EnemyHurt", "Hurt", 7, 1, 15, false));
+		animator.Animations.push_back(new Engine::Animation("EnemyDie", "Die", 7, 1, 15, true));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
 	}
@@ -62,6 +63,7 @@ private:
 		RUNLEFT,
 		RUNRIGHT,
 		HURT,
+		DIE
 	};
 
 	States state;
