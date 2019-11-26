@@ -9,6 +9,7 @@ void PauseMenu::Init()
 
 	inputManager->AddClickableElement(playButton);
 	inputManager->AddClickableElement(exitButton);
+	inputManager->AddClickableElement(menuButton);
 }
 void PauseMenu::Start()
 {
@@ -23,14 +24,22 @@ void PauseMenu::SetUpUI()
 	playButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
 	playButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
 
-	exitButton = new Engine::Button({ 200, 80, 345, 300 }, { 0, 255, 0, 255 });
+	exitButton = new Engine::Button({ 200, 80, 345, 450 }, { 0, 255, 0, 255 });
 	exitText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "EXIT", { 255, 255, 255, 255 }, { 45, 45, 55, 15 });
 	exitButton->SetOnClickEvent(button::OnExit);
 	exitButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
 	exitButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
-	Engine::UIManager::AddObjectsToCanvas(2, { playButton, exitButton });
+	
+	
+	menuButton = new Engine::Button({ 200, 80, 345, 300 }, { 0, 255, 0, 255 });
+	menuText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "Menu", { 255, 255, 255, 255 }, { 45, 45, 55, 15 });
+	menuButton->SetOnClickEvent(button::OnMenu);
+	menuButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
+	menuButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
+	Engine::UIManager::AddObjectsToCanvas(2, { playButton, exitButton, menuButton });
 	playButton->SetText(playText);
 	exitButton->SetText(exitText);
+	menuButton->SetText(menuText);
 	Init();
 }
 
@@ -43,4 +52,11 @@ void button::OnPlay()
 void button::OnExit()
 {
 	Engine::Scene::ActiveScene->application->isRunning = false;
+}
+
+void button::OnMenu()
+{
+	Engine::Scene::ActiveScene->application->Pause = false;
+	Engine::Scene::ActiveScene->application->LoadScene(0);
+	Engine::UIManager::ActiveCanvas = 0;
 }
