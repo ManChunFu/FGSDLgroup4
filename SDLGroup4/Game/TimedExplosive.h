@@ -9,7 +9,6 @@ public:
 		lifeSpan = lifespan;
 		this->AddSprite("FireSpell");
 	}
-	~TimedExplosive() override { Engine::Entity::~Entity(); }
 	void Update() override;
 private:
 	int speed = 200;

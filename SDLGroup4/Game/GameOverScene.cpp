@@ -21,11 +21,18 @@ void GameOverScene::AddClickables()
 	inputManager->AddClickableElement(scoreButton);
 }
 
+void GameOverScene::Start()
+{
+	Engine::Scene::Start();
+	SetUpUI();
+	Engine::UIManager::ActiveCanvas = 1;
+}
+
 void GameOverScene::SetUpUI()
 {
 	thisScene = this;
 	GameOverMenuTitle = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, "Game Over!", { 0, 150, 200, 255 }, { 50, 50, 300, 20 });
-	Engine::UIManager::CreateCanvas();
+	
 
 	backToMenuButton = new Engine::Button({ 350, 80, 280, 150 }, { 0, 255, 0, 255 });
 	backToMenuText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "Back To Menu", { 255, 255, 255, 255 }, { 45, 45, 40, 15 });
@@ -58,11 +65,11 @@ void ButtonMethods::OnClickExitButton()
 
 void ButtonMethods::OnClickMenuButton()
 {
-	GameOverScene::thisScene->application->LoadScene(0);
+	GameOverScene::thisScene->LoadScene(0);
 	Engine::UIManager::ActiveCanvas = 0;
 }
 void ButtonMethods::OnClickScoreButton()
 {
-	GameOverScene::thisScene->application->LoadScene(0);
-	Engine::UIManager::ActiveCanvas = 1;
+	GameOverScene::thisScene->LoadScene(0);
+	Engine::UIManager::ActiveCanvas = 0;
 }

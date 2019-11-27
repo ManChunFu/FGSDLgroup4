@@ -2,6 +2,7 @@
 #include <Application.h>
 #include <InputManager.h>
 #include <SoundManager.h>
+#include "Tracker.h"
 MainMenu* MainMenu::mainMenu = nullptr;
 void MainMenu::Shutdown()
 {
@@ -23,6 +24,8 @@ void MainMenu::AddClickables()
 }
 void MainMenu::SetUpUI()
 {
+	Tracker::Score = 0;
+	Tracker::Enemies = 0;
 	mainMenu = this;
 	startMenuTitle = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, "BLINKER2XYX", { 0, 150, 150, 255 }, { 50, 50, 500, 80 });
 
@@ -59,11 +62,11 @@ void mainmenu::OnClickExitButton()
 
 void mainmenu::OnClickPlayButton()
 {
-	MainMenu::mainMenu->application->LoadScene(1);
+	MainMenu::mainMenu->LoadScene(1);
 	Engine::UIManager::ActiveCanvas = 10;
 }
 void mainmenu::OnClickScoreButton()
 {
-	MainMenu::mainMenu->application->LoadScene(2);
+	MainMenu::mainMenu->LoadScene(2);
 	Engine::UIManager::ActiveCanvas = 1;
 }

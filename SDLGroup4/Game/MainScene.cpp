@@ -5,10 +5,14 @@
 #include "Obstacle.h"
 #include <SoundManager.h>
 #include <GameTime.h>
+#include "Tracker.h"
+#include <Application.h>
 MainScene* MainScene::mainScene = nullptr;
 void MainScene::Update()
 {
 	Scene::Update();
+	std::cout << "Score: " << Tracker::Score << "Enemies: " << Tracker::Enemies << std::endl;
+	
 	if (enemySpawnTimer > enemySpawnRate) 
 	{ 
 		CreateEnemy(); 
@@ -24,6 +28,7 @@ void MainScene::Render()
 	map->DrawMap();
 	Scene::Render();
 }
+
 
 void MainScene::CreateMap()
 {
