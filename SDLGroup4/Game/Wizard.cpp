@@ -2,21 +2,6 @@
 #include <GameTime.h>
 #include "Player.h"
 
-void Wizard::OnCollisionEnter(Engine::Collider* other)
-{
-	if (other->tag == "Spell")
-	{
-		if (state != HURT)
-		{
-			animator.Stop();
-			animator.Trigger("Hurt");
-			isHurt = true;
-			state = HURT;
-		}
-		hitpoint--;
-	}
-}
-
 void Wizard::Update()
 {
 	if (state != DIE)
@@ -36,10 +21,18 @@ void Wizard::Update()
 	if (position.Y > 900 - (destRect.h)) position.Y = 900 - destRect.h;
 
 	Engine::Entity::Update();
+	if (hitpoint < 1)
+	{
+		Engine::Scene::ActiveScene->Destroy(this);
+	}
+	
 }
 
 void Wizard::Movement()
 {
+	if (animator.CurrenAnimation->RunFullClip)
+		return;
+
 	Engine::Vector2D newPosition;
 	if (OnTriggerEnter())
 	{
@@ -48,6 +41,10 @@ void Wizard::Movement()
 			animator.Stop();
 			animator.Trigger("Attack");
 			state = ATTACK;
+			if (player->position.X < position.X)
+				spriteFlip = SDL_FLIP_HORIZONTAL;
+			else
+				SDL_FLIP_NONE;
 		}
 	}
 	else
@@ -102,4 +99,23 @@ void Wizard::Movement()
 bool Wizard::OnTriggerEnter()
 {
 	return (ai.EnterDangerZone(300.0f, position, player->position));
+}
+
+void Wizard::OnCollisionEnter(Engine::Collider* other)
+{
+	if (other->tag == "Spell")
+	{
+		if (state != HURT)
+		{
+			animator.Stop();
+			animator.Trigger("Hurt");
+			state = HURT;
+		}
+		hitpoint--;
+	}
+}
+
+void Wizard::OnCollisionExit(Engine::Collider* other)
+{
+	//isHurt = false;
 }

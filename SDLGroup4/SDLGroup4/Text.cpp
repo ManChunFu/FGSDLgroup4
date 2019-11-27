@@ -63,5 +63,5 @@ void Engine::Text::Script(std::string& text)
 {
 	messageText = text;
 	SDL_DestroyTexture(textTexture);
-	textTexture = LoadFont(fontPath.c_str(), fontsize, messageText, color);
+	textTexture = LoadFont(fontPath, fontsize, messageText, color);
 }

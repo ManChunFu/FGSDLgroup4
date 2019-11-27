@@ -45,6 +45,7 @@
       <Filter>Cpp files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Wizard.cpp" />
+    <ClCompile Include="ScoreRecorder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background.h">
@@ -96,6 +97,8 @@
     <ClInclude Include="Setup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ScoreRecorder.h" />
+    <ClInclude Include="ScoreRecord.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

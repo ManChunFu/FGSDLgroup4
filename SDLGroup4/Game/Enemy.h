@@ -46,7 +46,6 @@ private:
 	void OnCollisionEnter(Engine::Collider* other) override;
 	void OnCollisionExit(Engine::Collider* other) override;
 	void OnDestroy() override;
-	float Distance(Engine::Vector2D position, Engine::Vector2D targetPosition);
 	AI ai;
 	Player* player = nullptr;
 	std::vector<Engine::Vector2D> pathToTarget;

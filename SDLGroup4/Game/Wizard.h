@@ -30,13 +30,13 @@ public:
 
 private:
 	void OnCollisionEnter(Engine::Collider* other) override;
+	void OnCollisionExit(Engine::Collider* other) override;
 	void Update() override;
 	void Movement();
 	bool OnTriggerEnter();
 
 	int hitpoint;
 	float randomCounter = 0;
-	bool isHurt = false;
 	Engine::Vector2D positionTemp;
 	AI ai;
 	Player* player;

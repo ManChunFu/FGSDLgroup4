@@ -40,6 +40,12 @@ Engine::Vector2D AI::RandomMovement()
 	return position;
 }
 
+float AI::GetDistance(Engine::Vector2D position, Engine::Vector2D targetPosition)
+{
+	float distance = _hypotf(fabsf(targetPosition.X - position.X), fabsf(targetPosition.Y - position.Y));
+	return distance;
+}
+
 
 
 

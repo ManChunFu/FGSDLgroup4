@@ -93,11 +93,11 @@ void Enemy::Movement()
 				animator.Trigger("Run");
 			}
 
-			if (Distance(position, player->position) < 120)
+			if (ai.GetDistance(position, player->position) < 120)
 			{
 				if (state == RUNLEFT)
 				{
-					if (Distance(position, player->position) < 50)
+					if (ai.GetDistance(position, player->position) < 50)
 					{
 						if (state != ATTACK)
 						{
@@ -210,10 +210,6 @@ void Enemy::OnDestroy()
 	
 }
 
-float Enemy::Distance(Engine::Vector2D position, Engine::Vector2D targetPosition)
-{
-	float distance = _hypotf(fabsf(targetPosition.X - position.X), fabsf(targetPosition.Y - position.Y));
-	return distance;
-}
+
 
 

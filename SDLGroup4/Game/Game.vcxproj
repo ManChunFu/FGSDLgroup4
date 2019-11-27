@@ -92,6 +92,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
+    <ClCompile Include="ScoreRecorder.cpp" />
     <ClCompile Include="TimedExplosive.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -115,6 +116,8 @@
     <ClInclude Include="AI.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="GameOverScene.h" />
+    <ClInclude Include="ScoreRecord.h" />
+    <ClInclude Include="ScoreRecorder.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="Setup.h" />
