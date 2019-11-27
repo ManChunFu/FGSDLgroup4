@@ -8,7 +8,7 @@
 #include "MainScene.h"
 #include "Enemy.h"
 #include <Application.h>
-
+#include <SoundManager.h>
 void Player::Update()
 {
 	if (mineTimer > 0) mineTimer -= Engine::GameTime::DeltaTime();
@@ -121,6 +121,7 @@ void Player::Shoot()
 	bulletpos.Y = position.Y;
 	if (inputManager->IsKeyPressed(Key::RETURN) && mineTimer < 0)
 	{
+		
 		bullet = new TimedExplosive(3, bulletpos);
 		mineTimer = mineCooldown;
 	}
@@ -146,6 +147,7 @@ void Player::Shoot()
 		{
 			shootTimer = 0;
 			projectile = new Engine::Projectile(3, projectilePos, lastDirection.X, lastDirection.Y);
+			Engine::SoundManager::PlaySoundEffect("Shoot", 0, 10);
 			if (lastDirection.Y != 0)
 			{
 				projectile->position.X = position.X + 20.f;
@@ -185,6 +187,7 @@ void Player::OnCollisionEnter(Engine::Collider* other)
 				if (!hpLost)
 				{
 					hitPoint--;
+					Engine::SoundManager::PlaySoundEffect("Hurt", 0, 10);
 					hpLost = true;
 				}
 			}
