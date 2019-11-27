@@ -15,6 +15,7 @@
 #include <TextureManager.h>
 #include <Camera.h>
 #include "PauseMenu.h"
+#include "SpriteSetup.h"
 #pragma warning( push )
 #pragma warning( disable : 4267)
 //todo: add game over screen and on hover sounds to buttons
@@ -60,7 +61,7 @@ bool Engine::Application::Initialize()
 	{
 		return false;
 	}
-
+	Sprites::Setup();
 	window = new Engine::Window("Main Window", 1440, 900);
 	if (!window->Init())
 	{
