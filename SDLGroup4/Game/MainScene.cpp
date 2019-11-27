@@ -1,6 +1,7 @@
 #include "MainScene.h"
 #include "Enemy.h"
 #include "Player.h"
+#include "Wizard.h"
 #include "Map.h"
 #include "Obstacle.h"
 #include <SoundManager.h>
@@ -21,6 +22,7 @@ void MainScene::Update()
 	else 
 	{ enemySpawnTimer += Engine::GameTime::DeltaTime(); }
 	Enemy::hasPathFound = false;
+
 }
 
 void MainScene::Render()
@@ -43,8 +45,17 @@ void MainScene::Start()
 	CreateObstacle();
 	CreatePlayer();
 	CreateEnemy();
+	CreateWizard();
 	CreateMap();
 	Engine::SoundManager::SetMusic("Assets/Sounds/BackgroundMusic.mp3", 20);
+}
+
+void MainScene::CreateWizard()
+{
+	wizard.push_back(new Wizard(7));
+	//Engine::Vector2D randomPos = RandomeStartPos();
+	wizard[wizard.size() - 1]->position = { 500, 500 };
+
 }
 
 void MainScene::CreateEnemy()

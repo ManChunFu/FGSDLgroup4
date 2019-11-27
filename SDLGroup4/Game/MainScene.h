@@ -9,6 +9,7 @@ class Player;
 class Enemy;
 class Map;
 class Obstacle;
+class Wizard;
 
 class MainScene : public Engine::Scene
 {
@@ -17,6 +18,8 @@ public:
 	{ 
 		mainScene = this; 
 		
+		Engine::TextureManager::AddTexture("Wizard", "Assets/Sprites/Wizard/sprite.png");
+		Engine::TextureManager::AddTexture("WizardIdle", "Assets/Sprites/Wizard/IDLE.png");
 		Engine::TextureManager::AddTexture("Enemy", "Assets/Sprites/Enemy/sprite.png");
 		Engine::TextureManager::AddTexture("EnemyIdle", "Assets/Sprites/Enemy/IDLE1.png");
 		Engine::TextureManager::AddTexture("EnemyWalk", "Assets/Sprites/Enemy/WALK.png");
@@ -47,6 +50,7 @@ public:
 	std::vector<Obstacle*>obstacle;
 	Map* map; 
 	Player* player;
+	std::vector<Wizard*> wizard;
 	std::vector<Enemy*> enemy;
 	static MainScene* mainScene;
 	void Update() override;
@@ -54,7 +58,7 @@ public:
 	
 private:
 	void Start() override;
-	
+	void CreateWizard();
 	void CreateEnemy();
 	Engine::Vector2D RandomeStartPos();
 	void CreateObstacle();

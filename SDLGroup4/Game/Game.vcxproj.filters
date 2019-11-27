@@ -44,6 +44,7 @@
     <ClCompile Include="PauseMenu.cpp">
       <Filter>Cpp files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Wizard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background.h">
@@ -91,6 +92,7 @@
     <ClInclude Include="Tracker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Wizard.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
