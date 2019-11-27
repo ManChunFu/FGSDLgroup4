@@ -51,8 +51,10 @@ public:
 	static MainScene* mainScene;
 	void Update() override;
 	void Render() override;
+	
 private:
 	void Start() override;
+	
 	void CreateEnemy();
 	Engine::Vector2D RandomeStartPos();
 	void CreateObstacle();

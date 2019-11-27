@@ -5,6 +5,7 @@
 #include "AI.h"
 #include "MainScene.h"
 #include <string>
+#include "Tracker.h"
 namespace Engine
 {
 	class InputManager;
@@ -31,8 +32,9 @@ public:
 		animator.Animations.push_back(new Engine::Animation("EnemyDie", "Die", 12, 1, 10, true, destRect));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
+		Tracker::Enemies++;
 	}
-
+	~Enemy() {};
 	int hitpoint;
 	void Update() override;
 	void Movement();
@@ -44,6 +46,7 @@ public:
 private:
 	void OnCollisionEnter(Engine::Collider* other) override;
 	void OnCollisionExit(Engine::Collider* other) override;
+	void OnDestroy() override;
 	float Distance(Engine::Vector2D position, Engine::Vector2D targetPosition);
 	Engine::InputManager* inputManager = nullptr;
 	AI ai;

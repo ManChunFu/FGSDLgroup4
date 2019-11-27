@@ -201,6 +201,11 @@ void Enemy::OnCollisionExit(Engine::Collider* other)
 	//state = IDLE;
 }
 
+void Enemy::OnDestroy()
+{
+	Tracker::Enemies--;
+}
+
 float Enemy::Distance(Engine::Vector2D position, Engine::Vector2D targetPosition)
 {
 	float distance = _hypotf(fabsf(targetPosition.X - position.X), fabsf(targetPosition.Y - position.Y));

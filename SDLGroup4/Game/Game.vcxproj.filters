@@ -38,7 +38,12 @@
       <Filter>Cpp files\Character Related</Filter>
     </ClCompile>
     <ClCompile Include="Obstacle.cpp" />
-    <ClCompile Include="PauseMenu.cpp" />
+    <ClCompile Include="Tracker.cpp">
+      <Filter>Cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Cpp files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background.h">
@@ -80,7 +85,12 @@
     <ClInclude Include="Obstacle.h">
       <Filter>Header Files\Character related stuff</Filter>
     </ClInclude>
-    <ClInclude Include="PauseMenu.h" />
+    <ClInclude Include="PauseMenu.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Tracker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

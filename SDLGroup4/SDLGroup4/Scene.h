@@ -30,11 +30,14 @@ namespace Engine
 		Engine::Application* application;
 		static Scene* ActiveScene;
 		Camera* Camera() { return &sceneCam; }
+		void LoadScene(int scene);
 	protected:
 		Engine::Camera sceneCam;
 		Engine::InputManager* inputManager;
 	private:
 		std::vector<Entity*> addQueue;
+		bool loadscene;
+		int scene;
 		std::vector<Entity*> destroyQueue;
 		Engine::EntityManager* entityManager;
 		static int idCtr;

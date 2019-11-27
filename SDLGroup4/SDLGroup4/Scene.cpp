@@ -4,6 +4,7 @@
 #include "Text.h"
 #include "UIManager.h"
 #include "Entity.h"
+#include "Application.h"
 namespace Engine {
 	int Scene::idCtr = 0;
 	Scene* Scene::ActiveScene = nullptr;
@@ -44,6 +45,12 @@ namespace Engine {
 		for (Entity* add : addQueue)
 		{ entityManager->AddEntity(add); }
 		addQueue.clear();
+		if (loadscene)
+		{
+			application->LoadScene(scene);
+			loadscene = false;
+		}
+
 	}
 	void Scene::HandleEvents()
 	{
@@ -71,6 +78,12 @@ namespace Engine {
 		for (Entity* i : destroyQueue)
 		{ if (i == target) return; }
 		destroyQueue.push_back(target);
+	}
+
+	void Scene::LoadScene(int _scene)
+	{
+		loadscene = true;
+		scene = _scene;
 	}
 
 }

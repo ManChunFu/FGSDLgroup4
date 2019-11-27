@@ -15,7 +15,7 @@
 namespace Engine {
 	class Entity {
 	public:
-		virtual ~Entity() {}
+		 ~Entity() { OnDestroy(); }
 		Entity() { Engine::Scene::ActiveScene->AddEntity(this); };
 		void AddCollider(std::string tag, bool boxCollider);
 		void AddSprite(std::string _name, float scaleX, float scaleY);
@@ -35,6 +35,7 @@ namespace Engine {
 	protected:
 		virtual void OnCollisionEnter(Engine::Collider* other) {}
 		virtual void OnCollisionExit(Engine::Collider* other) {}
+		virtual void OnDestroy() {};
 		SDL_Rect destRect = {0,0,0,0};
 		SDL_Rect sourceRect = { 0,0,0,0 };
 		SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;

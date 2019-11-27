@@ -100,6 +100,7 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="NodeList.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Tracker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SDLGroup4\SDLGroup4.vcxproj">
@@ -124,6 +125,7 @@
     <ClInclude Include="NodeList.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Tracker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -57,6 +57,6 @@ void button::OnExit()
 void button::OnMenu()
 {
 	Engine::Scene::ActiveScene->application->Pause = false;
-	Engine::Scene::ActiveScene->application->LoadScene(0);
+	Engine::Scene::ActiveScene->LoadScene(0);
 	Engine::UIManager::ActiveCanvas = 0;
 }
