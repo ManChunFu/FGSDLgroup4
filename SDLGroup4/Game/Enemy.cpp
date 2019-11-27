@@ -28,8 +28,12 @@ void Enemy::Update()
 	}
 
 	if (state == DIE && animator.CurrenAnimation->StopPlaying)
+	{
+		Tracker::Score++;
+		Tracker::Enemies--;
 		Engine::Scene::ActiveScene->Destroy(this);
 
+	}
 }
 
 void Enemy::Movement()
@@ -187,7 +191,7 @@ void Enemy::OnCollisionExit(Engine::Collider* other)
 
 void Enemy::OnDestroy()
 {
-	Tracker::Enemies--;
+	
 }
 
 float Enemy::Distance(Engine::Vector2D position, Engine::Vector2D targetPosition)

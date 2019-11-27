@@ -20,12 +20,13 @@ namespace Engine
 		void Render() override;
 		void UpdatePosition(float xCoordinate, float yCoordinate) override;
 		SDL_Texture* LoadFont(const std::string& fontPath, int fontsize, const std::string& messageText, SDL_Color color);
-
+		void Script(std::string& text);
 	private:
 		SDL_Texture* textTexture;
 		SDL_Rect textRect;
 		std::string fontPath, messageText;
 		int fontsize;
+		SDL_Color color;
 
 	};
 }

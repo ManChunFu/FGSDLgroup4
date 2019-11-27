@@ -51,7 +51,7 @@ void GameOverScene::SetUpUI()
 	scoreButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
 	scoreButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
 	scoreButton->SetOnClickEvent(ButtonMethods::OnClickScoreButton);
-	Engine::UIManager::AddObjectsToCanvas(1, { GameOverMenuTitle, backToMenuButton, exitButton, scoreButton });
+	Engine::UIManager::AddObjectsToCanvas(2, { GameOverMenuTitle, backToMenuButton, exitButton, scoreButton });
 	backToMenuButton->SetText(backToMenuText);
 	exitButton->SetText(exitText);
 	scoreButton->SetText(scoreRecordText);
@@ -66,10 +66,8 @@ void ButtonMethods::OnClickExitButton()
 void ButtonMethods::OnClickMenuButton()
 {
 	GameOverScene::thisScene->LoadScene(0);
-	Engine::UIManager::ActiveCanvas = 0;
 }
 void ButtonMethods::OnClickScoreButton()
 {
 	GameOverScene::thisScene->LoadScene(0);
-	Engine::UIManager::ActiveCanvas = 0;
 }

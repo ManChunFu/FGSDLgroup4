@@ -11,8 +11,9 @@ MainScene* MainScene::mainScene = nullptr;
 void MainScene::Update()
 {
 	Scene::Update();
-	std::cout << "Score: " << Tracker::Score << "Enemies: " << Tracker::Enemies << std::endl;
-	
+	std::cout << "Score: " << Tracker::Score << " Enemies: " << Tracker::Enemies << std::endl;
+	std::string score = "Score: " + Tracker::Score;
+	scoreText->Script(score);
 	if (enemySpawnTimer > enemySpawnRate) 
 	{ 
 		CreateEnemy(); 
@@ -38,7 +39,7 @@ void MainScene::CreateMap()
 
 void MainScene::Start()
 {
-	Engine::UIManager::ActiveCanvas = 10;
+	Engine::UIManager::ActiveCanvas = 1;
 	Scene::Start();
 	CreateObstacle();
 	CreatePlayer();

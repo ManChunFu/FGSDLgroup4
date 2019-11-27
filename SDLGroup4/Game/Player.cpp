@@ -44,6 +44,7 @@ void Player::Update()
 
 		//active gameover scene
 		MainScene::mainScene->LoadScene(2);
+		
 	}
 		
 }
