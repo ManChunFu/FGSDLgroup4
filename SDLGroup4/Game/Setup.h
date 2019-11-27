@@ -1,9 +1,10 @@
 #pragma once
 #include <TextureManager.h>
-class Sprites
+#include <SoundManager.h>
+class Setup
 {
 public:
-	static void Setup() 
+	static void Sprites() 
 	{
 		Engine::TextureManager::AddTexture("Wizard", "Assets/Sprites/Enemy/Wizard/sprite.png");
 		Engine::TextureManager::AddTexture("WizardIdle", "Assets/Sprites/Enemy/Wizard/IDLE.png");
@@ -32,6 +33,11 @@ public:
 		Engine::TextureManager::AddTexture("Stone", "Assets/Sprites/Enviroment/stone_brick_1.png");
 		Engine::TextureManager::AddTexture("Border", "Assets/Sprites/Enviroment/bars_red_2.png");
 		Engine::TextureManager::AddTexture("Obstacle01", "Assets/Sprites/Enviroment/granite_statue.png");
+	}
+	static void Sounds() 
+	{
+		Engine::SoundManager::AddSoundEffect("Hurt", "Assets/Sounds/Wounded.wav");
+		Engine::SoundManager::AddSoundEffect("Shoot", "Assets/Sounds/Shoot.wav");
 	}
 
 private:

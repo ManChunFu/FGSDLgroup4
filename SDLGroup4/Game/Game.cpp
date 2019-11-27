@@ -15,7 +15,7 @@
 #include <TextureManager.h>
 #include <Camera.h>
 #include "PauseMenu.h"
-#include "SpriteSetup.h"
+#include "Setup.h"
 #pragma warning( push )
 #pragma warning( disable : 4267)
 //todo: add game over screen and on hover sounds to buttons
@@ -61,21 +61,20 @@ bool Engine::Application::Initialize()
 	{
 		return false;
 	}
-	Sprites::Setup();
 	window = new Engine::Window("Main Window", 1440, 900);
 	if (!window->Init())
 	{
 		std::cout << "Failed to initialize. SDL Error: " << SDL_GetError << std::endl;
 		return false;
 	}
+	Setup::Sprites();
+	Setup::Sounds();
 	inputManager = new Engine::InputManager();
 	Engine::UIManager::Initialize();
 	scenes.push_back(new MainMenu(this, inputManager));
 	scenes.push_back(new MainScene(this, inputManager));
 	scenes.push_back(new GameOverScene(this, inputManager));
 	scenes.push_back(new PauseMenu(this, inputManager));
-	SoundManager::AddSoundEffect("Bell", "Assets/Sounds/bell.wav");
-	SoundManager::AddSoundEffect("Button", "Assets/Sounds/button.wav");
 	
 	for (auto i : scenes)
 	{ i->Shutdown(); }
@@ -94,6 +93,7 @@ void Engine::Application::Run()
 	{
 		Engine::GameTime::StartFrame();
 		frameStartTick = SDL_GetTicks();
+		Engine::Window::RenderClear();
 		if (Pause) Engine::UIManager::ActiveCanvas = 3;
 		Update();
 		HandleEvents();
@@ -169,7 +169,7 @@ void Engine::Application::Update()
 
 void Engine::Application::Render()
 {
-	Engine::Window::RenderClear();
+	
 	SDL_SetRenderDrawColor(Engine::Window::Renderer, 100, 100, 100, 255);//background color
 	Engine::Scene::ActiveScene->Render();
 	Engine::UIManager::Render();

@@ -93,7 +93,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Wizard.h" />
-    <ClInclude Include="SpriteSetup.h">
+    <ClInclude Include="Setup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
