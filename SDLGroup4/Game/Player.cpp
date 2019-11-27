@@ -43,7 +43,7 @@ void Player::Update()
 	}
 	if (state == DIE && animator.CurrenAnimation->StopPlaying)
 	{
-		MainScene::ActiveScene->application->LoadScene(2);
+		MainScene::ActiveScene->LoadScene(2);
 	}
 		
 }
