@@ -22,17 +22,20 @@ public:
 		AddCollider("Wizard", true);
 		animator.Animations.push_back(new Engine::Animation("WizardIdle", "Idle", 5, 1, 5, false, destRect));
 		animator.Animations.push_back(new Engine::Animation("WizardWalk", "Walk", 5, 1, 5, false, destRect));
+		animator.Animations.push_back(new Engine::Animation("WizardAttack", "Attack", 5, 1, 5, true, destRect));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
 	}
 
 private:
-	int hitpoint;
+	void OnCollisionEnter(Engine::Collider* other) override;
 	void Update() override;
 	void Movement();
 	bool OnTriggerEnter();
 
+	int hitpoint;
 	float randomCounter = 0;
+	bool isHurt = false;
 	Engine::Vector2D positionTemp;
 	AI ai;
 	Player* player;

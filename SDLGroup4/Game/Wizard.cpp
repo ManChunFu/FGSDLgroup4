@@ -2,9 +2,40 @@
 #include <GameTime.h>
 #include "Player.h"
 
+void Wizard::OnCollisionEnter(Engine::Collider* other)
+{
+	if (other->tag == "Spell")
+	{
+		if (state != HURT)
+		{
+			animator.Stop();
+			animator.Trigger("Hurt");
+			isHurt = true;
+			state = HURT;
+		}
+		hitpoint--;
+	}
+}
+
 void Wizard::Update()
 {
-	Movement();
+	if (state != DIE)
+		Movement();
+	if (player->isDead)
+	{
+		if (state == ATTACK)
+		{
+			animator.Stop();
+			animator.Trigger("Idle");
+		}
+	}
+
+	if (position.X < 0) position.X = 0;
+	if (position.X > 1440 - (destRect.w)) position.X = 1440 - destRect.w;
+	if (position.Y < 0) position.Y = 0;
+	if (position.Y > 900 - (destRect.h)) position.Y = 900 - destRect.h;
+
+	Engine::Entity::Update();
 }
 
 void Wizard::Movement()
@@ -12,7 +43,12 @@ void Wizard::Movement()
 	Engine::Vector2D newPosition;
 	if (OnTriggerEnter())
 	{
-
+		if (state != ATTACK)
+		{
+			animator.Stop();
+			animator.Trigger("Attack");
+			state = ATTACK;
+		}
 	}
 	else
 	{
