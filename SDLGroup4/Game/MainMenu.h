@@ -9,6 +9,7 @@ public:
 	void AddClickables() override;
 private:
 	virtual void SetUpUI() override;
+	void Start() override;
 	Engine::Text* startMenuTitle;
 	Engine::Button* playButton;
 	Engine::Text* playText;

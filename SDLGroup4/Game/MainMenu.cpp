@@ -10,8 +10,8 @@ void MainMenu::Shutdown()
 	Engine::Text* startMenuTitle = nullptr;
 	Engine::Button* playButton = nullptr;
 	Engine::Text* playText = nullptr;
-	Engine::Button* quitButton = nullptr;
-	Engine::Text* quitText = nullptr;
+	Engine::Button* exitButton = nullptr;
+	Engine::Text* exitText = nullptr;
 	Engine::Button* scoreButton = nullptr;
 	Engine::Text* scoreRecordText = nullptr;
 }
@@ -53,6 +53,12 @@ void MainMenu::SetUpUI()
 	scoreButton->SetText(scoreRecordText);
 	AddClickables();
 
+}
+
+void MainMenu::Start()
+{
+	Engine::Scene::Start();
+	AddClickables();
 }
 
 void mainmenu::OnClickExitButton()

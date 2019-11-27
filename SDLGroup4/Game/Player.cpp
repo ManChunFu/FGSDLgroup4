@@ -81,10 +81,10 @@ void Player::MovePlayer()
 
 	if (dirX == 0 && dirY == 0)
 	{
-		if (state != IDLE)
-		{
 			animator.Stop();
 			animator.Trigger("Idle");
+		if (state != IDLE)
+		{
 			state = IDLE;
 		}
 	}

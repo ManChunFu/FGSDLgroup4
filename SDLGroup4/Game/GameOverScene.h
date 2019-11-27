@@ -5,7 +5,7 @@ class GameOverScene : public Engine::Scene
 public:
 	GameOverScene(Engine::Application* app, Engine::InputManager* input) : Scene(app, input) 
 	{ 
-		Engine::UIManager::CreateCanvas(); 
+		Engine::UIManager::CreateCanvas();
 		SetUpUI(); 
 	}
 	static GameOverScene* thisScene;
