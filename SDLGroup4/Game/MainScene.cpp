@@ -52,7 +52,7 @@ void MainScene::Start()
 
 void MainScene::CreateWizard()
 {
-	wizard = new Wizard(7);
+	wizard = new Wizard(10);
 	//Engine::Vector2D randomPos = RandomeStartPos();
 	wizard->position = { 1200, 300 };
 

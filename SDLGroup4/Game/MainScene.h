@@ -22,6 +22,7 @@ public:
 		Engine::UIManager::AddObjectsToCanvas(1, { scoreText });
 		Engine::TextureManager::AddTexture("Wizard", "Assets/Sprites/Enemy/Wizard/sprite.png");
 		Engine::TextureManager::AddTexture("WizardIdle", "Assets/Sprites/Enemy/Wizard/IDLE.png");
+		Engine::TextureManager::AddTexture("WizardWalk", "Assets/Sprites/Enemy/Wizard/WALK.png");
 		Engine::TextureManager::AddTexture("Enemy", "Assets/Sprites/Enemy/sprite.png");
 		Engine::TextureManager::AddTexture("Hp", "Assets/Sprites/Player/hp.png");
 		Engine::TextureManager::AddTexture("EnemyIdle", "Assets/Sprites/Enemy/IDLE1.png");
@@ -67,7 +68,7 @@ private:
 	Engine::Vector2D RandomeStartPos();
 	void CreateObstacle();
 	void CreatePlayer();
-	const int enemySpawnRate = 10;
+	const int enemySpawnRate = 20;
 	float enemySpawnTimer = 0.1f;
 	Engine::Vector2D ObstaclePlacement(Engine::Vector2D pos);
 	Engine::Vector2D lastPosition;
