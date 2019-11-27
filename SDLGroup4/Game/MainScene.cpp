@@ -54,7 +54,7 @@ void MainScene::CreateWizard()
 {
 	wizard = new Wizard(7);
 	//Engine::Vector2D randomPos = RandomeStartPos();
-	wizard->position = { 500, 500 };
+	wizard->position = { 1200, 300 };
 
 }
 
