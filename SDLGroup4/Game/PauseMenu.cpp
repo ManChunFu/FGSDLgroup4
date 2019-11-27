@@ -36,7 +36,7 @@ void PauseMenu::SetUpUI()
 	menuButton->SetOnClickEvent(button::OnMenu);
 	menuButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
 	menuButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
-	Engine::UIManager::AddObjectsToCanvas(2, { playButton, exitButton, menuButton });
+	Engine::UIManager::AddObjectsToCanvas(3, { playButton, exitButton, menuButton });
 	playButton->SetText(playText);
 	exitButton->SetText(exitText);
 	menuButton->SetText(menuText);
@@ -46,7 +46,7 @@ void PauseMenu::SetUpUI()
 void button::OnPlay()
 {
 	Engine::Scene::ActiveScene->application->Pause = false;
-	Engine::UIManager::ActiveCanvas = 5;
+	Engine::UIManager::ActiveCanvas = 1;
 }
 
 void button::OnExit()
@@ -58,5 +58,4 @@ void button::OnMenu()
 {
 	Engine::Scene::ActiveScene->application->Pause = false;
 	Engine::Scene::ActiveScene->LoadScene(0);
-	Engine::UIManager::ActiveCanvas = 0;
 }

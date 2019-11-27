@@ -1,6 +1,8 @@
 #pragma once
 #include <Entity.h>
+#include <Slider.h>
 #include "MainScene.h"|
+#include <UIManager.h>
 class TimedExplosive;
 namespace Engine 
 {
@@ -31,7 +33,9 @@ public:
 		animator.Animations.push_back(new Engine::Animation("PlayerDie", "Die", 17, 1, 15, true, destRect));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
-
+		hpSlider = new Engine::Slider("Hp", { 0, 150, 200, 255 }, { 50, 50, 300, 20 });
+		Engine::UIManager::AddObjectsToCanvas(1, { hpSlider });
+		hpSlider->amount = playerHP;
 		lastDirection.X = 1;
 	};
 
@@ -49,6 +53,7 @@ private:
 	int hitPoint;
 	int dirX = 0;
 	int dirY = 0;
+	Engine::Slider* hpSlider;
 	Engine::Vector2D lastDirection;
 	TimedExplosive* bullet = nullptr;
 	Engine::Vector2D currPos;

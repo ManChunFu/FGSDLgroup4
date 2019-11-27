@@ -93,7 +93,7 @@ void Engine::Application::Run()
 	{
 		Engine::GameTime::StartFrame();
 		frameStartTick = SDL_GetTicks();
-		if (Pause) Engine::UIManager::ActiveCanvas = 2;
+		if (Pause) Engine::UIManager::ActiveCanvas = 3;
 		Update();
 		HandleEvents();
 		Render();
@@ -140,10 +140,7 @@ void Engine::Application::HandleEvents()
 	if (!application->Pause)
 	{ Engine::Scene::ActiveScene->HandleEvents(); }
 	if (inputManager->IsKeyPressed(Key::BACKSPACE)) 
-	{ 
-		LoadScene(0); 
-		UIManager::ActiveCanvas = 0;
-	}
+	{ LoadScene(0); }
 }
 
 void Engine::Application::Update()
@@ -182,6 +179,7 @@ void Engine::Application::LoadScene(int scene)
 	Engine::Scene::ActiveScene->Shutdown();
 	Engine::Scene::ActiveScene = scenes[scene];
 	Engine::Scene::ActiveScene->Start();
+	Engine::UIManager::ActiveCanvas = scene;
 	Engine::Camera::ActiveCamera = scenes[scene]->Camera();
 	inputManager->ClearClickables();
 	scenes[scene]->AddClickables();

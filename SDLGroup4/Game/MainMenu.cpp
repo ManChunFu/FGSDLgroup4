@@ -63,10 +63,9 @@ void mainmenu::OnClickExitButton()
 void mainmenu::OnClickPlayButton()
 {
 	MainMenu::mainMenu->LoadScene(1);
-	Engine::UIManager::ActiveCanvas = 10;
+	Tracker::Score = 0;
 }
 void mainmenu::OnClickScoreButton()
 {
 	MainMenu::mainMenu->LoadScene(2);
-	Engine::UIManager::ActiveCanvas = 1;
 }

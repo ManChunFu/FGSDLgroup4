@@ -6,7 +6,7 @@
 #include <iostream>
 
 Engine::Text::Text(const std::string& fontPath, int fontsize, const std::string& messageText, SDL_Color color, GameElement base) :
-	fontPath(fontPath), fontsize(fontsize), messageText(messageText)//Engine::Vector2D position)
+	fontPath(fontPath), fontsize(fontsize), messageText(messageText), color(color)//Engine::Vector2D position)
 {
 	textTexture = LoadFont(fontPath, fontsize, messageText, color);
 	SDL_QueryTexture(textTexture, nullptr, nullptr, &textRect.w, &textRect.h);
@@ -57,4 +57,11 @@ SDL_Texture* Engine::Text::LoadFont(const std::string& fontPath, int fontsize, c
 	TTF_CloseFont(font);
 
 	return textTexture;
+}
+
+void Engine::Text::Script(std::string& text)
+{
+	messageText = text;
+	SDL_DestroyTexture(textTexture);
+	textTexture = LoadFont(fontPath.c_str(), fontsize, messageText, color);
 }
