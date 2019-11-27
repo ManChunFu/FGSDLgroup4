@@ -23,6 +23,7 @@ public:
 		animator.Animations.push_back(new Engine::Animation("WizardIdle", "Idle", 5, 1, 5, false, destRect));
 		animator.Animations.push_back(new Engine::Animation("WizardWalk", "Walk", 5, 1, 5, false, destRect));
 		animator.Animations.push_back(new Engine::Animation("WizardAttack", "Attack", 5, 1, 5, true, destRect));
+		animator.Animations.push_back(new Engine::Animation("WizardHurt", "Hurt", 5, 1, 5, true, destRect));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
 	}

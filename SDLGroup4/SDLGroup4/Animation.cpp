@@ -20,6 +20,14 @@ Engine::Animation::Animation(const std::string& _spritePath, const std::string& 
 		std::cout << "Failed to setup animated sprite's source / destination value. SDL Error: " << SDL_GetError << std::endl;
 }
 
+Engine::Animation::~Animation()
+{
+	if (newAnimation)
+		delete newAnimation;
+
+	newAnimation = nullptr;
+}
+
 
 void Engine::Animation::PlayAnimation(Vector2D& position, SDL_RendererFlip flip)
 {
@@ -28,6 +36,8 @@ void Engine::Animation::PlayAnimation(Vector2D& position, SDL_RendererFlip flip)
 	destinationRect.y = position.Y;
 	if (destinationRect.h > originSprite.h)
 		destinationRect.y -= destinationRect.h - originSprite.h;
+	if (destinationRect.w > originSprite.w && flip == SDL_FLIP_HORIZONTAL)
+		destinationRect.x -= destinationRect.w - originSprite.w;
 	if (framePerSecond / framtime == speed)
 	{
 		framtime = 0;
