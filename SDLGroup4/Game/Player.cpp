@@ -41,6 +41,7 @@ void Player::Update()
 	}
 	if (state == DIE && animator.CurrenAnimation->StopPlaying)
 	{
+
 		//active gameover scene
 		MainScene::ActiveScene->application->LoadScene(2);
 	}
@@ -150,9 +151,9 @@ void Player::OnCollisionExit(Engine::Collider* other)
 
 void Player::OnCollisionEnter(Engine::Collider* other)
 {
-	Enemy* enemy = dynamic_cast<Enemy*>(other->GameObject);
 	if (other->tag == "Enemy")
 	{
+		Enemy* enemy = dynamic_cast<Enemy*>(other->GameObject);
 		collider->solid = false;
 		if (enemy->Attack)
 		{
