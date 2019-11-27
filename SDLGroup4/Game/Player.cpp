@@ -123,8 +123,16 @@ void Player::Shoot()
 
 	if (inputManager->GetAxis("Fire2") == 1)
 	{
-		animator.Stop();
-		animator.Trigger("Attack");
+		if (state != ATTACK)
+		{
+			animator.Stop();
+			animator.Trigger("Attack");
+			state = ATTACK;
+			if (state == ATTACK && dirX > 0)
+				spriteFlip = SDL_FLIP_NONE;
+			else if(state == ATTACK && dirX < 0)
+				spriteFlip = SDL_FLIP_HORIZONTAL;
+		}
 
 		if (shootTimer > 0.4f)
 		{
