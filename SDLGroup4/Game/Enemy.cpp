@@ -11,6 +11,14 @@ void Enemy::Update()
 {
 	if (state != DIE)
 		Movement();
+	if (player->isDead)
+	{
+		if (state == ATTACK)
+		{
+			animator.Stop();
+			animator.Trigger("Idle");
+		}
+	}
 
 	if (position.X < 0) position.X = 0;
 	if (position.X > 1440 - (destRect.w)) position.X = 1440 - destRect.w;
@@ -87,20 +95,28 @@ void Enemy::Movement()
 				{
 					if (Distance(position, player->position) < 50)
 					{
-						collider->solid = false;
-						animator.Stop();
-						animator.Trigger("Attack");
-						Attack = true;
-						return;
+						if (state != ATTACK)
+						{
+							collider->solid = false;
+							animator.Stop();
+							animator.Trigger("Attack");
+							state = ATTACK;
+							Attack = true;
+							return;
+						}
 					}
 				}
 				else
 				{
-					collider->solid = false;
-					animator.Stop();
-					animator.Trigger("Attack");
-					Attack = true;
-					return;
+					if (state != ATTACK)
+					{
+						collider->solid = false;
+						animator.Stop();
+						animator.Trigger("Attack");
+						state = ATTACK;
+						Attack = true;
+						return;
+					}
 				}
 			}
 			lastDirectionX = position.X;

@@ -17,7 +17,8 @@ void Player::Update()
 	dirY = inputManager->GetAxis("Vertical");
 
 	if (state != DIE)
-	{ MovePlayer(); }
+	 MovePlayer(); 
+
 	if (position.X < 0) position.X = 0;
 	if (position.X > 1440 - (destRect.w)) position.X = 1440 - destRect.w;
 	if (position.Y < 0) position.Y = 0;
@@ -38,11 +39,10 @@ void Player::Update()
 		animator.Stop();
 		animator.Trigger("Die");
 		state = DIE;
+		isDead = true;
 	}
 	if (state == DIE && animator.CurrenAnimation->StopPlaying)
 	{
-
-		//active gameover scene
 		MainScene::ActiveScene->application->LoadScene(2);
 	}
 		
@@ -151,19 +151,22 @@ void Player::OnCollisionExit(Engine::Collider* other)
 
 void Player::OnCollisionEnter(Engine::Collider* other)
 {
-	if (other->tag == "Enemy")
+	if (state != DIE)
 	{
-		Enemy* enemy = dynamic_cast<Enemy*>(other->GameObject);
-		collider->solid = false;
-		if (enemy->Attack)
+		if (other->tag == "Enemy")
 		{
-			if (state != HURT)
+			Enemy* enemy = dynamic_cast<Enemy*>(other->GameObject);
+			collider->solid = false;
+			if (enemy->Attack)
 			{
-				animator.Stop();
-				animator.Trigger("Hurt");
-				state = HURT;
+				if (state != HURT)
+				{
+					animator.Stop();
+					animator.Trigger("Hurt");
+					state = HURT;
+				}
+				hitPoint--;
 			}
-			hitPoint--;
 		}
 	}
 }

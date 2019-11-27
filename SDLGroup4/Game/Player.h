@@ -28,7 +28,7 @@ public:
 		animator.Animations.push_back(new Engine::Animation("PlayerRun", "Run", 5, 1, 15, false, destRect));
 		animator.Animations.push_back(new Engine::Animation("PlayerAttack", "Attack", 5, 1, 15, true, destRect));
 		animator.Animations.push_back(new Engine::Animation("PlayerHurt", "Hurt", 5, 1, 15, true, destRect));
-		animator.Animations.push_back(new Engine::Animation("PlayerDie", "Die", 5, 1, 15, true, destRect));
+		animator.Animations.push_back(new Engine::Animation("PlayerDie", "Die", 17, 1, 15, true, destRect));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
 
@@ -39,6 +39,7 @@ public:
 	void Update() override;
 
 	float moveSpeed = normalSpeed;
+	bool isDead = false;
 
 private:
 	Enemy* enemy = nullptr;

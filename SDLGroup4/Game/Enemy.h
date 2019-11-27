@@ -64,6 +64,7 @@ private:
 		WALKRIGHT,
 		RUNLEFT,
 		RUNRIGHT,
+		ATTACK,
 		HURT,
 		DIE
 	};

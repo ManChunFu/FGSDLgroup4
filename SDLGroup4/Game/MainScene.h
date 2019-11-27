@@ -30,7 +30,7 @@ public:
 		Engine::TextureManager::AddTexture("PlayerRun", "Assets/Sprites/Player/RUN.png");
 		Engine::TextureManager::AddTexture("PlayerAttack", "Assets/Sprites/Player/ATTACK.png");
 		Engine::TextureManager::AddTexture("PlayerHurt", "Assets/Sprites/Player/HURT.png");
-		Engine::TextureManager::AddTexture("PlayerDie", "Assets/Sprites/Player/DIE.png");
+		Engine::TextureManager::AddTexture("PlayerDie", "Assets/Sprites/Player/DIE1.png");
 		Engine::TextureManager::AddTexture("IceBallSprite", "Assets/Sprites/Player/ICEBALLSprite.png");
 		Engine::TextureManager::AddTexture("IceBall", "Assets/Sprites/Player/ICEBALL1.png");
 		Engine::TextureManager::AddTexture("FireBall", "Assets/Sprites/player/FIREBALL1.png");
