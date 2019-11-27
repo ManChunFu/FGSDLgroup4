@@ -100,7 +100,7 @@ void MainScene::CreateObstacle()
 
 void MainScene::CreatePlayer()
 {
-	player = new Player(inputManager, 5);
+	player = new Player(inputManager, 10);
 	
 	player->position.X = 500;
 	player->position.Y = 500;
