@@ -63,6 +63,7 @@ void mainmenu::OnClickExitButton()
 void mainmenu::OnClickPlayButton()
 {
 	MainMenu::mainMenu->LoadScene(1);
+	Tracker::Score = 0;
 }
 void mainmenu::OnClickScoreButton()
 {

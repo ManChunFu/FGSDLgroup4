@@ -11,8 +11,7 @@ MainScene* MainScene::mainScene = nullptr;
 void MainScene::Update()
 {
 	Scene::Update();
-	std::cout << "Score: " << Tracker::Score << " Enemies: " << Tracker::Enemies << std::endl;
-	std::string score = "Score: " + Tracker::Score;
+	std::string score = "Score: " + std::to_string(Tracker::Score);
 	scoreText->Script(score);
 	if (enemySpawnTimer > enemySpawnRate) 
 	{ 

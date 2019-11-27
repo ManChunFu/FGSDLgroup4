@@ -1,6 +1,7 @@
 #include "GameOverScene.h"
 #include <InputManager.h>
 #include <Application.h>
+#include "Tracker.h"
 GameOverScene* GameOverScene::thisScene;
 void GameOverScene::Shutdown()
 {
@@ -32,7 +33,8 @@ void GameOverScene::SetUpUI()
 {
 	thisScene = this;
 	GameOverMenuTitle = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, "Game Over!", { 0, 150, 200, 255 }, { 50, 50, 300, 20 });
-	
+	std::string scoretext = "Your score: " + std::to_string(Tracker::Score);
+	ScoreText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 40, scoretext, { 0, 150, 200, 255 }, { 40, 40, 310, 90 });
 
 	backToMenuButton = new Engine::Button({ 350, 80, 280, 150 }, { 0, 255, 0, 255 });
 	backToMenuText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "Back To Menu", { 255, 255, 255, 255 }, { 45, 45, 40, 15 });
@@ -51,7 +53,7 @@ void GameOverScene::SetUpUI()
 	scoreButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
 	scoreButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
 	scoreButton->SetOnClickEvent(ButtonMethods::OnClickScoreButton);
-	Engine::UIManager::AddObjectsToCanvas(2, { GameOverMenuTitle, backToMenuButton, exitButton, scoreButton });
+	Engine::UIManager::AddObjectsToCanvas(2, { GameOverMenuTitle, backToMenuButton, exitButton, scoreButton, ScoreText });
 	backToMenuButton->SetText(backToMenuText);
 	exitButton->SetText(exitText);
 	scoreButton->SetText(scoreRecordText);
