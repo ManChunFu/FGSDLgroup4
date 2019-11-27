@@ -57,6 +57,8 @@ private:
 	Engine::Vector2D RandomeStartPos();
 	void CreateObstacle();
 	void CreatePlayer();
+	const int enemySpawnRate = 5;
+	float enemySpawnTimer = 0.1f;
 	Engine::Vector2D ObstaclePlacement(Engine::Vector2D pos);
 	Engine::Vector2D lastPosition;
 	//trying different techniques to create tilemap (um)

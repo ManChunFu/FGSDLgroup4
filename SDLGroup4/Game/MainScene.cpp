@@ -4,10 +4,18 @@
 #include "Map.h"
 #include "Obstacle.h"
 #include <SoundManager.h>
+#include <GameTime.h>
 MainScene* MainScene::mainScene = nullptr;
 void MainScene::Update()
 {
 	Scene::Update();
+	if (enemySpawnTimer > enemySpawnRate) 
+	{ 
+		CreateEnemy(); 
+		enemySpawnTimer = 0;
+	}
+	else 
+	{ enemySpawnTimer += Engine::GameTime::DeltaTime(); }
 	Enemy::hasPathFound = false;
 }
 
@@ -36,12 +44,9 @@ void MainScene::Start()
 
 void MainScene::CreateEnemy()
 {
-	for (int i = 0; i < 1; i++)
-	{
-		enemy.push_back(new Enemy(5));
-		Engine::Vector2D randomPos = RandomeStartPos();
-		enemy[i]->position = randomPos;
-	}
+	enemy.push_back(new Enemy(5));
+	Engine::Vector2D randomPos = RandomeStartPos();
+	enemy[enemy.size() - 1]->position = randomPos;
 }
 
 Engine::Vector2D MainScene::RandomeStartPos()

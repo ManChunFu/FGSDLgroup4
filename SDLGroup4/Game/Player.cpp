@@ -7,7 +7,7 @@
 #include "TimedExplosive.h"
 #include "MainScene.h"
 #include "Enemy.h"
-
+#include <Application.h>
 void Player::Update()
 {
 	if (mineTimer > 0) mineTimer -= Engine::GameTime::DeltaTime();
@@ -17,9 +17,7 @@ void Player::Update()
 	dirY = inputManager->GetAxis("Vertical");
 
 	if (state != DIE)
-	{
-		MovePlayer();
-	}
+	{ MovePlayer(); }
 	if (position.X < 0) position.X = 0;
 	if (position.X > 1440 - (destRect.w)) position.X = 1440 - destRect.w;
 	if (position.Y < 0) position.Y = 0;
@@ -44,6 +42,7 @@ void Player::Update()
 	if (state == DIE && animator.CurrenAnimation->StopPlaying)
 	{
 		//active gameover scene
+		MainScene::ActiveScene->application->LoadScene(2);
 	}
 		
 }
