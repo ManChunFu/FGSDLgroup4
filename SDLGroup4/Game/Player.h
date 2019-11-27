@@ -66,6 +66,8 @@ private:
 	float shootTimer = 0;
 	void MovePlayer();
 	void Shoot();
+	float damageTimer = 0;
+	bool hpLost = false;
 
 	enum States
 	{

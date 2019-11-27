@@ -29,6 +29,13 @@ void Player::Update()
 	shootTimer += Engine::GameTime::DeltaTime();
 	Shoot();
 
+	if (damageTimer > 150.f)
+	{
+		hpLost = false;
+		damageTimer = 0;
+	}
+
+
 	if (dirX != 0 || dirY != 0)
 	{
 		lastDirection.X = dirX;
@@ -160,6 +167,7 @@ void Player::OnCollisionExit(Engine::Collider* other)
 
 void Player::OnCollisionEnter(Engine::Collider* other)
 {
+	damageTimer++;
 	if (state != DIE)
 	{
 		if (other->tag == "Enemy")
@@ -174,7 +182,11 @@ void Player::OnCollisionEnter(Engine::Collider* other)
 					animator.Trigger("Hurt");
 					state = HURT;
 				}
-				hitPoint--;
+				if (!hpLost)
+				{
+					hitPoint--;
+					hpLost = true;
+				}
 			}
 		}
 	}

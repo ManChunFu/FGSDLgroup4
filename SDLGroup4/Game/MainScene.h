@@ -9,6 +9,7 @@ class Player;
 class Enemy;
 class Map;
 class Obstacle;
+class Wizard;
 
 class MainScene : public Engine::Scene
 {
@@ -19,6 +20,8 @@ public:
 		Engine::UIManager::CreateCanvas({ 0,0,0,0 }, { 0, 0, 250, 150 });
 		scoreText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, "Score: ", { 0, 0, 0, 255 }, { 50, 50, 900, -100 });
 		Engine::UIManager::AddObjectsToCanvas(1, { scoreText });
+		Engine::TextureManager::AddTexture("Wizard", "Assets/Sprites/Enemy/Wizard/sprite.png");
+		Engine::TextureManager::AddTexture("WizardIdle", "Assets/Sprites/Enemy/Wizard/IDLE.png");
 		Engine::TextureManager::AddTexture("Enemy", "Assets/Sprites/Enemy/sprite.png");
 		Engine::TextureManager::AddTexture("Hp", "Assets/Sprites/Player/ICEBALLSprite.png");
 		Engine::TextureManager::AddTexture("EnemyIdle", "Assets/Sprites/Enemy/IDLE1.png");
@@ -51,6 +54,7 @@ public:
 	Map* map; 
 	Player* player;
 	std::vector<Enemy*> enemy;
+	Wizard* wizard;
 	static MainScene* mainScene;
 	void Update() override;
 	void Render() override;
@@ -59,10 +63,11 @@ private:
 	void Start() override;
 	Engine::Text* scoreText;
 	void CreateEnemy();
+	void CreateWizard();
 	Engine::Vector2D RandomeStartPos();
 	void CreateObstacle();
 	void CreatePlayer();
-	const int enemySpawnRate = 5;
+	const int enemySpawnRate = 10;
 	float enemySpawnTimer = 0.1f;
 	Engine::Vector2D ObstaclePlacement(Engine::Vector2D pos);
 	Engine::Vector2D lastPosition;

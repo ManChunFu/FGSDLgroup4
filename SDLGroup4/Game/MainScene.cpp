@@ -52,9 +52,9 @@ void MainScene::Start()
 
 void MainScene::CreateWizard()
 {
-	wizard.push_back(new Wizard(7));
+	wizard = new Wizard(7);
 	//Engine::Vector2D randomPos = RandomeStartPos();
-	wizard[wizard.size() - 1]->position = { 500, 500 };
+	wizard->position = { 500, 500 };
 
 }
 
@@ -100,7 +100,7 @@ void MainScene::CreateObstacle()
 
 void MainScene::CreatePlayer()
 {
-	player = new Player(inputManager, 100);
+	player = new Player(inputManager, 5);
 	
 	player->position.X = 500;
 	player->position.Y = 500;
