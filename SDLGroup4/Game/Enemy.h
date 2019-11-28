@@ -18,8 +18,9 @@ class AI;
 class Enemy : public Engine::Entity
 {
 public:
-	Enemy(int hp, bool troll) : Engine::Entity() {
+	Enemy(int hp, bool _troll) : Engine::Entity() {
 		hitpoint = hp;
+		troll = _troll;
 		if (troll)
 		{
 			AddSprite("Enemy");
@@ -36,8 +37,8 @@ public:
 			animator.Animations.push_back(new Engine::Animation("KnightIdle", "Idle", 7, 1, 5, false, destRect));
 			animator.Animations.push_back(new Engine::Animation("KnightWalk", "Walk", 7, 1, 5, false, destRect));
 			animator.Animations.push_back(new Engine::Animation("KnightRun", "Run", 7, 1, 5, false, destRect));
-			animator.Animations.push_back(new Engine::Animation("KnightRun", "Attack", 7, 1, 5, true, destRect));
-			animator.Animations.push_back(new Engine::Animation("KnightRun", "Hurt", 7, 1, 5, true, destRect));
+			animator.Animations.push_back(new Engine::Animation("KnightAttack", "Attack", 7, 1, 5, true, destRect));
+			animator.Animations.push_back(new Engine::Animation("KnightHurt", "Hurt", 7, 1, 5, true, destRect));
 			animator.Animations.push_back(new Engine::Animation("KnightDie", "Die", 14, 1, 5, true, destRect));
 
 		}
@@ -54,7 +55,6 @@ public:
 	bool OnTriggerEnter();
 	static bool hasPathFound;
 	bool Attack = false;
-	
 
 private:
 	void OnCollisionEnter(Engine::Collider* other) override;
@@ -70,6 +70,7 @@ private:
 	int movementTimer = 0;
 	float lastDirectionX;
 	bool isHurt = false;
+	bool troll;
 	
 	enum States
 	{
