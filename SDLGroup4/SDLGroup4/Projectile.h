@@ -21,7 +21,7 @@ namespace Engine {
 			affectsEnemies = _affectsEnemies;
 			AddSprite("IceBallSprite");
 			animator.Animations.push_back(new Engine::Animation("IceBall", "FireIce", 3, 1, 10, true, destRect));
-			animator.Animations.push_back(new Engine::Animation("FireBall", "FireFire", 3, 1, 10, true, destRect));
+			//animator.Animations.push_back(new Engine::Animation("FireBall", "FireFire", 3, 1, 10, true, destRect));
 			if(affectsEnemies) AddCollider("Spell", false);
 			else AddCollider("EnemySpell", false);
 			PlayAnimation = true;

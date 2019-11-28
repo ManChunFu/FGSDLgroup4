@@ -151,13 +151,11 @@ void Player::Shoot()
 			if (lastDirection.Y != 0)
 			{
 				projectile->position.X = position.X + 20.f;
-				projectile->animator.Trigger("FireFire");
+				
 			}
 			else
-			{
-				projectile->position.Y = position.Y + 15.f;
+			{ projectile->position.Y = position.Y + 15.f; }
 				projectile->animator.Trigger("FireIce");
-			}
 		}
 	}
 }

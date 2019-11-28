@@ -23,7 +23,6 @@ public:
 		if (troll)
 		{
 			AddSprite("Enemy");
-			AddCollider("Enemy", true);
 			animator.Animations.push_back(new Engine::Animation("EnemyIdle", "Idle", 7, 1, 5, false, destRect));
 			animator.Animations.push_back(new Engine::Animation("EnemyWalk", "Walk", 7, 1, 10, false, destRect));
 			animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 7, 1, 12, false, destRect));
@@ -31,6 +30,7 @@ public:
 			animator.Animations.push_back(new Engine::Animation("EnemyHurt", "Hurt", 7, 1, 20, true, destRect));
 			animator.Animations.push_back(new Engine::Animation("EnemyDie", "Die", 12, 1, 10, true, destRect));
 		}
+		AddCollider("Enemy", true);
 		player = MainScene::mainScene->player;
 		animator.Trigger("Idle");
 		PlayAnimation = true;
