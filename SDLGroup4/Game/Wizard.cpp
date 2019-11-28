@@ -1,7 +1,8 @@
 #include "Wizard.h"
 #include <GameTime.h>
 #include "Player.h"
-
+#include "Tracker.h"
+#include <Projectile.h>
 void Wizard::Update()
 {
 	if (state != DIE)
@@ -28,9 +29,13 @@ void Wizard::Update()
 		animator.Trigger("Die");
 		state = DIE;
 	}
+	shootTimer -= Engine::GameTime::DeltaTime();
+	
+	
 
 	if (state == DIE && animator.CurrenAnimation->StopPlaying)
 	{
+		Tracker::Score += 10;
 		Engine::Scene::ActiveScene->Destroy(this);
 	}
 
@@ -42,17 +47,21 @@ void Wizard::Movement()
 	collider->solid = true;
 	if (OnTriggerEnter())
 	{
-		if (state != ATTACK)
+		if (shootTimer < 0)
 		{
-			animator.Stop();
-			animator.Trigger("Attack");
-			state = ATTACK;
-			if (player->position.X < position.X)
-				spriteFlip = SDL_FLIP_HORIZONTAL;
-			else
-				spriteFlip = SDL_FLIP_NONE;
+			shootTimer = 5;
+			if (state != ATTACK)
+			{
+				animator.Stop();
+				animator.Trigger("Attack");
+				Shoot();
+				state = ATTACK;
+				if (player->position.X < position.X)
+					spriteFlip = SDL_FLIP_HORIZONTAL;
+				else
+					spriteFlip = SDL_FLIP_NONE;
+			}
 		}
-
 	}
 	else
 	{
@@ -108,6 +117,30 @@ void Wizard::Movement()
 bool Wizard::OnTriggerEnter()
 {
 	return (ai.EnterDangerZone(300.0f, position, player->position));
+}
+
+void Wizard::Shoot()
+{
+	int numSpawners = 32;
+	Engine::Vector2D projectilePos = position;
+	double angle = 0;
+	float xPosition;
+	float yPosition;
+
+	double rad = 150;
+
+	for (int i = 0; i < numSpawners; i++)
+	{
+		angle = i * (360.0 / numSpawners) + 90.0;
+		float degree = (angle * (M_PI / 180));
+		xPosition = rad * cos(degree);
+		yPosition = rad * sin(degree);
+		float mag = sqrt((xPosition * xPosition) + (yPosition * yPosition));
+		float x = xPosition / mag;
+		float y = yPosition / mag;
+		projectile = new Engine::Projectile(1, projectilePos, x, y, false);
+		projectile->animator.Trigger("FireIce");
+	}
 }
 
 void Wizard::OnCollisionEnter(Engine::Collider* other)

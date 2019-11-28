@@ -23,8 +23,16 @@ namespace Engine
 
 	void Projectile::OnCollisionEnter(Collider* other)
 	{
-		if(other->tag == "Enemy" || other->tag == "Wizard") 
-			Scene::ActiveScene->Destroy(this);
+		if (affectsEnemies) 
+		{
+		  if(other->tag == "Enemy" || other->tag == "Wizard") 
+			 Scene::ActiveScene->Destroy(this);
+		}
+		else 
+		{
+			if (other->tag == "Player")
+				Scene::ActiveScene->Destroy(this);
+		}
 	}
 
 }

@@ -12,16 +12,18 @@ namespace Engine {
 	class Projectile : public Engine::Entity
 	{
 	public:
-		Projectile(float lifeSpan, const Engine::Vector2D& startPos, int _dirX, int _dirY) :
+		Projectile(float lifeSpan, const Engine::Vector2D& startPos, float _dirX, float _dirY, bool _affectsEnemies) :
 			Engine::Entity()
 		{
 			dirX = _dirX;
 			dirY = _dirY;
 			position = startPos;
+			affectsEnemies = _affectsEnemies;
 			AddSprite("IceBallSprite");
 			animator.Animations.push_back(new Engine::Animation("IceBall", "FireIce", 3, 1, 10, true, destRect));
 			animator.Animations.push_back(new Engine::Animation("FireBall", "FireFire", 3, 1, 10, true, destRect));
-			AddCollider("Spell", false);
+			if(affectsEnemies) AddCollider("Spell", false);
+			else AddCollider("EnemySpell", false);
 			PlayAnimation = true;
 		}
 
@@ -31,9 +33,9 @@ namespace Engine {
 		void OnCollisionEnter(Collider* other) override;
 		int shootX = 400;
 		int shootY = 400;
-
-		int dirX;
-		int dirY;
+		bool affectsEnemies;
+		float dirX;
+		float dirY;
 
 		float lifeSpan = 0;
 

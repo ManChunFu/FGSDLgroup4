@@ -146,7 +146,7 @@ void Player::Shoot()
 		if (shootTimer > 0.4f)
 		{
 			shootTimer = 0;
-			projectile = new Engine::Projectile(3, projectilePos, lastDirection.X, lastDirection.Y);
+			projectile = new Engine::Projectile(3, projectilePos, lastDirection.X, lastDirection.Y, true);
 			Engine::SoundManager::PlaySoundEffect("Shoot", 0, 10);
 			if (lastDirection.Y != 0)
 			{

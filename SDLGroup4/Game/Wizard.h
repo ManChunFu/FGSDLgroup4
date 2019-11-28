@@ -10,6 +10,7 @@ namespace Engine
 	class Scene;
 	class AI;
 	class Player;
+	class Projectile;
 }
 class Wizard : public Engine::Entity
 {
@@ -35,13 +36,14 @@ private:
 	void Update() override;
 	void Movement();
 	bool OnTriggerEnter();
-
+	void Shoot();
+	Engine::Projectile* projectile;
 	int hitpoint;
 	float randomCounter = 0;
 	Engine::Vector2D positionTemp;
 	AI ai;
 	Player* player;
-
+	float shootTimer;
 	enum States
 	{
 		IDLE,
