@@ -105,7 +105,15 @@ void Enemy::Movement()
 						{ player->Hurt(); }
 						if (state != ATTACK || (animator.CurrenAnimation->StopPlaying && state == ATTACK))
 						{
-							if (troll) { Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1); }
+							if (troll) 
+							{
+								if (soundDelay)
+								{
+									soundDelay = false;
+									Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1);
+								}
+								else soundDelay = true;
+							}
 							else { Engine::SoundManager::PlaySoundEffect("", 0, 8, 1); }
 							animator.Stop();
 							animator.Trigger("Attack");
@@ -120,7 +128,15 @@ void Enemy::Movement()
 				{ player->Hurt(); }
 				if (state != ATTACK || (animator.CurrenAnimation->StopPlaying && state == ATTACK))
 				{
-					if (troll) { Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1); }
+					if (troll) 
+					{ 
+						if (soundDelay)
+						{
+							soundDelay = false;
+							Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1);
+						}
+						else soundDelay = true;
+					}
 					else { Engine::SoundManager::PlaySoundEffect("",0,8,1); }
 					animator.Stop();
 					animator.Trigger("Attack");
