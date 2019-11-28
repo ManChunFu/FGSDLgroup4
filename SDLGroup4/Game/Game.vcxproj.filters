@@ -46,6 +46,7 @@
     </ClCompile>
     <ClCompile Include="Wizard.cpp" />
     <ClCompile Include="ScoreRecorder.cpp" />
+    <ClCompile Include="EnemySpawner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background.h">
@@ -99,6 +100,7 @@
     </ClInclude>
     <ClInclude Include="ScoreRecorder.h" />
     <ClInclude Include="ScoreRecord.h" />
+    <ClInclude Include="EnemySpawner.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

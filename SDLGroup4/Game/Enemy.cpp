@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Player.h"
 #include <GameTime.h>
-
+#include <SoundManager.h>
 bool Enemy::hasPathFound;
 void Enemy::Update()
 {
@@ -69,7 +69,7 @@ void Enemy::Movement()
 			pathCounter++;
 			if (position.X > lastDirectionX)
 			{
-				if (state != RUNRIGHT)
+				if (state != RUNRIGHT && state != ATTACK)
 				{
 					animator.Stop();
 					animator.Trigger("Run");
@@ -79,7 +79,7 @@ void Enemy::Movement()
 			}
 			else if (position.X < lastDirectionX)
 			{
-				if (state != RUNLEFT)
+				if (state != RUNLEFT && state != ATTACK)
 				{
 					animator.Stop();
 					animator.Trigger("Run");
@@ -104,6 +104,7 @@ void Enemy::Movement()
 							collider->solid = false;
 							animator.Stop();
 							animator.Trigger("Attack");
+							Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1);
 							state = ATTACK;
 							Attack = true;
 							return;
@@ -117,12 +118,14 @@ void Enemy::Movement()
 						collider->solid = false;
 						animator.Stop();
 						animator.Trigger("Attack");
+						Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1);
 						state = ATTACK;
 						Attack = true;
 						return;
 					}
 				}
 			}
+			else { state = IDLE; }
 			lastDirectionX = position.X;
 		}
 	}
@@ -195,6 +198,7 @@ void Enemy::OnCollisionEnter(Engine::Collider* other)
 			state = HURT;
 		}
 		hitpoint--;
+		Engine::SoundManager::PlaySoundEffect("EnemyHurt",0,8);
 	}
 }
 
