@@ -23,7 +23,6 @@ void EnemySpawner::SpawnKnight()
 
 void EnemySpawner::Update()
 {
-	SpawningKnights = false;
 	if (SpawningWizards && wizardTimer > WizardSpawnRate)
 	{ 
 		SpawnWizard(); 

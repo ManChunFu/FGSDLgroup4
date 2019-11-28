@@ -1,9 +1,9 @@
 #include "Player.h"
-#include<InputManager.h>
-#include<TextureManager.h>
+#include <InputManager.h>
+#include <TextureManager.h>
 #include <GameTime.h>
-#include<Vector2D.h>
-#include<Projectile.h>
+#include <Vector2D.h>
+#include <Projectile.h>
 #include "TimedExplosive.h"
 #include "MainScene.h"
 #include "Enemy.h"
