@@ -11,12 +11,19 @@ void EnemySpawner::SpawnTroll()
 
 void EnemySpawner::SpawnWizard()
 {
-	wizard = new Wizard(10);
+	wizard = new Wizard(5);
 	wizard->position = RandomPos();
+}
+
+void EnemySpawner::SpawnKnight()
+{
+	enemy = new Enemy(4, false);
+	enemy->position = RandomPos();
 }
 
 void EnemySpawner::Update()
 {
+	SpawningKnights = false;
 	if (SpawningWizards && wizardTimer > WizardSpawnRate)
 	{ 
 		SpawnWizard(); 
@@ -29,6 +36,18 @@ void EnemySpawner::Update()
 		trollTimer = 0;
 	}
 	else if (SpawningTrolls) trollTimer += Engine::GameTime::DeltaTime();
+	if (SpawningKnights && knightTimer > KnightSpawnRate)
+	{ 
+		SpawnKnight(); 
+		knightTimer = 0;
+	}
+	else if (SpawningTrolls) knightTimer += Engine::GameTime::DeltaTime();
+}
+
+void EnemySpawner::Reset()
+{
+	wizardTimer = 0;
+	trollTimer = 0;
 }
 
 Engine::Vector2D EnemySpawner::RandomPos()
