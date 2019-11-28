@@ -18,13 +18,13 @@ public:
 	float KnightSpawnRate = 10;
 	bool SpawningTrolls = false;
 	bool SpawningWizards = false;
-	bool SpawningKnights = true;
+	bool SpawningKnights = false;
 private:
 	Engine::Vector2D RandomPos();
 	Enemy* enemy;
 	Wizard* wizard;
 	float wizardTimer = 0;
 	float trollTimer = 0;
-	float knightTimer = 9;
+	float knightTimer = 5;
 };
 

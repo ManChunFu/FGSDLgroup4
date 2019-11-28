@@ -62,115 +62,131 @@ void Enemy::Movement()
 			isHurt = false;
 		}
 
-		if (pathToTarget.size() > pathCounter && !Attack && !isHurt)//&& movementTimer % 2 == 0)
+		if (pathToTarget.size() > pathCounter && !isHurt)//&& movementTimer % 2 == 0)
 		{
-			movementTimer = 0;
-			position = pathToTarget[pathToTarget.size() - pathCounter];
-			pathCounter++;
-			if (position.X > lastDirectionX)
+			if (state != ATTACK) 
 			{
-				if (state != RUNRIGHT && state != ATTACK)
+				movementTimer = 0;
+				position = pathToTarget[pathToTarget.size() - pathCounter];
+				pathCounter++;
+				if (position.X > lastDirectionX)
 				{
-					animator.Stop();
-					animator.Trigger("Run");
-					spriteFlip = SDL_FLIP_NONE;
-					state = RUNRIGHT;
-				}
-			}
-			else if (position.X < lastDirectionX)
-			{
-				if (state != RUNLEFT && state != ATTACK)
-				{
-					animator.Stop();
-					animator.Trigger("Run");
-					spriteFlip = SDL_FLIP_HORIZONTAL;
-					state = RUNLEFT;
-				}
-			}
-			else
-			{
-				animator.Stop();
-				animator.Trigger("Run");
-			}
-			
-				if (ai.GetDistance(position, player->position) < destRect.w)
-				{
-					if (position.X - player->position.X < 0)
+					if (state != RUNRIGHT && state != ATTACK)
 					{
-						if (ai.GetDistance(position, player->position) < 50)
+						animator.Stop();
+						animator.Trigger("Run");
+						spriteFlip = SDL_FLIP_NONE;
+						state = RUNRIGHT;
+					}
+				}
+				else if (position.X < lastDirectionX)
+				{
+					if (state != RUNLEFT && state != ATTACK)
+					{
+						animator.Stop();
+						animator.Trigger("Run");
+						spriteFlip = SDL_FLIP_HORIZONTAL;
+						state = RUNLEFT;
+					}
+				}
+				else
+				{
+					animator.Stop();
+					animator.Trigger("Run");
+				}
+			}
+			if (ai.GetDistance(position, player->position) < destRect.w + 30)
+			{
+				if (position.X - player->position.X > 0)
+				{
+					if (ai.GetDistance(position, player->position) < destRect.w + 30)
+					{
+						if (animator.CurrenAnimation->StopPlaying)
+						{ player->Hurt(); }
+						if (state != ATTACK || (animator.CurrenAnimation->StopPlaying && state == ATTACK))
 						{
-							collider->solid = false;
+							if (troll) { Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1); }
+							else { Engine::SoundManager::PlaySoundEffect("", 0, 8, 1); }
 							animator.Stop();
 							animator.Trigger("Attack");
 							spriteFlip = SDL_FLIP_HORIZONTAL;
-							Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1);
-							state = ATTACK;
-							Attack = true;
-							return;
 						}
+						state = ATTACK;
+						//Attack = true;
+						return;
 					}
-
-					collider->solid = false;
+				}
+				if (animator.CurrenAnimation->StopPlaying)
+				{ player->Hurt(); }
+				if (state != ATTACK || (animator.CurrenAnimation->StopPlaying && state == ATTACK))
+				{
+					if (troll) { Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1); }
+					else { Engine::SoundManager::PlaySoundEffect("",0,8,1); }
 					animator.Stop();
 					animator.Trigger("Attack");
-					spriteFlip = SDL_FLIP_NONE;
-					Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1);
 					state = ATTACK;
-					Attack = true;
-					return;
+					Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1);
 				}
-				lastDirectionX = position.X;
-			
-		}
-		else
-		{
-			if (animator.CurrenAnimation->RunFullClip)
+				spriteFlip = SDL_FLIP_NONE;
+				//Attack = true;
 				return;
-			randomCounter += Engine::GameTime::DeltaTime();
+			}
+			else state = IDLE;
+			lastDirectionX = position.X;
 
-			if (randomCounter > 1.f)
-			{
-				randomCounter = 0.f;
-				positionTemp = ai.RandomMovement();
-			}
-			newPosition = position + positionTemp;
+		}
+		
+	}
+	else
+	{
 
-			if (positionTemp.X == 0 && positionTemp.Y == 0)
+
+		if (animator.CurrenAnimation->RunFullClip)
+			return;
+		randomCounter += Engine::GameTime::DeltaTime();
+
+		if (randomCounter > 1.f)
+		{
+			randomCounter = 0.f;
+			positionTemp = ai.RandomMovement();
+		}
+		newPosition = position + positionTemp;
+
+		if (positionTemp.X == 0 && positionTemp.Y == 0)
+		{
+			if (state != IDLE)
 			{
-				if (state != IDLE)
-				{
-					animator.Stop();
-					animator.Trigger("Idle");
-					state = IDLE;
-				}
+				animator.Stop();
+				animator.Trigger("Idle");
+				state = IDLE;
 			}
-			else if (positionTemp.X > 0)
-			{
-				if (state != WALKRIGHT)
-				{
-					animator.Stop();
-					animator.Trigger("Walk");
-					spriteFlip = SDL_FLIP_NONE;
-					state = WALKRIGHT;
-				}
-			}
-			else if (positionTemp.X < 0)
-			{
-				if (state != WALKLEFT)
-				{
-					animator.Stop();
-					animator.Trigger("Walk");
-					spriteFlip = SDL_FLIP_HORIZONTAL;
-					state = WALKLEFT;
-				}
-			}
-			else
+		}
+		else if (positionTemp.X > 0)
+		{
+			if (state != WALKRIGHT)
 			{
 				animator.Stop();
 				animator.Trigger("Walk");
+				spriteFlip = SDL_FLIP_NONE;
+				state = WALKRIGHT;
 			}
-			position = newPosition;
 		}
+		else if (positionTemp.X < 0)
+		{
+			if (state != WALKLEFT)
+			{
+				animator.Stop();
+				animator.Trigger("Walk");
+				spriteFlip = SDL_FLIP_HORIZONTAL;
+				state = WALKLEFT;
+			}
+		}
+		else
+		{
+			animator.Stop();
+			animator.Trigger("Walk");
+		}
+		position = newPosition;
 	}
 }
 

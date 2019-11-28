@@ -21,7 +21,7 @@ namespace Engine {
 		void AddSprite(std::string _name, float scaleX, float scaleY);
 		void AddSprite(std::string _name);
 		virtual void Update();
-		void Render();
+		virtual void Render();
 		Engine::Animator animator;
 		Vector2D position;
 		Vector2D lastPosition;

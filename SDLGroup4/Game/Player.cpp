@@ -11,6 +11,13 @@
 #include <SoundManager.h>
 void Player::Update()
 {
+	if (hitPoint < lastFrameHitpoint)
+	{
+		takenDamage = true;
+		Engine::SoundManager::PlaySoundEffect("Hurt", 0, 10);
+	}
+	lastFrameHitpoint = hitPoint;
+	damageTimer += Engine::GameTime::DeltaTime();
 	if (mineTimer > 0) mineTimer -= Engine::GameTime::DeltaTime();
 	collider->solid = true;
 	currPos = position;
@@ -29,7 +36,7 @@ void Player::Update()
 	shootTimer += Engine::GameTime::DeltaTime();
 	Shoot();
 
-	if (damageTimer > 150.f)
+	if (damageTimer > 2)
 	{
 		hpLost = false;
 		damageTimer = 0;
@@ -54,6 +61,22 @@ void Player::Update()
 		MainScene::ActiveScene->LoadScene(2);
 	}
 
+}
+
+void Player::Hurt()
+{
+	if (!hpLost)
+	{
+		if (state != HURT)
+		{
+			animator.Stop();
+			animator.Trigger("Hurt");
+			state = HURT;
+		}
+		hitPoint--;
+		
+		hpLost = true;
+	}
 }
 
 
@@ -162,6 +185,25 @@ void Player::Shoot()
 	}
 }
 
+void Player::Render()
+{
+	if (takenDamage && state != DIE)
+	{
+		invulClock++;
+		if (invulClock % 6 == 0)
+		{
+			
+		}
+		else Engine::Entity::Render();
+		if (invulClock > 120) 
+		{
+			takenDamage = false;
+			invulClock = 0;
+		}
+	}
+	else Engine::Entity::Render();
+}
+
 void Player::OnCollisionExit(Engine::Collider* other)
 {
 	collider->solid = true;
@@ -169,29 +211,18 @@ void Player::OnCollisionExit(Engine::Collider* other)
 
 void Player::OnCollisionEnter(Engine::Collider* other)
 {
-	damageTimer++;
+
 	if (state != DIE)
 	{
 		if (other->tag == "EnemySpell") hitPoint--;
-		if (other->tag == "Enemy")
+		/*if (other->tag == "Enemy")
 		{
 			Enemy* enemy = dynamic_cast<Enemy*>(other->GameObject);
-			collider->solid = false;
+
 			if (enemy->Attack)
 			{
-				if (!hpLost)
-				{
-					if (state != HURT)
-					{
-						animator.Stop();
-						animator.Trigger("Hurt");
-						state = HURT;
-					}
-					hitPoint--;
-					Engine::SoundManager::PlaySoundEffect("Hurt", 0, 10);
-					hpLost = true;
-				}
+
 			}
-		}
+		}*/
 	}
 }

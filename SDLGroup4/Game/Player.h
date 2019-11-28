@@ -41,7 +41,7 @@ public:
 
 
 	void Update() override;
-
+	void Hurt();
 	float moveSpeed = normalSpeed;
 	bool isDead = false;
 
@@ -51,8 +51,11 @@ private:
 	float normalSpeed = 300.0f;
 	float teleportDistance = 15000.0f;
 	int hitPoint;
+	int lastFrameHitpoint;
 	int dirX = 0;
 	int dirY = 0;
+	bool takenDamage = false;
+	int invulClock;
 	Engine::Slider* hpSlider;
 	Engine::Vector2D lastDirection;
 	TimedExplosive* bullet = nullptr;
@@ -68,7 +71,7 @@ private:
 	void Shoot();
 	float damageTimer = 0;
 	bool hpLost = false;
-
+	void Render() override;
 	enum States
 	{
 		IDLE,
