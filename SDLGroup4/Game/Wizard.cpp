@@ -21,19 +21,25 @@ void Wizard::Update()
 	if (position.Y > 900 - (destRect.h)) position.Y = 900 - destRect.h;
 
 	Engine::Entity::Update();
-	if (hitpoint < 1)
+
+	if (hitpoint < 1 && state != DIE)
+	{
+		animator.Stop();
+		animator.Trigger("Die");
+		state = DIE;
+	}
+
+	if (state == DIE && animator.CurrenAnimation->StopPlaying)
 	{
 		Engine::Scene::ActiveScene->Destroy(this);
 	}
-	
+
 }
 
 void Wizard::Movement()
 {
-	if (animator.CurrenAnimation->RunFullClip)
-		return;
-
 	Engine::Vector2D newPosition;
+	collider->solid = true;
 	if (OnTriggerEnter())
 	{
 		if (state != ATTACK)
@@ -44,11 +50,14 @@ void Wizard::Movement()
 			if (player->position.X < position.X)
 				spriteFlip = SDL_FLIP_HORIZONTAL;
 			else
-				SDL_FLIP_NONE;
+				spriteFlip = SDL_FLIP_NONE;
 		}
+
 	}
 	else
 	{
+		if (animator.CurrenAnimation->RunFullClip)
+			return;
 		randomCounter += Engine::GameTime::DeltaTime();
 
 		if (randomCounter > 1.f)
@@ -103,15 +112,18 @@ bool Wizard::OnTriggerEnter()
 
 void Wizard::OnCollisionEnter(Engine::Collider* other)
 {
-	if (other->tag == "Spell")
+	if (state != DIE)
 	{
-		if (state != HURT)
+		if (other->tag == "Spell")
 		{
-			animator.Stop();
-			animator.Trigger("Hurt");
-			state = HURT;
+			if (state != HURT)
+			{
+				animator.Stop();
+				animator.Trigger("Hurt");
+				state = HURT;
+			}
+			hitpoint--;
 		}
-		hitpoint--;
 	}
 }
 
