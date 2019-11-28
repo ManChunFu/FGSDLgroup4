@@ -99,22 +99,6 @@ void Enemy::Movement()
 				{
 					if (ai.GetDistance(position, player->position) < 50)
 					{
-						/*if (state != ATTACK)
-						{*/
-							collider->solid = false;
-							animator.Stop();
-							animator.Trigger("Attack");
-							Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1);
-							state = ATTACK;
-							Attack = true;
-							return;
-						//}
-					}
-				}
-				else
-				{
-					/*if (state != ATTACK)
-					{*/
 						collider->solid = false;
 						animator.Stop();
 						animator.Trigger("Attack");
@@ -122,10 +106,23 @@ void Enemy::Movement()
 						state = ATTACK;
 						Attack = true;
 						return;
-					//}
+					}
+				}
+				else
+				{
+					collider->solid = false;
+					animator.Stop();
+					animator.Trigger("Attack");
+					Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1);
+					state = ATTACK;
+					Attack = true;
+					return;
 				}
 			}
-			else { state = IDLE; }
+			//else { state = IDLE; }
+
+			
+
 			lastDirectionX = position.X;
 		}
 	}
@@ -198,7 +195,7 @@ void Enemy::OnCollisionEnter(Engine::Collider* other)
 			state = HURT;
 		}
 		hitpoint--;
-		Engine::SoundManager::PlaySoundEffect("EnemyHurt",0,8);
+		Engine::SoundManager::PlaySoundEffect("EnemyHurt", 0, 8);
 	}
 }
 
@@ -211,7 +208,7 @@ void Enemy::OnCollisionExit(Engine::Collider* other)
 
 void Enemy::OnDestroy()
 {
-	
+
 }
 
 

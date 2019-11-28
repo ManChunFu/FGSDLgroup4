@@ -46,6 +46,8 @@ void Wizard::Movement()
 	Engine::Vector2D newPosition;
 	collider->solid = true;
 	
+	if (OnTriggerEnter())
+	{
 		if (shootTimer < 0)
 		{
 			shootTimer = 3;
@@ -57,8 +59,9 @@ void Wizard::Movement()
 				spriteFlip = SDL_FLIP_HORIZONTAL;
 			else
 				spriteFlip = SDL_FLIP_NONE;
-			
+
 		}
+	}
 	
 	
 		if (animator.CurrenAnimation->RunFullClip)
@@ -112,7 +115,7 @@ void Wizard::Movement()
 
 bool Wizard::OnTriggerEnter()
 {
-	return (ai.EnterDangerZone(300.0f, position, player->position));
+	return (ai.EnterDangerZone(500.0f, position, player->position));
 }
 
 void Wizard::Shoot()

@@ -18,17 +18,20 @@ class AI;
 class Enemy : public Engine::Entity
 {
 public:
-	Enemy(int hp) : Engine::Entity() {
+	Enemy(int hp, bool troll) : Engine::Entity() {
 		hitpoint = hp;
-		AddSprite("Enemy");
-		AddCollider("Enemy", true);
+		if (troll)
+		{
+			AddSprite("Enemy");
+			AddCollider("Enemy", true);
+			animator.Animations.push_back(new Engine::Animation("EnemyIdle", "Idle", 7, 1, 5, false, destRect));
+			animator.Animations.push_back(new Engine::Animation("EnemyWalk", "Walk", 7, 1, 10, false, destRect));
+			animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 7, 1, 12, false, destRect));
+			animator.Animations.push_back(new Engine::Animation("EnemyAttack", "Attack", 7, 1, 12, true, destRect));
+			animator.Animations.push_back(new Engine::Animation("EnemyHurt", "Hurt", 7, 1, 20, true, destRect));
+			animator.Animations.push_back(new Engine::Animation("EnemyDie", "Die", 12, 1, 10, true, destRect));
+		}
 		player = MainScene::mainScene->player;
-		animator.Animations.push_back(new Engine::Animation("EnemyIdle", "Idle", 7, 1, 5, false, destRect));
-		animator.Animations.push_back(new Engine::Animation("EnemyWalk", "Walk", 7, 1, 10, false, destRect));
-		animator.Animations.push_back(new Engine::Animation("EnemyRun", "Run", 7, 1, 12, false, destRect));
-		animator.Animations.push_back(new Engine::Animation("EnemyAttack", "Attack", 7, 1, 12, true, destRect));
-		animator.Animations.push_back(new Engine::Animation("EnemyHurt", "Hurt", 7, 1, 20, true, destRect));
-		animator.Animations.push_back(new Engine::Animation("EnemyDie", "Die", 12, 1, 10, true, destRect));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
 		Tracker::Enemies++;

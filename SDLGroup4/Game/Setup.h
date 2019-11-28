@@ -12,6 +12,12 @@ public:
 		Engine::TextureManager::AddTexture("WizardAttack", "Assets/Sprites/Enemy/Wizard/ATTACK1.png");
 		Engine::TextureManager::AddTexture("WizardHurt", "Assets/Sprites/Enemy/Wizard/HURT.png");
 		Engine::TextureManager::AddTexture("WizardDie", "Assets/Sprites/Enemy/Wizard/DIE.png");
+		Engine::TextureManager::AddTexture("Knight", "Assets/Sprites/Enemy/Knight/sprite.png");
+		Engine::TextureManager::AddTexture("KnightIdle", "Assets/Sprites/Enemy/Knight/IDLE.png");
+		Engine::TextureManager::AddTexture("KnightWalk", "Assets/Sprites/Enemy/Knight/WALK.png");
+		Engine::TextureManager::AddTexture("KnightRun", "Assets/Sprites/Enemy/Knight/ATTACK.png");
+		Engine::TextureManager::AddTexture("KnightAttack", "Assets/Sprites/Enemy/Knight/RUN.png");
+		Engine::TextureManager::AddTexture("KnighHurt", "Assets/Sprites/Enemy/Knight/HURT.png");
 		Engine::TextureManager::AddTexture("Enemy", "Assets/Sprites/Enemy/sprite.png");
 		Engine::TextureManager::AddTexture("Hp", "Assets/Sprites/Player/hp.png");
 		Engine::TextureManager::AddTexture("EnemyIdle", "Assets/Sprites/Enemy/IDLE1.png");
