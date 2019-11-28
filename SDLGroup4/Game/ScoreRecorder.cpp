@@ -9,7 +9,7 @@
 void ScoreRecorder::AddNewScore(int score)
 {
 	std::fstream streamWriter;
-	streamWriter.open(scoreFilename, std::fstream::in | std::fstream::out | std::fstream::app);
+	streamWriter.open("ScoreRecords.txt", std::fstream::in | std::fstream::out | std::fstream::app);
 
 	std::time_t t = std::time(0); // get time now
 	std::tm* now = std::localtime(&t); //covert time to local date
@@ -26,13 +26,13 @@ std::vector<ScoreRecord*> ScoreRecorder::GetSavedRecords()
 {
 	std::vector<ScoreRecord*> scores;
 	std::string line;
-	std::ifstream streamReader(scoreFilename);
+	std::ifstream streamReader("ScoreRecords.txt", std::fstream::in);
 
 	if (streamReader.is_open())
 	{
 		while (std::getline(streamReader,line))
 		{
-			size_t comaPlace = line.find(',');
+			size_t comaPlace = line.find('|');
 			ScoreRecord* scoreLine = new ScoreRecord(line.substr(0, comaPlace),
 				line.substr(comaPlace + 1, line.size() - (comaPlace + 1)));
 
@@ -40,14 +40,32 @@ std::vector<ScoreRecord*> ScoreRecorder::GetSavedRecords()
 				scores.push_back(scoreLine);
 			else
 			{
-
+				for (int index = 0; index < scores.size(); index++)
+				{
+					if (scoreLine->Score > scores[index]->Score)
+					{
+						scores.insert(scores.begin(), scores[index]);
+						goto endwhile;
+					}
+				}
+				scores.push_back(scoreLine);
 			}
-
+		endwhile:
+			if (scores.size() == 10)
+				break;
 		}
 		streamReader.close();
 	} 
-	 
-
 	return scores;
+}
+
+std::string ScoreRecorder::GetSavedRecordsAsText()
+{
+	std::string scoreList = "";
+	for (auto score : GetSavedRecords())
+	{
+		scoreList += score->Date + " | " + std::to_string(score->Score) + '\n';
+	}
+	return scoreList;
 }
 

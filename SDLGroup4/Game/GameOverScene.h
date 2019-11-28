@@ -1,5 +1,7 @@
 #pragma once
 #include <Scene.h>
+#include "ScoreRecorder.h"
+
 class GameOverScene : public Engine::Scene
 {
 public:
@@ -22,6 +24,7 @@ private:
 	Engine::Text* exitText;
 	Engine::Button* scoreButton;
 	Engine::Text* scoreRecordText;
+	ScoreRecorder* scoreRecorder;
 };
 namespace ButtonMethods
 {

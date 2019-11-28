@@ -12,13 +12,14 @@
 #include <Scene.h>
 #include "MainScene.h"
 #include "GameOverScene.h"
+#include "ScoreBoard.h"
 #include <TextureManager.h>
 #include <Camera.h>
 #include "PauseMenu.h"
 #include "Setup.h"
 #pragma warning( push )
 #pragma warning( disable : 4267)
-//todo: add game over screen and on hover sounds to buttons
+
 int main(int argc, char** argv)
 {
 	application = new Engine::Application();
@@ -75,6 +76,7 @@ bool Engine::Application::Initialize()
 	scenes.push_back(new MainScene(this, inputManager));
 	scenes.push_back(new GameOverScene(this, inputManager));
 	scenes.push_back(new PauseMenu(this, inputManager));
+	scenes.push_back(new ScoreBoard(this, inputManager));
 	
 	for (auto i : scenes)
 	{ i->Shutdown(); }

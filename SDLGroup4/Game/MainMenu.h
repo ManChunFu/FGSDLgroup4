@@ -18,7 +18,7 @@ private:
 	Engine::Button* scoreButton;
 	Engine::Text* scoreRecordText;
 };
-namespace mainmenu {
+namespace mainMenu {
 	void OnClickExitButton();
 	void OnClickPlayButton();
 	void OnClickScoreButton();

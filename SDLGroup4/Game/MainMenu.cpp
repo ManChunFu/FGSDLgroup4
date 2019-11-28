@@ -31,13 +31,13 @@ void MainMenu::SetUpUI()
 
 	playButton = new Engine::Button({ 200, 80, 550, 250 }, { 0, 255, 0, 255 });
 	playText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "PLAY", { 255, 255, 255, 255 }, { 45, 45, 55, 15 });
-	playButton->SetOnClickEvent(mainmenu::OnClickPlayButton);
+	playButton->SetOnClickEvent(mainMenu::OnClickPlayButton);
 	playButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
 	playButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
 
 	exitButton = new Engine::Button({ 200, 80, 550, 400 }, { 0, 255, 0, 255 });
 	exitText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "EXIT", { 255, 255, 255, 255 }, { 45, 45, 55, 15 });
-	exitButton->SetOnClickEvent(mainmenu::OnClickExitButton);
+	exitButton->SetOnClickEvent(mainMenu::OnClickExitButton);
 	exitButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
 	exitButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
 
@@ -45,7 +45,7 @@ void MainMenu::SetUpUI()
 	scoreRecordText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "SCORE RECORDS", { 255, 255, 255, 255 }, { 45, 45, 30, 15 });
 	scoreButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
 	scoreButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
-	scoreButton->SetOnClickEvent(mainmenu::OnClickScoreButton);
+	scoreButton->SetOnClickEvent(mainMenu::OnClickScoreButton);
 		
 	Engine::UIManager::AddObjectsToCanvas(0, { startMenuTitle, playButton, exitButton, scoreButton });
 	playButton->SetText(playText);
@@ -61,17 +61,17 @@ void MainMenu::Start()
 	AddClickables();
 }
 
-void mainmenu::OnClickExitButton()
+void mainMenu::OnClickExitButton()
 {
 	MainMenu::mainMenu->application->Quit();
 }
 
-void mainmenu::OnClickPlayButton()
+void mainMenu::OnClickPlayButton()
 {
 	MainMenu::mainMenu->LoadScene(1);
 	Tracker::Score = 0;
 }
-void mainmenu::OnClickScoreButton()
+void mainMenu::OnClickScoreButton()
 {
-	MainMenu::mainMenu->LoadScene(2);
+	MainMenu::mainMenu->LoadScene(4);
 }

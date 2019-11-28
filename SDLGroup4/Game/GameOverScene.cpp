@@ -2,6 +2,7 @@
 #include <InputManager.h>
 #include <Application.h>
 #include "Tracker.h"
+
 GameOverScene* GameOverScene::thisScene;
 void GameOverScene::Shutdown()
 {
@@ -18,6 +19,7 @@ void GameOverScene::AddClickables()
 void GameOverScene::Start()
 {
 	Engine::Scene::Start();
+	scoreRecorder->AddNewScore(Tracker::Score);
 	std::string scoretext = "Your score: " + std::to_string(Tracker::Score);
 	ScoreText->Script(scoretext);
 	AddClickables();

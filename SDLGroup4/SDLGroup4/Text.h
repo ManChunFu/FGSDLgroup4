@@ -27,7 +27,6 @@ namespace Engine
 		std::string fontPath, messageText;
 		int fontsize;
 		SDL_Color color;
-
 	};
 }
 

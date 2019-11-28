@@ -8,8 +8,9 @@ class ScoreRecorder
 public:
 	void AddNewScore(int score);
 	std::vector<ScoreRecord*> GetSavedRecords();
-
+	std::string GetSavedRecordsAsText();
+	
 private:
-	std::string scoreFilename = "ScoreRecords.txt";
-		
+	const std::string scoreFilename = "ScoreRecords.txt";
 };
+
