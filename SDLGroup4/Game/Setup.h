@@ -17,6 +17,7 @@ public:
 		Engine::TextureManager::AddTexture("KnightWalk", "Assets/Sprites/Enemy/Knight/WALK.png");
 		Engine::TextureManager::AddTexture("KnightRun", "Assets/Sprites/Enemy/Knight/ATTACK.png");
 		Engine::TextureManager::AddTexture("KnightAttack", "Assets/Sprites/Enemy/Knight/RUN.png");
+		Engine::TextureManager::AddTexture("KnightDie", "Assets/Sprites/Enemy/Knight/DIE1.png");
 		Engine::TextureManager::AddTexture("KnighHurt", "Assets/Sprites/Enemy/Knight/HURT.png");
 		Engine::TextureManager::AddTexture("Enemy", "Assets/Sprites/Enemy/sprite.png");
 		Engine::TextureManager::AddTexture("Hp", "Assets/Sprites/Player/hp.png");

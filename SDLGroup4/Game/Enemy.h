@@ -31,6 +31,18 @@ public:
 			animator.Animations.push_back(new Engine::Animation("EnemyHurt", "Hurt", 7, 1, 20, true, destRect));
 			animator.Animations.push_back(new Engine::Animation("EnemyDie", "Die", 12, 1, 10, true, destRect));
 		}
+		else
+		{
+			AddSprite("Knight");
+			AddCollider("Knight", true);
+			animator.Animations.push_back(new Engine::Animation("KnightIdle", "Idle", 7, 1, 5, false, destRect));
+			animator.Animations.push_back(new Engine::Animation("KnightWalk", "Walk", 7, 1, 5, false, destRect));
+			animator.Animations.push_back(new Engine::Animation("KnightRun", "Run", 7, 1, 5, false, destRect));
+			animator.Animations.push_back(new Engine::Animation("KnightRun", "Attack", 7, 1, 5, true, destRect));
+			animator.Animations.push_back(new Engine::Animation("KnightRun", "Hurt", 7, 1, 5, true, destRect));
+			animator.Animations.push_back(new Engine::Animation("KnightDie", "Die", 14, 1, 5, true, destRect));
+
+		}
 		player = MainScene::mainScene->player;
 		animator.Trigger("Idle");
 		PlayAnimation = true;
