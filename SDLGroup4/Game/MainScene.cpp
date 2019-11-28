@@ -38,6 +38,7 @@ void MainScene::Start()
 	Scene::Start();
 	CreateObstacle();
 	CreatePlayer();
+	spawner->Reset();
 	for (int i = 0; i < 3; i++)
 	{ spawner->SpawnTroll(); }
 	CreateMap();

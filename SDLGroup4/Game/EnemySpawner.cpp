@@ -31,6 +31,12 @@ void EnemySpawner::Update()
 	else if (SpawningTrolls) trollTimer += Engine::GameTime::DeltaTime();
 }
 
+void EnemySpawner::Reset()
+{
+	wizardTimer = 0;
+	trollTimer = 0;
+}
+
 Engine::Vector2D EnemySpawner::RandomPos()
 {
 	float x = rand() % 800 + 100;

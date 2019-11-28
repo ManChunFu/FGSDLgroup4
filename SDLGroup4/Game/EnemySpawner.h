@@ -11,8 +11,9 @@ public:
 	void SpawnTroll();
 	void SpawnWizard();
 	void Update();
+	void Reset();
 	float WizardSpawnRate = 40;
-	float TrollSpawnRate = 5;
+	float TrollSpawnRate = 10;
 	bool SpawningTrolls = true;
 	bool SpawningWizards = true;
 private:
