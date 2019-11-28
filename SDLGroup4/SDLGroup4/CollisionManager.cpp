@@ -14,7 +14,7 @@ namespace Engine {
 		{
 			for (int a = i + 1; a < colliders.size(); a++)
 			{
-				if (colliders[i]->TestCollision(colliders[a])) 
+				if (colliders[i]->tag != colliders[a]->tag && colliders[i]->TestCollision(colliders[a])) 
 				{
 					colliders[i]->AddCollision(colliders[a]);
 					colliders[a]->AddCollision(colliders[i]);

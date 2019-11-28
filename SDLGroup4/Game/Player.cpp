@@ -65,7 +65,7 @@ void Player::MovePlayer()
 		if (inputManager->IsKeyReleased(Key::SPACE)) hasTeleported = false;
 	}
 	moveSpeed = normalSpeed;
-	if (teleportTimer <= 0 && !hasTeleported && inputManager->GetAxis("Space") != 0)
+	if (teleportTimer <= 0 && !hasTeleported && inputManager->GetAxis("Space") != 0 && (dirX != 0 || dirY != 0))
 	{
 		teleportTimer = teleportCooldown;
 		hasTeleported = true;

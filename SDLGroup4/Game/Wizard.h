@@ -43,7 +43,7 @@ private:
 	Engine::Vector2D positionTemp;
 	AI ai;
 	Player* player;
-	float shootTimer;
+	float shootTimer = 5;
 	enum States
 	{
 		IDLE,
