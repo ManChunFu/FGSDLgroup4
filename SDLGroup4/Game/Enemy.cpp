@@ -92,88 +92,85 @@ void Enemy::Movement()
 				animator.Stop();
 				animator.Trigger("Run");
 			}
-
-			if (ai.GetDistance(position, player->position) < 120)
-			{
-				if (state == RUNLEFT)
+			
+				if (ai.GetDistance(position, player->position) < destRect.w)
 				{
-					if (ai.GetDistance(position, player->position) < 50)
+					if (position.X - player->position.X < 0)
 					{
-						collider->solid = false;
-						animator.Stop();
-						animator.Trigger("Attack");
-						Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1);
-						state = ATTACK;
-						Attack = true;
-						return;
+						if (ai.GetDistance(position, player->position) < 50)
+						{
+							collider->solid = false;
+							animator.Stop();
+							animator.Trigger("Attack");
+							spriteFlip = SDL_FLIP_HORIZONTAL;
+							Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1);
+							state = ATTACK;
+							Attack = true;
+							return;
+						}
 					}
-				}
-				else
-				{
+
 					collider->solid = false;
 					animator.Stop();
 					animator.Trigger("Attack");
+					spriteFlip = SDL_FLIP_NONE;
 					Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1);
 					state = ATTACK;
 					Attack = true;
 					return;
 				}
-			}
-			//else { state = IDLE; }
-
+				lastDirectionX = position.X;
 			
-
-			lastDirectionX = position.X;
-		}
-	}
-	else
-	{
-		if (animator.CurrenAnimation->RunFullClip)
-			return;
-		randomCounter += Engine::GameTime::DeltaTime();
-
-		if (randomCounter > 1.f)
-		{
-			randomCounter = 0.f;
-			positionTemp = ai.RandomMovement();
-		}
-		newPosition = position + positionTemp;
-
-		if (positionTemp.X == 0 && positionTemp.Y == 0)
-		{
-			if (state != IDLE)
-			{
-				animator.Stop();
-				animator.Trigger("Idle");
-				state = IDLE;
-			}
-		}
-		else if (positionTemp.X > 0)
-		{
-			if (state != WALKRIGHT)
-			{
-				animator.Stop();
-				animator.Trigger("Walk");
-				spriteFlip = SDL_FLIP_NONE;
-				state = WALKRIGHT;
-			}
-		}
-		else if (positionTemp.X < 0)
-		{
-			if (state != WALKLEFT)
-			{
-				animator.Stop();
-				animator.Trigger("Walk");
-				spriteFlip = SDL_FLIP_HORIZONTAL;
-				state = WALKLEFT;
-			}
 		}
 		else
 		{
-			animator.Stop();
-			animator.Trigger("Walk");
+			if (animator.CurrenAnimation->RunFullClip)
+				return;
+			randomCounter += Engine::GameTime::DeltaTime();
+
+			if (randomCounter > 1.f)
+			{
+				randomCounter = 0.f;
+				positionTemp = ai.RandomMovement();
+			}
+			newPosition = position + positionTemp;
+
+			if (positionTemp.X == 0 && positionTemp.Y == 0)
+			{
+				if (state != IDLE)
+				{
+					animator.Stop();
+					animator.Trigger("Idle");
+					state = IDLE;
+				}
+			}
+			else if (positionTemp.X > 0)
+			{
+				if (state != WALKRIGHT)
+				{
+					animator.Stop();
+					animator.Trigger("Walk");
+					spriteFlip = SDL_FLIP_NONE;
+					state = WALKRIGHT;
+				}
+			}
+			else if (positionTemp.X < 0)
+			{
+				if (state != WALKLEFT)
+				{
+					animator.Stop();
+					animator.Trigger("Walk");
+					spriteFlip = SDL_FLIP_HORIZONTAL;
+					state = WALKLEFT;
+				}
+			}
+			else
+			{
+				animator.Stop();
+				animator.Trigger("Walk");
+			}
+			position = newPosition;
 		}
-		position = newPosition;
 	}
 }
 
@@ -185,17 +182,20 @@ bool Enemy::OnTriggerEnter()
 
 void Enemy::OnCollisionEnter(Engine::Collider* other)
 {
-	if (other->tag == "Spell")
+	if (state != DIE)
 	{
-		if (state != HURT)
+		if (other->tag == "Spell")
 		{
-			animator.Stop();
-			animator.Trigger("Hurt");
-			isHurt = true;
-			state = HURT;
+			if (state != HURT)
+			{
+				animator.Stop();
+				animator.Trigger("Hurt");
+				isHurt = true;
+				state = HURT;
+			}
+			hitpoint--;
+			Engine::SoundManager::PlaySoundEffect("EnemyHurt", 0, 8);
 		}
-		hitpoint--;
-		Engine::SoundManager::PlaySoundEffect("EnemyHurt", 0, 8);
 	}
 }
 

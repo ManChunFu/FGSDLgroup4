@@ -13,7 +13,7 @@ void MainScene::Update()
 {
 	Scene::Update();
 	spawner->Update();
-	std::string score = "Score: " + std::to_string(Tracker::Score);
+	std::string score = "SCORE: " + std::to_string(Tracker::Score);
 	scoreText->Script(score);
 	Enemy::hasPathFound = false;
 
@@ -39,9 +39,9 @@ void MainScene::Start()
 	CreateObstacle();
 	CreatePlayer();
 	spawner->Reset();
-	spawner->SpawnWizard();
-	for (int i = 0; i < 3; i++)
-	{ spawner->SpawnTroll(); }
+	//spawner->SpawnWizard();
+	for (int i = 0; i < 1; i++)
+	{ spawner->SpawnKnight(); }
 	CreateMap();
 	Engine::SoundManager::SetMusic("Assets/Sounds/BackgroundMusic.mp3", 20);
 }

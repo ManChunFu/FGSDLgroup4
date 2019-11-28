@@ -5,7 +5,7 @@
 #include <GameTime.h>
 void EnemySpawner::SpawnTroll()
 {
-	enemy = new Enemy(5, true);
+	enemy = new Enemy(4, true);
 	enemy->position = RandomPos();
 }
 
@@ -17,7 +17,7 @@ void EnemySpawner::SpawnWizard()
 
 void EnemySpawner::SpawnKnight()
 {
-	enemy = new Enemy(4, false);
+	enemy = new Enemy(5, false);
 	enemy->position = RandomPos();
 }
 

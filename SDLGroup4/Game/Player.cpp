@@ -18,7 +18,7 @@ void Player::Update()
 	dirY = inputManager->GetAxis("Vertical");
 
 	if (state != DIE)
-	 MovePlayer(); 
+		MovePlayer();
 	hpSlider->amount = hitPoint;
 	if (position.X < 0) position.X = 0;
 	if (position.X > 1440 - (destRect.w)) position.X = 1440 - destRect.w;
@@ -53,7 +53,7 @@ void Player::Update()
 	{
 		MainScene::ActiveScene->LoadScene(2);
 	}
-		
+
 }
 
 
@@ -81,8 +81,8 @@ void Player::MovePlayer()
 
 	if (dirX == 0 && dirY == 0)
 	{
-			animator.Stop();
-			animator.Trigger("Idle");
+		animator.Stop();
+		animator.Trigger("Idle");
 		if (state != IDLE)
 		{
 			state = IDLE;
@@ -93,7 +93,7 @@ void Player::MovePlayer()
 		if (dirX > 0)
 		{
 			if (state != RUNRIGHT)
-			animator.Stop();
+				animator.Stop();
 			animator.Trigger("Run");
 			spriteFlip = SDL_FLIP_NONE;
 			state = RUNRIGHT;
@@ -101,7 +101,7 @@ void Player::MovePlayer()
 		else if (dirX < 0)
 		{
 			if (state != RUNLEFT)
-			animator.Stop();
+				animator.Stop();
 			animator.Trigger("Run");
 			spriteFlip = SDL_FLIP_HORIZONTAL;
 			state = RUNLEFT;
@@ -121,7 +121,7 @@ void Player::Shoot()
 	bulletpos.Y = position.Y;
 	if (inputManager->IsKeyPressed(Key::RETURN) && mineTimer < 0)
 	{
-		
+
 		bullet = new TimedExplosive(3, bulletpos);
 		mineTimer = mineCooldown;
 	}
@@ -139,7 +139,7 @@ void Player::Shoot()
 			state = ATTACK;
 			if (state == ATTACK && dirX > 0)
 				spriteFlip = SDL_FLIP_NONE;
-			else if(state == ATTACK && dirX < 0)
+			else if (state == ATTACK && dirX < 0)
 				spriteFlip = SDL_FLIP_HORIZONTAL;
 		}
 
@@ -151,11 +151,13 @@ void Player::Shoot()
 			if (lastDirection.Y != 0)
 			{
 				projectile->position.X = position.X + 20.f;
-				
+
 			}
 			else
-			{ projectile->position.Y = position.Y + 15.f; }
-				projectile->animator.Trigger("FireIce");
+			{
+				projectile->position.Y = position.Y + 15.f;
+			}
+			projectile->animator.Trigger("FireIce");
 		}
 	}
 }
@@ -177,14 +179,14 @@ void Player::OnCollisionEnter(Engine::Collider* other)
 			collider->solid = false;
 			if (enemy->Attack)
 			{
-				if (state != HURT)
-				{
-					animator.Stop();
-					animator.Trigger("Hurt");
-					state = HURT;
-				}
 				if (!hpLost)
 				{
+					if (state != HURT)
+					{
+						animator.Stop();
+						animator.Trigger("Hurt");
+						state = HURT;
+					}
 					hitPoint--;
 					Engine::SoundManager::PlaySoundEffect("Hurt", 0, 10);
 					hpLost = true;
