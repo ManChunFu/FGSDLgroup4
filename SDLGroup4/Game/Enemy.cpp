@@ -99,8 +99,8 @@ void Enemy::Movement()
 				{
 					if (ai.GetDistance(position, player->position) < 50)
 					{
-						if (state != ATTACK)
-						{
+						/*if (state != ATTACK)
+						{*/
 							collider->solid = false;
 							animator.Stop();
 							animator.Trigger("Attack");
@@ -108,13 +108,13 @@ void Enemy::Movement()
 							state = ATTACK;
 							Attack = true;
 							return;
-						}
+						//}
 					}
 				}
 				else
 				{
-					if (state != ATTACK)
-					{
+					/*if (state != ATTACK)
+					{*/
 						collider->solid = false;
 						animator.Stop();
 						animator.Trigger("Attack");
@@ -122,7 +122,7 @@ void Enemy::Movement()
 						state = ATTACK;
 						Attack = true;
 						return;
-					}
+					//}
 				}
 			}
 			else { state = IDLE; }
