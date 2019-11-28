@@ -45,8 +45,6 @@ void MainScene::Start()
 }
 
 
-
-
 void MainScene::CreateObstacle()
 {
 	lastPosition.X = 0;

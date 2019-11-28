@@ -12,7 +12,7 @@ public:
 	void SpawnWizard();
 	void Update();
 	float WizardSpawnRate = 40;
-	float TrollSpawnRate = 5;
+	float TrollSpawnRate = 10;
 	bool SpawningTrolls = true;
 	bool SpawningWizards = true;
 private:
