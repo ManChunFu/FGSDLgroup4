@@ -43,9 +43,7 @@ void BoxCollider::UpdateCollider(SDL_Rect destRect, float rotation)
 }
 
 bool BoxCollider::TestCollision(Collider* other)
-{
-	return false;
-}
+{ return false; }
 
 bool BoxCollider::BoxToBoxCollision(BoxCollider* other)
 {
