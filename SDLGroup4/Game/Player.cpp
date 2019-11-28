@@ -172,6 +172,7 @@ void Player::OnCollisionEnter(Engine::Collider* other)
 	damageTimer++;
 	if (state != DIE)
 	{
+		if (other->tag == "EnemySpell") hitPoint--;
 		if (other->tag == "Enemy")
 		{
 			Enemy* enemy = dynamic_cast<Enemy*>(other->GameObject);

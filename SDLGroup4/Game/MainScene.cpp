@@ -12,15 +12,9 @@ MainScene* MainScene::mainScene = nullptr;
 void MainScene::Update()
 {
 	Scene::Update();
+	spawner->Update();
 	std::string score = "Score: " + std::to_string(Tracker::Score);
 	scoreText->Script(score);
-	if (enemySpawnTimer > enemySpawnRate) 
-	{ 
-		CreateEnemy(); 
-		enemySpawnTimer = 0;
-	}
-	else 
-	{ enemySpawnTimer += Engine::GameTime::DeltaTime(); }
 	Enemy::hasPathFound = false;
 
 }
@@ -44,37 +38,14 @@ void MainScene::Start()
 	Scene::Start();
 	CreateObstacle();
 	CreatePlayer();
-	CreateEnemy();
-	CreateWizard();
+	for (int i = 0; i < 3; i++)
+	{ spawner->SpawnTroll(); }
 	CreateMap();
 	Engine::SoundManager::SetMusic("Assets/Sounds/BackgroundMusic.mp3", 20);
 }
 
-void MainScene::CreateWizard()
-{
-	wizard = new Wizard(10);
-	//Engine::Vector2D randomPos = RandomeStartPos();
-	wizard->position = { 1200, 300 };
 
-}
 
-void MainScene::CreateEnemy()
-{
-	enemy.push_back(new Enemy(5));
-	Engine::Vector2D randomPos = RandomeStartPos();
-	enemy[enemy.size() - 1]->position = randomPos;
-}
-
-Engine::Vector2D MainScene::RandomeStartPos()
-{
-	float x = rand() % 800 + 100;
-	float y = rand() % 450 + 100;
-
-	Engine::Vector2D position;
-	position.X = x;
-	position.Y = y;
-	return position;
-}
 
 void MainScene::CreateObstacle()
 {

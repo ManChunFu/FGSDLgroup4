@@ -5,12 +5,12 @@
 #include "Map.h"
 #include "Obstacle.h"
 #include <Text.h>
+#include "EnemySpawner.h"
 class Player;
 class Enemy;
 class Map;
 class Obstacle;
 class Wizard;
-
 class MainScene : public Engine::Scene
 {
 public:
@@ -20,6 +20,7 @@ public:
 		Engine::UIManager::CreateCanvas({ 0,0,0,0 }, { 0, 0, 250, 150 });
 		scoreText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, "Score: ", { 0, 0, 0, 255 }, { 50, 50, 900, -100 });
 		Engine::UIManager::AddObjectsToCanvas(1, { scoreText });
+		spawner = new EnemySpawner();
 	}
 
 	/*Obstacle* obstacle;*/
@@ -35,13 +36,9 @@ public:
 private:
 	void Start() override;
 	Engine::Text* scoreText;
-	void CreateEnemy();
-	void CreateWizard();
-	Engine::Vector2D RandomeStartPos();
+	EnemySpawner* spawner;
 	void CreateObstacle();
 	void CreatePlayer();
-	const int enemySpawnRate = 20;
-	float enemySpawnTimer = 0.1f;
 	Engine::Vector2D ObstaclePlacement(Engine::Vector2D pos);
 	Engine::Vector2D lastPosition;
 	//trying different techniques to create tilemap (um)

@@ -45,26 +45,22 @@ void Wizard::Movement()
 {
 	Engine::Vector2D newPosition;
 	collider->solid = true;
-	if (OnTriggerEnter())
-	{
+	
 		if (shootTimer < 0)
 		{
-			shootTimer = 5;
-			if (state != ATTACK)
-			{
-				animator.Stop();
-				animator.Trigger("Attack");
-				Shoot();
-				state = ATTACK;
-				if (player->position.X < position.X)
-					spriteFlip = SDL_FLIP_HORIZONTAL;
-				else
-					spriteFlip = SDL_FLIP_NONE;
-			}
+			shootTimer = 3;
+			animator.Stop();
+			animator.Trigger("Attack");
+			Shoot();
+			state = ATTACK;
+			if (player->position.X < position.X)
+				spriteFlip = SDL_FLIP_HORIZONTAL;
+			else
+				spriteFlip = SDL_FLIP_NONE;
+			
 		}
-	}
-	else
-	{
+	
+	
 		if (animator.CurrenAnimation->RunFullClip)
 			return;
 		randomCounter += Engine::GameTime::DeltaTime();
@@ -111,7 +107,7 @@ void Wizard::Movement()
 			animator.Trigger("Walk");
 		}
 		position = newPosition;
-	}
+	
 }
 
 bool Wizard::OnTriggerEnter()

@@ -1,21 +1,25 @@
 #pragma once
 class Enemy;
 class Wizard;
+namespace Engine 
+{
+	class Vector2D;
+}
 class EnemySpawner
 {
 public:
 	void SpawnTroll();
 	void SpawnWizard();
 	void Update();
-	float WizardSpawnRate = 50;
-	float TrollSpawnRate = 20;
+	float WizardSpawnRate = 40;
+	float TrollSpawnRate = 5;
 	bool SpawningTrolls = true;
 	bool SpawningWizards = true;
 private:
-	void RandomPos();
+	Engine::Vector2D RandomPos();
 	Enemy* enemy;
 	Wizard* wizard;
-	float wizardTimer = 50;
-	float trollTimer = -1;
+	float wizardTimer = 0;
+	float trollTimer = 0;
 };
 
