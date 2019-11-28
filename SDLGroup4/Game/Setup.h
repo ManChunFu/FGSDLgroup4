@@ -42,6 +42,8 @@ public:
 	{
 		Engine::SoundManager::AddSoundEffect("Hurt", "Assets/Sounds/Wounded.wav");
 		Engine::SoundManager::AddSoundEffect("Shoot", "Assets/Sounds/Shoot.wav");
+		Engine::SoundManager::AddSoundEffect("EnemyAttack", "Assets/Sounds/EnemyAttack.wav");
+		Engine::SoundManager::AddSoundEffect("EnemyHurt", "Assets/Sounds/EnemyHurt.wav");
 	}
 
 private:
