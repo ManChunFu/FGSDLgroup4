@@ -18,7 +18,7 @@ public:
 		Engine::TextureManager::AddTexture("KnightRun", "Assets/Sprites/Enemy/Knight/RUN.png");
 		Engine::TextureManager::AddTexture("KnightAttack", "Assets/Sprites/Enemy/Knight/ATTACK.png");
 		Engine::TextureManager::AddTexture("KnightDie", "Assets/Sprites/Enemy/Knight/DIE1.png");
-		Engine::TextureManager::AddTexture("KnighHurt", "Assets/Sprites/Enemy/Knight/HURT.png");
+		Engine::TextureManager::AddTexture("KnightHurt", "Assets/Sprites/Enemy/Knight/HURT.png");
 		Engine::TextureManager::AddTexture("Enemy", "Assets/Sprites/Enemy/sprite.png");
 		Engine::TextureManager::AddTexture("Hp", "Assets/Sprites/Player/hp.png");
 		Engine::TextureManager::AddTexture("EnemyIdle", "Assets/Sprites/Enemy/IDLE1.png");
@@ -51,6 +51,7 @@ public:
 		Engine::SoundManager::AddSoundEffect("Shoot", "Assets/Sounds/Shoot.wav");
 		Engine::SoundManager::AddSoundEffect("EnemyAttack", "Assets/Sounds/EnemyAttack.wav");
 		Engine::SoundManager::AddSoundEffect("EnemyHurt", "Assets/Sounds/EnemyHurt.wav");
+		Engine::SoundManager::AddSoundEffect("KnightAttack", "Assets/Sounds/KnightAttack.wav");
 	}
 
 private:

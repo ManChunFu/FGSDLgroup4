@@ -35,7 +35,7 @@ void Wizard::Update()
 
 	if (state == DIE && animator.CurrenAnimation->StopPlaying)
 	{
-		Tracker::Score += 10;
+		Tracker::Score += 200;
 		Engine::Scene::ActiveScene->Destroy(this);
 	}
 
@@ -138,7 +138,6 @@ void Wizard::Shoot()
 		float x = xPosition / mag;
 		float y = yPosition / mag;
 		projectile = new Engine::Projectile(1, projectilePos, x, y, false);
-		projectile->animator.Trigger("FireIce");
 	}
 }
 

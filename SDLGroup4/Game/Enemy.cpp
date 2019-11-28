@@ -33,11 +33,14 @@ void Enemy::Update()
 		animator.Stop();
 		animator.Trigger("Die");
 		state = DIE;
+		collider->solid = false;
 	}
 
 	if (state == DIE && animator.CurrenAnimation->StopPlaying)
 	{
-		Tracker::Score++;
+		if(troll) Tracker::Score += 50;
+		else Tracker::Score += 100;
+		
 		Tracker::Enemies--;
 		Engine::Scene::ActiveScene->Destroy(this);
 
@@ -107,14 +110,14 @@ void Enemy::Movement()
 						{
 							if (troll) 
 							{
-								if (soundDelay)
+								if (soundDelay > 1)
 								{
-									soundDelay = false;
-									Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1);
+									soundDelay = 0;
+									Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 15);
 								}
-								else soundDelay = true;
+								else soundDelay++;
 							}
-							else { Engine::SoundManager::PlaySoundEffect("", 0, 8, 1); }
+							else { Engine::SoundManager::PlaySoundEffect("KnightAttack", 0, 8); }
 							animator.Stop();
 							animator.Trigger("Attack");
 							spriteFlip = SDL_FLIP_HORIZONTAL;
@@ -130,18 +133,17 @@ void Enemy::Movement()
 				{
 					if (troll) 
 					{ 
-						if (soundDelay)
+						if (soundDelay > 1)
 						{
-							soundDelay = false;
-							Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1);
+							soundDelay = 0;
+							Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 15);
 						}
-						else soundDelay = true;
+						else soundDelay ++;
 					}
-					else { Engine::SoundManager::PlaySoundEffect("",0,8,1); }
+					else { Engine::SoundManager::PlaySoundEffect("KnightAttack",0,8); }
 					animator.Stop();
 					animator.Trigger("Attack");
 					state = ATTACK;
-					Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 8, 1);
 				}
 				spriteFlip = SDL_FLIP_NONE;
 				//Attack = true;
@@ -226,16 +228,13 @@ void Enemy::OnCollisionEnter(Engine::Collider* other)
 				state = HURT;
 			}
 			hitpoint--;
-			Engine::SoundManager::PlaySoundEffect("EnemyHurt", 0, 8);
+			Engine::SoundManager::PlaySoundEffect("EnemyHurt", 0, 14);
 		}
 	}
 }
 
 void Enemy::OnCollisionExit(Engine::Collider* other)
 {
-	std::cout << "NOTHING" << std::endl;
-	//isHurt = false;
-	//state = IDLE;
 }
 
 void Enemy::OnDestroy()

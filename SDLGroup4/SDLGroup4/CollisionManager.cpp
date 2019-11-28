@@ -1,7 +1,6 @@
 #include "CollisionManager.h"
 #include "Collider.h"
 #include<algorithm> 
-#include <iostream>
 #include "Entity.h"
 namespace Engine {
 	void CollisionManager::AddNewCollider(Engine::Collider* col)

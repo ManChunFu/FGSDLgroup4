@@ -42,6 +42,7 @@ void MainScene::Start()
 	//spawner->SpawnWizard();
 	for (int i = 0; i < 1; i++)
 	{ spawner->SpawnTroll(); }
+	spawner->SpawnKnight();
 	CreateMap();
 	Engine::SoundManager::SetMusic("Assets/Sounds/BackgroundMusic.mp3", 20);
 }

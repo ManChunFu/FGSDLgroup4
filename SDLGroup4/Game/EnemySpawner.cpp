@@ -11,13 +11,13 @@ void EnemySpawner::SpawnTroll()
 
 void EnemySpawner::SpawnWizard()
 {
-	wizard = new Wizard(5);
+	wizard = new Wizard(8);
 	wizard->position = RandomPos();
 }
 
 void EnemySpawner::SpawnKnight()
 {
-	enemy = new Enemy(5, false);
+	enemy = new Enemy(6, false);
 	enemy->position = RandomPos();
 }
 

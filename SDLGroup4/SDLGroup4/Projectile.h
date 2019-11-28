@@ -20,11 +20,12 @@ namespace Engine {
 			position = startPos;
 			affectsEnemies = _affectsEnemies;
 			AddSprite("IceBallSprite");
-			animator.Animations.push_back(new Engine::Animation("IceBall", "FireIce", 3, 1, 10, true, destRect));
-			//animator.Animations.push_back(new Engine::Animation("FireBall", "FireFire", 3, 1, 10, true, destRect));
+			if(affectsEnemies) animator.Animations.push_back(new Engine::Animation("IceBall", "Projectile", 3, 1, 10, true, destRect));
+			else animator.Animations.push_back(new Engine::Animation("FireBall", "Projectile", 3, 1, 10, true, destRect));
 			if(affectsEnemies) AddCollider("Spell", false);
 			else AddCollider("EnemySpell", false);
 			PlayAnimation = true;
+			animator.Trigger("Projectile");
 		}
 
 		void Update() override;

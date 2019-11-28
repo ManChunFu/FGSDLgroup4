@@ -8,6 +8,7 @@ namespace Engine
 {
 	class Application;
 	class EntityManager;
+	class Collider;
 	class CollisionManager;
 	class InputManager;
 	class Entity;

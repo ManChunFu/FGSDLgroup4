@@ -139,15 +139,6 @@ void Player::MovePlayer()
 
 void Player::Shoot()
 {
-	Engine::Vector2D bulletpos;
-	bulletpos.X = position.X;
-	bulletpos.Y = position.Y;
-	if (inputManager->IsKeyPressed(Key::RETURN) && mineTimer < 0)
-	{
-
-		bullet = new TimedExplosive(3, bulletpos);
-		mineTimer = mineCooldown;
-	}
 
 	Engine::Vector2D projectilePos;
 	projectilePos.X += position.X + (55.f * lastDirection.X);
@@ -170,7 +161,7 @@ void Player::Shoot()
 		{
 			shootTimer = 0;
 			projectile = new Engine::Projectile(3, projectilePos, lastDirection.X, lastDirection.Y, true);
-			Engine::SoundManager::PlaySoundEffect("Shoot", 0, 10);
+			Engine::SoundManager::PlaySoundEffect("Shoot", 0, 5);
 			if (lastDirection.Y != 0)
 			{
 				projectile->position.X = position.X + 20.f;
@@ -180,7 +171,7 @@ void Player::Shoot()
 			{
 				projectile->position.Y = position.Y + 15.f;
 			}
-			projectile->animator.Trigger("FireIce");
+			
 		}
 	}
 }
@@ -213,16 +204,5 @@ void Player::OnCollisionEnter(Engine::Collider* other)
 {
 
 	if (state != DIE)
-	{
-		if (other->tag == "EnemySpell") hitPoint--;
-		/*if (other->tag == "Enemy")
-		{
-			Enemy* enemy = dynamic_cast<Enemy*>(other->GameObject);
-
-			if (enemy->Attack)
-			{
-
-			}
-		}*/
-	}
+	{ if (other->tag == "EnemySpell") hitPoint--; }
 }

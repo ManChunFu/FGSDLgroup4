@@ -1,8 +1,5 @@
 #include "CircleCollider.h"
 #include "BoxCollider.h"
-#include <iostream>
-
-
 
 void CircleCollider::UpdateCollider(SDL_Rect destRect, float rotation)
 {
@@ -33,7 +30,6 @@ bool CircleCollider::TestCollision(Collider* other)
 			return CircleToCircleCollision(circle);
 		}
 	}
-	std::cout << "Not valid collider!" << std::endl;
 	return false;
 }
 
