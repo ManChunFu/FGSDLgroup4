@@ -18,6 +18,7 @@ public:
 	{ 
 		mainScene = this; 
 		Engine::UIManager::CreateCanvas({ 0,0,0,0 }, { 0, 0, 250, 150 });
+		scoreImage = new Engine::Image("Assets/Buttons/17.png", { 850, 100, 20, 20 });
 		scoreText = new Engine::Text("Assets/Fonts/Roboto-Medium.ttf", 30, "SCORE: ", { 0, 0, 0, 255 }, { 50, 50, 900, -150 });
 		Engine::UIManager::AddObjectsToCanvas(1, { scoreText });
 		spawner = new EnemySpawner();
@@ -34,6 +35,7 @@ public:
 private:
 	void Start() override;
 	Engine::Text* scoreText;
+	Engine::Image* scoreImage;
 	EnemySpawner* spawner;
 	void CreatePlayer();
 	Engine::Vector2D lastPosition;

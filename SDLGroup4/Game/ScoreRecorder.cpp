@@ -55,6 +55,7 @@ std::vector<ScoreRecord*> ScoreRecorder::GetSavedRecords()
 		}
 		streamReader.close();
 	} 
+	scores = sortScores(scores);
 	return scores;
 }
 
