@@ -52,7 +52,11 @@ void CircleCollider::AddCollision(Collider* other)
 
 void CircleCollider::ClearCollision()
 {
-	if (ThisBoxCollider) ThisBoxCollider->collisionExit.clear();
+	if (ThisBoxCollider)
+	{
+		ThisBoxCollider->collisionExit.clear();
+	}
+
 	else collisionExit.clear();
 }
 
