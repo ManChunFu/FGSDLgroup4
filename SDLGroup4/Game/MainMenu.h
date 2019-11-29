@@ -10,6 +10,7 @@ public:
 private:
 	virtual void SetUpUI() override;
 	void Start() override;
+	Engine::Image* menuBackground;
 	Engine::Text* startMenuTitle;
 	Engine::Button* playButton;
 	Engine::Text* playText;
