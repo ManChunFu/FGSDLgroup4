@@ -99,7 +99,7 @@ void Player::MovePlayer()
 		Engine::SoundManager::PlaySoundEffect("Teleport", 0, 20);
 		moveSpeed = teleportDistance;
 	}
-
+	Engine::GameTime::DeltaTime();
 	position.X += dirX * moveSpeed * Engine::GameTime::DeltaTime();
 	position.Y += dirY * moveSpeed * Engine::GameTime::DeltaTime();
 

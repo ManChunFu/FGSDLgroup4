@@ -40,9 +40,9 @@ void MainScene::Start()
 	CreatePlayer();
 	spawner->Reset();
 	//spawner->SpawnWizard();
-	for (int i = 0; i < 1; i++)
+	/*for (int i = 0; i < 1; i++)
 	{ spawner->SpawnTroll(); }
-	spawner->SpawnKnight();
+	spawner->SpawnKnight();*/
 	CreateMap();
 	Engine::SoundManager::SetMusic("Assets/Sounds/BackgroundMusic.mp3", 20);
 }
