@@ -54,12 +54,12 @@ public:
 	void Movement();
 	bool OnTriggerEnter();
 	static bool hasPathFound;
-	bool Attack = false;
 
 private:
 	void OnCollisionEnter(Engine::Collider* other) override;
 	void OnCollisionExit(Engine::Collider* other) override;
 	void OnDestroy() override;
+	void RandomMovement();
 	AI ai;
 	float soundDelay = 4;
 	float soundDelayHurt = 4;

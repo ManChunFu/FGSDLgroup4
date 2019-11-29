@@ -6,13 +6,12 @@
 class NodeList 
 {
 public:
-	NodeList(Engine::Vector2D targetPos, Engine::Vector2D startPos);//, std::vector<Engine::Vector2D> obstacleList);
+	NodeList(Engine::Vector2D targetPos, Engine::Vector2D startPos);
 	~NodeList();
 
 	std::vector<Engine::Vector2D> GetPath();
 	void SetNewTargetPos(Engine::Vector2D targetPos) { this->targetPos = targetPos; }
 	void SetNewStartPos(Engine::Vector2D startPos) { this->targetPos = startPos; }
-	//void SetNewObstacleList(std::vector<Engine::Vector2D> obstacleList) { this->obstacleList = obstacleList; }
 
 	
 private:
@@ -20,9 +19,8 @@ private:
 	void SetWorkingNodes();
 	bool CheckObstacle(Engine::Vector2D newNodePos);
 	Node* CheckExistingNode(Engine::Vector2D newNodePos);
-	//void MoveNodeToClose(Node* node);
 	bool CheckAllNodesCompleted();
-	//Engine::Vector2D HalfWayPoint(Engine::Vector2D targetPos, Engine::Vector2D startPos);
+	float GetDistance(Engine::Vector2D position, Engine::Vector2D targetPosition);
 
 	std::vector<Node*> examinatedNodeArea;
 	std::vector<Node*> workingNodes;

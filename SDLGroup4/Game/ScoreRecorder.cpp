@@ -18,7 +18,7 @@ void ScoreRecorder::AddNewScore(int score)
 		<< (now->tm_mon + 1) << '-'
 		<< now->tm_wday << " "  
 		<< now->tm_hour << ":"
-		<< now->tm_min << "  |  "
+		<< now->tm_min << " | "
 		<< score << std::endl;
 	streamWriter.close();
 }
@@ -54,7 +54,6 @@ std::vector<ScoreRecord*> ScoreRecorder::GetSavedRecords()
 		endwhile:;
 		}
 		streamReader.close();
-				//scores = sortScores(scores);
 	} 
 	return scores;
 }
