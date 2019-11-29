@@ -27,6 +27,7 @@ void Player::Update()
 	if (state != DIE)
 		MovePlayer();
 	hpSlider->amount = hitPoint;
+	TeleportCooldownSlider->amount = (teleportTimer / teleportCooldown) * 10;
 	if (position.X < 0) position.X = 0;
 	if (position.X > 1440 - (destRect.w)) position.X = 1440 - destRect.w;
 	if (position.Y < 0) position.Y = 0;
@@ -92,6 +93,7 @@ void Player::MovePlayer()
 	{
 		teleportTimer = teleportCooldown;
 		hasTeleported = true;
+		Engine::SoundManager::PlaySoundEffect("Teleport", 0, 20);
 		moveSpeed = teleportDistance;
 	}
 
@@ -161,7 +163,7 @@ void Player::Shoot()
 		{
 			shootTimer = 0;
 			projectile = new Engine::Projectile(3, projectilePos, lastDirection.X, lastDirection.Y, true);
-			Engine::SoundManager::PlaySoundEffect("Shoot", 0, 5);
+			Engine::SoundManager::PlaySoundEffect("Shoot", 0, 1);
 			if (lastDirection.Y != 0)
 			{
 				projectile->position.X = position.X + 20.f;

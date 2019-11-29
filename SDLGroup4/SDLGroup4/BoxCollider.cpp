@@ -17,12 +17,6 @@ void BoxCollider::UpdateCollider(SDL_Rect destRect, float rotation)
 	else radius = destRect.h * 0.5f;
 	middlePoint.X = ((points[3].X - points[0].X) * 0.5f) + points[0].X;
 	middlePoint.Y = ((points[3].Y - points[0].Y) * 0.5f) + points[0].Y;
-	/*for (auto i : points)
-	{
-		int tempX = middlePoint.X + (i.X - middlePoint.X) * cosf(rotation) - (i.Y - middlePoint.Y) * sinf(rotation);
-		i.Y = middlePoint.Y + (i.X - middlePoint.X) * sinf(rotation) + (i.Y - middlePoint.Y) * cosf(rotation);
-		i.X = tempX;
-	}*/
 	if (parentCollider) parentCollider->UpdateCollider(destRect, 0);
 	float lowestY = 2000;
 	float lowestX = 2000;
@@ -35,11 +29,6 @@ void BoxCollider::UpdateCollider(SDL_Rect destRect, float rotation)
 		if (i.X < lowestX) lowestX = i.X;
 		if (i.X > highestX) highestX = i.X;
 	}
-	SDL_Rect drawrect = { lowestX, lowestY, highestX - lowestX, highestY - lowestY };
-	SDL_SetRenderDrawColor(Engine::Window::Renderer, 255, 0, 0, 255);
-	SDL_RenderDrawRect(Engine::Window::Renderer, &drawrect);
-	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);
-
 }
 
 bool BoxCollider::TestCollision(Collider* other)

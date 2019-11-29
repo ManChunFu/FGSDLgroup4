@@ -62,6 +62,7 @@ private:
 	void OnDestroy() override;
 	AI ai;
 	float soundDelay = 4;
+	float soundDelayHurt = 4;
 	Player* player = nullptr;
 	std::vector<Engine::Vector2D> pathToTarget;
 	Engine::Vector2D positionTemp;

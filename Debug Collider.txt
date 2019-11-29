@@ -1,0 +1,4 @@
+SDL_Rect drawrect = { lowestX, lowestY, highestX - lowestX, highestY - lowestY };
+	SDL_SetRenderDrawColor(Engine::Window::Renderer, 255, 0, 0, 255);
+	SDL_RenderDrawRect(Engine::Window::Renderer, &drawrect);
+	SDL_SetRenderDrawColor(Engine::Window::Renderer, 0, 0, 0, 255);

@@ -11,9 +11,9 @@ namespace Engine {
 	}
 	void SoundManager::PlaySoundEffect(std::string soundName, int loops, int volume, int channel)
 	{
-		Mix_Volume(channel, volume);
 		if (HasSoundEffect(soundName))
 		{
+			Mix_VolumeChunk(soundeffects.find(soundName)->second, volume);
 			Mix_PlayChannel(channel, soundeffects.find(soundName)->second, loops);
 		}
 	}
