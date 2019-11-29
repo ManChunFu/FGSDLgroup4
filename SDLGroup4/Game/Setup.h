@@ -41,7 +41,7 @@ public:
 		Engine::TextureManager::AddTexture("Ground03", "Assets/Sprites/floor_sand_rock_2.png");
 		Engine::TextureManager::AddTexture("Stone", "Assets/Sprites/Enviroment/stone_brick_1.png");
 		Engine::TextureManager::AddTexture("Border", "Assets/Sprites/Enviroment/bars_red_2.png");
-		Engine::TextureManager::AddTexture("Obstacle01", "Assets/Sprites/Enviroment/granite_statue.png");
+		Engine::TextureManager::AddTexture("Obstacle01", "Assets/Sprites/Enviroment/silver_wall.png");
 		Engine::TextureManager::AddTexture("TeleportCooldown", "Assets/Buttons/PNG/shiny/1.png");
 	}
 	static void Sounds() 
