@@ -15,9 +15,9 @@ void ScoreRecorder::AddNewScore(int score)
 	std::tm* now = std::localtime(&t); //covert time to local date
 	streamWriter << (now->tm_year + 1900) << '-'
 		<< (now->tm_mon + 1) << '-'
-		<< now->tm_wday << " "
+		<< now->tm_wday << " "  
 		<< now->tm_hour << ":"
-		<< now->tm_min << " | "
+		<< now->tm_min << "  |  "
 		<< score << std::endl;
 	streamWriter.close();
 }
