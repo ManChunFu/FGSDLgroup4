@@ -18,4 +18,8 @@ namespace Engine
 		for (int i = 0; i < childObject.size(); i++)
 		{ ExistingCanvas[scene]->AddChild(childObject[i]); }
 	}
+	void UIManager::CleanElement(int scene)
+	{
+		ExistingCanvas[scene]->Close();
+	}
 }

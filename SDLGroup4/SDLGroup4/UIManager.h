@@ -34,6 +34,8 @@ namespace Engine
 			ExistingCanvas.clear();
 		}
 		static int ActiveCanvas;
+
+		static void CleanElement(int scene);
 	};
 #pragma warning( pop ) 
 }

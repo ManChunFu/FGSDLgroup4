@@ -33,6 +33,9 @@ std::vector<ScoreRecord*> ScoreRecorder::GetSavedRecords()
 	{
 		while (std::getline(streamReader,line))
 		{
+			if (line == "")
+				continue;
+
 			size_t comaPlace = line.find('|');
 
 			ScoreRecord* scoreLine = new ScoreRecord(line.substr(0, comaPlace), 

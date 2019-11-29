@@ -73,6 +73,6 @@ void mainMenu::OnClickPlayButton()
 	Tracker::Score = 0;
 }
 void mainMenu::OnClickScoreButton()
-{
+{	
 	MainMenu::mainMenu->LoadScene(4);
 }

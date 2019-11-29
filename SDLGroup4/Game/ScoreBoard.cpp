@@ -33,6 +33,7 @@ void ScoreBoard::SetUpUI()
 
 	float textPosY = 200;
 	int index = 1;
+	
 	for (auto score : scoreRecorder->GetSavedRecords())
 	{
 		if (index > 10)
@@ -45,6 +46,7 @@ void ScoreBoard::SetUpUI()
 		textPosY += 50;
 		index++;
 	}
+		
 	Engine::UIManager::AddObjectsToCanvas(4, scoreTexts);
 
 	backToMenuButton->SetText(backToMenuText);
@@ -53,7 +55,9 @@ void ScoreBoard::SetUpUI()
 
 void ScoreBoard::Start()
 {
+	Engine::UIManager::CleanElement(4);
 	Engine::Scene::Start();
+	SetUpUI();
 	AddClickables();
 }
 
