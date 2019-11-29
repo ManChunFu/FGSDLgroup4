@@ -13,6 +13,7 @@ void MainScene::Update()
 {
 	Scene::Update();
 	spawner->Update();
+	if (spawner->WizardSpawnRate > 30 && Tracker::Score > 2000) spawner->WizardSpawnRate = 25;
 	std::string score = "SCORE: " + std::to_string(Tracker::Score);
 	scoreText->Script(score);
 	Enemy::hasPathFound = false;

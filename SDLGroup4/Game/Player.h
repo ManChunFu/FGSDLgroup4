@@ -3,6 +3,7 @@
 #include <Slider.h>
 #include "MainScene.h"|
 #include <UIManager.h>
+#include <Text.h>
 class TimedExplosive;
 namespace Engine 
 {
@@ -37,7 +38,8 @@ public:
 		TeleportCooldownSlider = new Engine::Slider("TeleportCooldown", { 0, 150, 200, 255 }, { 50, 50, 0, 850 });
 		TeleportCooldownSlider->scaleX = 0.1f;
 		TeleportCooldownSlider->scaleY = 0.1f;
-		Engine::UIManager::AddObjectsToCanvas(1, { hpSlider, TeleportCooldownSlider });
+		TeleportReady = new Engine::Text("Assets/Fonts/Roboto-Medium.ttf", 25, "TELEPORT READY", { 200, 0, 100, 255 }, { 50, 50, -200, 700 });
+		Engine::UIManager::AddObjectsToCanvas(1, { hpSlider, TeleportCooldownSlider, TeleportReady });
 		hpSlider->amount = playerHP;
 		lastDirection.X = 1;
 	};
@@ -61,6 +63,7 @@ private:
 	int invulClock;
 	Engine::Slider* hpSlider;
 	Engine::Slider* TeleportCooldownSlider;
+	Engine::Text* TeleportReady;
 	Engine::Vector2D lastDirection;
 	TimedExplosive* bullet = nullptr;
 	Engine::Vector2D currPos;

@@ -28,6 +28,9 @@ void Player::Update()
 		MovePlayer();
 	hpSlider->amount = hitPoint;
 	TeleportCooldownSlider->amount = (teleportTimer / teleportCooldown) * 10;
+	std::string readyText;
+	if (TeleportCooldownSlider->amount <= 0) TeleportReady->Active = true;
+	else TeleportReady->Active = false;
 	if (position.X < 0) position.X = 0;
 	if (position.X > 1440 - (destRect.w)) position.X = 1440 - destRect.w;
 	if (position.Y < 0) position.Y = 0;

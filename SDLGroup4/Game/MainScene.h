@@ -27,8 +27,6 @@ public:
 	std::vector<Obstacle*>obstacle;
 	Map* map; 
 	Player* player;
-	std::vector<Enemy*> enemy;
-	Wizard* wizard;
 	static MainScene* mainScene;
 	void Update() override;
 	void Render() override;

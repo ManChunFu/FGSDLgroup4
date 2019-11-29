@@ -27,8 +27,10 @@ void Engine::Canvas::Render()
 	SDL_RenderFillRect(Engine::Window::Renderer, &rect);
 
 
-	for (int8_t index = 0; index < Children.size(); index++)
-		Children[index]->Render();
+	for (int8_t index = 0; index < Children.size(); index++) 
+	{
+		if(Children[index]->Active) Children[index]->Render();
+	}
 }
 
 void Engine::Canvas::UpdatePosition(float xCoordinate, float yCoordinate)
