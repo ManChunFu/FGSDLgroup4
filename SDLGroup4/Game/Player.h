@@ -33,8 +33,11 @@ public:
 		animator.Animations.push_back(new Engine::Animation("PlayerDie", "Die", 17, 1, 15, true, destRect));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
-		hpSlider = new Engine::Slider("Hp", { 0, 150, 200, 255 }, { 50, 50, 300, 20 });
-		Engine::UIManager::AddObjectsToCanvas(1, { hpSlider });
+		hpSlider = new Engine::Slider("Hp", { 0, 150, 200, 255 }, { 50, 50, 10, 10 });
+		TeleportCooldownSlider = new Engine::Slider("TeleportCooldown", { 0, 150, 200, 255 }, { 50, 50, 0, 850 });
+		TeleportCooldownSlider->scaleX = 0.1f;
+		TeleportCooldownSlider->scaleY = 0.1f;
+		Engine::UIManager::AddObjectsToCanvas(1, { hpSlider, TeleportCooldownSlider });
 		hpSlider->amount = playerHP;
 		lastDirection.X = 1;
 	};
@@ -57,6 +60,7 @@ private:
 	bool takenDamage = false;
 	int invulClock;
 	Engine::Slider* hpSlider;
+	Engine::Slider* TeleportCooldownSlider;
 	Engine::Vector2D lastDirection;
 	TimedExplosive* bullet = nullptr;
 	Engine::Vector2D currPos;

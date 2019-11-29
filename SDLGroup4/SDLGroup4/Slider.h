@@ -11,6 +11,8 @@ namespace Engine
 		Slider(const std::string& spriteName, SDL_Color color, GameElement base);
 		void Render() override;
 		float amount = 1;
+		float scaleX = 1;
+		float scaleY = 1;
 	private:
 		SDL_Texture* texture;
 		SDL_Rect sourceRect, destRect;

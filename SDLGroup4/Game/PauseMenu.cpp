@@ -40,7 +40,6 @@ void PauseMenu::SetUpUI()
 	playButton->SetText(playText);
 	exitButton->SetText(exitText);
 	menuButton->SetText(menuText);
-	Init();
 }
 
 void button::OnPlay()

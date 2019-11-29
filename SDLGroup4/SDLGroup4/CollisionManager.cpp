@@ -39,7 +39,7 @@ namespace Engine {
 	{
 		
 		BoxCollider* box = dynamic_cast<BoxCollider*>(col);
-		if (box) col = box->parentCollider;
+		if (box) col = box->ParentCollider();
 		for (int i = 0; i < colliders.size(); i++)
 		{
 			if (colliders[i] == col) 

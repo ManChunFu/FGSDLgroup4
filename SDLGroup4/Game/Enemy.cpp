@@ -19,7 +19,7 @@ void Enemy::Update()
 			animator.Trigger("Idle");
 		}
 	}
-
+	soundDelayHurt += Engine::GameTime::DeltaTime();
 	if (position.X < 0) position.X = 0;
 	if (position.X > 1440 - (destRect.w)) position.X = 1440 - destRect.w;
 	if (position.Y < 0) position.Y = 0;
@@ -32,6 +32,8 @@ void Enemy::Update()
 	{
 		animator.Stop();
 		animator.Trigger("Die");
+		if (troll) Engine::SoundManager::PlaySoundEffect("TrollDeath", 0, 8);
+		else Engine::SoundManager::PlaySoundEffect("KnightDeath",0,8);
 		state = DIE;
 		collider->solid = false;
 	}
@@ -228,7 +230,12 @@ void Enemy::OnCollisionEnter(Engine::Collider* other)
 				state = HURT;
 			}
 			hitpoint--;
-			Engine::SoundManager::PlaySoundEffect("EnemyHurt", 0, 14);
+			if (soundDelayHurt > 1)
+			{
+				if(troll) Engine::SoundManager::PlaySoundEffect("TrollHurt", 0, 14, 2);
+				else Engine::SoundManager::PlaySoundEffect("KnightHurt", 0, 14, 2);
+				soundDelayHurt = 0;
+			}
 		}
 	}
 }

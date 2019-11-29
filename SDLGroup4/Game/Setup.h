@@ -45,16 +45,18 @@ public:
 		Engine::TextureManager::AddTexture("Stone", "Assets/Sprites/Enviroment/stone_brick_1.png");
 		Engine::TextureManager::AddTexture("Border", "Assets/Sprites/Enviroment/bars_red_2.png");
 		Engine::TextureManager::AddTexture("Obstacle01", "Assets/Sprites/Enviroment/granite_statue.png");
+		Engine::TextureManager::AddTexture("TeleportCooldown", "Assets/Buttons/PNG/shiny/1.png");
 	}
 	static void Sounds() 
 	{
 		Engine::SoundManager::AddSoundEffect("Hurt", "Assets/Sounds/Wounded.wav");
 		Engine::SoundManager::AddSoundEffect("Shoot", "Assets/Sounds/Shoot.wav");
 		Engine::SoundManager::AddSoundEffect("EnemyAttack", "Assets/Sounds/EnemyAttack.wav");
-		Engine::SoundManager::AddSoundEffect("EnemyHurt", "Assets/Sounds/EnemyHurt.wav");
+		Engine::SoundManager::AddSoundEffect("TrollHurt", "Assets/Sounds/TrollHurt.wav");
+		Engine::SoundManager::AddSoundEffect("KnightHurt", "Assets/Sounds/KnightHurt.wav");
 		Engine::SoundManager::AddSoundEffect("KnightAttack", "Assets/Sounds/KnightAttack.wav");
+		Engine::SoundManager::AddSoundEffect("Teleport", "Assets/Sounds/TeleportSound.wav");
+		Engine::SoundManager::AddSoundEffect("KnightDeath", "Assets/Sounds/KnightDeath.wav");
 	}
-
-private:
 
 };

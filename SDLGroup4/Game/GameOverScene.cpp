@@ -67,5 +67,5 @@ void ButtonMethods::OnClickMenuButton()
 }
 void ButtonMethods::OnClickScoreButton()
 {
-	GameOverScene::thisScene->LoadScene(0);
+	GameOverScene::thisScene->LoadScene(4);
 }
