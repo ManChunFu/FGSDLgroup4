@@ -78,7 +78,11 @@ bool BoxCollider::BoxToBoxCollision(BoxCollider* other)
 						 if (abs(directionX) < abs(directionY)) directionX = 0;
 						 else directionY = 0;
 					}
-					else if (directionY == (otherHighestY - i.Y) && directionX == (otherHighestX - i.X)) directionY = 0;
+					else if (directionY == (otherHighestY - i.Y) && directionX == (otherHighestX - i.X)) 
+					{ 
+						if (abs(directionX) > abs(directionY)) directionX = 0;
+						else directionY = 0;
+					}
 					else if (directionY == (otherHighestY - i.Y) && directionX == (i.X - otherLowestX)) 
 					{
 						directionX = 0;

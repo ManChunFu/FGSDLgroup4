@@ -11,6 +11,7 @@ namespace Engine {
 		{ colliders[i]->ClearCollision(); }
 		for (int i = 0; i < colliders.size(); i++)
 		{
+		
 			for (int a = i + 1; a < colliders.size(); a++)
 			{
 				if (colliders[i]->tag != colliders[a]->tag && colliders[i]->TestCollision(colliders[a])) 

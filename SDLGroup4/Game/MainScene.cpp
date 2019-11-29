@@ -14,7 +14,7 @@ void MainScene::Update()
 {
 	Scene::Update();
 	spawner->Update();
-	if (spawner->WizardSpawnRate > 30 && Tracker::Score > 2000) spawner->WizardSpawnRate = 25;
+	if (spawner->WizardSpawnRate > 30 && Tracker::Score > 1000) spawner->WizardSpawnRate = 25;
 	std::string score = "SCORE: " + std::to_string(Tracker::Score);
 	scoreText->Script(score);
 	Enemy::hasPathFound = false;
@@ -40,10 +40,9 @@ void MainScene::Start()
 	Scene::Start();
 	CreatePlayer();
 	spawner->Reset();
-	//spawner->SpawnWizard();
-	/*for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 1; i++)
 	{ spawner->SpawnTroll(); }
-	spawner->SpawnKnight();*/
+	spawner->SpawnKnight();
 	CreateMap();
 	Engine::SoundManager::SetMusic("Assets/Sounds/BackgroundMusic.mp3", 20);
 }

@@ -38,7 +38,7 @@ void Engine::Animation::PlayAnimation(Vector2D& position, SDL_RendererFlip flip)
 		destinationRect.y -= destinationRect.h - originSprite.h;
 	if (destinationRect.w > originSprite.w && flip == SDL_FLIP_HORIZONTAL)
 		destinationRect.x -= destinationRect.w - originSprite.w;
-	if (framePerSecond / framtime == speed)
+	if (framePerSecond / framtime < speed)
 	{
 		framtime = 0;
 		sourceRect.x += frameWidth;

@@ -25,12 +25,12 @@ namespace Engine
 	{
 		if (affectsEnemies) 
 		{
-		  if(other->tag != "Player") 
+		  if(other->tag != "Player" && other->tag != "EnemySpell") 
 			 Scene::ActiveScene->Destroy(this);
 		}
 		else 
 		{
-			if (other->tag != "Enemy")
+			if (other->tag != "Enemy" && other->tag != "Spell")
 				Scene::ActiveScene->Destroy(this);
 		}
 	}

@@ -38,7 +38,7 @@ void Player::Update()
 	Engine::Entity::Update();
 
 	shootTimer += Engine::GameTime::DeltaTime();
-	Shoot();
+	if(state != DIE) Shoot();
 
 	if (damageTimer > 2)
 	{
@@ -105,10 +105,13 @@ void Player::MovePlayer()
 		Engine::SoundManager::PlaySoundEffect("Teleport", 0, 20);
 		moveSpeed = teleportDistance;
 	}
-	Engine::GameTime::DeltaTime();
 	position.X += dirX * moveSpeed * Engine::GameTime::DeltaTime();
 	position.Y += dirY * moveSpeed * Engine::GameTime::DeltaTime();
-
+	if (animator.CurrenAnimation->StopPlaying) 
+	{
+		animator.Stop();
+		animator.Trigger("Idle");
+	}
 
 	if (animator.CurrenAnimation->RunFullClip)
 		return;
