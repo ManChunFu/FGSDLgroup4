@@ -22,6 +22,7 @@ namespace Engine
 		void LoadScene(int scene);
 		bool Pause = false;
 		bool isRunning = true;
+		int ActiveScene;
 	private:
 		std::vector<Scene*> scenes;
 		void Update();

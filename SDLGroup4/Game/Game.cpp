@@ -29,6 +29,7 @@ int main(int argc, char** argv)
 		application->Shutdown();
 		delete application;
 		application = nullptr;
+		return -5;
 	}
 
 	application->Run();
@@ -149,7 +150,7 @@ void Engine::Application::HandleEvents()
 void Engine::Application::Update()
 {
 	inputManager->Update(isRunning, application->Pause);
-	if (inputManager->IsKeyPressed(Key::ESCAPE)) 
+	if (ActiveScene == 1 && inputManager->IsKeyPressed(Key::ESCAPE)) 
 	{
 		Pause = !Pause;
 		if (!Pause)
@@ -186,6 +187,7 @@ void Engine::Application::LoadScene(int scene)
 	Engine::Camera::ActiveCamera = scenes[scene]->Camera();
 	inputManager->ClearClickables();
 	scenes[scene]->AddClickables();
+	ActiveScene = scene;
 }
 
 
