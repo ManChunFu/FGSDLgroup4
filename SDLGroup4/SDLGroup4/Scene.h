@@ -1,6 +1,7 @@
 #pragma once
 #include "UIManager.h"
 #include "Text.h"
+#include "Image.h"
 #include "Button.h"
 #include <vector>
 #include "Camera.h"

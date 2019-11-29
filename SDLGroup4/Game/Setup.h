@@ -6,6 +6,7 @@ class Setup
 public:
 	static void Sprites() 
 	{
+		Engine::TextureManager::AddTexture("MenuBackground", "Assets/Sprites/DarkForest/main_background.png");
 		Engine::TextureManager::AddTexture("Wizard", "Assets/Sprites/Enemy/Wizard/sprite.png");
 		Engine::TextureManager::AddTexture("WizardIdle", "Assets/Sprites/Enemy/Wizard/IDLE.png");
 		Engine::TextureManager::AddTexture("WizardWalk", "Assets/Sprites/Enemy/Wizard/WALK.png");
