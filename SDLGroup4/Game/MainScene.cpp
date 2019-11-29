@@ -36,7 +36,6 @@ void MainScene::Start()
 {
 	Engine::UIManager::ActiveCanvas = 1;
 	Scene::Start();
-	CreateObstacle();
 	CreatePlayer();
 	spawner->Reset();
 	//spawner->SpawnWizard();
@@ -45,29 +44,6 @@ void MainScene::Start()
 	spawner->SpawnKnight();
 	CreateMap();
 	Engine::SoundManager::SetMusic("Assets/Sounds/BackgroundMusic.mp3", 20);
-}
-
-
-void MainScene::CreateObstacle()
-{
-	lastPosition.X = 0;
-	lastPosition.Y = 0;
-	obstacle.push_back(new Obstacle());
-	obstacle[obstacle.size() - 1]->AddCollider("Obstacle01", true);
-	obstacle[obstacle.size() - 1]->AddSprite("Obstacle01");
-	obstacle[0]->position = lastPosition;
-
-	for (int row = 1; row < 5; row++)
-	{
-		obstacle.push_back(new Obstacle());
-		obstacle[obstacle.size() - 1]->AddCollider("Obstacle01", true);
-		obstacle[obstacle.size() - 1]->AddSprite("Obstacle01");
-		obstacle[row]->position = ObstaclePlacement(lastPosition);
-		lastPosition = obstacle[row]->position;
-		/*obstacle->AddSprite("Obstacle01");
-		obstacle->AddCollider("Obstacle01", true);
-		obstacle->collider->solid = true;*/
-	}
 }
 
 void MainScene::CreatePlayer()
@@ -79,15 +55,7 @@ void MainScene::CreatePlayer()
 	//player->collider->solid = true;
 }
 
-Engine::Vector2D MainScene::ObstaclePlacement(Engine::Vector2D pos)
-{
-	Engine::Vector2D position;
-	position.X = pos.X + 32;
 
-	//use mandy's fanstatic logic for columns
-
-	return position;
-}
 
 void MainScene::SetUpUI()
 {
