@@ -37,11 +37,11 @@ std::vector<ScoreRecord*> ScoreRecorder::GetSavedRecords()
 			ScoreRecord* scoreLine = new ScoreRecord(line.substr(0, comaPlace),
 				line.substr(comaPlace + 1, line.size() - (comaPlace + 1)));
 
-			/*if (scores.size() == 0)*/
+			if (scores.size() == 0)
 				scores.push_back(scoreLine);
-			/*else
-			{*/
-				/*for (int index = 0; index < scores.size(); index++)
+			else
+			{
+				for (int index = 0; index < scores.size(); index++)
 				{
 					if (scoreLine->Score > scores[index]->Score)
 					{
@@ -49,12 +49,12 @@ std::vector<ScoreRecord*> ScoreRecorder::GetSavedRecords()
 						goto endwhile;
 					}
 				}
-				scores.push_back(scoreLine)*/;
-			//}
-		/*endwhile:;*/
+				scores.push_back(scoreLine);
+			}
+		endwhile:;
 		}
 		streamReader.close();
-				scores = sortScores(scores);
+				//scores = sortScores(scores);
 	} 
 	return scores;
 }

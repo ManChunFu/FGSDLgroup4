@@ -33,19 +33,20 @@ void ScoreBoard::SetUpUI()
 
 	float textPosY = 200;
 	int index = 1;
-	std::vector<ScoreRecord*> scoreTop10 = scoreRecorder->GetSavedRecords();
-	for (int listIndex = 0; listIndex < scoreTop10.size(); listIndex++)
+	//std::vector<ScoreRecord*> scoreTop10 = scoreRecorder->GetSavedRecords();
+	for (auto score : scoreRecorder->GetSavedRecords())
 	{
-		if (listIndex == 10)
+		if (index > 10)
 			break;
-		if (textPosY == 200 && listIndex == 0)
+		
+		if (textPosY == 200)
 		{
 			scoreTexts.push_back(new Engine::Text("Assets/Fonts/Roboto-Medium.ttf", 30,
-				std::to_string(index) + "     " + scoreTop10[listIndex]->Date + "  |   " + std::to_string(scoreTop10[listIndex]->Score), { 255, 255, 255, 255 }, { 50, 50, 500, textPosY }));
+				std::to_string(index) + "     " + score->Date + "  |   " + std::to_string(score->Score), { 255, 255, 255, 255 }, { 50, 50, 500, textPosY }));
 		}
 		else
 			scoreTexts.push_back(new Engine::Text("Assets/Fonts/Roboto-Medium.ttf", 30,
-				std::to_string(index) + "     " + scoreTop10[listIndex]->Date + "  |   " + std::to_string(scoreTop10[listIndex]->Score), { 255, 255, 255, 255 }, { 50, 50, 500, textPosY}));
+				std::to_string(index) + "     " + score->Date + "  |   " + std::to_string(score->Score), { 255, 255, 255, 255 }, { 50, 50, 500, textPosY}));
 
 		textPosY += 50;
 		index++;
