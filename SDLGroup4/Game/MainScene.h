@@ -23,7 +23,7 @@ public:
 		spawner = new EnemySpawner();
 	}
 
-	/*Obstacle* obstacle;*/
+	
 	std::vector<Obstacle*>obstacle;
 	Map* map; 
 	Player* player;
@@ -35,11 +35,8 @@ private:
 	void Start() override;
 	Engine::Text* scoreText;
 	EnemySpawner* spawner;
-	void CreateObstacle();
 	void CreatePlayer();
-	Engine::Vector2D ObstaclePlacement(Engine::Vector2D pos);
 	Engine::Vector2D lastPosition;
-	//trying different techniques to create tilemap (um)
 	void CreateMap();
 	
 	// Inherited via Scene

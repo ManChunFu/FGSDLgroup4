@@ -1,5 +1,9 @@
 #include "Map.h"
 #include <TextureManager.h>
+#include "Setup.h"
+#include "Obstacle.h"
+#include "MainScene.h"
+
 
 namespace Engine
 {
@@ -13,29 +17,29 @@ int mainLevel[20][25]
 {
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0},
+	{0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0},
+	{0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0},
+	{0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0},
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0},
+	{0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0},
+	{0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0},
+	{0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0},
+	{0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 	 
 };
 Map::Map()
 {
-	redTiles0 = Engine::TextureManager::GetTexture("Ground04");
+	redTiles0 = Engine::TextureManager::GetTexture("Ground03");
 	stonefloor = Engine::TextureManager::GetTexture("Stone");
 	/*sandFloor1 = Engine::TextureManager::GetTexture("Ground02");
 	sandFloor2 = Engine::TextureManager::GetTexture("Ground03");*/
@@ -72,6 +76,20 @@ void Map::LoadMap(int arr[20][25])
 		for (int column = 0; column < 25; column++)
 		{
 			map[row][column] = arr[row][column];
+			destRect.x = column * 32 * ScaleX;
+			destRect.y = row * 32 * ScaleY;
+
+			if (arr[row][column] == 1)
+			{
+				
+				MainScene::mainScene->obstacle.push_back(new Obstacle());
+				MainScene::mainScene->obstacle[MainScene::mainScene->obstacle.size() - 1]->AddSprite("Obstacle01");
+				MainScene::mainScene->obstacle[MainScene::mainScene->obstacle.size() - 1]->AddCollider("Obstacle01", true);
+				MainScene::mainScene->obstacle[MainScene::mainScene->obstacle.size() - 1]->ScaleX = 2;
+				MainScene::mainScene->obstacle[MainScene::mainScene->obstacle.size() - 1]->ScaleY = 2;
+				MainScene::mainScene->obstacle[MainScene::mainScene->obstacle.size() - 1]->position = { (float)column *64, (float)row * 64};
+			}
+
 		}
 	}
 }
@@ -89,6 +107,11 @@ void Map::DrawMap()
 			destRect.x = column * 32 * ScaleX;
 			destRect.y = row * 32 * ScaleY;
 
+
+			//if (map[column][row] == 0)
+			//{
+			//	Engine::TextureManager::Draw(stonefloor, sourceRect, destRect);
+			//}
 			switch (type)
 			{
 			case 0:
