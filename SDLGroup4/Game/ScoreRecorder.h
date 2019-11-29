@@ -11,6 +11,6 @@ public:
 	std::string GetSavedRecordsAsText();
 	
 private:
-	const std::string scoreFilename = "ScoreRecords.txt";
+	std::vector<ScoreRecord*> sortScores(std::vector<ScoreRecord*> scoreList);
 };
 
