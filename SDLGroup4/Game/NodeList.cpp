@@ -1,5 +1,6 @@
 #include "NodeList.h"
 #include "Node.h"
+#include "MainScene.h"
 
 
 NodeList::NodeList(Engine::Vector2D targetPos, Engine::Vector2D startPos) ://, std::vector<Engine::Vector2D*> obstacleList) :
@@ -103,8 +104,6 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 
 void NodeList::SetWorkingNodes()
 {
-	/*for (auto node : workingNodes)
-		delete node;*/
 	workingNodes.clear();
 
 	int arrayCount = examinatedNodeArea.size();
@@ -158,10 +157,21 @@ void NodeList::SetWorkingNodes()
 
 bool NodeList::CheckObstacle(Engine::Vector2D newNodePos)
 {
-	for (auto obstacle : obstacleList)
-		return (obstacle == newNodePos);
-
+	for (auto obstacle : MainScene::obstacle)
+	{
+		Engine::Vector2D middlePoint = obstacle->position;
+		middlePoint.X += 32;
+		middlePoint.Y += 32;
+		if (GetDistance(middlePoint, newNodePos) < 33)
+		return true;
+	}
 	return false;
+}
+
+float NodeList::GetDistance(Engine::Vector2D position, Engine::Vector2D targetPosition)
+{
+	float distance = _hypotf(fabsf(targetPosition.X - position.X), fabsf(targetPosition.Y - position.Y));
+	return distance;
 }
 
 Node* NodeList::CheckExistingNode(Engine::Vector2D newNodePos)
@@ -183,17 +193,6 @@ bool NodeList::CheckAllNodesCompleted()
 	}
 	return true;
 }
-
-//in the future purpose
-//Engine::Vector2D NodeList::HalfWayPoint(Engine::Vector2D targetPos, Engine::Vector2D startPos)
-//{
-//	Engine::Vector2D temPos;
-//
-//	temPos.X = targetPos.X - fabsf((targetPos.X - startPos.X) * 0.5);
-//	temPos.Y = targetPos.Y - fabsf((targetPos.Y - startPos.Y) * 0.5);
-//
-//	return temPos;
-//}
 
 
 int NodeList::GetHCost(Engine::Vector2D newNodePos, Engine::Vector2D targetPos)

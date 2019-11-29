@@ -94,6 +94,12 @@ void Player::MovePlayer()
 	moveSpeed = normalSpeed;
 	if (teleportTimer <= 0 && !hasTeleported && inputManager->GetAxis("Space") != 0 && (dirX != 0 || dirY != 0))
 	{
+		if (state != BLINK)
+		{
+			animator.Stop();
+			animator.Trigger("Blink");
+			state = BLINK;
+		}
 		teleportTimer = teleportCooldown;
 		hasTeleported = true;
 		Engine::SoundManager::PlaySoundEffect("Teleport", 0, 20);
@@ -144,7 +150,6 @@ void Player::MovePlayer()
 
 void Player::Shoot()
 {
-
 	Engine::Vector2D projectilePos;
 	projectilePos.X += position.X + (55.f * lastDirection.X);
 	projectilePos.Y += position.Y + (60.f * lastDirection.Y);
@@ -170,7 +175,6 @@ void Player::Shoot()
 			if (lastDirection.Y != 0)
 			{
 				projectile->position.X = position.X + 20.f;
-
 			}
 			else
 			{

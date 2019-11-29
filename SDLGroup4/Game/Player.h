@@ -32,6 +32,7 @@ public:
 		animator.Animations.push_back(new Engine::Animation("PlayerAttack", "Attack", 5, 1, 15, true, destRect));
 		animator.Animations.push_back(new Engine::Animation("PlayerHurt", "Hurt", 5, 1, 15, true, destRect));
 		animator.Animations.push_back(new Engine::Animation("PlayerDie", "Die", 17, 1, 15, true, destRect));
+		animator.Animations.push_back(new Engine::Animation("PlayerBlink", "Blink", 4, 1, 25, true, destRect));
 		animator.Trigger("Idle");
 		PlayAnimation = true;
 		hpSlider = new Engine::Slider("Hp", { 0, 150, 200, 255 }, { 50, 50, 10, 10 });
@@ -86,7 +87,8 @@ private:
 		RUNRIGHT,
 		ATTACK,
 		HURT,
-		DIE
+		DIE,
+		BLINK
 	};	
 
 	States state;

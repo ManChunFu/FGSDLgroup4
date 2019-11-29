@@ -9,6 +9,7 @@
 #include "Tracker.h"
 #include <Application.h>
 MainScene* MainScene::mainScene = nullptr;
+std::vector<Obstacle*> MainScene::obstacle;
 void MainScene::Update()
 {
 	Scene::Update();

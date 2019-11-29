@@ -24,7 +24,7 @@ public:
 	}
 
 	
-	std::vector<Obstacle*>obstacle;
+	static std::vector<Obstacle*>obstacle;
 	Map* map; 
 	Player* player;
 	static MainScene* mainScene;

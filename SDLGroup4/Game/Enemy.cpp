@@ -45,13 +45,14 @@ void Enemy::Update()
 		
 		Tracker::Enemies--;
 		Engine::Scene::ActiveScene->Destroy(this);
-
 	}
 }
 
 void Enemy::Movement()
 {
-	Engine::Vector2D newPosition;
+
+	
+	
 	frameCounter += Engine::GameTime::DeltaTime();
 	collider->solid = true;
 	if (OnTriggerEnter())
@@ -63,9 +64,12 @@ void Enemy::Movement()
 			frameCounter = 0.f;
 			pathToTarget = ai.pathFinding(player->position, position);
 			pathCounter = 2;
-			Attack = false;
 			isHurt = false;
 		}
+			if (pathToTarget.size() == 0) {
+				RandomMovement();
+				return;
+			}
 
 		if (pathToTarget.size() > pathCounter && !isHurt)//&& movementTimer % 2 == 0)
 		{
@@ -125,7 +129,6 @@ void Enemy::Movement()
 							spriteFlip = SDL_FLIP_HORIZONTAL;
 						}
 						state = ATTACK;
-						//Attack = true;
 						return;
 					}
 				}
@@ -148,7 +151,6 @@ void Enemy::Movement()
 					state = ATTACK;
 				}
 				spriteFlip = SDL_FLIP_NONE;
-				//Attack = true;
 				return;
 			}
 			else state = IDLE;
@@ -159,54 +161,7 @@ void Enemy::Movement()
 	}
 	else
 	{
-
-
-		if (animator.CurrenAnimation->RunFullClip)
-			return;
-		randomCounter += Engine::GameTime::DeltaTime();
-
-		if (randomCounter > 1.f)
-		{
-			randomCounter = 0.f;
-			positionTemp = ai.RandomMovement();
-		}
-		newPosition = position + positionTemp;
-
-		if (positionTemp.X == 0 && positionTemp.Y == 0)
-		{
-			if (state != IDLE)
-			{
-				animator.Stop();
-				animator.Trigger("Idle");
-				state = IDLE;
-			}
-		}
-		else if (positionTemp.X > 0)
-		{
-			if (state != WALKRIGHT)
-			{
-				animator.Stop();
-				animator.Trigger("Walk");
-				spriteFlip = SDL_FLIP_NONE;
-				state = WALKRIGHT;
-			}
-		}
-		else if (positionTemp.X < 0)
-		{
-			if (state != WALKLEFT)
-			{
-				animator.Stop();
-				animator.Trigger("Walk");
-				spriteFlip = SDL_FLIP_HORIZONTAL;
-				state = WALKLEFT;
-			}
-		}
-		else
-		{
-			animator.Stop();
-			animator.Trigger("Walk");
-		}
-		position = newPosition;
+	RandomMovement();
 	}
 }
 
@@ -247,6 +202,65 @@ void Enemy::OnCollisionExit(Engine::Collider* other)
 void Enemy::OnDestroy()
 {
 
+}
+
+void Enemy::RandomMovement()
+{
+	Engine::Vector2D newPosition;
+	if (animator.CurrenAnimation->RunFullClip)
+		return;
+	randomCounter += Engine::GameTime::DeltaTime();
+
+	if (randomCounter > 1.f)
+	{
+		randomCounter = 0.f;
+		positionTemp = ai.RandomMovement();
+	}
+	newPosition = position + positionTemp;
+
+	/*for (auto obstacle : MainScene::obstacle)
+	{
+		Engine::Vector2D middlePoint = obstacle->position;
+		middlePoint.X += 32;
+		middlePoint.Y += 32;
+		if (middlePoint == newPosition)
+			newPosition = position - positionTemp;
+	}*/
+	if (positionTemp.X == 0 && positionTemp.Y == 0)
+	{
+		if (state != IDLE)
+		{
+			animator.Stop();
+			animator.Trigger("Idle");
+			state = IDLE;
+		}
+	}
+	else if (positionTemp.X > 0)
+	{
+		if (state != WALKRIGHT)
+		{
+			animator.Stop();
+			animator.Trigger("Walk");
+			spriteFlip = SDL_FLIP_NONE;
+			state = WALKRIGHT;
+		}
+	}
+	else if (positionTemp.X < 0)
+	{
+		if (state != WALKLEFT)
+		{
+			animator.Stop();
+			animator.Trigger("Walk");
+			spriteFlip = SDL_FLIP_HORIZONTAL;
+			state = WALKLEFT;
+		}
+	}
+	else
+	{
+		animator.Stop();
+		animator.Trigger("Walk");
+	}
+	position = newPosition;
 }
 
 
