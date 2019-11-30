@@ -8,7 +8,7 @@
 
 namespace Engine
 {
-	class Animation
+	class Animation 
 	{
 	public:
 		Animation(const std::string& _spritePath, const std::string& _name, int _spriteSheetLenghtX, int _spriteSheetLengthY, int _speed, bool _runFullClip, SDL_Rect _originSprite);

@@ -27,6 +27,8 @@ void ScoreBoard::SetUpUI()
 	backToMenuButton = new Engine::Button({ 350, 80, 550, 750 }, { 0, 255, 0, 255 });
 	backToMenuText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "BACK TO MENU", { 255, 255, 255, 255 }, { 45, 45, 25, 15 });
 	backToMenuButton->SetOnClickEvent(OnClickMenuButton);
+	backToMenuButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
+	backToMenuButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
 
 	std::vector<Engine::GameElement*> scoreTexts;
 	Engine::UIManager::AddObjectsToCanvas(4, { topTenScoreListTitle, backToMenuButton });

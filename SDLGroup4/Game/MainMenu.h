@@ -1,9 +1,10 @@
 #pragma once
 #include <Scene.h>
+#include <Entity.h>
 class MainMenu : public Engine::Scene
 {
 public:
-	MainMenu(Engine::Application* app, Engine::InputManager* input) : Scene(app, input) { SetUpUI(); }
+	MainMenu(Engine::Application* app, Engine::InputManager* input) : Scene(app, input) { SetUpUI();}
 	static MainMenu* mainMenu;
 	void Shutdown() override;
 	void AddClickables() override;

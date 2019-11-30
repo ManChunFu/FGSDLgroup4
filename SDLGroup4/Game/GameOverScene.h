@@ -17,6 +17,7 @@ public:
 private:
 	virtual void SetUpUI() override;
 	Engine::Text* ScoreText;
+	Engine::Image* gameOverBackground;
 	Engine::Text* GameOverMenuTitle;
 	Engine::Button* backToMenuButton;
 	Engine::Text* backToMenuText;

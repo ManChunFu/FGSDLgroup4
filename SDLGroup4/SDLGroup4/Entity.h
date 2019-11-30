@@ -32,11 +32,11 @@ namespace Engine {
 		int GetSpriteHeight() { return destRect.h; };
 		bool PlayAnimation = false;
 		float rotation = 0;
+		SDL_Rect destRect = {0,0,0,0};
 	protected:
 		virtual void OnCollisionEnter(Engine::Collider* other) {}
 		virtual void OnCollisionExit(Engine::Collider* other) {}
 		virtual void OnDestroy() {};
-		SDL_Rect destRect = {0,0,0,0};
 		SDL_Rect sourceRect = { 0,0,0,0 };
 		SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
 	private:

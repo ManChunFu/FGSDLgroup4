@@ -5,7 +5,7 @@
 
 namespace Engine
 {
-	class Animator
+	class Animator 
 	{
 	public:
 		Animator(std::vector<Animation*> animations) { Animations = animations; }

@@ -28,28 +28,29 @@ void GameOverScene::Start()
 void GameOverScene::SetUpUI()
 {
 	thisScene = this;
-	GameOverMenuTitle = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 50, "Game Over!", { 0, 150, 200, 255 }, { 50, 50, 475, 80 });
-	std::string scoretext = "Your score: " + std::to_string(Tracker::Score);
-	ScoreText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 40, scoretext, { 0, 150, 200, 255 }, { 40, 40, 560, 170 });
+	gameOverBackground = new Engine::Image("GameOverBackground", { 1440, 900, 0, 0 });
+	GameOverMenuTitle = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 100, "GAME OVER", { 0, 150, 150, 255 }, { 50, 50, 500, 120 });
+	std::string scoretext = "YOUR SCORE : " + std::to_string(Tracker::Score);
+	ScoreText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 60, scoretext, { 255, 255, 255, 255 }, { 45, 45, 540, 250 });
 
-	backToMenuButton = new Engine::Button({ 350, 80, 475, 250 }, { 0, 255, 0, 255 });
-	backToMenuText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "Back To Menu", { 255, 255, 255, 255 }, { 45, 45, 40, 15 });
+	backToMenuButton = new Engine::Button({ 350, 80, 580, 380 }, { 0, 255, 0, 255 });
+	backToMenuText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "BACK TO MENU", { 255, 255, 255, 255 }, { 45, 45, 25, 15 });
 	backToMenuButton->SetOnClickEvent(ButtonMethods::OnClickMenuButton);
 	backToMenuButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
 	backToMenuButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
 
-	exitButton = new Engine::Button({ 200, 80, 550, 550 }, { 0, 255, 0, 255 });
-	exitText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "EXIT", { 255, 255, 255, 255 }, { 45, 45, 50, 15 });
+	exitButton = new Engine::Button({ 200, 80, 650, 510 }, { 0, 255, 0, 255 });
+	exitText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "EXIT", { 255, 255, 255, 255 }, { 45, 45, 55, 15 });
 	exitButton->SetOnClickEvent(ButtonMethods::OnClickExitButton);
 	exitButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
 	exitButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
 
-	scoreButton = new Engine::Button({ 400, 80, 450, 400 }, { 0, 255, 0, 255 });
+	scoreButton = new Engine::Button({ 400, 80, 550, 630 }, { 0, 255, 0, 255 });
 	scoreRecordText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "SCORE RECORDS", { 255, 255, 255, 255 }, { 45, 45, 30, 15 });
 	scoreButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
 	scoreButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
 	scoreButton->SetOnClickEvent(ButtonMethods::OnClickScoreButton);
-	Engine::UIManager::AddObjectsToCanvas(2, { GameOverMenuTitle, backToMenuButton, exitButton, scoreButton, ScoreText });
+	Engine::UIManager::AddObjectsToCanvas(2, { gameOverBackground, GameOverMenuTitle, backToMenuButton, exitButton, scoreButton, ScoreText });
 	backToMenuButton->SetText(backToMenuText);
 	exitButton->SetText(exitText);
 	scoreButton->SetText(scoreRecordText);

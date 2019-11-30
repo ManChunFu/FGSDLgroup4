@@ -38,7 +38,7 @@ void MainMenu::SetUpUI()
 	playButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
 
 	exitButton = new Engine::Button({ 200, 80, 640, 450 }, { 0, 255, 0, 255 });
-	exitText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "EXIT", { 255, 255, 255, 255 }, { 45, 45, 55, 15 });
+	exitText = new Engine::Text("Assets/Fonts/BAUHS93.ttf", 45, "EXIT", { 255, 255, 255, 255 }, { 45, 45, 57, 15 });
 	exitButton->SetOnClickEvent(mainMenu::OnClickExitButton);
 	exitButton->ForegroundColor = new SDL_Color{ 255, 255, 255, 255 };
 	exitButton->HoverForegroundColor = new SDL_Color{ 255, 0, 0, 255 };
