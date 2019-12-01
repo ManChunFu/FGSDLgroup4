@@ -13,9 +13,6 @@
     <ClCompile Include="Node.cpp">
       <Filter>Cpp files</Filter>
     </ClCompile>
-    <ClCompile Include="NodeList.cpp">
-      <Filter>Cpp files</Filter>
-    </ClCompile>
     <ClCompile Include="GameOverScene.cpp">
       <Filter>Cpp files\Scenes</Filter>
     </ClCompile>
@@ -48,6 +45,9 @@
     <ClCompile Include="ScoreRecorder.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="ScoreBoard.cpp" />
+    <ClCompile Include="Pathfinding.cpp">
+      <Filter>Cpp files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background.h">
@@ -60,9 +60,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NodeList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameOverScene.h">
@@ -103,6 +100,10 @@
     <ClInclude Include="ScoreRecord.h" />
     <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="ScoreBoard.h" />
+    <ClInclude Include="Pathfinding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeList.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

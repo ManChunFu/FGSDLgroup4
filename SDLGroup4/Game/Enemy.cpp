@@ -50,9 +50,6 @@ void Enemy::Update()
 
 void Enemy::Movement()
 {
-
-
-
 	frameCounter += Engine::GameTime::DeltaTime();
 	collider->solid = true;
 	if (OnTriggerEnter())
@@ -62,7 +59,7 @@ void Enemy::Movement()
 		{
 			hasPathFound = true;
 			frameCounter = 0.f;
-			pathToTarget = ai.pathFinding(player->position, position);
+			pathToTarget = ai.CallPathFinding(player->position, position);
 			pathCounter = 2;
 			isHurt = false;
 		}
@@ -71,7 +68,7 @@ void Enemy::Movement()
 			return;
 		}
 
-		if (pathToTarget.size() > pathCounter && !isHurt)//&& movementTimer % 2 == 0)
+		if (pathToTarget.size() > pathCounter && !isHurt)
 		{
 			if (state != ATTACK)
 			{

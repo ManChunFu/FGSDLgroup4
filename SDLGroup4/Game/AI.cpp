@@ -2,7 +2,7 @@
 #include <random>
 #include <ctime>
 #include <time.h>
-#include "NodeList.h"
+#include "Pathfinding.h"
 #include <iostream>
 
 bool AI::EnterDangerZone(float radiusLimit, Engine::Vector2D position, Engine::Vector2D targetPosition)
@@ -10,7 +10,7 @@ bool AI::EnterDangerZone(float radiusLimit, Engine::Vector2D position, Engine::V
 	return (hypotf(fabsf(targetPosition.X - position.X),fabsf(targetPosition.Y - position.Y)) <= radiusLimit);
 }
 
-std::vector<Engine::Vector2D> AI::pathFinding(Engine::Vector2D targetPosition, Engine::Vector2D startPosition)
+std::vector<Engine::Vector2D> AI::CallPathFinding(Engine::Vector2D targetPosition, Engine::Vector2D startPosition)
 {
 	int targetPosIntX = (int)targetPosition.X;
 	int targetPosIntY = (int)targetPosition.Y;
@@ -22,10 +22,10 @@ std::vector<Engine::Vector2D> AI::pathFinding(Engine::Vector2D targetPosition, E
 	Engine::Vector2D startPosInt;
 	startPosInt.X = startPosIntX;
 	startPosInt.Y = startPosIntY;
-	nodelist = new NodeList(targetPosInt, startPosInt);
-	std::vector<Engine::Vector2D> list = nodelist->GetPath(); 
+	pathfinding = new Pathfinding(targetPosInt, startPosInt);
+	std::vector<Engine::Vector2D> list = pathfinding->GetPath(); 
 
-	delete nodelist;
+	delete pathfinding;
 	return list;
 }
 

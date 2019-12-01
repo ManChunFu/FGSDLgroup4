@@ -1,34 +1,33 @@
-#include "NodeList.h"
+#include "Pathfinding.h"
 #include "Node.h"
 #include "MainScene.h"
 
 
-NodeList::NodeList(Engine::Vector2D targetPos, Engine::Vector2D startPos) :
+Pathfinding::Pathfinding(Engine::Vector2D targetPos, Engine::Vector2D startPos) :
 	targetPos(targetPos), startPos(startPos) {}
 
-NodeList::~NodeList()
+Pathfinding::~Pathfinding()
 {
-	for (auto examinatedNode : examinatedNodeArea)
-		delete examinatedNode;
+	Path.clear();
 
-	examinatedNodeArea.clear();
+	nodeList.ClearNodeList();
 }
 
-std::vector<Engine::Vector2D> NodeList::GetPath()
+std::vector<Engine::Vector2D> Pathfinding::GetPath()
 {
-	examinatedNodeArea.push_back(new Node(startPos, GetHCost(startPos, targetPos), nullptr));
+	nodeList.examinatedNodeArea.push_back(new Node(startPos, GetHCost(startPos, targetPos), nullptr));
 
 	bool reachTarget = false;
-	currentSmallestFCost = 1000;
+	nodeList.currentSmallestFCost = 1000;
 	
 	do 
 	{
 		SetWorkingNodes();
 
-		if (workingNodes.size() == 0)
+		if (nodeList.workingNodes.size() == 0)
 			break;
 
-		for (Node* current : workingNodes)
+		for (Node* current : nodeList.workingNodes)
 		{
 			Engine::Vector2D closeEnough = targetPos - current->Position;
 			float distance = fabsf(closeEnough.X) + fabsf(closeEnough.Y);
@@ -63,7 +62,7 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 					{
 						Node* existingNode = CheckExistingNode(newMovePosStraight);
 						if (existingNode == nullptr)
-							examinatedNodeArea.push_back(new Node(newMovePosStraight, GetHCost(newMovePosStraight, targetPos), current));
+							nodeList.examinatedNodeArea.push_back(new Node(newMovePosStraight, GetHCost(newMovePosStraight, targetPos), current));
 						else if (!current->HasThisParent(existingNode))
 							current->Parent.push_back(existingNode);
 					}
@@ -87,7 +86,7 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 						{
 							Node* existingNode = CheckExistingNode(newMovePosDiagnoal);
 							if (existingNode == nullptr)
-								examinatedNodeArea.push_back(new Node(newMovePosDiagnoal, GetHCost(newMovePosDiagnoal, targetPos), current));
+								nodeList.examinatedNodeArea.push_back(new Node(newMovePosDiagnoal, GetHCost(newMovePosDiagnoal, targetPos), current));
 							else if (!current->HasThisParent(existingNode))
 								current->Parent.push_back(existingNode);
 						}
@@ -102,60 +101,60 @@ std::vector<Engine::Vector2D> NodeList::GetPath()
 }
 
 
-void NodeList::SetWorkingNodes()
+void Pathfinding::SetWorkingNodes()
 {
-	workingNodes.clear();
+	nodeList.workingNodes.clear();
 
-	int arrayCount = examinatedNodeArea.size();
+	int arrayCount = nodeList.examinatedNodeArea.size();
 	if (arrayCount < 1)
 	{
-		miniFCost = 0;
+		nodeList.miniFCost = 0;
 		return;
 	}
 /*Get miniFCost*/
-	for (auto node : examinatedNodeArea)
+	for (auto node : nodeList.examinatedNodeArea)
 	{
 		if (!node->NodeCompleted)
 		{
-			if (miniFCost == 0 || node->FCost < miniFCost)
-				miniFCost = node->FCost;
+			if (nodeList.miniFCost == 0 || node->FCost < nodeList.miniFCost)
+				nodeList.miniFCost = node->FCost;
 		}
 	}	
 /*Compare to the current smallestFCost*/
-	if (miniFCost > currentSmallestFCost)
+	if (nodeList.miniFCost > nodeList.currentSmallestFCost)
 	{
-		for (auto node : examinatedNodeArea)
+		for (auto node : nodeList.examinatedNodeArea)
 		{
-			if (node->FCost == miniFCost)
-				workingNodes.push_back(node);
+			if (node->FCost == nodeList.miniFCost)
+				nodeList.workingNodes.push_back(node);
 		}
 	}	
 	else
 	{	
-		currentSmallestFCost = miniFCost;
+		nodeList.currentSmallestFCost = nodeList.miniFCost;
 
-		for (auto node : examinatedNodeArea)
+		for (auto node : nodeList.examinatedNodeArea)
 		{
 			if (!node->NodeCompleted)
 			{
-				if (node->FCost == miniFCost)
-					if (miniHCostOfAllMiniFCosts == 0 || node->HCost < miniHCostOfAllMiniFCosts)
-						miniHCostOfAllMiniFCosts = node->HCost;
+				if (node->FCost == nodeList.miniFCost)
+					if (nodeList.miniHCostOfAllMiniFCosts == 0 || node->HCost < nodeList.miniHCostOfAllMiniFCosts)
+						nodeList.miniHCostOfAllMiniFCosts = node->HCost;
 			}
 		}
 
-		for (auto node : examinatedNodeArea)
+		for (auto node : nodeList.examinatedNodeArea)
 		{
 			if (!node->NodeCompleted)
 			{
-				if (node->FCost == miniFCost && node->HCost == miniHCostOfAllMiniFCosts)
-					workingNodes.push_back(node);
+				if (node->FCost == nodeList.miniFCost && node->HCost == nodeList.miniHCostOfAllMiniFCosts)
+					nodeList.workingNodes.push_back(node);
 			}
 		}
 	}
 }
 
-bool NodeList::CheckObstacle(Engine::Vector2D newNodePos)
+bool Pathfinding::CheckObstacle(Engine::Vector2D newNodePos)
 {
 	for (auto obstacle : MainScene::obstacle)
 	{
@@ -168,9 +167,9 @@ bool NodeList::CheckObstacle(Engine::Vector2D newNodePos)
 	return false;
 }
 
-Node* NodeList::CheckExistingNode(Engine::Vector2D newNodePos)
+Node* Pathfinding::CheckExistingNode(Engine::Vector2D newNodePos)
 {
-	for (auto node : examinatedNodeArea)
+	for (auto node : nodeList.examinatedNodeArea)
 	{
 		if (node->Position == newNodePos)
 			return node;
@@ -178,9 +177,9 @@ Node* NodeList::CheckExistingNode(Engine::Vector2D newNodePos)
 	return nullptr;
 }
 
-bool NodeList::CheckAllNodesCompleted()
+bool Pathfinding::CheckAllNodesCompleted()
 {
-	for (auto node : examinatedNodeArea)
+	for (auto node : nodeList.examinatedNodeArea)
 	{
 		if (!node->NodeCompleted)
 			return false;
@@ -189,7 +188,7 @@ bool NodeList::CheckAllNodesCompleted()
 }
 
 
-int NodeList::GetHCost(Engine::Vector2D newNodePos, Engine::Vector2D targetPos)
+int Pathfinding::GetHCost(Engine::Vector2D newNodePos, Engine::Vector2D targetPos)
 {
 	int x = fabsf(targetPos.X - newNodePos.X);
 	int y = fabsf(targetPos.Y - newNodePos.Y);

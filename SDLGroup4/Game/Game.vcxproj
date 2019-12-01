@@ -101,7 +101,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="Node.cpp" />
-    <ClCompile Include="NodeList.cpp" />
+    <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Tracker.cpp" />
     <ClCompile Include="Wizard.cpp" />
@@ -119,6 +119,7 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="GameOverScene.h" />
+    <ClInclude Include="NodeList.h" />
     <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="ScoreRecord.h" />
     <ClInclude Include="ScoreRecorder.h" />
@@ -131,7 +132,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="Node.h" />
-    <ClInclude Include="NodeList.h" />
+    <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Tracker.h" />
