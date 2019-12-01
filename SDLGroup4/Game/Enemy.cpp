@@ -158,7 +158,6 @@ void Enemy::Movement()
 			lastDirectionX = position.X;
 
 		}
-
 	}
 	else
 	{
@@ -197,8 +196,7 @@ void Enemy::OnCollisionEnter(Engine::Collider* other)
 }
 
 void Enemy::OnCollisionExit(Engine::Collider* other)
-{
-}
+{}
 
 void Enemy::OnDestroy()
 {}

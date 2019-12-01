@@ -80,6 +80,7 @@ private:
 	float damageTimer = 0;
 	bool hpLost = false;
 	void Render() override;
+
 	enum States
 	{
 		IDLE,

@@ -35,6 +35,7 @@ void Player::Update()
 	if (position.X > 1440 - (destRect.w)) position.X = 1440 - destRect.w;
 	if (position.Y < 0) position.Y = 0;
 	if (position.Y > 900 - (destRect.h)) position.Y = 900 - destRect.h;
+	
 	Engine::Entity::Update();
 
 	shootTimer += Engine::GameTime::DeltaTime();
@@ -105,8 +106,23 @@ void Player::MovePlayer()
 		Engine::SoundManager::PlaySoundEffect("Teleport", 0, 20);
 		moveSpeed = teleportDistance;
 	}
+
+	//Engine::Vector2D previousPos = position;
 	position.X += dirX * moveSpeed * Engine::GameTime::DeltaTime();
 	position.Y += dirY * moveSpeed * Engine::GameTime::DeltaTime();
+
+	/*if (dirX < 0 && dirY > 0)
+	{
+		for (auto obstacle : MainScene::obstacle)
+		{
+			if (obstacle->position.Y <= position.Y + destRect.h)
+			{
+				position.Y = previousPos.Y;
+				break;
+			}
+		}
+	}*/
+
 	if (animator.CurrenAnimation->StopPlaying) 
 	{
 		animator.Stop();
@@ -214,7 +230,6 @@ void Player::OnCollisionExit(Engine::Collider* other)
 
 void Player::OnCollisionEnter(Engine::Collider* other)
 {
-
 	if (state != DIE)
 	{ if (other->tag == "EnemySpell") hitPoint--; }
 }
