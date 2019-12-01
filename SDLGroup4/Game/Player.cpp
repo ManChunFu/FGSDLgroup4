@@ -107,21 +107,8 @@ void Player::MovePlayer()
 		moveSpeed = teleportDistance;
 	}
 
-	//Engine::Vector2D previousPos = position;
 	position.X += dirX * moveSpeed * Engine::GameTime::DeltaTime();
 	position.Y += dirY * moveSpeed * Engine::GameTime::DeltaTime();
-
-	/*if (dirX < 0 && dirY > 0)
-	{
-		for (auto obstacle : MainScene::obstacle)
-		{
-			if (obstacle->position.Y <= position.Y + destRect.h)
-			{
-				position.Y = previousPos.Y;
-				break;
-			}
-		}
-	}*/
 
 	if (animator.CurrenAnimation->StopPlaying) 
 	{
@@ -190,7 +177,7 @@ void Player::Shoot()
 		{
 			shootTimer = 0;
 			projectile = new Engine::Projectile(3, projectilePos, lastDirection.X, lastDirection.Y, true);
-			Engine::SoundManager::PlaySoundEffect("Shoot", 0, 1);
+			Engine::SoundManager::PlaySoundEffect("Shoot", 0, 3);
 			if (lastDirection.Y != 0)
 			{
 				projectile->position.X = position.X + 20.f;

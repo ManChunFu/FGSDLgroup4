@@ -16,9 +16,9 @@ public:
 	float WizardSpawnRate = 40;
 	float TrollSpawnRate = 10;
 	float KnightSpawnRate = 10;
-	bool SpawningTrolls = false;
-	bool SpawningWizards = false;
-	bool SpawningKnights = false;
+	bool SpawningTrolls = true;
+	bool SpawningWizards = true;
+	bool SpawningKnights = true;
 private:
 	Engine::Vector2D RandomPos();
 	Enemy* enemy;

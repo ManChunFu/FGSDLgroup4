@@ -6,13 +6,13 @@
 #include <iostream>
 
 Engine::Text::Text(const std::string& fontPath, int fontsize, const std::string& messageText, SDL_Color color, GameElement base) :
-	fontPath(fontPath), fontsize(fontsize), messageText(messageText), color(color)//Engine::Vector2D position)
+	fontPath(fontPath), fontsize(fontsize), messageText(messageText), color(color)
 {
 	textTexture = LoadFont(fontPath, fontsize, messageText, color);
 	SDL_QueryTexture(textTexture, nullptr, nullptr, &textRect.w, &textRect.h);
 
-	this->xCoordinate =	textRect.x = base.xCoordinate ;//position.X;
-	this->yCoordinate = textRect.y = base.yCoordinate;//position.Y;
+	this->xCoordinate =	textRect.x = base.xCoordinate;
+	this->yCoordinate = textRect.y = base.yCoordinate;
 }
 
 Engine::Text::~Text()

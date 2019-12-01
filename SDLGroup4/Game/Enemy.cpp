@@ -142,7 +142,7 @@ void Enemy::Movement()
 						if (soundDelay > 1)
 						{
 							soundDelay = 0;
-							Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 15);
+							Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 18);
 						}
 						else soundDelay++;
 					}
@@ -187,7 +187,7 @@ void Enemy::OnCollisionEnter(Engine::Collider* other)
 			hitpoint--;
 			if (soundDelayHurt > 1)
 			{
-				if (troll) Engine::SoundManager::PlaySoundEffect("TrollHurt", 0, 14, 2);
+				if (troll) Engine::SoundManager::PlaySoundEffect("TrollHurt", 0, 18, 2);
 				else Engine::SoundManager::PlaySoundEffect("KnightHurt", 0, 14, 2);
 				soundDelayHurt = 0;
 			}

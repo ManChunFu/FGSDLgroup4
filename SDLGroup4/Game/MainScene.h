@@ -19,7 +19,7 @@ public:
 	{ 
 		mainScene = this; 
 		Engine::UIManager::CreateCanvas({ 0,0,0,0 }, { 0, 0, 250, 150 });
-		scoreText = new Engine::Text("Assets/Fonts/Roboto-Medium.ttf", 30, "SCORE: ", { 0, 0, 0, 255 }, { 50, 50, 900, -150 });
+		scoreText = new Engine::Text("Assets/Fonts/tt0861m_.ttf", 35, "SCORE: ", { 153, 0, 0, 255 }, { 50, 50, 900, -145 });
 		Engine::UIManager::AddObjectsToCanvas(1, { scoreText });
 		spawner = new EnemySpawner();
 	}

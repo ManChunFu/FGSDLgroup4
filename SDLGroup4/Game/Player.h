@@ -39,7 +39,7 @@ public:
 		TeleportCooldownSlider = new Engine::Slider("TeleportCooldown", { 0, 150, 200, 255 }, { 50, 50, 0, 850 });
 		TeleportCooldownSlider->scaleX = 0.1f;
 		TeleportCooldownSlider->scaleY = 0.1f;
-		TeleportReady = new Engine::Text("Assets/Fonts/Roboto-Medium.ttf", 25, "TELEPORT READY", { 200, 0, 100, 255 }, { 50, 50, -200, 700 });
+		TeleportReady = new Engine::Text("Assets/Fonts/tt0861m_.ttf", 25, "TELEPORT READY", { 51, 102, 0, 255 }, { 50, 50, -200, 700 });
 		Engine::UIManager::AddObjectsToCanvas(1, { hpSlider, TeleportCooldownSlider, TeleportReady });
 		hpSlider->amount = playerHP;
 		lastDirection.X = 1;

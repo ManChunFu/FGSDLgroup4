@@ -29,6 +29,7 @@ void Wizard::Update()
 	{
 		animator.Stop();
 		animator.Trigger("Die");
+		Engine::SoundManager::PlaySoundEffect("WizardDeath", 0, 30, 2);
 		state = DIE;
 	}
 	shootTimer -= Engine::GameTime::DeltaTime();
@@ -165,6 +166,7 @@ void Wizard::OnCollisionEnter(Engine::Collider* other)
 			{
 				animator.Stop();
 				animator.Trigger("Hurt");
+				Engine::SoundManager::PlaySoundEffect("WizardHurt", 0, 20, 2);
 				state = HURT;
 			}
 			hitpoint--;
