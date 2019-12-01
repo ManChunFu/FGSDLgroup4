@@ -159,19 +159,13 @@ bool NodeList::CheckObstacle(Engine::Vector2D newNodePos)
 {
 	for (auto obstacle : MainScene::obstacle)
 	{
-		Engine::Vector2D middlePoint = obstacle->position;
-		middlePoint.X += 32;
-		middlePoint.Y += 32;
-		if (GetDistance(middlePoint, newNodePos) < 33)
+		if (obstacle->position.X + obstacle->destRect.w >= newNodePos.X &&
+			newNodePos.X + 3 >= obstacle->position.X &&
+			obstacle->position.Y + obstacle->destRect.h >= newNodePos.Y &&
+			newNodePos.Y + 3 >= obstacle->position.Y)
 			return true;
 	}
 	return false;
-}
-
-float NodeList::GetDistance(Engine::Vector2D position, Engine::Vector2D targetPosition)
-{
-	float distance = _hypotf(fabsf(targetPosition.X - position.X), fabsf(targetPosition.Y - position.Y));
-	return distance;
 }
 
 Node* NodeList::CheckExistingNode(Engine::Vector2D newNodePos)

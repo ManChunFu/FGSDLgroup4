@@ -208,35 +208,29 @@ void Enemy::OnDestroy()
 
 void Enemy::RandomMovement()
 {
-	bool isPositionOccupied = false;
-
 	Engine::Vector2D newPosition;
 	if (animator.CurrenAnimation->RunFullClip)
 		return;
-	do
+
+	randomCounter += Engine::GameTime::DeltaTime();
+
+	if (randomCounter > 1.f)
 	{
-		randomCounter += Engine::GameTime::DeltaTime();
+		randomCounter = 0.f;
+		positionTemp = ai.RandomMovement();
+	}
+	newPosition = position + positionTemp;
 
-		if (randomCounter > 1.f)
+	for (auto obstacle : MainScene::obstacle)
+	{
+		if (obstacle->position.X + obstacle->destRect.w >= newPosition.X &&
+			newPosition.X + destRect.w >= obstacle->position.X &&
+			obstacle->position.Y + obstacle->destRect.h >= newPosition.Y &&
+			newPosition.Y + destRect.h >= obstacle->position.Y)
 		{
-			randomCounter = 0.f;
-			positionTemp = ai.RandomMovement();
+			return;
 		}
-		newPosition = position + positionTemp;
-
-		isPositionOccupied = false;
-		for (auto obstacle : MainScene::obstacle)
-		{
-			if (obstacle->position.X + obstacle->destRect.w >= newPosition.X &&
-				newPosition.X + destRect.w >= obstacle->position.X &&
-				obstacle->position.Y + obstacle->destRect.h >= newPosition.Y &&
-				newPosition.Y + destRect.h >= obstacle->position.Y)
-			{
-				isPositionOccupied = true;
-				return;
-			}
-		}
-	} while (isPositionOccupied);
+	}
 
 	if (positionTemp.X == 0 && positionTemp.Y == 0)
 	{

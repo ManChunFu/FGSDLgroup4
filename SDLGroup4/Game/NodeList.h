@@ -20,7 +20,6 @@ private:
 	bool CheckObstacle(Engine::Vector2D newNodePos);
 	Node* CheckExistingNode(Engine::Vector2D newNodePos);
 	bool CheckAllNodesCompleted();
-	float GetDistance(Engine::Vector2D position, Engine::Vector2D targetPosition);
 
 	std::vector<Node*> examinatedNodeArea;
 	std::vector<Node*> workingNodes;
