@@ -33,16 +33,16 @@ void Enemy::Update()
 		animator.Stop();
 		animator.Trigger("Die");
 		if (troll) Engine::SoundManager::PlaySoundEffect("TrollDeath", 0, 8);
-		else Engine::SoundManager::PlaySoundEffect("KnightDeath",0,8);
+		else Engine::SoundManager::PlaySoundEffect("KnightDeath", 0, 8);
 		state = DIE;
 		collider->solid = false;
 	}
 
 	if (state == DIE && animator.CurrenAnimation->StopPlaying)
 	{
-		if(troll) Tracker::Score += 50;
+		if (troll) Tracker::Score += 50;
 		else Tracker::Score += 100;
-		
+
 		Tracker::Enemies--;
 		Engine::Scene::ActiveScene->Destroy(this);
 	}
@@ -51,8 +51,8 @@ void Enemy::Update()
 void Enemy::Movement()
 {
 
-	
-	
+
+
 	frameCounter += Engine::GameTime::DeltaTime();
 	collider->solid = true;
 	if (OnTriggerEnter())
@@ -66,14 +66,14 @@ void Enemy::Movement()
 			pathCounter = 2;
 			isHurt = false;
 		}
-			if (pathToTarget.size() == 0) {
-				RandomMovement();
-				return;
-			}
+		if (pathToTarget.size() == 0) {
+			RandomMovement();
+			return;
+		}
 
 		if (pathToTarget.size() > pathCounter && !isHurt)//&& movementTimer % 2 == 0)
 		{
-			if (state != ATTACK) 
+			if (state != ATTACK)
 			{
 				movementTimer = 0;
 				position = pathToTarget[pathToTarget.size() - pathCounter];
@@ -111,10 +111,12 @@ void Enemy::Movement()
 					if (ai.GetDistance(position, player->position) < destRect.w + 30)
 					{
 						if (animator.CurrenAnimation->StopPlaying)
-						{ player->Hurt(); }
+						{
+							player->Hurt();
+						}
 						if (state != ATTACK || (animator.CurrenAnimation->StopPlaying && state == ATTACK))
 						{
-							if (troll) 
+							if (troll)
 							{
 								if (soundDelay > 1)
 								{
@@ -133,19 +135,21 @@ void Enemy::Movement()
 					}
 				}
 				if (animator.CurrenAnimation->StopPlaying)
-				{ player->Hurt(); }
+				{
+					player->Hurt();
+				}
 				if (state != ATTACK || (animator.CurrenAnimation->StopPlaying && state == ATTACK))
 				{
-					if (troll) 
-					{ 
+					if (troll)
+					{
 						if (soundDelay > 1)
 						{
 							soundDelay = 0;
 							Engine::SoundManager::PlaySoundEffect("EnemyAttack", 0, 15);
 						}
-						else soundDelay ++;
+						else soundDelay++;
 					}
-					else { Engine::SoundManager::PlaySoundEffect("KnightAttack",0,8); }
+					else { Engine::SoundManager::PlaySoundEffect("KnightAttack", 0, 8); }
 					animator.Stop();
 					animator.Trigger("Attack");
 					state = ATTACK;
@@ -157,11 +161,11 @@ void Enemy::Movement()
 			lastDirectionX = position.X;
 
 		}
-		
+
 	}
 	else
 	{
-	RandomMovement();
+		RandomMovement();
 	}
 }
 
@@ -187,7 +191,7 @@ void Enemy::OnCollisionEnter(Engine::Collider* other)
 			hitpoint--;
 			if (soundDelayHurt > 1)
 			{
-				if(troll) Engine::SoundManager::PlaySoundEffect("TrollHurt", 0, 14, 2);
+				if (troll) Engine::SoundManager::PlaySoundEffect("TrollHurt", 0, 14, 2);
 				else Engine::SoundManager::PlaySoundEffect("KnightHurt", 0, 14, 2);
 				soundDelayHurt = 0;
 			}
@@ -200,32 +204,40 @@ void Enemy::OnCollisionExit(Engine::Collider* other)
 }
 
 void Enemy::OnDestroy()
-{
-
-}
+{}
 
 void Enemy::RandomMovement()
 {
+	bool isPositionOccupied = false;
+
 	Engine::Vector2D newPosition;
 	if (animator.CurrenAnimation->RunFullClip)
 		return;
-	randomCounter += Engine::GameTime::DeltaTime();
-
-	if (randomCounter > 1.f)
+	do
 	{
-		randomCounter = 0.f;
-		positionTemp = ai.RandomMovement();
-	}
-	newPosition = position + positionTemp;
+		randomCounter += Engine::GameTime::DeltaTime();
 
-	/*for (auto obstacle : MainScene::obstacle)
-	{
-		Engine::Vector2D middlePoint = obstacle->position;
-		middlePoint.X += 32;
-		middlePoint.Y += 32;
-		if (middlePoint == newPosition)
-			newPosition = position - positionTemp;
-	}*/
+		if (randomCounter > 1.f)
+		{
+			randomCounter = 0.f;
+			positionTemp = ai.RandomMovement();
+		}
+		newPosition = position + positionTemp;
+
+		isPositionOccupied = false;
+		for (auto obstacle : MainScene::obstacle)
+		{
+			if (obstacle->position.X + obstacle->destRect.w >= newPosition.X &&
+				newPosition.X + destRect.w >= obstacle->position.X &&
+				obstacle->position.Y + obstacle->destRect.h >= newPosition.Y &&
+				newPosition.Y + destRect.h >= obstacle->position.Y)
+			{
+				isPositionOccupied = true;
+				return;
+			}
+		}
+	} while (isPositionOccupied);
+
 	if (positionTemp.X == 0 && positionTemp.Y == 0)
 	{
 		if (state != IDLE)

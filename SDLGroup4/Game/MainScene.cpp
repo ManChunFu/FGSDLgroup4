@@ -45,7 +45,7 @@ void MainScene::Start()
 	{ spawner->SpawnTroll(); }
 	spawner->SpawnKnight();
 	CreateMap();
-	Engine::SoundManager::SetMusic("Assets/Sounds/BackgroundMusic.mp3", 20);
+	Engine::SoundManager::SetMusic("Assets/Sounds/BackgroundMusic.wav", 20);
 }
 
 void MainScene::CreatePlayer()
@@ -54,7 +54,6 @@ void MainScene::CreatePlayer()
 	
 	player->position.X = 500;
 	player->position.Y = 500;
-	//player->collider->solid = true;
 }
 
 

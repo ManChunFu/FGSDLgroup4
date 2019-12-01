@@ -20,7 +20,7 @@ void MainMenu::AddClickables()
 	inputManager->AddClickableElement(playButton);
 	inputManager->AddClickableElement(exitButton);
 	inputManager->AddClickableElement(scoreButton);
-	Engine::SoundManager::SetMusic("Assets/Sounds/Menu.mp3", 20);
+	Engine::SoundManager::SetMusic("Assets/Sounds/Menu.wav", 30);
 }
 void MainMenu::SetUpUI()
 {

@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "Tracker.h"
 #include <Projectile.h>
+#include <SoundManager.h>
+
 void Wizard::Update()
 {
 	if (state != DIE)
@@ -30,8 +32,7 @@ void Wizard::Update()
 		state = DIE;
 	}
 	shootTimer -= Engine::GameTime::DeltaTime();
-	
-	
+
 
 	if (state == DIE && animator.CurrenAnimation->StopPlaying)
 	{
@@ -45,7 +46,7 @@ void Wizard::Movement()
 {
 	Engine::Vector2D newPosition;
 	collider->solid = true;
-	
+
 	if (OnTriggerEnter())
 	{
 		if (shootTimer < 0)
@@ -53,19 +54,26 @@ void Wizard::Movement()
 			shootTimer = 3;
 			animator.Stop();
 			animator.Trigger("Attack");
-			Shoot();
 			state = ATTACK;
 			if (player->position.X < position.X)
 				spriteFlip = SDL_FLIP_HORIZONTAL;
 			else
-				spriteFlip = SDL_FLIP_NONE;
-
+				spriteFlip = SDL_FLIP_NONE;	
+		}
+		if (animator.CurrenAnimation->StopPlaying)
+		{
+			Engine::SoundManager::PlaySoundEffect("WizardCastSpell", 0, 20, 2);
+			Shoot();
 		}
 	}
-	
-	
-		if (animator.CurrenAnimation->RunFullClip)
-			return;
+
+
+	if (animator.CurrenAnimation->RunFullClip)
+		return;
+	bool isPositionOccupied = false;
+
+	do
+	{
 		randomCounter += Engine::GameTime::DeltaTime();
 
 		if (randomCounter > 1.f)
@@ -75,42 +83,56 @@ void Wizard::Movement()
 		}
 		newPosition = position + positionTemp;
 
-		if (positionTemp.X == 0 && positionTemp.Y == 0)
+		isPositionOccupied = false;
+		for (auto obstacle : MainScene::obstacle)
 		{
-			if (state != IDLE)
+			if (obstacle->position.X + obstacle->destRect.w >= newPosition.X &&
+				newPosition.X + destRect.w >= obstacle->position.X &&
+				obstacle->position.Y + obstacle->destRect.h >= newPosition.Y &&
+				newPosition.Y + destRect.h >= obstacle->position.Y)
 			{
-				animator.Stop();
-				animator.Trigger("Idle");
-				state = IDLE;
+				isPositionOccupied = true;
+				return;
 			}
 		}
-		else if (positionTemp.X > 0)
+	} while (isPositionOccupied);
+
+	if (positionTemp.X == 0 && positionTemp.Y == 0)
+	{
+		if (state != IDLE)
 		{
-			if (state != WALKRIGHT)
-			{
-				animator.Stop();
-				animator.Trigger("Walk");
-				spriteFlip = SDL_FLIP_NONE;
-				state = WALKRIGHT;
-			}
+			animator.Stop();
+			animator.Trigger("Idle");
+			state = IDLE;
 		}
-		else if (positionTemp.X < 0)
-		{
-			if (state != WALKLEFT)
-			{
-				animator.Stop();
-				animator.Trigger("Walk");
-				spriteFlip = SDL_FLIP_HORIZONTAL;
-				state = WALKLEFT;
-			}
-		}
-		else
+	}
+	else if (positionTemp.X > 0)
+	{
+		if (state != WALKRIGHT)
 		{
 			animator.Stop();
 			animator.Trigger("Walk");
+			spriteFlip = SDL_FLIP_NONE;
+			state = WALKRIGHT;
 		}
-		position = newPosition;
-	
+	}
+	else if (positionTemp.X < 0)
+	{
+		if (state != WALKLEFT)
+		{
+			animator.Stop();
+			animator.Trigger("Walk");
+			spriteFlip = SDL_FLIP_HORIZONTAL;
+			state = WALKLEFT;
+		}
+	}
+	else
+	{
+		animator.Stop();
+		animator.Trigger("Walk");
+	}
+	position = newPosition;
+
 }
 
 bool Wizard::OnTriggerEnter()
@@ -160,5 +182,4 @@ void Wizard::OnCollisionEnter(Engine::Collider* other)
 
 void Wizard::OnCollisionExit(Engine::Collider* other)
 {
-	//isHurt = false;
 }

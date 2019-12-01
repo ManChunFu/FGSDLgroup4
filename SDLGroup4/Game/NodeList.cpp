@@ -3,8 +3,8 @@
 #include "MainScene.h"
 
 
-NodeList::NodeList(Engine::Vector2D targetPos, Engine::Vector2D startPos) ://, std::vector<Engine::Vector2D*> obstacleList) :
-	targetPos(targetPos), startPos(startPos) {}//, obstacleList(obstacleList){}
+NodeList::NodeList(Engine::Vector2D targetPos, Engine::Vector2D startPos) :
+	targetPos(targetPos), startPos(startPos) {}
 
 NodeList::~NodeList()
 {
@@ -163,7 +163,7 @@ bool NodeList::CheckObstacle(Engine::Vector2D newNodePos)
 		middlePoint.X += 32;
 		middlePoint.Y += 32;
 		if (GetDistance(middlePoint, newNodePos) < 33)
-		return true;
+			return true;
 	}
 	return false;
 }

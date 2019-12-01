@@ -57,6 +57,7 @@ public:
 		Engine::SoundManager::AddSoundEffect("KnightAttack", "Assets/Sounds/KnightAttack.wav");
 		Engine::SoundManager::AddSoundEffect("Teleport", "Assets/Sounds/TeleportSound.wav");
 		Engine::SoundManager::AddSoundEffect("KnightDeath", "Assets/Sounds/KnightDeath.wav");
+		Engine::SoundManager::AddSoundEffect("WizardCastSpell", "Assets/Sounds/WizardMagic.wav");
 	}
 
 };
