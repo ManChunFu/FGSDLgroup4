@@ -9,6 +9,11 @@ Game Description:
 Top down shooter based on the fantasy adventure classic game Gaunlet. Blinker is a good wizard who fights his way through a castle filled with
 his wand spell and teleportation abilties. I worked on the Map, player projectile classes. 
 
+Work:
+I work alot on the map class, though I cannot say I say satified instead creating a array to place tiles and obstacles I was hope to learn how read from text file
+sadly I did not succeed in time. I continue to explore the topic in the near future. I coded the basic layout for the projectile and player class which eventually was 
+developed further by my colleagues.
+
 Challenges:
 The biggest challenge was the pace of the learning SDL and C++ while simultaneously making a game. Fortunately I had support of my colleagues who
 answered my questions and explained as thoroughly as possible. A personal lesson  i received from this project was new way of studying that includes dedicating 
