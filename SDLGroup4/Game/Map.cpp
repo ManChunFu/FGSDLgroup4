@@ -39,11 +39,8 @@ int mainLevel[20][25]
 };
 Map::Map()
 {
-	redTiles0 = Engine::TextureManager::GetTexture("Ground03");
 	stonefloor = Engine::TextureManager::GetTexture("Stone");
-	/*sandFloor1 = Engine::TextureManager::GetTexture("Ground02");
-	sandFloor2 = Engine::TextureManager::GetTexture("Ground03");*/
-	//sandFloor3 = Engine::TextureManager::GetTexture("Ground04");
+	
 	
 	
 	LoadMap(mainLevel);
@@ -108,26 +105,9 @@ void Map::DrawMap()
 			destRect.y = row * 32 * ScaleY;
 
 
-			//if (map[column][row] == 0)
-			//{
-			//	Engine::TextureManager::Draw(stonefloor, sourceRect, destRect);
-			//}
-			switch (type)
+			if (type == 0)
 			{
-			case 0:
-				Engine::TextureManager::Draw(stonefloor, sourceRect, destRect);
-				break;
-			/*case 1:
-				Engine::TextureManager::Draw(redTiles1, sourceRect, destRect);
-				break;
-			case 2:
-				Engine::TextureManager::Draw(sandFloor2, sourceRect, destRect);
-				break;
-			case 3:
-				Engine::TextureManager::Draw(sandFloor3, sourceRect, destRect);*/
-				break;
-			default:
-				break;
+				Engine::TextureManager::Draw(stonefloor, sourceRect, destRect);			
 			}
 		}
 	}

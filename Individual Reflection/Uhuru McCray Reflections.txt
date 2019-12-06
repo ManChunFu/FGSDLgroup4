@@ -1,0 +1,21 @@
+Uhuru McCray
+
+
+Game: Blinker
+Group 4: Max, Mandy
+
+
+Game Description:
+Top down shooter based on the fantasy adventure classic game Gaunlet. Blinker is a good wizard who fights his way through a castle filled with
+his wand spell and teleportation abilties. I worked on the Map, player projectile classes. 
+
+Challenges:
+The biggest challenge was the pace of the learning SDL and C++ while simultaneously making a game. Fortunately I had support of my colleagues who
+answered my questions and explained as thoroughly as possible. A personal lesson  i received from this project was new way of studying that includes dedicating 
+blocks of time for studying even when working a project that I lack knowledge of at the beginning. Another challenge in a group collaboration I expereinced
+was sifting through code to find relevant and useful tools to what I was working on. I believe more annotation in the group projects would save
+a lot of time. 
+
+Conclusion:
+Even though it was extremely challenging I really enjoyed both SDL and C++, I plan to keep working with the smaller frameworks like SDL to strengthen 
+my skills and knowledge for the foreseeable future.
